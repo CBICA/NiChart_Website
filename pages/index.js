@@ -1,10 +1,15 @@
 import React from 'react';
+import Head from 'next/head';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 
 const HomePage = () => {
   return (
     <div>
+      <Head>
+        <title>NiChart | Home</title>
+      </Head>
+      
       <Header />
       
       {/* Content of your homepage */}

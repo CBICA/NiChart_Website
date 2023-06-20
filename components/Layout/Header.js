@@ -1,17 +1,26 @@
 import React from 'react';
+import { FaBars } from 'react-icons/fa';
+import styles from '/styles/Header.module.css';
+import Link from 'next/link';
 
 const Header = () => {
   return (
-    <header>
-      {/* Logo */}
-      <div className="logo">
-        {/* Place your NiChart logo here */}
-        <img src="/images/logo.png" alt="NiChart Logo" />
+    <header className={styles.header}>
+      <div className={styles.logo}>
+        <Link href="/">
+          <a>
+            <img src="/images/craiyon_logo.png" alt="NiChart Logo" className={styles.logoImage} />
+          </a>
+        </Link>
       </div>
 
-      {/* Navigation */}
       <nav>
-        <ul>
+        <input type="checkbox" id="menu-toggle" className={styles.menuToggle} />
+        <label htmlFor="menu-toggle" className={styles.menuIcon}>
+          <FaBars />
+        </label>
+
+        <ul className={styles.navList}>
           <li><a href="/about">About</a></li>
           <li><a href="/documentation">Documentation</a></li>
           <li><a href="/team">Team</a></li>

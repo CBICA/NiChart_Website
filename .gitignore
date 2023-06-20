@@ -34,3 +34,6 @@ Thumbs.db
 
 # Ignore temp files
 /temp
+
+# Ignore next.js build artifacts
+.next

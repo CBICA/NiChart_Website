@@ -1,0 +1,36 @@
+# Ignore general project files
+/node_modules
+/dist
+/.cache
+/.vscode
+.env
+
+# Ignore build artifacts
+/build
+/.DS_Store
+Thumbs.db
+
+# Ignore package manager files
+/yarn.lock
+/package-lock.json
+
+# Ignore IDE and editor files
+.idea
+.vs
+
+# Ignore compiled CSS and JavaScript
+*.css.map
+*.js.map
+
+# Ignore sensitive or environment-specific information
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore log files
+/log
+*.log
+
+# Ignore temp files
+/temp

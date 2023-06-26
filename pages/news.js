@@ -12,14 +12,14 @@ const News = () => {
           <div className={styles.twitterFeed}>
             {/* Embed the Twitter feed here */}
             <a 
-                class="twitter-timeline" 
+                className="twitter-timeline" 
                 data-tweet-limit="3"
                 href="https://twitter.com/CBICAannounce?ref_src=twsrc%5Etfw">
                 Tweets by CBICAannounce
             </a> 
             <script async 
                     src="https://platform.twitter.com/widgets.js" 
-                    charset="utf-8">
+                    charSet="utf-8">
             </script> 
           </div>
         </div>

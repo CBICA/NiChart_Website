@@ -1,42 +1,68 @@
 .header {
+  /* Floating header */
+  position: sticky;
+  top: 0;
+
+  /* Make sure that nav tabs stay in same line as logo */
   display: flex;
-  align-items: center;
+
+  /* Make sure that nav tabs  at the right of the screen*/
   justify-content: space-between;
+
+  /* Make sure there is some space between logo and box */
   padding: 1rem;
-  background-color: #f2f2f2;
+
+  /* Background color - gray */
+  background-image: linear-gradient(to right, #000000, #f2f2f2);
 }
 
 .logo {
   display: flex;
-  align-items: center;
 }
 
 .logo img {
-  height: 100px; /* Adjust the height to make the logo bigger */
+  /* Adjust the height to make the logo bigger */
+  height: 110px; 
+  border-radius: 15px;
 }
 
 .header nav {
   display: flex;
-  align-items: center;
+  /* align the items to the end - automatic bottom */
+  align-items: flex-end;
 }
 
 .header .navList {
   list-style: none;
   display: flex;
-  gap: 1.5rem; /* Adjust the gap to increase the spacing between navigation links */
+  gap: 2rem; /* Adjust the gap to increase the spacing between navigation links */
 }
 
 .header .navList li a {
   text-decoration: none;
   color: #333;
-  font-size: 18px; /* Adjust the font-size to make the navigation links bigger */
+  font-size: 18px;
   font-weight: bold;
-  transition: color 0.3s ease;
+  position: relative;
 }
 
-.header .navList li a:hover {
-  color: #007bff;
+/* Underline animation for Navigation text stuff */
+.header .navList li a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #333;
+  transition: width 0.3s ease;
 }
+
+.header .navList li a:hover::after {
+  width: 100%;
+}
+/* End of underline animation stuff */
+
 
 .header .menuToggle {
   display: none;

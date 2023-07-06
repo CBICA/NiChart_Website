@@ -5,7 +5,7 @@ import { StorageManager } from '@aws-amplify/ui-react-storage';
 import { Auth, Storage } from 'aws-amplify';
 import { BatchClient, ListJobsCommand }  from "@aws-sdk/client-batch";
 import '@aws-amplify/ui-react/styles.css';
-// import awsconfig from './aws-exports';
+import awsconfig from './aws-exports';
 
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
@@ -293,13 +293,13 @@ async function submitButtonClicked() {
 
 function Portal() {
   return (
-  // <Authenticator>
-  // {({ signOut, user }) => (
+  <Authenticator>
+  {({ signOut, user }) => (
     <div>
       <Header />
       <div>
           <Flex direction = {{ base: 'row' }} height="60px" justifyContent="flex-end">
-          {/* <h3> Hello, {user.attributes.email}! </h3><Button onClick={signOut}> Sign Out </Button> */}
+          <h3> Hello, {user.attributes.email}! </h3><Button onClick={signOut}> Sign Out </Button>
           </Flex>
       </div>
       
@@ -328,8 +328,8 @@ function Portal() {
       </Flex>
       <Footer />
     </div>
-  // )}
-  // </Authenticator>
+  )}
+  </Authenticator>
   );
 }
 

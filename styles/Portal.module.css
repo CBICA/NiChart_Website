@@ -1,0 +1,40 @@
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .heading {
+    margin-bottom: 1rem;
+  }
+  
+  .subheading {
+    margin-bottom: 0.5rem;
+  }
+  
+  .fileUpload {
+    margin-bottom: 2rem;
+  }
+  
+  .jobList {
+    margin-top: 2rem;
+  }
+  
+  .jobItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .jobItemStatus {
+    flex-grow: 1;
+  }
+  
+  .jobItemLink {
+    margin-left: 1rem;
+  }
+  
+  .signOutButton {
+    margin-top: 1rem;
+  }
+  

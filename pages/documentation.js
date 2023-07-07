@@ -16,9 +16,9 @@ const Documentation = () => {
     return (
       <div>
         <Header />
-        <div className={styles.documentationPage}>
+        <div className={styles.documentation_page}>
           <h2>Documentation</h2>
-          <div className="documentation-content">
+          <div className={styles.documentation_container}>
             <ReactMarkdown>{markdownContent}</ReactMarkdown>
           </div>
         </div>

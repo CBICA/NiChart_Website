@@ -1,17 +1,15 @@
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  grid-template-columns:100%;
+
+  /* fallback height */
+  min-height:100vh;
+
+  /* new small viewport height for modern browsers */
+  min-height:100svh;
 }
 
-.container h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.container p {
-  font-size: 1.2rem;
-  line-height: 1.5;
+.about_container {
+  
 }

@@ -5,14 +5,14 @@ import styles from '../styles/Team.module.css';
 
 const Team = () => {
     return (
-      <div>
+      <div className={styles.container}>
         <Header />
-        <div className={styles.teamPage}>
-          <div className={styles.teamMembers}>
+        <div className={styles.team_page}>
+          <div className={styles.team_members}>
             <h2>Team Members</h2>
             {/* Include the team members content here */}
           </div>
-          <div className={styles.collaborators}>
+          <div className={styles.team_collaborators}>
             <h2>Collaborators</h2>
             {/* Include the collaborators content here */}
           </div>

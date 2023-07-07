@@ -1,11 +1,97 @@
+.container{
+  display: grid;
+  grid-template-rows:auto auto 1fr auto;
+  grid-template-columns:100%;
+
+  /* fallback height */
+  min-height:100vh;
+
+  /* new small viewport height for modern browsers */
+  min-height:100svh;  
+}
+
+.newsTitle {
+  font-size: 3rem; /* Adjust the font size as desired */
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 2rem; /* Add some spacing below the title */
+  margin-left: 3rem;
+}
+
 .newsPage {
-    padding: 2rem;
+  display:block;
+}
+
+/* columns */
+.newsPage > * {
+  padding:1rem;
+}
+
+/* tablet breakpoint */
+@media (min-width:768px) {
+  .newsPage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
   }
+}
   
-  .twitterFeed {
-    margin-top: 2rem;
-    max-width: 600px; /* Adjust the value as per your desired width */
-    margin-left: auto;
-    margin-right: auto;
-  }
+.newsStories {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(7, 1fr);
+}
+
+.newsStory {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;;
+  text-align: left;
+  padding: 2rem;
+}
+
+.newsContent {
+  display: flex;
+  align-items: flex-start;
+}
+
+.newsImage {
+  width: 40%; 
+  max-width: 200px; 
+  height: auto;
+  margin-right: 1rem; 
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.newsDetails {
+  flex-grow: 1; /* Allow the details section to expand and fill the remaining space */
+}
+
+.newsStoryTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.newsStoryDescription {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.newsStoryDate {
+  font-size: 1rem;
+  color: #888;
+}
+.twitterFeed {
+  width: auto;
+  padding-left: 10%;
+  padding-right: 10%;
+  min-width: 340px;
+  max-width: 800px;
+  min-height: 1500px;
+}
   
+.newsStories a {
+  text-decoration: none;
+  color: black;
+}

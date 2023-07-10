@@ -1,7 +1,7 @@
 .header {
   /* Floating header */
   position: sticky;
-  top: 0;
+  top: 0.1%;
 
   /* Make sure that nav tabs stay in same line as logo */
   display: flex;
@@ -10,7 +10,14 @@
   justify-content: space-between;
 
   /* Make sure there is some space between logo and box */
-  padding: 1rem;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  /* Make border white */
+  border: solid;
+  border-color: #f2f2f2;
+  border-width: 5px;
 
   /* Background color - gray */
   background-image: linear-gradient(to right, #000000, #f2f2f2);
@@ -22,7 +29,7 @@
 
 .logo img {
   /* Adjust the height to make the logo bigger */
-  height: 110px; 
+  height: 130px; 
   border-radius: 15px;
 }
 

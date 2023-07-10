@@ -9,7 +9,7 @@ const Header = () => {
       <div className={styles.logo}>
         <Link href="/">
           <a>
-            <img src="/images/craiyon_logo.png" alt="NiChart Logo" className={styles.logoImage} />
+            <img src="/images/brain_transparent_logo_cropped.png" alt="NiChart Logo - Image by Gerd Altmann from Pixabay" className={styles.logoImage} />
           </a>
         </Link>
       </div>

@@ -38,7 +38,8 @@
 .newsStories {
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: repeat(7, 1fr);
+  grid-template-rows: auto 1fr auto;
+  gap: 20px; /* Padding between rows */
 }
 
 .newsStory {
@@ -88,7 +89,7 @@
   padding-right: 10%;
   min-width: 340px;
   max-width: 800px;
-  min-height: 1500px;
+  min-height: 1000px;
 }
   
 .newsStories a {

@@ -10,6 +10,42 @@
   min-height:100svh;
 }
 
-.about_container {
+.title {
+  padding-left: 10px;
+}
+
+.aboutContent {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 20vh auto;
+  gap: 10px;
+  height:  100%;
+}
+
+.aboutHeaderPicture {
+  display: flex;
+  justify-content: center;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.aboutMainContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding-left: 10%;
+  padding-right: 10%;
+  gap: 10%;
+}
+
+.aboutMainContent p {
+  text-align: left;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-size: 150%;
   
 }

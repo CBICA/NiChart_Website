@@ -1,7 +1,7 @@
 .header {
   /* Floating header */
   position: sticky;
-  top: 0.1%;
+  top: 0%;
 
   /* Make sure that nav tabs stay in same line as logo */
   display: flex;

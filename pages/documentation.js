@@ -8,34 +8,37 @@ import ReactMarkdown from 'react-markdown';
 import styles from '../styles/Documentation.module.css';
 
 const Documentation = () => {
-    const [markdownContent, setMarkdownContent] = useState('');
-    
-    useEffect(() => {
-      fetch('/content/documentation-content.md')
-        .then((response) => response.text())
-        .then((content) => setMarkdownContent(content));
-    }, []);
+  const [markdownContent, setMarkdownContent] = useState('');
+  const [selectedSection, setSelectedSection] = useState('Installation');
 
-    return (
-      <div className={styles.container}>
-        <Head>
-            <title>NiChart | Documentation</title>
-            <Favicons />
-        </Head>
-        <Header />
-        <div className={styles.documentationPage}>
-            <Sidebar />
-            <div >
-                <h2>Documentation</h2>
-                <div className={styles.documentation_container}>
-                    <ReactMarkdown>{markdownContent}</ReactMarkdown>
-                </div>
-            </div>
-        </div>
-        <Footer />
-      </div>
-    );
+  useEffect(() => {
+    fetch(`/content/${selectedSection}.md`)
+      .then((response) => response.text())
+      .then((content) => setMarkdownContent(content));
+  }, [selectedSection]);
+
+  const handleSectionChange = (section) => {
+    setSelectedSection(section);
   };
-  
-  export default Documentation;
-  
+
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>NiChart | Documentation</title>
+        <Favicons />
+      </Head>
+      <Header />
+      <div className={styles.documentationPage}>
+        <Sidebar onSectionChange={handleSectionChange} />
+        <div>
+          <div className={styles.documentationContainer}>
+            <ReactMarkdown>{markdownContent}</ReactMarkdown>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default Documentation;

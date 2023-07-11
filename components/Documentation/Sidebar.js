@@ -1,21 +1,23 @@
 import React from 'react';
-import styles from '/styles/Sidebar.module.css';
+import styles from '../../styles/Sidebar.module.css';
 
-const Sidebar = () => {
-  // Add logic for foldable sections and navigation here if needed
+const Sidebar = ({ onSectionChange }) => {
+  const handleItemClick = (section) => {
+    onSectionChange(section);
+  };
 
   return (
     <aside className={styles.sidebar}>
       <nav>
         <ul>
           <li>
-            <a href="#installation">Installation</a>
+            <a onClick={() => handleItemClick('Installation')}>Installation</a>
           </li>
           <li>
-            <a href="#usage">Usage</a>
+            <a onClick={() => handleItemClick('Container-Installation')}>Container Installation</a>
           </li>
           <li>
-            <a href="#examples">Examples</a>
+            <a onClick={() => handleItemClick('Usage')}>Usage</a>
           </li>
         </ul>
       </nav>

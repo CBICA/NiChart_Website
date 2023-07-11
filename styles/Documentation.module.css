@@ -22,3 +22,90 @@
     gap: 3%;
   }
 }
+
+.documentationContainer {
+  line-height: 1.6;
+  font-size: 16px;
+  color: #333;
+}
+
+.documentationContainer h1,
+.documentationContainer h2,
+.documentationContainer h3,
+.documentationContainer h4,
+.documentationContainer h5,
+.documentationContainer h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  max-width: 60%;
+}
+
+.documentationContainer h1 {
+  font-size: 2em;
+}
+
+.documentationContainer h2 {
+  font-size: 1.5em;
+}
+
+.documentationContainer h3 {
+  font-size: 1.3em;
+}
+
+.documentationContainer h4 {
+  font-size: 1.2em;
+}
+
+.documentationContainer h5 {
+  font-size: 1.1em;
+}
+
+.documentationContainer h6 {
+  font-size: 1em;
+}
+
+.documentationContainer p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  max-width: 70%;
+}
+
+.documentationContainer ul,
+.documentationContainer ol {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.documentationContainer li {
+  margin-bottom: 0.5em;
+}
+
+.documentationContainer code {
+  padding: 0.2em 0.4em;
+  background-color: #f6f8fa;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  max-width: 40%;
+  overflow-x: auto;
+}
+
+.documentationContainer pre {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em;
+  background-color: #f6f8fa;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  max-width: 40%;
+}
+
+.documentationContainer a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.documentationContainer a:hover {
+  text-decoration: underline;
+}

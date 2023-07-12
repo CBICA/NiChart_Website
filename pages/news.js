@@ -1,12 +1,18 @@
 import React from 'react';
+import Head from 'next/head';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import styles from '../styles/News.module.css';
+import Favicons from '../components/Favicons/Favicons';
 import newsStories from '/public/content/news_stories.js'
 
 const News = () => {
     return (
       <div className={styles.container}>
+        <Head>
+          <title>NiChart | News</title>
+          <Favicons />
+        </Head>
         <Header />
         <h2 className={styles.newsTitle}>News</h2>
         <div className={styles.newsPage}>

@@ -14,8 +14,45 @@
     padding: 2rem;
 }
 
-.team_members,
-.team_collaborators {
+.team_members {
+  padding-bottom: 2%;
   margin-bottom: 2rem;
 }
-  
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 2rem;
+  align-items: start;
+}
+
+.member {
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.member img {
+  max-width: 100%;
+  min-width: 10%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.member h3 {
+  margin-top: 1rem;
+}
+
+.member p {
+  display: none;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.member.expanded {
+  transform: scale(1.1);
+}
+
+.member.expanded p {
+  display: block;
+}

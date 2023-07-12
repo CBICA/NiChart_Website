@@ -20,7 +20,7 @@ const About = () => {
           </div>
           <div className={styles.aboutContent}>
               <div className={styles.aboutHeaderPicture}>
-                  <img src="/images/about_banner_picture_2.jpg" alt="NiChart Logo - Image by Gerd Altmann from Pixabay"/>
+                  <img src="/images/About/about_banner_picture_2.jpg" alt="NiChart Logo - Image by Gerd Altmann from Pixabay"/>
               </div>
               <div className={styles.aboutMainContent}>
                   <p>
@@ -32,9 +32,9 @@ const About = () => {
                     data standardization, interactive visualization, and 
                     extraction of expressive imaging signatures.
                   </p>
-                  <img src="/images/brain_transparent_logo_cropped.png" alt="NiChart Logo - Image by Gerd Altmann from Pixabay"/>
+                  <img src="/images/Logo/brain_transparent_logo_cropped.png" alt="NiChart Logo - Image by Gerd Altmann from Pixabay"/>
                   <p> This is a second test</p>
-                  <img src="/images/brain_transparent_logo_cropped.png" alt="NiChart Logo - Image by Gerd Altmann from Pixabay"/>
+                  <img src="/images/Logo/brain_transparent_logo_cropped.png" alt="NiChart Logo - Image by Gerd Altmann from Pixabay"/>
               </div>
           </div>
           

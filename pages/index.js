@@ -21,16 +21,16 @@ const HomePage = () => {
         <h1 className={styles.title}>Welcome to NiChart!</h1>
         <div className={styles.photoContainer}>
             <div className={styles.photoItem}>
-                <img src="/images/brain_anatomy.jpg" alt="Brain anatomy - Image by Raman Oza from Pixabay"/>
+                <img src="/images/Home/brain_anatomy.jpg" alt="Brain anatomy - Image by Raman Oza from Pixabay"/>
             </div>
             <div className={styles.photoItem}>
-                <img src="/images/brain_ai.jpg" alt="Brain AI - Image by Gerd Altmann from Pixabay"/>
+                <img src="/images/Home/brain_ai.jpg" alt="Brain AI - Image by Gerd Altmann from Pixabay"/>
             </div>
             <div className={styles.photoItem}>
-                <img src="/images/embroidered_brains.jpg" alt="Embroidery of brains - Author/Copyright holder: Hey Paul Studios. Copyright terms and licence: CC BY 2."/>
+                <img src="/images/Home/embroidered_brains.jpg" alt="Embroidery of brains - Author/Copyright holder: Hey Paul Studios. Copyright terms and licence: CC BY 2."/>
             </div>
             <div className={styles.photoItem}>
-                <img src="/images/MRI_scan_2.jpg" alt="MRI scan of a fixed cerebral hemisphere from a person with multiple sclerosis - Credit: Govind Bhagavatheeshwaran, Daniel Reich, National Institute of Neurological Disorders and Stroke, National Institutes of Health"/>
+                <img src="/images/Home/MRI_scan_2.jpg" alt="MRI scan of a fixed cerebral hemisphere from a person with multiple sclerosis - Credit: Govind Bhagavatheeshwaran, Daniel Reich, National Institute of Neurological Disorders and Stroke, National Institutes of Health"/>
             </div>
         </div>
       </div>

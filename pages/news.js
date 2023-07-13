@@ -18,7 +18,7 @@ const News = () => {
         <div className={styles.newsPage}>
           <div className={styles.newsStories}>
             {newsStories.map((story, index) => (
-              <a href={story.href} target="_blank"  rel="noopener noreferrer" className='link'>
+              <a key={index} href={story.href} target="_blank"  rel="noopener noreferrer" className='link'>
                 <div className={styles.newsStory} key={index}>
                   <div className={styles.newsContent} key={index}>
                       <img src={story.image} alt={`News ${index + 1}`} className={styles.newsImage} />

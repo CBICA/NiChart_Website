@@ -31,20 +31,20 @@ const Contact = () => {
             </form>
           </div>
           <div className={styles.contactInfo}>
-            <h2 class="footer-heading">Contact Us</h2>
-            <h3 class="footer-site-name">CBICA</h3>
-            <p class="address"> 3700 Hamilton Walk Richards Building, 7th Floor Philadelphia, PA 19104</p>
+            <h2 className="footer-heading">Contact Us</h2>
+            <h3 className="footer-site-name">CBICA</h3>
+            <p className="address"> 3700 Hamilton Walk Richards Building, 7th Floor Philadelphia, PA 19104</p>
             <br></br>
-            <span class="phone">
+            <span className="phone">
                 <a href="tel:+1-215-746-4060">215-746-4060</a>
             </span>
             <br></br>
-            <span class="directions">
+            <span className="directions">
                 <a href="https://goo.gl/maps/9SkjfpSLwHY1YFzW9">Directions</a>
             </span>
             <br></br>
             <div className='google-maps'>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3058.6297914270904!2d-75.20029352253465!3d39.949669871518395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6c72677dd280d%3A0x7888b382a71d5f44!2sRichards%20Medical%20Research%20Laboratories!5e0!3m2!1sen!2sus!4v1689101746189!5m2!1sen!2sus" width="600" height="450" styles="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3058.6297914270904!2d-75.20029352253465!3d39.949669871518395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6c72677dd280d%3A0x7888b382a71d5f44!2sRichards%20Medical%20Research%20Laboratories!5e0!3m2!1sen!2sus!4v1689101746189!5m2!1sen!2sus" width="600" height="450" styles="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
         </div>

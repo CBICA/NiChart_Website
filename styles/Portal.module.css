@@ -1,9 +1,29 @@
 .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
+  display:grid;
+  grid-template-columns:100%;
+  grid-template-rows:auto 1fr auto;
+
+  /* fallback height */
+  min-height:100vh;
+
+  /* new small viewport height for modern browsers */
+  min-height:100svh;
+}
   
+.portalPage {
+  display:block;
+  padding: 1rem;
+}
+
+@media (min-width:768px) {
+  .portalPage  {
+    display: grid;
+    grid-template-columns: 10% 90%;
+    gap: 3%;
+  }
+}
+
+
   .heading {
     margin-bottom: 1rem;
   }

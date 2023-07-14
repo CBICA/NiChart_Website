@@ -29,15 +29,18 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
+  margin-left: 6px;
 }
 
 .aboutMainContent {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 3%;
+  padding-right: 3%;
   gap: 10%;
+  justify-content: center;
+  align-items: center;
 }
 
 .aboutMainContent p {
@@ -47,5 +50,11 @@
   padding-left: 2%;
   padding-right: 2%;
   font-size: 150%;
-  
+}
+
+.aboutMainContent img {
+  width: 100%;
+  overflow: hidden;
+  max-width: fit-content;
+  max-height: fit-content;
 }

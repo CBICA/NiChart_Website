@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import styles from '/styles/Header.module.css';
 import Link from 'next/link';
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -15,18 +21,17 @@ const Header = () => {
       </div>
 
       <nav>
-        <input type="checkbox" id="menu-toggle" className={styles.menuToggle} />
-        <label htmlFor="menu-toggle" className={styles.menuIcon}>
+        <div className={styles.menuIcon} onClick={toggleMenu}>
           <FaBars />
-        </label>
+        </div>
 
-        <ul className={styles.navList}>
-          <li><a href="/about">About</a></li>
-          <li><a href="/documentation">Documentation</a></li>
-          <li><a href="/team">Team</a></li>
-          <li><a href="/news">News</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/portal">Portal</a></li>
+        <ul className={`${styles.navList} ${menuOpen ? styles.show : ''}`}>
+          <li><Link href="/about"><a>About</a></Link></li>
+          <li><Link href="/documentation"><a>Documentation</a></Link></li>
+          <li><Link href="/team"><a>Team</a></Link></li>
+          <li><Link href="/news"><a>News</a></Link></li>
+          <li><Link href="/contact"><a>Contact</a></Link></li>
+          <li><Link href="/portal"><a>Portal</a></Link></li>
         </ul>
       </nav>
     </header>

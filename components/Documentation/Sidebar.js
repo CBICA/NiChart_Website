@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../styles/Sidebar.module.css';
+import styles from '../../styles/Documentation_Sidebar.module.css';
 
 const Sidebar = ({ onSectionChange }) => {
   const handleItemClick = (section) => {

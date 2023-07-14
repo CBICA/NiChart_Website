@@ -20,7 +20,7 @@ const Documentation = () => {
   const handleSectionChange = (section) => {
     setSelectedSection(section);
   };
-
+  
   return (
     <div className={styles.container}>
       <Head>

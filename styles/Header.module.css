@@ -1,25 +1,14 @@
 .header {
-  /* Floating header */
   position: sticky;
   top: 0%;
-
-  /* Make sure that nav tabs stay in same line as logo */
   display: flex;
-
-  /* Make sure that nav tabs  at the right of the screen*/
   justify-content: space-between;
-
-  /* Make sure there is some space between logo and box */
   padding: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
-
-  /* Make border white */
   border: solid;
   border-color: #f2f2f2;
   border-width: 5px;
-
-  /* Background color - gray */
   background-image: linear-gradient(to right, #000000, #f2f2f2);
 }
 
@@ -28,24 +17,27 @@
 }
 
 .logo img {
-  /* Adjust the height to make the logo bigger */
-  height: 130px; 
+  height: 130px;
   border-radius: 15px;
 }
 
 .header nav {
   display: flex;
-  /* align the items to the end - automatic bottom */
   align-items: flex-end;
 }
 
-.header .navList {
-  list-style: none;
-  display: flex;
-  gap: 2rem; /* Adjust the gap to increase the spacing between navigation links */
+.menuIcon {
+  cursor: pointer;
+  font-size: 1.5rem;
 }
 
-.header .navList li a {
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.navList li a {
   text-decoration: none;
   color: #333;
   font-size: 18px;
@@ -53,8 +45,7 @@
   position: relative;
 }
 
-/* Underline animation for Navigation text stuff */
-.header .navList li a::after {
+.navList li a::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -65,32 +56,22 @@
   transition: width 0.3s ease;
 }
 
-.header .navList li a:hover::after {
+.navList li a:hover::after {
   width: 100%;
 }
-/* End of underline animation stuff */
 
-
-.header .menuToggle {
-  display: none;
-}
-
-.header .menuIcon {
+.menuIcon {
   cursor: pointer;
+  font-size: 1.5rem;
   display: none;
 }
 
 @media (max-width: 768px) {
-  .header .menuToggle {
+  .menuIcon {
     display: block;
   }
 
-  .header .menuIcon {
-    display: block;
-    font-size: 1.5rem;
-  }
-
-  .header .navList {
+  .navList {
     display: none;
     flex-direction: column;
     position: absolute;
@@ -102,11 +83,11 @@
     z-index: 1;
   }
 
-  .header .navList.show {
+  .navList.show {
     display: flex;
   }
 
-  .header .navList li {
+  .navList li {
     margin-bottom: 0.5rem;
   }
 }

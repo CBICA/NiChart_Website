@@ -32,7 +32,14 @@
   margin-left: 6px;
 }
 
+/* FOR DEMO ONLY */
 .aboutMainContent {
+  padding-left: 3%;
+  padding-right: 3%;
+  font-size: x-large;
+}
+
+/* .aboutMainContent {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -57,4 +64,4 @@
   overflow: hidden;
   max-width: fit-content;
   max-height: fit-content;
-}
+} */

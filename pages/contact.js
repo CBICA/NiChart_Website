@@ -19,7 +19,11 @@ const Contact = () => {
         <h1>Contact Us</h1>
         <p>Have a question or need assistance? We're here to help!</p>
         <div className={styles.contactContainer}>
-          <div className={styles.formContainer}>
+          <p>
+              Please contact us <a href="mailto:software@cbica.upenn.edu">here</a>.
+          </p>
+
+          {/* <div className={styles.formContainer}>
             <form className={styles.form}>
               <label htmlFor="name">Name</label>
               <input type="text" id="name" name="name" placeholder="Your name" required />
@@ -29,7 +33,7 @@ const Contact = () => {
               <textarea id="message" name="message" placeholder="Your message" required />
               <button type="submit">Submit</button>
             </form>
-          </div>
+          </div> */}
           <div className={styles.contactInfo}>
             <h2 className="footer-heading">Contact Us</h2>
             <h3 className="footer-site-name">CBICA</h3>

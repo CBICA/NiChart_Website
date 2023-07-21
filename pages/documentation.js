@@ -9,7 +9,8 @@ import styles from '../styles/Documentation.module.css';
 
 const Documentation = () => {
   const [markdownContent, setMarkdownContent] = useState('');
-  const [selectedSection, setSelectedSection] = useState('Installation');
+  // const [selectedSection, setSelectedSection] = useState('Installation');
+  const [selectedSection, setSelectedSection] = useState('sMRI');
 
   useEffect(() => {
     fetch(`/content/Documentation/${selectedSection}.md`)

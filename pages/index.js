@@ -19,6 +19,7 @@ const HomePage = () => {
       {/* Content of your homepage */}
       <div className={styles.container}>
         <h1 className={styles.title}>Welcome to NiChart!</h1>
+        <h2 className={styles.subtitle}>NiChart: NeuroImaging Computational Harmonization and Artificial Intelligence Toolbox</h2>
         <div className={styles.photoContainer}>
             <div className={styles.photoItem}>
                 <img src="/images/Home/brain_anatomy.jpg" alt="Brain anatomy - Image by Raman Oza from Pixabay"/>

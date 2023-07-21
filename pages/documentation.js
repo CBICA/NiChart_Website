@@ -12,7 +12,7 @@ const Documentation = () => {
   const [selectedSection, setSelectedSection] = useState('Installation');
 
   useEffect(() => {
-    fetch(`/content/${selectedSection}.md`)
+    fetch(`/content/Documentation/${selectedSection}.md`)
       .then((response) => response.text())
       .then((content) => setMarkdownContent(content));
   }, [selectedSection]);

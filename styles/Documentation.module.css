@@ -18,7 +18,7 @@
 @media (min-width:768px) {
   .documentationPage  {
     display: grid;
-    grid-template-columns: 10% 90%;
+    grid-template-columns: 10% 85%;
     gap: 3%;
   }
 }

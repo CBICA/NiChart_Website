@@ -6,7 +6,7 @@ import styles from '../../styles/Portal_Module_2.module.css'
 function Module_2() {
   return (
     <div>
-      <h2>Module 2: ML</h2>
+      <h2>Module 2: Machine Learning</h2>
       <div className={styles.moduleContainer}>
           <Divider orientation="horizontal" />
           <Flex direction={{ base: 'column', large: 'row' }} maxWidth="100%" padding="1rem" width="100%" justifyContent="flex-start">

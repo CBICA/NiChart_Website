@@ -4,7 +4,7 @@
     "description": "Website for NiChart project",
     "scripts": {
         "dev": "next dev",
-        "build": "next build",
+        "build": "next build && next export",
         "start": "next start"
     },
     "dependencies": {
@@ -12,6 +12,12 @@
         "@aws-amplify/ui-react": "^5.0.4",
         "@aws-amplify/ui-react-storage": "^2.0.4",
         "@aws-sdk/client-batch": "^3.365.0",
+        "@aws-sdk/client-lambda": "^3.370.0",
+        "@fortawesome/fontawesome-svg-core": "^6.4.0",
+        "@fortawesome/free-solid-svg-icons": "^6.4.0",
+        "@fortawesome/react-fontawesome": "^0.2.0",
+        "autoprefixer": "^10.4.0",
+        "next": "^12.0.7",
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@fortawesome/fontawesome-svg-core": "^6.4.0",

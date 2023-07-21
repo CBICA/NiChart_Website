@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Text, Link } from '@aws-amplify/ui-react';
 import Chart from './Chart';
 import styles from '../../styles/Portal_Module_3.module.css';
 import { FormControl, InputLabel, MenuItem, Select, Button } from '@mui/material';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'; 
 
 function Module_3() {
   const [chartCount, setChartCount] = useState(0);
@@ -43,6 +44,13 @@ function Module_3() {
   return (
     <div>
       <h2>Module 3: Plotting</h2>
+      <div className={styles.moduleContainer}>
+        <Text>
+        This module is currently under construction.
+        In the meantime, visit some work in progress at <Link isExternal="true" href="http://gurayerus.pythonanywhere.com/">our demo site.</Link>
+        <Link external="true" href="http://gurayerus.pythonanywhere.com/"></Link>
+        </Text>
+      </div>
       <div className={styles.inputsContainer}>
         <FormControl variant="outlined" className={styles.referenceDataSelect}>
           <InputLabel htmlFor="reference-data-select">Reference Data</InputLabel>

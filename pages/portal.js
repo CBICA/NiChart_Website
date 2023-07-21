@@ -8,8 +8,8 @@ import Module_1 from '../components/Portal/Module_1';
 import Module_2 from '../components/Portal/Module_2';
 import Module_3 from '../components/Portal/Module_3';
 import styles from '../styles/Portal.module.css'
-import { Button, Flex } from '@aws-amplify/ui-react';
-// import awsconfig from './aws-exports';
+import { Button, Flex, Authenticator } from '@aws-amplify/ui-react';
+import awsExports from '../utils/aws-exports';
 
 function Portal() {
 
@@ -21,8 +21,8 @@ function Portal() {
   };
   
   return (
-  // <Authenticator>
-  // {({ signOut, user }) => (
+  <Authenticator>
+  {({ signOut, user }) => (
     <div className={styles.container}>
       <Head>
         <title>NiChart | Portal</title>
@@ -33,8 +33,7 @@ function Portal() {
         <Sidebar handleModuleSelection={handleModuleSelection}/>
         <div className={styles.modulePage}>
             <Flex direction = {{ base: 'row' }} height="60px" justifyContent="flex-start">
-                {/* <h3> Hello, {user.attributes.email}! </h3><Button onClick={signOut}> Sign Out </Button> */}
-                <h3>Hello, user</h3><Button>Sign Out</Button>
+                <h3> Hello, {user.attributes.email}! </h3><Button onClick={signOut}> Sign Out </Button>
             </Flex>
             {selectedModule === 'module1' && <Module_1 />}
             {selectedModule === 'module2' && <Module_2 />}
@@ -48,8 +47,8 @@ function Portal() {
       </div> 
       <Footer />
     </div>
-  // )}
-  // </Authenticator>
+  )}
+  </Authenticator>
   );
 }
 

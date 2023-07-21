@@ -1,7 +1,7 @@
 import React from 'react';
-import { Flex, Heading, Divider } from '@aws-amplify/ui-react';
+import { Flex, Heading, Divider, Button, Text } from '@aws-amplify/ui-react';
 import styles from '../../styles/Portal_Module_1.module.css'
-import { DefaultStorageManagerExample, JobList } from '../../utils/uploadFiles.js'
+import { DefaultStorageManagerExample, JobList, getCombinedImageZip, getCombinedCSV } from '../../utils/uploadFiles.js'
 
 function Module_1() {
   return (
@@ -15,8 +15,14 @@ function Module_1() {
               </Flex>
               <Flex direction="column">
                   <Heading level={3}>Jobs in Progress</Heading>
-                  <JobList />
+                  <JobList jobQueue="cbica-nichart-helloworld-jobqueue2"/>
               </Flex>
+              <div>
+                  <Heading level={3}>Download Results</Heading>
+                  <Text>Results will be downloaded for all subjects that have finished processing.</Text>
+                  <Button onClick={async () => getCombinedCSV() } >Download MUSE CSV</Button>
+                  <Button onClick={async () => getCombinedImageZip() } >Download MUSE ROIs</Button>
+              </div>
           </Flex>
       </div>
     </div>

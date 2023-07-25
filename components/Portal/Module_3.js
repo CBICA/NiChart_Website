@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, Link } from '@aws-amplify/ui-react';
 import Chart from './Chart';
 import styles from '../../styles/Portal_Module_3.module.css';
 import { FormControl, InputLabel, MenuItem, Select, Button } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'; 
+import Papa from 'papaparse';
+
 
 function Module_3() {
   const [chartCount, setChartCount] = useState(0);
   const [chartsData, setChartsData] = useState([]);
-  const [xAxis, setXAxis] = useState('');
-  const [yAxis, setYAxis] = useState('');
   const [chartNames, setChartNames] = useState([]);
-  const [referenceData, setReferenceData] = useState('iSTAGING data');
+  const [referenceDataOption, setReferenceDataOption] = useState('All data');
+  const [referenceData, setReferenceData] = useState(null);
   const defaultDataFile = 'Output_of_Module_2.csv';
+  const [userUploadedData, setUserUploadedData] = useState(null);
+  const [roiColumn, setROIColumn] = useState('MUSE_ICV');
+
 
   const handleAddChart = () => {
     setChartCount((prevCount) => prevCount + 1);
@@ -27,19 +31,65 @@ function Module_3() {
     setChartNames((prevNames) => prevNames.filter((_, i) => i !== index));
   };
 
-  const handleXAxisChange = (index, value) => {
-    setXAxis((prevAxes) => ({
-      ...prevAxes,
-      [index]: value,
-    }));
+
+  // Function to read user data from the uploaded CSV file
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (results) => {
+          const userData = results.data;
+          setUserUploadedData(userData);
+          console.log(userData);
+        },
+        error: (error) => {
+          console.error('Error parsing CSV file:', error);
+        },
+      });
+    }
   };
 
-  const handleYAxisChange = (index, value) => {
-    setYAxis((prevAxes) => ({
-      ...prevAxes,
-      [index]: value,
-    }));
-  };
+
+// Function to handle the reference data selection change
+const handleReferenceDataChange = async (event) => {
+  const selectedOption = event
+  let referenceFilePath;
+
+  if (selectedOption === 'All data') {
+    // referenceFilePath = '/public/content/Portal/Visualization/Reference_Data/All_Data.csv';
+    return;
+  } else if (selectedOption === 'iSTAGING data') {
+    referenceFilePath = '/content/Portal/Visualization/Reference_Data/iSTAGING_Data.csv';
+  } else if (selectedOption === 'UK Biobank data') {
+    // referenceFilePath = '/public/content/Portal/Visualization/Reference_Data/UK_Biobank_Data.csv';
+    return;
+  } else if (selectedOption === 'ADNI data') {
+    // referenceFilePath = '/public/content/Portal/Visualization/Reference_Data/ADNI_Data.csv';
+    return;
+  } else {
+    // Handle any other option here (optional)
+    return;
+  }
+
+  try {
+    const response = await fetch(referenceFilePath);
+    if (response.status === 404) {
+      console.error('Error loading reference data:', response.statusText);
+      setReferenceDataOption('Error loading reference data');
+      return;
+    }
+    const content = await response.text();
+    const parsedData = Papa.parse(content, { header: true });
+    console.log(parsedData.data);
+    // setReferenceData(parsedData.data);
+    setReferenceDataOption(selectedOption);
+  } catch (error) {
+    console.error('Error loading reference data:', error);
+    setReferenceDataOption('Error loading reference data');
+  }
+};
 
   return (
     <div>
@@ -53,16 +103,18 @@ function Module_3() {
       </div>
       <div className={styles.inputsContainer}>
         <FormControl variant="outlined" className={styles.referenceDataSelect}>
-          <InputLabel htmlFor="reference-data-select">Reference Data</InputLabel>
+          <InputLabel htmlFor="reference-data-select">Select Reference Data</InputLabel>
           <Select
-            value={referenceData}
-            onChange={(e) => setReferenceData(e.target.value)}
+            defaultValue="All data"
+            value={referenceDataOption}
+            onChange={(e) => handleReferenceDataChange(e.target.value)}
             label="Reference Data"
             inputProps={{
               name: 'reference-data',
               id: 'reference-data-select',
             }}
           >
+            <MenuItem value="All data">All data</MenuItem>
             <MenuItem value="iSTAGING data">iSTAGING data</MenuItem>
             <MenuItem value="UK Biobank data">UK Biobank data</MenuItem>
             <MenuItem value="ADNI data">ADNI data</MenuItem>
@@ -77,12 +129,33 @@ function Module_3() {
           </div>
           <Button variant="contained" component="label">
             Browse File
-            <input type="file" accept=".csv" style={{ display: 'none' }} />
+            <input type="file" accept=".csv" style={{ display: 'none' }}  onChange={handleFileUpload}/>
           </Button>
           <div className={styles.selectedFile}>
             File to be used: {defaultDataFile}
           </div>
         </div>
+        <FormControl variant="outlined" className={styles.referenceDataSelect}>
+          <InputLabel htmlFor="ROI-column-select">Select ROI column</InputLabel>
+          <Select
+            defaultValue='MUSE_ICV'
+            value={roiColumn}
+            onChange={(e) => setROIColumn(e.target.value)}
+            label="ROI column"
+            inputProps={{
+              name: 'ROI-column',
+              id: 'ROI-column-select',
+            }}
+          >
+            <MenuItem value="MUSE_ICV">MUSE_ICV</MenuItem>
+            <MenuItem value="MUSE_TBR">MUSE_TBR</MenuItem>
+            <MenuItem value="MUSE_GM">MUSE_GM</MenuItem>
+            <MenuItem value="MUSE_WM">MUSE_WM</MenuItem>
+            <MenuItem value="MUSE_VN">MUSE_VN</MenuItem>
+            <MenuItem value="MUSE_HIPPOL">MUSE_HIPPOL</MenuItem>
+            <MenuItem value="MUSE_HIPPOR">MUSE_HIPPOR</MenuItem>
+          </Select>
+        </FormControl>
         <button onClick={handleAddChart}>Add Plot</button>
       </div>
       <div className={styles.chartsContainer}>
@@ -90,11 +163,9 @@ function Module_3() {
           <Chart
             key={index}
             data={chartsData[index]}
-            xAxis={xAxis[index] || ''}
-            yAxis={yAxis[index] || ''}
             name={chartNames[index]}
-            onXAxisChange={(value) => handleXAxisChange(index, value)}
-            onYAxisChange={(value) => handleYAxisChange(index, value)}
+            // referenceData
+            // ROIColumn
             onDestroy={() => handleDestroyChart(index)}
           />
         ))}

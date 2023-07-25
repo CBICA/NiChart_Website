@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 const PlotlyChart = dynamic(() => import('react-plotly.js'), { ssr: false });
 
-const Chart = ({ data, xAxis, yAxis, name, onXAxisChange, onYAxisChange, onDestroy }) => {
+const Chart = ({ data, name, onDestroy }) => {
   const [chartData, setChartData] = useState([]);
   const [chartLayout, setChartLayout] = useState(null);
   const [chartConfig, setChartConfig] = useState(null);
@@ -25,8 +25,8 @@ const Chart = ({ data, xAxis, yAxis, name, onXAxisChange, onYAxisChange, onDestr
 
     const layout = {
       title: name,
-      xaxis: { title: xAxis },
-      yaxis: { title: yAxis },
+      xaxis: { title: "Age" },
+      yaxis: { title: "ROI" },
       hovermode:'closest',
     };
     
@@ -113,21 +113,10 @@ const Chart = ({ data, xAxis, yAxis, name, onXAxisChange, onYAxisChange, onDestr
     setEventHandlers({ click: onClickHandler,
                        hover: onHoverHandler, 
                        unhover: onUnHoverHandler,});
-  }, [data.x, data.y, name, xAxis, yAxis]);
-
-  const handleXAxisChange = (e) => {
-    onXAxisChange(e.target.value);
-  };
-
-  const handleYAxisChange = (e) => {
-    onYAxisChange(e.target.value);
-  };
-
+  }, [data.x, data.y, name]);
 
   return (
     <div>
-      <input type="text" value={xAxis} onChange={handleXAxisChange} placeholder="X-axis" />
-      <input type="text" value={yAxis} onChange={handleYAxisChange} placeholder="Y-axis" />
       <button onClick={onDestroy}>Destroy Chart</button>
       <PlotlyChart  data={chartData} 
                     layout={chartLayout} 

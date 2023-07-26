@@ -32,7 +32,7 @@ const Chart = ({ name, data, reference, roi, onDestroy }) => {
     const redColors = referenceDataKeys.map((key, index) => {
       const centerIndex = (referenceDataKeys.length - 1) / 2;
       const distanceFromCenter = Math.abs(index - centerIndex);
-      const lightness = 85 + distanceFromCenter * distanceFromCenter * 2;
+      const lightness = 80 + distanceFromCenter * distanceFromCenter * 2;
       return `hsl(0, 100%, ${lightness}%)`;
     });
 

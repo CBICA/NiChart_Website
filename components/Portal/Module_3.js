@@ -9,19 +9,17 @@ import Papa from 'papaparse';
 
 function Module_3() {
   const [chartCount, setChartCount] = useState(0);
-  const [chartsData, setChartsData] = useState([]);
+  const [chartsData, setChartsData] = useState(null);
   const [chartNames, setChartNames] = useState([]);
   const [referenceDataOption, setReferenceDataOption] = useState('All data');
   const [referenceData, setReferenceData] = useState(null);
   const defaultDataFile = 'Output_of_Module_2.csv';
-  const [userUploadedData, setUserUploadedData] = useState(null);
   const [roiColumn, setROIColumn] = useState('MUSE_ICV');
 
 
   const handleAddChart = () => {
     setChartCount((prevCount) => prevCount + 1);
     const newChartName = `Chart ${chartCount + 1}`;
-    setChartsData((prevData) => [...prevData, { x: [], y: [] }]);
     setChartNames((prevNames) => [...prevNames, newChartName]);
   };
 
@@ -41,8 +39,7 @@ function Module_3() {
         skipEmptyLines: true,
         complete: (results) => {
           const userData = results.data;
-          setUserUploadedData(userData);
-          console.log(userData);
+          setChartsData(userData);
         },
         error: (error) => {
           console.error('Error parsing CSV file:', error);
@@ -82,8 +79,7 @@ const handleReferenceDataChange = async (event) => {
     }
     const content = await response.text();
     const parsedData = Papa.parse(content, { header: true });
-    console.log(parsedData.data);
-    // setReferenceData(parsedData.data);
+    setReferenceData(parsedData.data);
     setReferenceDataOption(selectedOption);
   } catch (error) {
     console.error('Error loading reference data:', error);
@@ -162,10 +158,10 @@ const handleReferenceDataChange = async (event) => {
         {Array.from({ length: chartCount }).map((_, index) => (
           <Chart
             key={index}
-            data={chartsData[index]}
             name={chartNames[index]}
-            // referenceData
-            // ROIColumn
+            data={chartsData}
+            reference={referenceData}
+            roi={roiColumn}
             onDestroy={() => handleDestroyChart(index)}
           />
         ))}

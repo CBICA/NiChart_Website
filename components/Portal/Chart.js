@@ -11,8 +11,8 @@ const Chart = ({ name, data, reference, roi, onDestroy }) => {
   useEffect(() => {
     // Calculate the marker size based on the number of data points
     const calculateMarkerSize = (dataLength) => {
-      const minSize = 14;
-      const maxSize = 7;
+      const minSize = 12;
+      const maxSize = 6;
       const minDataLength = 10;
       const maxDataLength = 1000;
     

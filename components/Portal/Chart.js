@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { NiiVue } from '../../utils/niiViewer.js'
+
 const PlotlyChart = dynamic(() => import('react-plotly.js'), { ssr: false });
 
 const Chart = ({ name, data, reference, roi, onDestroy }) => {
@@ -107,6 +109,11 @@ const Chart = ({ name, data, reference, roi, onDestroy }) => {
             // Do w/e
             const message = `Clicked Data Point:\nX: ${x}\nY: ${y}\nCurve Number: ${curveNumber} \nID: ${id}`;
             console.log(message);
+            <NiiVue imageUrl={"/content/Portal/Visualization/Reference_Data/T1_0000.nii.gz"}> </NiiVue>
+            // NiiVue("ID.nii.gz");
+
+            // Open a new tab with the NiiVue component
+            // const url = `/content/Portal/Visualization/Reference_Data/T1_0000.nii.gz`;
           }
           else {
             // do nothing, as we have centiles

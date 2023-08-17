@@ -59,3 +59,7 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+# Nifti files, make sure that nothing sensitive gets uploaded.
+*.nii.gz
+*.nii

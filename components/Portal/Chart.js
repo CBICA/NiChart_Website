@@ -57,6 +57,7 @@ const Chart = ({ name, data, reference, roi, onDestroy }) => {
     updatedData.push({
       x: data.map((row) => parseFloat(row["Age"])),
       y: data.map((row) => parseFloat(row[roi])),
+      id: data.map((row) => row["ID"]),
       type: 'scatter',
       mode: 'markers',
       marker: {
@@ -98,10 +99,18 @@ const Chart = ({ name, data, reference, roi, onDestroy }) => {
     const onClickHandler = (event) => {
       if (event.points) {
           const clickedDataPoint = event.points[0];
-          const { x, y, curveNumber, pointNumber, fullData} = clickedDataPoint;
-          console.log(clickedDataPoint);
-          const message = `Clicked Data Point:\nX: ${x}\nY: ${y}\nCurve Number: ${curveNumber}`;
-          console.log(message);
+          const { x, y, curveNumber, pointNumber, data} = clickedDataPoint;
+          if ("id" in data){
+            // If ID exists, we have user data. 
+            const id = data["id"][pointNumber];
+
+            // Do w/e
+            const message = `Clicked Data Point:\nX: ${x}\nY: ${y}\nCurve Number: ${curveNumber} \nID: ${id}`;
+            console.log(message);
+          }
+          else {
+            // do nothing, as we have centiles
+          }
         }
     };
 

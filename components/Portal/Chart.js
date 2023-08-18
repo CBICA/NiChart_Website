@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { NiiVue } from '../../utils/niiViewer.js'
+import NiiVue from '../../utils/niiViewer.js'
+import Modal from 'react-modal'; // Import the modal library you're using
+
 
 const PlotlyChart = dynamic(() => import('react-plotly.js'), { ssr: false });
 
@@ -9,6 +11,16 @@ const Chart = ({ name, data, reference, roi, onDestroy }) => {
   const [chartLayout, setChartLayout] = useState(null);
   const [chartConfig, setChartConfig] = useState(null);
   const [eventHandlers, setEventHandlers] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false); // State for modal visibility
+  const [selectedDataPoint, setSelectedDataPoint] = useState(null); // State for clicked data point info
+  const openModal = (dataPoint) => {
+    setSelectedDataPoint(dataPoint);
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setSelectedDataPoint(null);
+    setModalIsOpen(false);
+  };
 
   useEffect(() => {
     // Calculate the marker size based on the number of data points
@@ -109,14 +121,16 @@ const Chart = ({ name, data, reference, roi, onDestroy }) => {
             // Do w/e
             const message = `Clicked Data Point:\nX: ${x}\nY: ${y}\nCurve Number: ${curveNumber} \nID: ${id}`;
             console.log(message);
-            <NiiVue imageUrl={"/content/Portal/Visualization/Reference_Data/T1_0000.nii.gz"}> </NiiVue>
-            // NiiVue("ID.nii.gz");
-
-            // Open a new tab with the NiiVue component
-            // const url = `/content/Portal/Visualization/Reference_Data/T1_0000.nii.gz`;
+            openModal({
+              x,
+              y,
+              curveNumber,
+              id,
+              // Other data you want to pass to the modal, e.g. url
+            });
           }
           else {
-            // do nothing, as we have centiles
+            // do nothing, as centile data points were clicked
           }
         }
     };
@@ -135,6 +149,29 @@ const Chart = ({ name, data, reference, roi, onDestroy }) => {
                     config={chartConfig} 
                     onClick={eventHandlers?.click}
                     />
+      {/* Modal to show the NiiVue component */}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="NiiVue Modal"
+        style={{
+          overlay: {
+            // Overlay styles (if needed)
+          },
+          content: {
+            width: '50%',    // Adjust the width as needed
+            height: '50%',   // Adjust the height as needed
+            margin: 'auto',  // Center the modal horizontally
+          },
+        }}
+      >
+      Nii Vue visualization here
+        {/* {selectedDataPoint && (
+          <NiiVue imageUrl={"/content/Portal/Visualization/Reference_Data/T1_0000.nii.gz"}> </NiiVue>
+          // <NiiVue imageUrl={`/content/Portal/Visualization/Reference_Data/${selectedDataPoint.id}.nii.gz`} />
+        )} */}
+        <button onClick={closeModal}>Close</button>
+      </Modal>
     </div>
   );
 };

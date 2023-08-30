@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import NiiVue from '../../utils/niiViewer.js'
-import Modal from 'react-modal'; // Import the modal library you're using
+import Modal from 'react-modal';
+import { Select, MenuItem, Button} from '@mui/material';
+
 
 
 const PlotlyChart = dynamic(() => import('react-plotly.js'), { ssr: false });
 
-const Chart = ({ name, data, reference, roi, onDestroy }) => {
+const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROIChange, onReferenceDataChange }) => {
   const [chartData, setChartData] = useState([]);
   const [chartLayout, setChartLayout] = useState(null);
   const [chartConfig, setChartConfig] = useState(null);
   const [eventHandlers, setEventHandlers] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false); // State for modal visibility
   const [selectedDataPoint, setSelectedDataPoint] = useState(null); // State for clicked data point info
+
   const openModal = (dataPoint) => {
     setSelectedDataPoint(dataPoint);
     setModalIsOpen(true);
@@ -139,16 +142,40 @@ const Chart = ({ name, data, reference, roi, onDestroy }) => {
     setChartLayout(layout);
     setChartConfig(config);
     setEventHandlers({ click: onClickHandler,});
-  }, [data.x, data.y, name]);
+  }, [data.x, data.y, name, reference, roi]);
 
   return (
     <div>
-      <button onClick={onDestroy}>Destroy Chart</button>
       <PlotlyChart  data={chartData} 
                     layout={chartLayout} 
                     config={chartConfig} 
                     onClick={eventHandlers?.click}
                     />
+      <div>
+        {/* Dropdown to select ROI */}
+        <label>Select ROI:</label>
+        <Select value={roi} onChange={(e) => onROIChange(e.target.value)}>
+          <MenuItem value="MUSE_ICV">MUSE_ICV</MenuItem>
+            <MenuItem value="MUSE_TBR">MUSE_TBR</MenuItem>
+            <MenuItem value="MUSE_GM">MUSE_GM</MenuItem>
+            <MenuItem value="MUSE_WM">MUSE_WM</MenuItem>
+            <MenuItem value="MUSE_VN">MUSE_VN</MenuItem>
+            <MenuItem value="MUSE_HIPPOL">MUSE_HIPPOL</MenuItem>
+            <MenuItem value="MUSE_HIPPOR">MUSE_HIPPOR</MenuItem>
+        </Select>
+
+        {/* Dropdown to select reference data */}
+        <label>Select Reference Data:</label>
+        <Select value={referenceOption} onChange={(e) => onReferenceDataChange(e.target.value)}>
+            <MenuItem value="All data">All data</MenuItem>
+            <MenuItem value="iSTAGING data">iSTAGING data</MenuItem>
+            <MenuItem value="UK Biobank data">UK Biobank data</MenuItem>
+            <MenuItem value="ADNI data">ADNI data</MenuItem>
+        </Select>
+
+        {/* Button to destroy the plot */}
+        <Button onClick={onDelete}>Destroy Chart</Button>
+      </div>
       {/* Modal to show the NiiVue component */}
       <Modal
         isOpen={modalIsOpen}
@@ -165,11 +192,11 @@ const Chart = ({ name, data, reference, roi, onDestroy }) => {
           },
         }}
       >
-      Nii Vue visualization here
-        {/* {selectedDataPoint && (
+      {/* Nii Vue visualization here */}
+        {selectedDataPoint && (
           <NiiVue imageUrl={"/content/Portal/Visualization/Reference_Data/T1_0000.nii.gz"}> </NiiVue>
           // <NiiVue imageUrl={`/content/Portal/Visualization/Reference_Data/${selectedDataPoint.id}.nii.gz`} />
-        )} */}
+        )}
         <button onClick={closeModal}>Close</button>
       </Modal>
     </div>

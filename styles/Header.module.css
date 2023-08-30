@@ -10,6 +10,7 @@
   border-color: #f2f2f2;
   border-width: 5px;
   background-image: linear-gradient(to right, #000000, #f2f2f2);
+  z-index: 1000; /* Adjust this value as needed */
 }
 
 .logo {
@@ -66,7 +67,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .menuIcon {
     display: block;
   }
@@ -80,7 +81,6 @@
     background-color: #f2f2f2;
     padding: 1rem;
     width: 100%;
-    z-index: 1;
   }
 
   .navList.show {

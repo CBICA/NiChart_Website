@@ -15,16 +15,16 @@
   padding: 1rem;
 }
 
-@media (min-width:768px) {
+@media (min-width:850px) {
   .portalPage  {
     display: grid;
-    grid-template-columns: 10% 85%;
+    grid-template-columns: 15% 80%;
     gap: 3%;
   }
 }
 
 .modulePage {
-  
+  overflow-y: auto; /* Enable scrolling for main content */
 }
 
   .heading {

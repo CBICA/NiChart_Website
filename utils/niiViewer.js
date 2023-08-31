@@ -9,7 +9,10 @@ const NiiVue = ({ imageUrl }) => {
         url: imageUrl,
       },
     ];
-    const nv = new Niivue();
+    const nv = new Niivue({
+      isColorbar: true, // show colorbar
+      show3Dcrosshair: true, // show crosshair in 3D view      
+    });
     nv.attachToCanvas(canvas.current);
     nv.loadVolumes(volumeList);
   }, [imageUrl]);

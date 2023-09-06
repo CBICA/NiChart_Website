@@ -24,7 +24,6 @@
         "autoprefixer": "^10.4.0",
         "next": "^12.0.7",
         "papaparse": "^5.4.1",
-        "papaya": "^3.0.0",
         "plotly.js": "^2.24.3",
         "plotly.js-basic-dist": "^2.24.3",
         "postcss": "^8.4.4",

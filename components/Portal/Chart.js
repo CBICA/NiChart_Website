@@ -67,7 +67,7 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
         fillcolor: redColors[i], // Use the same color for the filled area
         type: 'scatter',
         name: key,
-        hovermode: false,
+        hovertemplate: '<i>Volume</i>: %{y:.2f}' + '<br><b>Age</b>: %{x:.1f}<br>',      
       });
     }
     if (data != []) {
@@ -83,6 +83,8 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
           size: calculateMarkerSize(data.length),
         },
         name: "User data",
+        text: data.map((row) => row["ID"]),
+        hovertemplate: '<b>%{text}</b><br>' + '<b>Volume</b>: %{y:.2f}<br>' + '<b>Age</b>: %{x:.1f}',      
       });
     }
         
@@ -94,12 +96,15 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
     
     const layout = {
       title: name,
-      xaxis: { title: "Age" },
+      xaxis: { 
+                title: "Age",
+              },
       yaxis: { 
-        title: roi,
-        range: dataRange,
-      },
+                title: roi,
+                range: dataRange,
+              },
       hovermode:'closest',
+      hoverinfo:'text'
     };
     
     const config = {

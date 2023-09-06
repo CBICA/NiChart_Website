@@ -70,20 +70,22 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
         hovermode: false,
       });
     }
-    // Add user data scatter trace
-    updatedData.push({
-      x: data.map((row) => parseFloat(row["Age"])),
-      y: data.map((row) => parseFloat(row[roi])),
-      id: data.map((row) => row["ID"]),
-      type: 'scatter',
-      mode: 'markers',
-      marker: {
-        color: 'blue',
-        size: calculateMarkerSize(data.length),
-      },
-      name: "User data",
-    });
-    
+    if (data != []) {
+      // Add user data scatter trace
+      updatedData.push({
+        x: data.map((row) => parseFloat(row["Age"])),
+        y: data.map((row) => parseFloat(row[roi])),
+        id: data.map((row) => row["ID"]),
+        type: 'scatter',
+        mode: 'markers',
+        marker: {
+          color: 'blue',
+          size: calculateMarkerSize(data.length),
+        },
+        name: "User data",
+      });
+    }
+        
     const yValues = data.map((row) => parseFloat(row[roi]));
     const minDataPoint = Math.min(...yValues);
     const maxDataPoint = Math.max(...yValues);

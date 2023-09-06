@@ -19,7 +19,6 @@ const Module_3 = () => {
   };
 
   const handleAddPlot = async () => {
-    if (!uploadedFile) return;
     
     let referenceData;
     let referenceFilePath;
@@ -46,6 +45,18 @@ const Module_3 = () => {
       setReferenceDataOption('Error loading reference data');
       return;
     }
+
+    if (!uploadedFile) {
+      const newPlot = {
+        name: `${roiColumn} | ${referenceDataOption}`,
+        data: [],
+        reference: referenceData,
+        referenceOption: referenceDataOption,
+        roi: roiColumn,
+      };
+      setPlots([...plots, newPlot]);
+      return;
+    };
 
     Papa.parse(uploadedFile, {
       header: true,
@@ -77,7 +88,8 @@ const Module_3 = () => {
     setPlots(prevPlots => {
       const updatedPlots = prevPlots.map(plot => {
         if (plot.name === plotName) {
-          return { ...plot, roi: newROI };
+          const newName = plot.name.replace(plot.roi, newROI);
+          return { ...plot, roi: newROI, name: newName };
         }
         return plot;
       });
@@ -89,7 +101,8 @@ const Module_3 = () => {
     setPlots(prevPlots => {
       const updatedPlots = prevPlots.map(plot => {
         if (plot.name === plotName) {
-          return { ...plot, referenceOption: newReference };
+          const newName = plot.name.replace(plot.referenceOption, newReference);
+          return { ...plot, referenceOption: newReference, name: newName };
         }
         return plot;
       });

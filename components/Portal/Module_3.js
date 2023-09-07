@@ -4,12 +4,19 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Papa from 'papaparse';
 import Chart from './Chart';
 import styles from '../../styles/Portal_Module_3.module.css';
+import MUSEROICompleteList from '/public/content/Portal/Visualization/Reference_Data/MUSE_ROI_complete_list.json';
+
 
 const Module_3 = () => {
   const [referenceDataOption, setReferenceDataOption] = useState('iSTAGING data');
-  const [roiColumn, setROIColumn] = useState('MUSE_ICV');
+  const [roiColumn, setROIColumn] = useState('702');
   const [uploadedFile, setUploadedFile] = useState(null);
   const [plots, setPlots] = useState([]);
+
+  const roiFullNames = Object.entries(MUSEROICompleteList).map(([id, roiData]) => ({
+    id,
+    fullName: roiData.Full_Name,
+  }));
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -17,7 +24,7 @@ const Module_3 = () => {
       setUploadedFile(file);
     }
   };
-
+  
   const handleAddPlot = async () => {
     
     let referenceData;
@@ -47,8 +54,9 @@ const Module_3 = () => {
     }
 
     if (!uploadedFile) {
+      const selectedROI = roiFullNames.find((roi) => roi.id === roiColumn);
       const newPlot = {
-        name: `${roiColumn} | ${referenceDataOption}`,
+        name: `${selectedROI.id}: ${selectedROI.fullName} | ${referenceDataOption}`,
         data: [],
         reference: referenceData,
         referenceOption: referenceDataOption,
@@ -63,7 +71,8 @@ const Module_3 = () => {
       skipEmptyLines: true,
       complete: (results) => {
         const parsedData = results.data;
-        const plotName = `${roiColumn} | ${referenceDataOption} | ${uploadedFile.name}`;
+        const selectedROI = roiFullNames.find((roi) => roi.id === roiColumn);
+        const plotName = `${selectedROI.id}: ${selectedROI.fullName} | ${referenceDataOption} | ${uploadedFile.name}`;
         const newPlot = {
           name: plotName,
           data: parsedData,
@@ -71,14 +80,14 @@ const Module_3 = () => {
           referenceOption: referenceDataOption,
           roi: roiColumn,
         };
-  
+    
         setPlots([...plots, newPlot]);
       },
       error: (error) => {
         console.error('Error parsing CSV file:', error);
       },
     });
-  };
+  }    
 
   const handleDeletePlot = (plotName) => {
     setPlots(plots.filter(plot => plot.name !== plotName));
@@ -88,14 +97,18 @@ const Module_3 = () => {
     setPlots(prevPlots => {
       const updatedPlots = prevPlots.map(plot => {
         if (plot.name === plotName) {
-          const newName = plot.name.replace(plot.roi, newROI);
-          return { ...plot, roi: newROI, name: newName };
+          const selectedROI = roiFullNames.find(roi => roi.id === newROI);
+          if (selectedROI) {
+            const newName = `${selectedROI.id}: ${selectedROI.fullName} | ${plot.referenceOption}`;
+            return { ...plot, roi: newROI, name: newName };
+          }
         }
         return plot;
       });
       return updatedPlots;
     });
   };
+  
 
   const handleReferenceChange = (plotName, newReference) => {
     setPlots(prevPlots => {
@@ -115,8 +128,8 @@ const Module_3 = () => {
       <div className={styles.controlsContainer}>
         <div className={styles.controlsGrid}>
           <div className={styles.controlItem}>
-            <FormControl variant="outlined" className={styles.referenceDataSelect}>
-                <InputLabel htmlFor="reference-data-select">Select Reference Data</InputLabel>
+            <FormControl variant="standard">
+                <InputLabel>Select Reference Data</InputLabel>
                 <Select
                   value={referenceDataOption}
                   onChange={(e) => setReferenceDataOption(e.target.value)}
@@ -129,27 +142,26 @@ const Module_3 = () => {
               </FormControl>
           </div>
           <div className={styles.controlItem}>
-            <FormControl variant="outlined" className={styles.referenceDataSelect}>
-              <InputLabel htmlFor="ROI-column-select">Select ROI column</InputLabel>
-              <Select
-                defaultValue='MUSE_ICV'
-                value={roiColumn}
-                onChange={(e) => setROIColumn(e.target.value)}
-                label="ROI column"
-                inputProps={{
-                  name: 'ROI-column',
-                  id: 'ROI-column-select',
-                }}
-              >
-                <MenuItem value="MUSE_ICV">MUSE_ICV</MenuItem>
-                <MenuItem value="MUSE_TBR">MUSE_TBR</MenuItem>
-                <MenuItem value="MUSE_GM">MUSE_GM</MenuItem>
-                <MenuItem value="MUSE_WM">MUSE_WM</MenuItem>
-                <MenuItem value="MUSE_VN">MUSE_VN</MenuItem>
-                <MenuItem value="MUSE_HIPPOL">MUSE_HIPPOL</MenuItem>
-                <MenuItem value="MUSE_HIPPOR">MUSE_HIPPOR</MenuItem>
-              </Select>
-            </FormControl>
+          <FormControl variant="standard">
+            <InputLabel>Select ROI column</InputLabel>
+            <Select
+              defaultValue="702"
+              value={roiColumn}
+              onChange={(e) => setROIColumn(e.target.value)}
+              label="ROI column"
+              inputProps={{
+                name: 'ROI-column',
+                id: 'ROI-column-select',
+              }}
+            >
+              {roiFullNames.map(({ id, fullName }) => (
+                <MenuItem key={id} value={id}>
+                  {`${id}: ${fullName}`}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
           </div>
         </div>
         <div className={styles.controlsGrid}>

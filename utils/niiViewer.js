@@ -16,26 +16,26 @@ const NiiVue = ({ subjectID, roi }) => {
         if (!originalResponse.ok) {
           throw new Error("Original scan does not exist.");
         }
-
+        
+        const volumeList = []
+        volumeList.push({
+          url: originalScanURL,
+          colormap: "gray",
+          opacity: 1,
+        })
         // Check if the overlay file exists
         const overlayResponse = await fetch(overlayURL);
         if (!overlayResponse.ok) {
-          throw new Error("Overlay does not exist.");
-        }
-
-        // If both files exist, proceed with visualization
-        const volumeList = [
-          {
-            url: originalScanURL,
-            colormap: "gray",
-            opacity: 1,
-          },
-          {
+          console.log("Overlay doesn't exist!")
+        } else {
+          // If both files exist, proceed with visualization
+          volumeList.push({
             url: overlayURL,
             colormap: "red",
             opacity: 0.5,
-          },
-        ];
+          })
+        }
+
 
         const nv = new Niivue({
           isColorbar: false,
@@ -58,7 +58,7 @@ const NiiVue = ({ subjectID, roi }) => {
   return (
     <>
       {isError ? (
-        <p>Error: One or more files do not exist.</p>
+        <p>Error: The original scan file (or more files) does not exist.</p>
       ) : (
         <canvas ref={canvas} height={480} width={640} />
       )}

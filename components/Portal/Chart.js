@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import { FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
 import { breakStringIntoParts } from '../../utils/chartTitleBreaker.js';
 import styles from '../../styles/Chart.module.css';
-import MUSEROICompleteList from '/public/content/Portal/Visualization/Reference_Data/MUSE_ROI_complete_list.json';
+import MUSEROICompleteList from '/public/content/Portal/Visualization/Dicts/MUSE_ROI_complete_list.json';
 
 const PlotlyChart = dynamic(() => import('react-plotly.js'), { ssr: false });
 

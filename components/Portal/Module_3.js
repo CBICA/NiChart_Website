@@ -4,7 +4,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Papa from 'papaparse';
 import Chart from './Chart';
 import styles from '../../styles/Portal_Module_3.module.css';
-import MUSEROICompleteList from '/public/content/Portal/Visualization/Reference_Data/MUSE_ROI_complete_list.json';
+import MUSEROICompleteList from '/public/content/Portal/Visualization/Dicts/MUSE_ROI_complete_list.json';
 
 
 const Module_3 = () => {

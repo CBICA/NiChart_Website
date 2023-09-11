@@ -138,7 +138,7 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
           setClickedDataPointId(id);
           // Do whatever you need to do with the ID
           const message = `Clicked Data Point:\nX: ${x}\nY: ${y}\nCurve Number: ${curveNumber} \nID: ${id}`;
-          console.log(message);
+          // console.log(message);
           openModal({
             x,
             y,
@@ -205,7 +205,7 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
           },
           content: {
             width: '50%',    // Adjust the width as needed
-            height: '50%',   // Adjust the height as needed
+            height: '75%',   // Adjust the height as needed
             margin: 'auto',  // Center the modal horizontally
           },
         }}

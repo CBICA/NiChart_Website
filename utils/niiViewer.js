@@ -109,7 +109,7 @@ const NiiVue = ({ subjectID, roi }) => {
             // console.log([x,y,z])
 
             // Move the crosshair to the calculated center of mass
-            nv.moveCrosshairInVox(x,y,z);
+            // nv.moveCrosshairInVox(x,y,z);
           }
         }, 1000); // Adjust the delay time as needed
       } catch (error) {

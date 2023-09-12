@@ -1,20 +1,69 @@
 import { useRef, useEffect, useState } from "react";
 import { Niivue } from "@niivue/niivue";
+import { Button, Select, MenuItem, Modal, Paper } from "@mui/material";
 
-const NiiVue = ({ subjectID, roi }) => {
+
+const NiiVue = ({ subjectID, roi, closeModal }) => {
   const canvas = useRef(null);
   const [isError, setIsError] = useState(false);
+  const [intensityValue, setIntensityValue] = useState(0); // State for intensity
+  const [xCoord, setXCoord] = useState(0); // State for x coordinate
+  const [yCoord, setYCoord] = useState(0); // State for y coordinate
+  const [zCoord, setZCoord] = useState(0); // State for z coordinate
+  const originalScanURL = `/content/Portal/Visualization/Subject_Scans/in/${subjectID}.nii.gz`;
+  const overlayURL = `/content/Portal/Visualization/Subject_Scans/out/${subjectID}_DLMUSE_${roi}.nii.gz`;
+  
+  let nv;
+  
+  // Define the showHeader function
+  const showHeader = () => {
+    if (nv) {
+      alert(nv.volumes[0].hdr.toFormattedString());
+    } 
+  };
+  
+  // Define the toggleOverlayVisibility function
+  const toggleOverlayVisibility = () => {
+    if (nv) {
+      const overlayVolume = nv.volumes[1];
+      if (overlayVolume) {
+        nv.removeVolumeByIndex(1);
+        nv.drawScene();
+      }
+      else {
+        nv.addVolumeFromUrl({
+          url: overlayURL,
+          colormap: "blue",
+          opacity: 0.8,
+        })
+        nv.drawScene();
+      }
+    }
+  };
+  
+  // Define the changeOverlayColor function
+  const changeOverlayColor = (overlayColor) => {
+    if (nv) {
+      const overlayVolume = nv.volumes[1];
+      if (overlayVolume) {
+        nv.removeVolumeByIndex(1);
+        nv.addVolumeFromUrl({
+          url: overlayURL,
+          colormap: overlayColor,
+          opacity: 0.6,
+        })
+        nv.drawScene();
+      }
+    }
+  };
 
   useEffect(() => {
     const checkFiles = async () => {
-
-//       const originalScanURL = `/content/Portal/Visualization/Subject_Scans/in/${subjectID}.nii.gz`;
-//       const overlayURL = `/content/Portal/Visualization/Subject_Scans/out/${subjectID}_DLMUSE_${roi}.nii.gz`;
-
-      // TMP: for my internal tests
-      const originalScanURL = `/tests/In/${subjectID}.nii.gz`;
-      const overlayURL = `/tests/Out/${subjectID}_DLMUSE_${roi}.nii.gz`;
       
+      function handleIntensityChange(data) {
+        document.getElementById("intensity").innerHTML = data.string ; 
+      }
+
       try {
         // Check if the original scan file exists
         const originalResponse = await fetch(originalScanURL);
@@ -41,32 +90,38 @@ const NiiVue = ({ subjectID, roi }) => {
         }
 
         // Create a new Niivue instance
-        const nv = new Niivue({
+        nv = new Niivue({
           isColorbar: false,
           show3Dcrosshair: true,
           show3Dhead: true,
+          onLocationChange: handleIntensityChange,
         });
+
 
         if (canvas.current) {
           nv.attachToCanvas(canvas.current);
           nv.loadVolumes(volumeList);
           nv.opts.dragMode = nv.dragModes.pan;
         }
+        // Calculate intensityValue, xCoord, yCoord, and zCoord based on your logic
+        // Example calculations:
+        const calculatedIntensityValue = 0;
+        const calculatedXCoord = 0;
+        const calculatedYCoord = 0;
+        const calculatedZCoord = 0;
+
+        // Update state variables
+        setIntensityValue(calculatedIntensityValue);
+        setXCoord(calculatedXCoord);
+        setYCoord(calculatedYCoord);
+        setZCoord(calculatedZCoord);
 
         // Delay setting the crosshair position to ensure Niivue is fully initialized
         setTimeout(() => {
           const overlayVolume = nv.volumes[1];
           const originalData = nv.volumes[0]
           if (overlayVolume) {
-            const data = overlayVolume.img;
-            // Print for debugging purposes:
-            console.log("ORIGINAL DATA:")
-            console.log(originalData);
-            console.log("######################################")
-            console.log("OVERLAY:")
-            console.log(overlayVolume);
-            console.log("######################################")
-            
+            const data = overlayVolume.img;           
             
             // Iterate through the overlay data to find the min and max indices in each dimension
             const dx = originalData.hdr.dims[1]
@@ -117,9 +172,8 @@ const NiiVue = ({ subjectID, roi }) => {
             
             // Move the crosshair to the calculated center of mass
              nv.moveCrosshairInVox(xOffsetImg, yOffsetImg, zOffsetImg);
-
           }
-        }, 2000); // Adjust the delay time as needed
+        }, 1000); // Adjust the delay time as needed
       } catch (error) {
         console.error(error.message);
         setIsError(true);
@@ -127,14 +181,28 @@ const NiiVue = ({ subjectID, roi }) => {
     };
 
     checkFiles();
-  }, [subjectID, roi]);
+  }, [subjectID, roi, closeModal, intensityValue]);
 
   return (
     <>
       {isError ? (
         <p>Error: The original scan file (or more files) does not exist.</p>
       ) : (
-        <canvas ref={canvas} height={480} width={640} />
+        <div>
+          <div style={{ display: "flex", flexDirection: "row" , gap: "2%"}}>
+            <Button onClick={toggleOverlayVisibility}>Toggle Overlay</Button>
+            <Select value="blue" onChange={(e) => changeOverlayColor(e.target.value)}>
+              <MenuItem value="blue">Blue</MenuItem>
+              <MenuItem value="green">Green</MenuItem>
+              <MenuItem value="red">Red</MenuItem>
+            </Select>
+            <Button onClick={showHeader}>Show Header</Button>
+          </div>
+          <div style={{marginTop: "1%"}}>
+            <canvas ref={canvas} height="1600%" width="100%"/>
+          </div>
+          <footer id="intensity">&nbsp;</footer>
+        </div>
       )}
     </>
   );

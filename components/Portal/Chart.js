@@ -215,27 +215,26 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
         <Button  variant="contained" color="primary" onClick={onDelete}>Destroy Chart</Button>
       </div>
       {/* Modal to show the NiiVue component */}
-      <Modal
+      <Modal id='niivue_modal'
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="NiiVue Modal"
         style={{
-          overlay: {
-            // Overlay styles (if needed)
-          },
           content: {
-            width: '50%',    // Adjust the width as needed
+            width: '45%',    // Adjust the width as needed
             height: '75%',   // Adjust the height as needed
-            margin: 'auto',  // Center the modal horizontally
+            marginTop: '10%', 
+            margintBottom: '10%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
           },
         }}
         ariaHideApp={false}
       >
         {/* Nii Vue visualization here */}
         {selectedDataPoint && (
-          <NiiVue subjectID={clickedDataPointId} roi={roi}> </NiiVue>
+          <NiiVue subjectID={clickedDataPointId} roi={roi} closeModal={closeModal}> </NiiVue>
         )}
-        <button onClick={closeModal}>Close</button>
       </Modal>
     </div>
   );

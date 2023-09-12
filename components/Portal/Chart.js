@@ -77,11 +77,31 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
       });
     }
     if (data.length > 0) {
+      // Detect the correct column name for IDs and Ages dynamically
+      let idColumnName = "ID"; // Default ID column name
+      let ageColumnName = "Age"; // Default Age column name
+      const columnNames = Object.keys(data[0]); // Get the column names from the first row
+
+      // Check for variations of column names
+      const idVariations = ["ID", "id", "MRID", "mrid", "scanid"];
+      const ageVariations = ["Age", "age", "age_at_scan", "Age_at_scan"];
+      idVariations.forEach(variation => {
+        if (columnNames.includes(variation)) {
+          idColumnName = variation;
+        }
+      });
+      ageVariations.forEach(variation => {
+        if (columnNames.includes(variation)) {
+          ageColumnName = variation;
+        }
+      });
+
+
       // Add user data scatter trace
       updatedData.push({
-        x: data.map((row) => parseFloat(row["Age"])),
+        x: data.map((row) => parseFloat(row[ageColumnName])),
         y: data.map((row) => parseFloat(row[roi])),
-        id: data.map((row) => row["ID"]),
+        id: data.map((row) => row[idColumnName]),
         type: 'scatter',
         mode: 'markers',
         marker: {
@@ -89,7 +109,7 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
           size: calculateMarkerSize(data.length),
         },
         name: "User data",
-        text: data.map((row) => row["ID"]),
+        text: data.map((row) => row[idColumnName]),
         hovertemplate: '<b>%{text}</b><br>' + '<b>Volume</b>: %{y:.2f}<br>' + '<b>Age</b>: %{x:.1f}',
       });
     }

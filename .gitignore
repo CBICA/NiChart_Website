@@ -63,3 +63,9 @@ amplifytools.xcconfig
 # Nifti files, make sure that nothing sensitive gets uploaded.
 *.nii.gz
 *.nii
+
+# Ignore .csv files that may contain sensitive info:
+*.csv
+
+# Apart from the reference data folder:
+!/public/content/Portal/Visualization/Reference_Data

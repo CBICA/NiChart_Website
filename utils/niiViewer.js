@@ -7,9 +7,14 @@ const NiiVue = ({ subjectID, roi }) => {
 
   useEffect(() => {
     const checkFiles = async () => {
-      const originalScanURL = `/content/Portal/Visualization/Subject_Scans/in/${subjectID}.nii.gz`;
-      const overlayURL = `/content/Portal/Visualization/Subject_Scans/out/${subjectID}_DLMUSE_${roi}.nii.gz`;
 
+//       const originalScanURL = `/content/Portal/Visualization/Subject_Scans/in/${subjectID}.nii.gz`;
+//       const overlayURL = `/content/Portal/Visualization/Subject_Scans/out/${subjectID}_DLMUSE_${roi}.nii.gz`;
+
+      // TMP: for my internal tests
+      const originalScanURL = `/tests/In/${subjectID}.nii.gz`;
+      const overlayURL = `/tests/Out/${subjectID}_DLMUSE_${roi}.nii.gz`;
+      
       try {
         // Check if the original scan file exists
         const originalResponse = await fetch(originalScanURL);
@@ -63,56 +68,58 @@ const NiiVue = ({ subjectID, roi }) => {
             console.log("######################################")
             
             
-            // Initialize variables to store min and max indices in each dimension
-            let xMin = overlayVolume.dimsRAS[1]; // Initialize with the maximum possible value
-            let xMax = 0;
-            let yMin = overlayVolume.dimsRAS[2];
-            let yMax = 0;
-            let zMin = overlayVolume.dimsRAS[3];
-            let zMax = 0;
-
             // Iterate through the overlay data to find the min and max indices in each dimension
-            for (let x = 0; x < overlayVolume.dimsRAS[1]; x++) {
-              for (let y = 0; y < overlayVolume.dimsRAS[2]; y++) {
-                for (let z = 0; z < overlayVolume.dimsRAS[3]; z++) {
-                  const voxelValue = data[x + y * overlayVolume.dimsRAS[1] + z * overlayVolume.dimsRAS[1] * overlayVolume.dimsRAS[2]];
-                  if (voxelValue !== 0) {
-                    // Update min and max indices in each dimension
-                    xMin = Math.min(xMin, x);
-                    xMax = Math.max(xMax, x);
-                    yMin = Math.min(yMin, y);
-                    yMax = Math.max(yMax, y);
-                    zMin = Math.min(zMin, z);
-                    zMax = Math.max(zMax, z);
-                  }
+            const dx = originalData.hdr.dims[1]
+            const dy = originalData.hdr.dims[2]
+            const dz = originalData.hdr.dims[3]
+            
+            let xMin = dx;
+            let xMax = 0;
+            let yMin = dy;
+            let yMax = 0;
+            let zMin = dz;
+            let zMax = 0;
+            
+            const isf = 0   // Tmp for DEBUG
+            
+            for (let i = 0; i < overlayVolume.img.length; i++) {
+                  if (overlayVolume.img[i] != 0) {
+                      const z = Math.floor(i / (dx * dy));
+                      const y = Math.floor((i % (dx * dy)) / dx);
+                      const x = ((i % (dx * dy)) % dx);
+                      xMin = Math.min(xMin, x);
+                      xMax = Math.max(xMax, x);
+                      yMin = Math.min(yMin, y);
+                      yMax = Math.max(yMax, y);
+                      zMin = Math.min(zMin, z);
+                      zMax = Math.max(zMax, z);
                 }
-              }
             }
-
+                        
             // Calculate the center of mass in voxel coordinates
-            console.log("xMin: ", xMin);
-            console.log("xMax: ", xMax);
-            console.log("yMin: ", yMin);
-            console.log("yMax: ", yMax);
-            console.log("zMin: ", zMin);
-            console.log("zMax: ", zMax);
-            const xCenter = (xMax - xMin)/2;
-            const yCenter = (yMax - yMin)/2;
-            const zCenter = (zMax - zMin)/2;
-            console.log("Calculated center point:")
-            console.log([xCenter, yCenter, zCenter]);
+            const xCent = (xMax + xMin)/2;
+            const yCent = (yMax + yMin)/2;
+            const zCent = (zMax + zMin)/2;
 
-            // TODO: Add logic to calculate correct relative xyz point, and not absolute 
-            const x = xCenter;
-            const y = yCenter;
-            const z = zCenter;
-            // console.log("Relative center point:")
-            // console.log([x,y,z])
-
+            const x0 = Math.floor( dx / 2)
+            const y0 = Math.floor( dy / 2)
+            const z0 = Math.floor( dz / 2)
+            
+            const xOffset = xCent - x0
+            const yOffset = yCent - y0
+            const zOffset = zCent - z0
+            
+            // Calculate the center of mass in display image coordinates
+            const aff = originalData.hdr.affine
+            const xOffsetImg = aff[0][0]*xOffset + aff[0][1]*yOffset + aff[0][2]*zOffset
+            const yOffsetImg = aff[1][0]*xOffset + aff[1][1]*yOffset + aff[1][2]*zOffset
+            const zOffsetImg = aff[2][0]*xOffset + aff[2][1]*yOffset + aff[2][2]*zOffset
+            
             // Move the crosshair to the calculated center of mass
-            // nv.moveCrosshairInVox(x,y,z);
+             nv.moveCrosshairInVox(xOffsetImg, yOffsetImg, zOffsetImg);
+
           }
-        }, 1000); // Adjust the delay time as needed
+        }, 2000); // Adjust the delay time as needed
       } catch (error) {
         console.error(error.message);
         setIsError(true);

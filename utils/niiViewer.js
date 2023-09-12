@@ -45,6 +45,7 @@ const NiiVue = ({ subjectID, roi }) => {
         if (canvas.current) {
           nv.attachToCanvas(canvas.current);
           nv.loadVolumes(volumeList);
+          nv.opts.dragMode = nv.dragModes.pan;
         }
 
         // Delay setting the crosshair position to ensure Niivue is fully initialized

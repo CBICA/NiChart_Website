@@ -15,7 +15,12 @@
 }
 
 .subtitle {
-    padding-left: 10px;
+    padding-left: 12px;
+}
+
+.description {
+    width: 80%;
+    padding-left: 14px;
 }
 
 .photoContainer {

@@ -20,6 +20,10 @@ const HomePage = () => {
       <div className={styles.container}>
         <h1 className={styles.title}>Welcome to NiChart!</h1>
         <h2 className={styles.subtitle}>NiChart: NeuroImaging Computational Harmonization and Artificial Intelligence Toolbox</h2>
+        <p className={styles.description}>NiChart is a project at the intersection of brain imaging, machine learning, and
+            data visualization. Designed as a user-friendly online tool, NiChart simplifies the intricate
+            process of processing and analyzing brain data, making it accessible to researchers and
+            academics worldwide</p>
         <div className={styles.photoContainer}>
             <div className={styles.photoItem}>
                 <img src="/images/Home/brain_anatomy.jpg" alt="Brain anatomy - Image by Raman Oza from Pixabay"/>

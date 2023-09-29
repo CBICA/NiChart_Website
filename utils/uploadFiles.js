@@ -4,12 +4,55 @@ import { StorageManager } from '@aws-amplify/ui-react-storage';
 import { Amplify, Auth, Storage } from 'aws-amplify';
 import { BatchClient, ListJobsCommand }  from "@aws-sdk/client-batch";
 import { InvokeCommand, LambdaClient, LogType } from "@aws-sdk/client-lambda";
+import { HttpRequest } from "@aws-sdk/protocol-http";
+import { S3RequestPresigner } from "@aws-sdk/s3-request-presigner";
+import { parseUrl } from "@aws-sdk/url-parser";
+import { Sha256 } from "@aws-crypto/sha256-browser";
+import { Hash } from "@aws-sdk/hash-node";
+import { formatUrl } from "@aws-sdk/util-format-url";
 import '@aws-amplify/ui-react/styles.css';
 import awsconfig from './aws-exports';
+import { getUseModule1Results, getUseModule2Results, getModule1Cache, getModule2Cache, getModule3Cache, setModule1Cache, setModule2Cache, setModule3Cache } from './NiChartPortalCache'
 
 Amplify.configure(awsconfig)
 Auth.configure(awsconfig)
 Storage.configure(awsconfig)
+
+export async function generatePresignedScanURL (subjectID) {
+    const credentials = await Auth.currentCredentials();
+    const region = 'us-east-1';
+    const presigner = new S3RequestPresigner({
+    credentials,
+    region,
+    //sha256: Hash.bind(null, "sha256"), // In Node.js
+    sha256: Sha256 // In browsers
+    });
+    const bucket = "cbica-nichart-inputdata";
+    const key = "private/" + credentials.identityId + "/" + subjectID + ".nii.gz";
+    const s3ObjectUrl = parseUrl(`https://${bucket}.s3.${region}.amazonaws.com/${key}`);
+    const url = await presigner.presign(new HttpRequest(s3ObjectUrl));
+    console.log("PRESIGNED URL (SCAN): ", formatUrl(url));
+    return url;
+    
+}
+
+export async function generatePresignedROIURL (subjectID, roi) {
+    const credentials = await Auth.currentCredentials();
+    const region = 'us-east-1';
+    const presigner = new S3RequestPresigner({
+    credentials,
+    region,
+    //sha256: Hash.bind(null, "sha256"), // In Node.js
+    sha256: Sha256 // In browsers
+    });
+    const bucket = "cbica-nichart-outputdata";
+    const key = "private/" + credentials.identityId + "/individual_rois/" + subjectID + "_DLMUSE_" + roi +  ".nii.gz";
+    const s3ObjectUrl = parseUrl(`https://${bucket}.s3.${region}.amazonaws.com/${key}`);
+    const url = await presigner.presign(new HttpRequest(s3ObjectUrl));
+    console.log("PRESIGNED URL (ROI): ", formatUrl(url));
+    return url;
+    
+}
 
 const invoke = async (funcName, payload) => {
   const client = createClientForDefaultRegion(LambdaClient);
@@ -77,23 +120,45 @@ async function generateCombinedImageZip() {
   return result.replaceAll('"', '');
 }
 
-export async function getCombinedCSV() {
-    const resultKey = await generateCombinedCSV();
-    await downloadOutputFile(resultKey);
+export async function getCombinedCSV(doBrowserDownload) {
+    try {
+        const resultKey = await generateCombinedCSV();
+        let resp = await downloadOutputFile(resultKey, doBrowserDownload);
+        if (getUseModule1Results()) {
+            setModule1Cache({'csv': resp})
+        }
+    }
+    catch (error) {
+        console.log("Error getting combined CSV:", error)
+        alert("Could not retrieve your CSV file! Please re-run the pipeline.")
+    }
 }
-export async function getCombinedImageZip() {
-    const resultKey = await generateCombinedImageZip();
-    await downloadOutputFile(resultKey);
+export async function getCombinedImageZip(doBrowserDownload) {
+    try {
+        const resultKey = await generateCombinedImageZip();
+        await downloadOutputFile(resultKey, doBrowserDownload);
+    }
+    catch (error) {
+        console.log("Error getting combined image zip: ", error)
+    }
+
 }
 
-async function downloadOutputFile(key) {
+async function downloadOutputFile(key, doBrowserDownload) {
       // Log config for download
       console.log("downloadOutputFile")
       console.log("Key: " + key);
       console.log(awsconfig)
-      
-      const result = await Storage.get(key, {bucket:'cbica-nichart-outputdata', download:true, level:'private'})
-      downloadBlob(result.Body, key);
+      try {
+        const result = await Storage.get(key, {bucket:'cbica-nichart-outputdata', download:true, level:'private'})
+        if (doBrowserDownload) {
+            downloadBlob(result.Body, key);
+        }
+        return result.Body
+      }
+      catch (error) {
+          console.log("Error during file download: ", error);
+      }
       
   }
 
@@ -111,6 +176,14 @@ export function downloadBlob(blob, filename) {
   a.addEventListener('click', clickHandler, false);
   a.click();
   return a;
+}
+
+export async function uploadToModule2(file) {
+    let userInfo = await Auth.currentAuthenticatedUser();
+    let username = userInfo.username
+    const credentials = await Auth.currentCredentials();
+    const key = "sparescores/input.csv"
+    const result = await Storage.put(key, file, {'bucket': 'cbica-nichart-inputdata', 'level': 'private', 'metadata': {'uploadedByUser': credentials.identityId, 'uploadedByUsername': username}})
 }
 
 async function processFile ({ file, key }) {
@@ -141,13 +214,13 @@ export const DefaultStorageManagerExample = () => {
   return (
    <>
     <StorageManager
-      acceptedFileTypes={['.nii.gz', '.nii']}
+      acceptedFileTypes={['.nii.gz']}
       accessLevel="private"
       maxFileCount={1024}
       shouldAutoProceed={false}
       processFile={processFile}
-      //onSuccess={onSuccess}
       isResumable
+      //onSuccess={onSuccess}
       onFileRemove={({ key }) => {
           setFiles((prevFiles) => {
             return {
@@ -219,7 +292,7 @@ export const JobList = ({jobQueue}) => {
       if (!jobQueue) {
           return;
       }
-      console.log("jobQueue: " + jobQueue)
+      //console.log("jobQueue: " + jobQueue)
       //setTime(new Date());
       // Check AWS Batch and update jobs in queue
       //console.log("Placeholder for checking AWS Batch...")
@@ -390,6 +463,47 @@ export const JobListForPipelines = () => {
     return list;
 }
 
+export async function emptyBucketForUser(bucket) {
+    console.log("emptyBucketForUser")
+    console.log("PLACEHOLDER, FIX ME")
+
+    const listedObjects = await Storage.list('', {'bucket': bucket,'level': 'private', 'pageSize': 'ALL'});
+    console.log("listedObjects")
+    console.log(listedObjects)
+    if (listedObjects.results.length === 0) return;
+
+
+    for (const result of listedObjects.results) {
+        console.log("Removing file key " + result.key)
+        await Storage.remove(result.key, {'bucket': bucket, 'level': 'private'});
+    }
+    alert("Successfully cleared all user input data.")
+
+    //await s3.deleteObjects(deleteParams).promise();
+
+    //if (listedObjects.IsTruncated) await emptyBucketForUser(bucket, user);
+
+}
+
+export async function runModule1Jobs() {
+    console.log("runModule1Jobs")
+    const credentials = await Auth.currentCredentials();
+    const client = new LambdaClient({
+          credentials: Auth.essentialCredentials(credentials),
+          region: 'us-east-1',
+       });
+    const command = new InvokeCommand({
+         FunctionName: 'cbica-nichart-helloworld-jobprocessor',
+         //Payload: JSON.stringify(payload),
+         LogType: LogType.Tail,
+       });
+  const { Payload, LogResult } = await client.send(command);
+  const result = Buffer.from(Payload).toString();
+  const logs = Buffer.from(LogResult, "base64").toString();
+  console.log("result: " + result)
+  console.log("logs: " + logs)
+  return result.replaceAll('"', '');
+}
 //async function submitButtonClicked() {
 //    alert('Starting Job!');
 //    let userInfo = await Auth.currentAuthenticatedUser();
@@ -460,7 +574,6 @@ export const SpareScoresInputStorageManager = () => {
       shouldAutoProceed={false}
       processFile={processFileForSpareScoresInput}
       //onSuccess={onSuccess}
-      isResumable
       onFileRemove={({ key }) => {
           setFiles((prevFiles) => {
             return {
@@ -523,7 +636,6 @@ export const SpareScoresDemographicStorageManager = () => {
       shouldAutoProceed={false}
       processFile={processFileForSpareScoresDemographics}
       //onSuccess={onSuccess}
-      isResumable
       onFileRemove={({ key }) => {
           setFiles((prevFiles) => {
             return {
@@ -594,9 +706,12 @@ export async function launchSpareScores() {
   return result.replaceAll('"', '');
 }
 
-export async function getSpareScoresOutput() {
+export async function getSpareScoresOutput(doBrowserDownload) {
     try {
-        await downloadOutputFile("sparescores/output.csv");
+        let resp = await downloadOutputFile("sparescores/output.csv", doBrowserDownload);
+        if (getUseModule2Results()) {
+            setModule2Cache({'csv': resp})
+        }
     } catch (e) {
         console.log("Caught an exception while downloading.")
         console.log(e)

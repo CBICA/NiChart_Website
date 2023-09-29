@@ -5,14 +5,46 @@ import Papa from 'papaparse';
 import Chart from './Chart';
 import styles from '../../styles/Portal_Module_3.module.css';
 import MUSEROICompleteList from '/public/content/Portal/Visualization/Dicts/MUSE_ROI_complete_list.json';
+import { setUseModule2Results, getUseModule2Results, getModule2Cache } from '../../utils/NiChartPortalCache.js'
+import { getSpareScoresOutput } from '../../utils/uploadFiles.js'
 
+function getDefaultCSV () {
+    let cachedResult = getModule2Cache();
+    if (Object.keys(cachedResult).length === 0) {
+        alert("We couldn't import your results because there doesn't appear to be output from Module 2. Please generate the output first or upload the file to Module 3 manually.")
+        return null;
+    }
+    return cachedResult.csv
+}
 
-const Module_3 = () => {
+const Module_3 = ({moduleSelector}) => {
   const [referenceDataOption, setReferenceDataOption] = useState('iSTAGING data');
   const [roiColumn, setROIColumn] = useState('702');
-  const [uploadedFile, setUploadedFile] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState(getDefaultCSV);
   const [plots, setPlots] = useState([]);
+  const [useModule2Cache, setUseModule2Cache] = useState(getUseModule2Results());
 
+  const disableModule2Results = async ( ) => {
+    setUseModule2Cache(false);
+    setUseModule2Results(false);
+  }
+  const enableModule2Results = async ( ) => {
+    setUseModule2Cache(true);
+    setUseModule2Results(true);
+    getSpareScoresOutput(false);
+    
+    let cachedResult = getModule2Cache();
+    if (Object.keys(cachedResult).length === 0) {
+        alert("We couldn't export your results because there doesn't appear to be output from Module 2. Please generate the output first or upload the file to Module 3 manually.")
+        return;
+    }
+    //console.log("cachedResult", cachedResult);
+    const csvText = await cachedResult.csv.text()
+    //console.log("csvText", csvText);
+    setUploadedFile(csvText);
+    
+  }
+   
   const roiFullNames = Object.entries(MUSEROICompleteList).map(([id, roiData]) => ({
     id,
     fullName: roiData.Full_Name,
@@ -164,7 +196,9 @@ const Module_3 = () => {
 
           </div>
         </div>
+
         <div className={styles.controlsGrid}>
+          { !getUseModule2Results() && (
           <div className={styles.controlItem}>
             <div className={styles.fileDropZone}>
               <div>
@@ -182,7 +216,16 @@ const Module_3 = () => {
                 <input type="file" accept=".csv" style={{ display: 'none' }}  onChange={handleFileUpload}/>
               </Button>
             </div>
+            <Button onClick={async () => {enableModule2Results()}}>Import from Module 2</Button> 
+            </div>
+          )
+          }
+          { getUseModule2Results() && (
+          <div>
+          <p>Using results from Module 2!</p>
+          <Button onClick={async () => {disableModule2Results()}}>Upload a CSV Instead</Button> 
           </div>
+          )}
           <div className={styles.controlItem}>
             <Button variant="contained" color="primary" onClick={handleAddPlot} className="add-plot-button">
               Add Plot
@@ -190,6 +233,7 @@ const Module_3 = () => {
           </div>
         </div>
       </div>
+
       <div className={styles.plotsContainer}>
           {plots.map(plot => (
             <div key={plot.name} className={styles.plotItem}>

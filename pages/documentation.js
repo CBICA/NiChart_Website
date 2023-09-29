@@ -1,4 +1,5 @@
-import {React, useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'; // Import useRouter from next/router
 import Head from 'next/head';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
@@ -8,18 +9,22 @@ import ReactMarkdown from 'react-markdown';
 import styles from '../styles/Documentation.module.css';
 
 const Documentation = () => {
+  const router = useRouter(); // Use useRouter to access router information
+  const { section } = router.query; // Get the section parameter from the URL query
   const [markdownContent, setMarkdownContent] = useState('');
-  // const [selectedSection, setSelectedSection] = useState('Installation');
-  const [selectedSection, setSelectedSection] = useState('sMRI');
 
   useEffect(() => {
+    // Use the "section" from the URL query as the selected section
+    const selectedSection = section || 'sMRI';
+
     fetch(`/content/Documentation/${selectedSection}.md`)
       .then((response) => response.text())
       .then((content) => setMarkdownContent(content));
-  }, [selectedSection]);
+  }, [router.query]);
 
   const handleSectionChange = (section) => {
-    setSelectedSection(section);
+    // Update the URL query when the section changes
+    router.push(`/documentation?section=${section}`);
   };
   
   return (

@@ -11,16 +11,13 @@ const Sidebar = ({ onSectionChange }) => {
       <nav>
         <ul>
           <li>
-          {/* <a onClick={() => handleItemClick('Installation')}>Installation</a> */}
-          <a onClick={() => handleItemClick('sMRI')}>sMRI</a>
+            <a onClick={() => handleItemClick('sMRI')}>sMRI</a>
           </li>
           <li>
-          {/* <a onClick={() => handleItemClick('Container-Installation')}>Container Installation</a> */}
-          <a onClick={() => handleItemClick('fMRI')}>fMRI</a>
+            <a onClick={() => handleItemClick('fMRI')}>fMRI</a>
           </li>
           <li>
-          {/* <a onClick={() => handleItemClick('Usage')}>Usage</a> */}
-          <a onClick={() => handleItemClick('dMRI')}>dMRI</a>
+            <a onClick={() => handleItemClick('DTI')}>DTI</a>
           </li>
         </ul>
       </nav>

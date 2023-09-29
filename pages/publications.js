@@ -2,9 +2,9 @@ import React from 'react';
 import Head from 'next/head';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
-import styles from '../styles/News.module.css';
+import styles from '../styles/Publications.module.css';
 import Favicons from '../components/Favicons/Favicons';
-import newsStories from '/public/content/News/news_stories.js'
+import newsStories from '/public/content/Publications/news_stories.js'
 
 const News = () => {
     return (

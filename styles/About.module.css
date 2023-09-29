@@ -1,67 +1,22 @@
-.container {
-  display:grid;
-  grid-template-rows:auto 1fr auto;
-  grid-template-columns:100%;
-
-  /* fallback height */
-  min-height:100vh;
-
-  /* new small viewport height for modern browsers */
-  min-height:100svh;
-}
-
+/* About.module.css */
 .title {
-  padding-left: 10px;
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
 
-.aboutContent {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 20vh auto;
-  gap: 10px;
-  height:  100%;
+.row {
+  margin-top: 5%;
+  padding: 1%;
 }
 
-.aboutHeaderPicture {
-  display: flex;
-  justify-content: center;
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  margin-left: 6px;
-}
-
-/* FOR DEMO ONLY */
-.aboutMainContent {
-  padding-left: 3%;
-  padding-right: 3%;
+.text {
   font-size: x-large;
+  padding-right: 5%;
 }
 
-/* .aboutMainContent {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  padding-left: 3%;
-  padding-right: 3%;
-  gap: 10%;
-  justify-content: center;
-  align-items: center;
-}
-
-.aboutMainContent p {
-  text-align: left;
-  padding-top: 10%;
-  padding-bottom: 10%;
-  padding-left: 2%;
+.image {
+  max-width: 100%;
+  height: auto;
   padding-right: 2%;
-  font-size: 150%;
+  max-height: 35vh;
 }
-
-.aboutMainContent img {
-  width: 100%;
-  overflow: hidden;
-  max-width: fit-content;
-  max-height: fit-content;
-} */

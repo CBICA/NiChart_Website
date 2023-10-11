@@ -11,6 +11,7 @@
   border-width: 5px;
   background-image: linear-gradient(to right, #000000, #f2f2f2);
   z-index: 1000; /* Adjust this value as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.05);
 }
 
 .logo {

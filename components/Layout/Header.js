@@ -32,6 +32,7 @@ const Header = () => {
           <li><Link href="/team"><a>Team</a></Link></li>
           <li><Link href="/publications"><a>Publications</a></Link></li>
           <li><Link href="/contact"><a>Contact</a></Link></li>
+          <li><Link href="https://forms.gle/jxUZFyJtcuQnKusK9"><a>Feedback</a></Link></li>
           <li><Link href="/portal"><a>Portal</a></Link></li>
         </ul>
       </nav>

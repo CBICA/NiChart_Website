@@ -27,8 +27,7 @@ const Header = () => {
 
         <ul className={`${styles.navList} ${menuOpen ? styles.show : ''}`}>
           <li><Link href="/about"><a>About</a></Link></li>
-          {/* <li><Link href="/documentation"><a>Documentation</a></Link></li> */}
-          <li><Link href="/documentation"><a>Components</a></Link></li>
+          <li><Link href="/components"><a>Components</a></Link></li>
           <li><Link href="/team"><a>Team</a></Link></li>
           <li><Link href="/publications"><a>Publications</a></Link></li>
           <li><Link href="/contact"><a>Contact</a></Link></li>

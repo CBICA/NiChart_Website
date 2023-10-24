@@ -19,7 +19,7 @@ Full documentation at <https://qsiprep.readthedocs.io>
 > 4. A novel motion correction algorithm that works on DSI and random
 >     q-space sampling schemes
 
-![image](/images/Documentation/DTI_workflow_full.png)
+![image](/images/Components/DTI_workflow_full.png)
 
 ### Preprocessing 
 

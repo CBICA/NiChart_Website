@@ -4,11 +4,11 @@ import Head from 'next/head';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import Favicons from '../components/Favicons/Favicons';
-import Sidebar from '../components/Documentation/Sidebar';
+import Sidebar from '../components/Components/Sidebar';
 import ReactMarkdown from 'react-markdown';
-import styles from '../styles/Documentation.module.css';
+import styles from '../styles/Components.module.css';
 
-const Documentation = () => {
+const Components = () => {
   const router = useRouter(); // Use useRouter to access router information
   const { section } = router.query; // Get the section parameter from the URL query
   const [markdownContent, setMarkdownContent] = useState('');
@@ -17,27 +17,27 @@ const Documentation = () => {
     // Use the "section" from the URL query as the selected section
     const selectedSection = section || 'sMRI';
 
-    fetch(`/content/Documentation/${selectedSection}.md`)
+    fetch(`/content/Components/${selectedSection}.md`)
       .then((response) => response.text())
       .then((content) => setMarkdownContent(content));
   }, [router.query]);
 
   const handleSectionChange = (section) => {
     // Update the URL query when the section changes
-    router.push(`/documentation?section=${section}`);
+    router.push(`/components?section=${section}`);
   };
   
   return (
     <div className={styles.container}>
       <Head>
-        <title>NiChart | Documentation</title>
+        <title>NiChart | Components</title>
         <Favicons />
       </Head>
       <Header />
-      <div className={styles.documentationPage}>
+      <div className={styles.componentsPage}>
         <Sidebar onSectionChange={handleSectionChange} />
         <div>
-          <div className={styles.documentationContainer}>
+          <div className={styles.componentsContainer}>
             <ReactMarkdown>{markdownContent}</ReactMarkdown>
           </div>
         </div>
@@ -47,4 +47,4 @@ const Documentation = () => {
   );
 };
 
-export default Documentation;
+export default Components;

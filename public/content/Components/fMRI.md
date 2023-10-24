@@ -103,7 +103,7 @@ list can be found in the GitHub repository
 (<https://github.com/PennBBL/xcpEngine/tree/master/designs>). These
 designs implement the processing pipelines found in the following table:
 
-![Available pipeline designs](/images/Documentation/fMRI_designs.png)
+![Available pipeline designs](/images/Components/fMRI_designs.png)
 
 The poor-performance pipelines are not included. Also, you will need to
 adjust the thresholds for rmss for your TR if you\'re using a

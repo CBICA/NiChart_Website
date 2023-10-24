@@ -41,9 +41,9 @@ const contentData = [
 
 const replaceWithLinks = (text) => {
   // Use regular expressions to replace the words with links
-  return text.replace(/sMRI/g, '<a href="/documentation/?section=sMRI">sMRI</a>')
-             .replace(/fMRI/g, '<a href="/documentation/?section=fMRI">fMRI</a>')
-             .replace(/DTI/g, '<a href="/documentation/?section=DTI">DTI</a>');
+  return text.replace(/sMRI/g, '<a href="/components/?section=sMRI">sMRI</a>')
+             .replace(/fMRI/g, '<a href="/components/?section=fMRI">fMRI</a>')
+             .replace(/DTI/g, '<a href="/components/?section=DTI">DTI</a>');
 };
 
 const About = () => {

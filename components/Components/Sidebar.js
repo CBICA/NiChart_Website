@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../../styles/Documentation_Sidebar.module.css';
+import styles from '../../styles/Components_Sidebar.module.css';
 
 const Sidebar = ({ onSectionChange }) => {
   const [expandedSection, setExpandedSection] = useState('Image Processing');

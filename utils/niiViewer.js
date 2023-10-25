@@ -93,7 +93,9 @@ const NiiVue = ({ subjectID, roi, closeModal }) => {
         nv = new Niivue({
           isColorbar: false,
           show3Dcrosshair: true,
-          show3Dhead: true,
+          // Disabling this for now until we change can reliably show the 3d brain
+          // TODO: instead of using the raw input (the entire head), show the ICV image so that the 3d reconstruction is defaced.
+          // show3Dhead: false,
           onLocationChange: handleIntensityChange,
         });
 
@@ -199,7 +201,7 @@ const NiiVue = ({ subjectID, roi, closeModal }) => {
             <Button onClick={showHeader}>Show Header</Button>
           </div>
           <div style={{marginTop: "1%"}}>
-            <canvas ref={canvas} height="1600%" width="100%"/>
+            <canvas ref={canvas} height="1200%" width="100%"/>
           </div>
           <footer id="intensity">&nbsp;</footer>
         </div>

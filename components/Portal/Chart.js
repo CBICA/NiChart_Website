@@ -222,7 +222,7 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
         style={{
           content: {
             width: '45%',    // Adjust the width as needed
-            height: '75%',   // Adjust the height as needed
+            height: '65%',   // Adjust the height as needed
             marginTop: '10%', 
             margintBottom: '10%',
             marginLeft: 'auto',

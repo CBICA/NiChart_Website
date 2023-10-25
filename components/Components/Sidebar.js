@@ -34,7 +34,7 @@ const Sidebar = ({ updateExpandedSection }) => {
           <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Reference data curation')}>
               <span className={expandedSection === 'Reference data curation' ? styles.rotated : ''}></span>
-              Reference data curation
+              Reference Data Curation
             </a>
             {expandedSection === 'Reference data curation' && (
               <ul className={styles.innerSection}>
@@ -45,7 +45,7 @@ const Sidebar = ({ updateExpandedSection }) => {
             <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Harmonization')}>
               <span className={expandedSection === 'Harmonization' ? styles.rotated : ''}></span>
-              Harmonization
+              Data Harmonization
             </a>
             {expandedSection === 'Harmonization' && (
               <ul className={styles.innerSection}>
@@ -57,7 +57,7 @@ const Sidebar = ({ updateExpandedSection }) => {
             <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Machine Learning Models')}>
               <span className={expandedSection === 'Machine Learning Models' ? styles.rotated : ''}></span>
-              Machine Learning
+              Machine Learning Models
             </a>
             {expandedSection === 'Machine Learning Models' && (
               <ul className={styles.innerSection}>
@@ -70,13 +70,26 @@ const Sidebar = ({ updateExpandedSection }) => {
             <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Data Visualization')}>
               <span className={expandedSection === 'Data Visualization' ? styles.rotated : ''}></span>
-              Visualization
+              Data Visualization
             </a>
             {expandedSection === 'Data Visualization' && (
               <ul className={styles.innerSection}>
                 <li><a onClick={() => handleItemClick('Centile curves')}>Centile curves</a></li>
                 <li><a onClick={() => handleItemClick('Link to images')}>Link to images</a></li>
                 <li><a onClick={() => handleItemClick('Reference values')}>Reference values</a></li>
+              </ul>
+            )}
+            </li>
+            <li className={styles.collapsibleSection}>
+            <a onClick={() => toggleSection('Deployment')}>
+              <span className={expandedSection === 'Deployment' ? styles.rotated : ''}></span>
+              Deployment
+            </a>
+            {expandedSection === 'Deployment' && (
+              <ul className={styles.innerSection}>
+                <li><a onClick={() => handleItemClick('AWS')}>AWS</a></li>
+                <li><a onClick={() => handleItemClick('Singularity')}>Singularity</a></li>
+                <li><a onClick={() => handleItemClick('Github')}>Github</a></li>
               </ul>
             )}
             </li>

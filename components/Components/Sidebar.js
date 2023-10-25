@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Components_Sidebar.module.css';
 
-const Sidebar = ({ onSectionChange }) => {
-  const [expandedSection, setExpandedSection] = useState('Image Processing');
+const Sidebar = ({ updateExpandedSection }) => {
+  const [expandedSection, setExpandedSection] = useState("Image Processing");
 
   const handleItemClick = (section) => {
-    onSectionChange(section);
+    const element = document.getElementById(section);
+    if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
   const toggleSection = (section) => {
     setExpandedSection(expandedSection === section ? null : section);
+    updateExpandedSection(section);
   };
 
   return (
@@ -39,8 +41,8 @@ const Sidebar = ({ onSectionChange }) => {
                 <li><a onClick={() => handleItemClick('iSTAGING')}>iSTAGING</a></li>
               </ul>
             )}
-          </li>
-          <li className={styles.collapsibleSection}>
+            </li>
+            <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Harmonization')}>
               <span className={expandedSection === 'Harmonization' ? styles.rotated : ''}></span>
               Harmonization
@@ -51,8 +53,8 @@ const Sidebar = ({ onSectionChange }) => {
                 <li><a onClick={() => handleItemClick('Combat')}>Combat</a></li>
               </ul>
             )}
-          </li>
-          <li className={styles.collapsibleSection}>
+            </li>
+            <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Machine Learning Models')}>
               <span className={expandedSection === 'Machine Learning Models' ? styles.rotated : ''}></span>
               Machine Learning
@@ -64,8 +66,8 @@ const Sidebar = ({ onSectionChange }) => {
                 <li><a onClick={() => handleItemClick('DL')}>DL Models</a></li>
               </ul>
             )}
-          </li>
-          <li className={styles.collapsibleSection}>
+            </li>
+            <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Data Visualization')}>
               <span className={expandedSection === 'Data Visualization' ? styles.rotated : ''}></span>
               Visualization
@@ -77,7 +79,7 @@ const Sidebar = ({ onSectionChange }) => {
                 <li><a onClick={() => handleItemClick('Reference values')}>Reference values</a></li>
               </ul>
             )}
-          </li>
+            </li>
         </ul>
       </nav>
     </aside>

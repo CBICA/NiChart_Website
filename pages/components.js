@@ -1,32 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router'; // Import useRouter from next/router
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import Favicons from '../components/Favicons/Favicons';
 import Sidebar from '../components/Components/Sidebar';
-import ReactMarkdown from 'react-markdown';
 import styles from '../styles/Components.module.css';
 
 const Components = () => {
-  const router = useRouter(); // Use useRouter to access router information
-  const { section } = router.query; // Get the section parameter from the URL query
-  const [markdownContent, setMarkdownContent] = useState('');
+  const [expandedSection, setExpandedSection] = useState('Image Processing');
 
-  useEffect(() => {
-    // Use the "section" from the URL query as the selected section
-    const selectedSection = section || 'sMRI';
-
-    fetch(`/content/Components/${selectedSection}.md`)
-      .then((response) => response.text())
-      .then((content) => setMarkdownContent(content));
-  }, [router.query]);
-
-  const handleSectionChange = (section) => {
-    // Update the URL query when the section changes
-    router.push(`/components?section=${section}`);
+  const contentBySection = {
+    'Image Processing': (
+      <>
+        <div id="sMRI">
+          sMRI HTML Content Here<br></br>
+        </div>
+        <div id="fMRI">
+          fMRI HTML Content Here<br></br>
+        </div>
+        <div id="DTI">
+          DTI HTML Content Here<br></br>
+        </div>
+      </>
+    ),
+    'Reference data curation': <div id="iSTAGING">iSTAGING HTML Content Here</div>,
+    'Harmonization': (
+      <>
+        <div id="Neuroharmonize">NeuroHarmonize HTML Content Here</div>
+        <div id="Combat">Combat HTML Content Here</div>
+      </>
+    ),
+    'Machine Learning Models': (
+      <>
+        <div id="Supervised">Supervised HTML Content Here</div>
+        <div id="Semisupervised">Semi-Supervised HTML Content Here</div>
+        <div id="DL">DL Models HTML Content Here</div>
+      </>
+    ),
+    'Data Visualization': (
+      <>
+        <div id="Centile curves">Centile curves HTML Content Here</div>
+        <div id="Link to images">Link to images HTML Content Here</div>
+        <div id="Reference values">Reference values HTML Content Here</div>
+      </>
+    ),
   };
-  
+
   return (
     <div className={styles.container}>
       <Head>
@@ -35,10 +55,10 @@ const Components = () => {
       </Head>
       <Header />
       <div className={styles.componentsPage}>
-        <Sidebar onSectionChange={handleSectionChange} />
+        <Sidebar updateExpandedSection={setExpandedSection} />
         <div>
           <div className={styles.componentsContainer}>
-            <ReactMarkdown>{markdownContent}</ReactMarkdown>
+            {contentBySection[expandedSection]}
           </div>
         </div>
       </div>

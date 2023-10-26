@@ -68,7 +68,7 @@
   display: none;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1100px) {
   .menuIcon {
     display: block;
   }
@@ -91,4 +91,22 @@
   .navList li {
     margin-bottom: 0.5rem;
   }
+}
+.portalItem {
+  /* border: 2px solid  #4397F8;  */
+  border-radius: 8px;  /* Rounded corners */
+}
+
+.portal {
+  color:   #4397F8;
+  padding: 2px 8px; /* Add padding to make the rectangle roomier */
+}
+
+.divider {
+  padding: 0 5px; /* Add space around the divider */
+  color: #333;
+  /* font-weight: bold; */
+  font-size: xx-large;
+  align-self: center;
+  transform: translateY(-8px);
 }

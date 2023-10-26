@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from '../../styles/Components_Sidebar.module.css';
 
 const Sidebar = ({ updateExpandedSection }) => {
-  const [expandedSection, setExpandedSection] = useState("Image Processing");
+  const [expandedSection, setExpandedSection] = useState("Reference data curation");
 
   const handleItemClick = (section) => {
     const element = document.getElementById(section);

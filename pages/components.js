@@ -5,16 +5,43 @@ import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import Favicons from '../components/Favicons/Favicons';
 import Sidebar from '../components/Components/Sidebar';
-import styles from '../styles/Components.module.css';
+import styles from '../styles/Components.module.css'
 
 const Components = () => {
-  const [expandedSection, setExpandedSection] = useState('Image Processing');
+  const [expandedSection, setExpandedSection] = useState('Reference data curation');
 
   const contentBySection = {
     'Reference data curation': (
       <>
-        <div id="iSTAGING">iSTAGING HTML Content Here</div>
-        <div id="Clinical Variables">Clinical Variables Content Here</div>
+        <div className={styles.subsection} id="iSTAGING">
+          <h1>iSTAGING Project</h1>
+          <p>
+            The iSTAGING project at the Center for Biomedical Image Computing and Analytics (CBICA) lab at UPenn is an imaging-based system focused on aging and neurodegenerative diseases. 
+            It encompasses sMRI, rsfMRI, and amyloid scans from approximately 32,000 individuals aged 45 and older, from 13 diverse studies. 
+            The data has been harmonized and integrated to create a brain chart in aging.
+          </p>
+          <div>
+            <img src="/images/Components/Reference_Data_Curation/Plot_AD.png" alt=""/>
+            <img src="/images/Components/Reference_Data_Curation/Plot_Age.png" alt=""/>
+            <img src="/images/Components/Reference_Data_Curation/Plot_Diab.png" alt=""/>
+            <img src="/images/Components/Reference_Data_Curation/Plot_Htn.png" alt=""/>
+            <img src="/images/Components/Reference_Data_Curation/Plot_MCI.png" alt=""/>
+            <img src="/images/Components/Reference_Data_Curation/Plot_Race.png" alt=""/>
+            <img src="/images/Components/Reference_Data_Curation/Plot_Sex.png" alt=""/>
+            
+          </div>
+        </div>
+        <div id="Clinical Variables">
+          <div className={styles.subsection} id="Clinical Variables">
+            <h1>Clinical Variables</h1>
+            <p>
+              Some text here
+            </p>
+            <div>
+              Some Images here
+            </div>
+          </div>
+        </div>
       </>
     ),
     'Image Processing': (

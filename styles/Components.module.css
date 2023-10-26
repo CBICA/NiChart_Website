@@ -22,133 +22,13 @@
     gap: 3%;
   }
 }
-
-.componentsContainer {
-  line-height: 1.6;
-  font-size: 16px;
-  color: #333;
+.subsection div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; /* Adjust as needed */
 }
 
-.componentsContainer h1,
-.componentsContainer h2,
-.componentsContainer h3,
-.componentsContainer h4,
-.componentsContainer h5,
-.componentsContainer h6 {
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-  font-weight: bold;
-  max-width: 90%;
-}
-
-.componentsContainer h1 {
-  font-size: 2em;
-}
-
-.componentsContainer h2 {
-  font-size: 1.5em;
-}
-
-.componentsContainer h3 {
-  font-size: 1.3em;
-}
-
-.componentsContainer h4 {
-  font-size: 1.2em;
-}
-
-.componentsContainer h5 {
-  font-size: 1.1em;
-}
-
-.componentsContainer h6 {
-  font-size: 1em;
-}
-
-.componentsContainer p {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  max-width: 90%;
-}
-
-.componentsContainer ul,
-.componentsContainer ol {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-.componentsContainer li {
-  margin-bottom: 0.5em;
-}
-
-.componentsContainer code {
-  padding: 0.2em 0.4em;
-  background-color: #f6f8fa;
-  border-radius: 4px;
-  font-family: 'Courier New', monospace;
+.subsection img {
   max-width: 100%;
-  overflow-x: auto;
-}
-
-.componentsContainer pre {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  padding: 1em;
-  background-color: #f6f8fa;
-  border-radius: 4px;
-  font-family: 'Courier New', monospace;
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-@media (min-width:768px) {
-  .componentsContainer code {
-    padding: 0.2em 0.4em;
-    background-color: #f6f8fa;
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    max-width: 40%;
-    min-width: 700px;
-    overflow-x: auto;
-  }
-  
-  .componentsContainer pre {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    padding: 1em;
-    background-color: #f6f8fa;
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    max-width: 40%;
-    min-width: 700px;
-    overflow-x: auto;
-  }
-
-  .componentsContainer h1,
-  .componentsContainer h2,
-  .componentsContainer h3,
-  .componentsContainer h4,
-  .componentsContainer h5,
-  .componentsContainer h6 {
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    font-weight: bold;
-    max-width: 60%;
-    min-width: 700px;
-  }
-
-  .componentsContainer p {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    max-width: 60%;
-    min-width: 700px;
-  }
-}
-.componentsContainer a {
-  color: #0366d6;
-  text-decoration: none;
-}
-
-.componentsContainer a:hover {
-  text-decoration: underline;
+  height: auto;
 }

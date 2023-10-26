@@ -11,40 +11,52 @@ const Components = () => {
   const [expandedSection, setExpandedSection] = useState('Image Processing');
 
   const contentBySection = {
+    'Reference data curation': (
+      <>
+        <div id="iSTAGING">iSTAGING HTML Content Here</div>
+        <div id="Clinical Variables">Clinical Variables Content Here</div>
+      </>
+    ),
     'Image Processing': (
       <>
-        <div id="sMRI">
-          sMRI HTML Content Here<br></br>
+        <div id="DLICV, DLMUSE">
+          DLICV, DLMUSE HTML Content Here<br></br>
         </div>
-        <div id="fMRI">
-          fMRI HTML Content Here<br></br>
+        <div id="sopNMF">
+          sopNMF HTML Content Here<br></br>
         </div>
-        <div id="DTI">
-          DTI HTML Content Here<br></br>
+        <div id="fMRIPrep, XCPEngine, DTIPrep, pNet">
+          fMRIPrep, XCPEngine, DTIPrep, pNet HTML Content Here<br></br>
         </div>
       </>
     ),
-    'Reference data curation': <div id="iSTAGING">iSTAGING HTML Content Here</div>,
     'Harmonization': (
       <>
-        <div id="Neuroharmonize">NeuroHarmonize HTML Content Here</div>
-        <div id="Combat">Combat HTML Content Here</div>
+        <div id="Combat Family">Combat family HTML Content Here</div>
+        <div id="Complementary tools">Complementary tools HTML Content Here</div>
       </>
     ),
     'Machine Learning Models': (
       <>
-        <div id="Supervised">Supervised HTML Content Here</div>
-        <div id="Semisupervised">Semi-Supervised HTML Content Here</div>
-        <div id="DL">DL Models HTML Content Here</div>
+        <div id="SPARE-AD, SPARE-BA, SPARE-CVD">SPARE-AD, SPARE-BA, SPARE-CVD HTML Content Here</div>
+        <div id="smileGAN, surrealGAN">smileGAN, surrealGAN HTML Content Here</div>
+        <div id="DL-SPARE">DL-SPARE Models HTML Content Here</div>
       </>
     ),
     'Data Visualization': (
       <>
-        <div id="Centile curves">Centile curves HTML Content Here</div>
-        <div id="Link to images">Link to images HTML Content Here</div>
-        <div id="Reference values">Reference values HTML Content Here</div>
+        <div id="NiChart_Viewer">NiChart_Viewer HTML Content Here</div>
+        <div id="NiChart_Webviewer">NiChart_Webviewer HTML Content Here</div>
       </>
     ),
+    'Deployment': (
+      <>
+        <div id="Github">Github goes here</div>
+        <div id="Docker and Singularity">Docker and Singularity goes here</div>
+        <div id="AWS">AWS goes here</div>
+      </>
+    ),
+    
   };
 
   return (

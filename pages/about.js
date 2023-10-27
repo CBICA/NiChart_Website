@@ -41,9 +41,9 @@ const contentData = [
 
 const replaceWithLinks = (text) => {
   // Use regular expressions to replace the words with links
-  return text.replace(/sMRI/g, '<a href="/documentation/?section=sMRI">sMRI</a>')
-             .replace(/fMRI/g, '<a href="/documentation/?section=fMRI">fMRI</a>')
-             .replace(/DTI/g, '<a href="/documentation/?section=DTI">DTI</a>');
+  return text.replace(/sMRI/g, '<a href="/components/?section=sMRI">sMRI</a>')
+             .replace(/fMRI/g, '<a href="/components/?section=fMRI">fMRI</a>')
+             .replace(/DTI/g, '<a href="/components/?section=DTI">DTI</a>');
 };
 
 const About = () => {
@@ -54,8 +54,8 @@ const About = () => {
         <Favicons />
       </Head>
       <Header />
-      <div>
-        <Container maxWidth="x-lg">
+      <div className={styles.container}>
+        {/* <Container maxWidth="x-lg">
           <Typography variant="h4" align="center" className={styles.title}>
             About NiChart
           </Typography>
@@ -65,7 +65,6 @@ const About = () => {
                 <Grid container spacing={2} alignItems="center">
                   <Grid item xs={12} sm={6}>
                     <Typography variant="body1" className={styles.text}>
-                      {/* Use dangerouslySetInnerHTML to render HTML */}
                       <span dangerouslySetInnerHTML={{ __html: replaceWithLinks(item.text) }} />
                     </Typography>
                   </Grid>
@@ -81,7 +80,8 @@ const About = () => {
               <Divider className={styles.divider} />
             </div>
           ))}
-        </Container>
+        </Container> */}
+        About content goes here
       </div>
       <Footer />
     </div>

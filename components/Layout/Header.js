@@ -27,12 +27,13 @@ const Header = () => {
 
         <ul className={`${styles.navList} ${menuOpen ? styles.show : ''}`}>
           <li><Link href="/about"><a>About</a></Link></li>
-          {/* <li><Link href="/documentation"><a>Documentation</a></Link></li> */}
-          <li><Link href="/documentation"><a>Image Processing & ML Components</a></Link></li>
+          <li><Link href="/components"><a>Components</a></Link></li>
           <li><Link href="/team"><a>Team</a></Link></li>
           <li><Link href="/publications"><a>Publications</a></Link></li>
-          <li><Link href="/contact"><a>Contact</a></Link></li>
-          <li><Link href="/portal"><a>Portal</a></Link></li>
+          <li><Link href="https://forms.gle/jxUZFyJtcuQnKusK9"><a>Feedback</a></Link></li>
+          <li><Link href="/contact"><a className={styles.contact}>Contact</a></Link></li>
+          <li className={styles.divider}>|</li>
+          <li className={styles.portalItem}><Link href="/portal"><a className={styles.portal}>Portal</a></Link></li>
         </ul>
       </nav>
     </header>

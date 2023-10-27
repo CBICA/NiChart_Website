@@ -11,6 +11,7 @@
   border-width: 5px;
   background-image: linear-gradient(to right, #000000, #f2f2f2);
   z-index: 1000; /* Adjust this value as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
@@ -67,11 +68,13 @@
   display: none;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1100px) {
   .menuIcon {
     display: block;
   }
-
+  .divider {
+    display: none; /* Hide the divider entirely */
+  }
   .navList {
     display: none;
     flex-direction: column;
@@ -90,4 +93,22 @@
   .navList li {
     margin-bottom: 0.5rem;
   }
+}
+.portalItem {
+  /* border: 2px solid  #4397F8;  */
+  border-radius: 8px;  /* Rounded corners */
+}
+
+.portal {
+  color:   #4397F8;
+  padding: 2px 8px; /* Add padding to make the rectangle roomier */
+}
+
+.divider {
+  padding: 0 5px; /* Add space around the divider */
+  color: #333;
+  /* font-weight: bold; */
+  font-size: xx-large;
+  align-self: center;
+  transform: translateY(-10px);
 }

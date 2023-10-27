@@ -7,44 +7,26 @@ import reportWebVitals from '/utils/reportWebVitals';
 import styles from '../styles/index.module.css';
 
 const HomePage = () => {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>NiChart | Home</title>
-        <Favicons />
-      </Head>
-      
-      <Header />
-      
-      {/* Content of your homepage */}
+    return (
       <div className={styles.container}>
-        <h1 className={styles.title}>Welcome to NiChart!</h1>
-        <h2 className={styles.subtitle}>NiChart: NeuroImaging Computational Harmonization and Artificial Intelligence Toolbox</h2>
-        <p className={styles.description}>NiChart is a project at the intersection of brain imaging, machine learning, and
-            data visualization.</p>
-        <p className={styles.description}>Designed as a user-friendly online tool, NiChart simplifies the intricate
-            process of processing and analyzing brain data, making it accessible to researchers and
-            academics worldwide</p>
-        <div className={styles.photoContainer}>
-            <div className={styles.photoItem}>
-                <img src="/images/Home/brain_anatomy.jpg" alt="Brain anatomy - Image by Raman Oza from Pixabay"/>
-            </div>
-            <div className={styles.photoItem}>
-                <img src="/images/Home/brain_ai.jpg" alt="Brain AI - Image by Gerd Altmann from Pixabay"/>
-            </div>
-            <div className={styles.photoItem}>
-                <img src="/images/Home/embroidered_brains.jpg" alt="Embroidery of brains - Author/Copyright holder: Hey Paul Studios. Copyright terms and licence: CC BY 2."/>
-            </div>
-            <div className={styles.photoItem}>
-                <img src="/images/Home/MRI_scan_2.jpg" alt="MRI scan of a fixed cerebral hemisphere from a person with multiple sclerosis - Credit: Govind Bhagavatheeshwaran, Daniel Reich, National Institute of Neurological Disorders and Stroke, National Institutes of Health"/>
-            </div>
+        <Head>
+          <title>NiChart | Home</title>
+          <Favicons />
+        </Head>
+  
+        <Header />
+        
+        {/* Sub-container for the image */}
+        <div className={styles.imageContainer}>
+          <img className={styles.infographic} src="/images/Home/main.png" alt=""/>
         </div>
+        
+        <Footer />
       </div>
-      
-      <Footer />
-    </div>
-  );
-};
+    );
+  };
+  
+
 
 export default HomePage;
 

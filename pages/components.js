@@ -21,6 +21,7 @@ const Components = () => {
             The data has been harmonized and integrated to create a brain chart in aging.
           </p>
           <div>
+            <img src="/images/Components/Reference_Data_Curation/Picture7.png" alt=""/>
             <img src="/images/Components/Reference_Data_Curation/Plot_AD.png" alt=""/>
             <img src="/images/Components/Reference_Data_Curation/Plot_Age.png" alt=""/>
             <img src="/images/Components/Reference_Data_Curation/Plot_Diab.png" alt=""/>
@@ -28,7 +29,6 @@ const Components = () => {
             <img src="/images/Components/Reference_Data_Curation/Plot_MCI.png" alt=""/>
             <img src="/images/Components/Reference_Data_Curation/Plot_Race.png" alt=""/>
             <img src="/images/Components/Reference_Data_Curation/Plot_Sex.png" alt=""/>
-            
           </div>
         </div>
         <div id="Clinical Variables">

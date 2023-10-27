@@ -6,7 +6,14 @@ const Sidebar = ({ updateExpandedSection }) => {
 
   const handleItemClick = (section) => {
     const element = document.getElementById(section);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
+    if (element) {
+      const headerHeight = 180; // Replace with your header's height
+      const offsetPosition = element.offsetTop - headerHeight;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
   };
 
   const toggleSection = (section) => {
@@ -39,7 +46,10 @@ const Sidebar = ({ updateExpandedSection }) => {
               <ul className={styles.innerSection}>
                 <li><a onClick={() => handleItemClick('DLICV, DLMUSE')}>DLICV, DLMUSE</a></li>
                 <li><a onClick={() => handleItemClick('sopNMF')}>sopNMF</a></li>
-                <li><a onClick={() => handleItemClick('fMRIPrep, XCPEngine, DTIPrep, pNet')}>fMRIPrep, XCPEngine, DTIPrep, pNet</a></li>
+                <li><a onClick={() => handleItemClick('fMRIPrep')}>fMRIPrep</a></li>
+                <li><a onClick={() => handleItemClick('XCPEngine')}>XCPEngine</a></li>
+                <li><a onClick={() => handleItemClick('QSIPrep')}>QSIPrep</a></li>
+                <li><a onClick={() => handleItemClick('pNet')}>pNet</a></li>
               </ul>
             )}
           </li>
@@ -50,8 +60,8 @@ const Sidebar = ({ updateExpandedSection }) => {
             </a>
             {expandedSection === 'Harmonization' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('Neuroharmonize')}>NeuroHarmonize</a></li>
-                <li><a onClick={() => handleItemClick('Combat')}>Combat</a></li>
+                <li><a onClick={() => handleItemClick('Combat Family')}>Combat Family</a></li>
+                <li><a onClick={() => handleItemClick('Complementary tools')}>Complementary tools</a></li>
               </ul>
             )}
           </li>
@@ -75,9 +85,8 @@ const Sidebar = ({ updateExpandedSection }) => {
             </a>
             {expandedSection === 'Data Visualization' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('Centile curves')}>Centile curves</a></li>
-                <li><a onClick={() => handleItemClick('Link to images')}>Link to images</a></li>
-                <li><a onClick={() => handleItemClick('Reference values')}>Reference values</a></li>
+                <li><a onClick={() => handleItemClick('NiChart_Viewer')}>NiChart_Viewer</a></li>
+                <li><a onClick={() => handleItemClick('NiChart_Webviewer')}>NiChart_Webviewer</a></li>
               </ul>
             )}
           </li>

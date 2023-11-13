@@ -116,45 +116,38 @@ const Components = () => {
             <div>
               <img src="/images/Components/Machine_Learning_Models/QSIPrep/Picture1.png" alt=""/>
             </div>
+            <i>Figure 4. QSIPrep flowchart</i>
         </div>
           
+        <hr/>
         <div className={styles.subsection} id="fMRIProcessing">
-          <h1>Functional MRI</h1>
+          <h2>Functional MRI</h2>
+          <p>Functional MRI processing combines well-established and extensively validated tools for image preprocessing, feature extraction, and calculation of functional networks.</p>
+          
+          <h3>fMRIPrep:</h3>
             <p>fMRIPrep is a robust preprocessing pipeline tailored for the analysis of functional Magnetic Resonance Imaging (fMRI) data. The pipeline leverages a combination of well-regarded software packages including FSL, ANTs, FreeSurfer, and AFNI to ensure optimal software implementation for each preprocessing stage. Designed to minimize manual intervention, fMRIPrep facilitates a transparent workflow that enhances the reproducibility of fMRI data analyses. It is suited for handling both task-based and resting-state fMRI data, adapting to the nuances of different datasets to provide high-quality preprocessing without requiring manual intervention.</p>
             <div>
-              Some Images here
+              <img src="/images/Components/ImageProcessing/fMRI/fmriprep-21.0.0.png" alt=""/>
             </div>
-        </div>
-        <div className={styles.subsection} id="XCPEngine">
-          <h1>XCPEngine</h1>
-            <p>The XCPEngine, or XCP imaging pipeline, is an open-source software package engineered for processing multimodal neuroimages. Utilizing a modular design, it integrates analytic routines from leading MRI analysis platforms like FSL, AFNI, and ANTs. This engine offers a configurable, modular, and agnostic platform for neuroimage processing and quality assessment, encapsulating a variety of high-performance denoising approaches while computing regional and voxelwise values for each modality. </p>
-            <div>
-            <img src="/images/Components/Machine_Learning_Models/XCP-D/Picture1.png" alt=""/>
-            <img src="/images/Components/Machine_Learning_Models/XCP-D/Picture2.png" alt=""/>
-            </div>
+            <i>Figure 5. fMRIPrep flowchart</i>
         </div>
 
-        <div className={styles.subsection} id="pNet">
-          <h1>pNet</h1>
-          <p>
-        <strong>pNet</strong> (Personalized Functional Network Modeling (pNet)) is a <em>toolbox</em> designed to model <strong>brain functional networks</strong> using functional MRI. It is developed for <strong>cross-compatibility</strong> in <em>MATLAB</em> and <em>Python</em>.
-          </p>
-          <p>
-              A <strong>GUI version</strong> is available specifically in <em>MATLAB</em>, providing an intuitive interface for users. For Python enthusiasts, a <strong>step-by-step guide</strong> is also available to ease the learning curve.
-          </p>
-          <p>
-              It can be found at:
-              <ul>
-                  <li><a href="https://github.com/MLDataAnalytics/pNet" target="_blank"><strong>GitHub</strong>: MLDataAnalytics/pNet</a></li>
-                  <li><a href="https://github.com/YuncongMa/pNet" target="_blank"><strong>GitHub</strong>: YuncongMa/pNet</a></li>
-              </ul>
-          </p>
+        <h3>XCPEngine</h3>
+            <p>The XCPEngine, or XCP imaging pipeline, is an open-source software package engineered for processing multimodal neuroimages. Utilizing a modular design, it integrates analytic routines from leading MRI analysis platforms like FSL, AFNI, and ANTs. This engine offers a configurable, modular, and agnostic platform for neuroimage processing and quality assessment, encapsulating a variety of high-performance denoising approaches while computing regional and voxelwise values for each modality. </p>
             <div>
-              <img src="/images/Components/Machine_Learning_Models/pNet/Picture1.jpg" alt=""/>
-              <img src="/images/Components/Machine_Learning_Models/pNet/Picture2.jpg" alt=""/>
-              <img src="/images/Components/Machine_Learning_Models/pNet/Picture3.png" alt=""/>
+            <img src="/images/Components/ImageProcessing/fMRI/qsiprep2.png" alt=""/>
             </div>
-        </div>
+            <i>Figure 6. XCPEngine flowchart</i>
+            
+
+          <h3>pNet</h3>
+          <p><strong>pNet</strong> (Personalized Functional Network Modeling (pNet)) is a <em>toolbox</em> designed to model <strong>brain functional networks</strong> using functional MRI.</p>
+
+          <div>
+              <img src="/images/Components/Machine_Learning_Models/pNet/Picture1.jpg" alt=""/>
+          </div>
+          <i>Figure 7. pNet network model</i>
+          
       </>
     ),
     'Harmonization': (

@@ -8,67 +8,118 @@ import Sidebar from '../components/Components/Sidebar';
 import styles from '../styles/Components.module.css'
 
 const Components = () => {
-  const [expandedSection, setExpandedSection] = useState('Reference data curation');
+  const [expandedSection, setExpandedSection] = useState('Reference Dataset');
 
   const contentBySection = {
-    'Reference data curation': (
+    'Reference Dataset': (
       <>
-        <div className={styles.subsection} id="iSTAGING">
-          <h1>iSTAGING Project</h1>
+        <div className={styles.subsection}>
+          <h1><font color="#3333ee">NiChart Reference Dataset</font></h1>
           <p>
-            The iSTAGING (imaging-based SysTem for AGing and NeurodeGenerative diseases) project at the Center for Biomedical Image Computing and Analytics (CBICA) lab at UPenn is an imaging-based system focused on aging and neurodegenerative diseases. 
-            It encompasses sMRI, rsfMRI, and amyloid scans from approximately 62,859 individuals, with 83,325 total scans. 
-            The data has been harmonized and integrated to create a brain chart in aging.
+            NiChart Reference Dataset is a large and diverse collection of MRI images from multiple studies. It was created as part of the ISTAGING project [FIXME: cite/link] to develop a system for identifying imaging biomarkers of aging and neurodegenerative diseases. The dataset includes multi-modal MRI data, as well as carefully curated demographic, clinical, and cognitive variables from participants with a variety of health conditions.
           </p>
+          <p>
+            The reference dataset is a key component of NiChart <font color="#aa00dd">for training machine learning models</font> and <font color="#aa00dd">for creating reference distributions of imaging measures and signatures</font>, which can be used to compare NiChart values that are computed from the user data to normative or disease-related reference values.
+          </p>
+
           <div>
             <img src="/images/Components/Reference_Data_Curation/Picture7.png" alt=""/>
-            <img src="/images/Components/Reference_Data_Curation/Plot_AD.png" alt=""/>
-            <img src="/images/Components/Reference_Data_Curation/Plot_Age.png" alt=""/>
-            <img src="/images/Components/Reference_Data_Curation/Plot_Diab.png" alt=""/>
-            <img src="/images/Components/Reference_Data_Curation/Plot_Htn.png" alt=""/>
-            <img src="/images/Components/Reference_Data_Curation/Plot_MCI.png" alt=""/>
-            <img src="/images/Components/Reference_Data_Curation/Plot_Race.png" alt=""/>
-            <img src="/images/Components/Reference_Data_Curation/Plot_Sex.png" alt=""/>
           </div>
+          <p>
+          <i>Table 1. Overview of studies that are part of the NiChart Reference Dataset</i>
+          </p>
+                    
         </div>
-        <div id="Clinical Variables">
-          <div className={styles.subsection} id="Clinical Variables">
-            <h1>Clinical Variables</h1>
-            <p>
-              Some text here
-            </p>
-            <div>
-              Some Images here
-            </div>
+
+      <hr/>
+      <div className={styles.subsection} id="RefVars">
+         <h2><font color="#3333bb">Demographics and Clinical Variables</font></h2>
+          <p>
+            The reference dataset includes a large number of samples from people of different ethnic groups, with a focus on older adults. This diversity is important because it allows to train machine learning models that are more accurate for people of diverse backgrounds.
+          </p>
+
+          <center>
+          <div>
+            <img src="/images/Components/Reference_Data_Curation/plot_istag_age-sex-race.png" alt=""/>
           </div>
-        </div>
+          <p>
+          <i>Figure 1. Reference dataset demographics </i>
+          </p>
+          </center>
+          
+          <p>
+            The reference dataset contains data from individuals with various diseases. Disease subgroups were used to train machine learning models specifically tailored to each disease and to calculate disease-specific reference distributions.
+          </p>
+
+          <center>
+          <p>
+          <div>
+            <img src="/images/Components/Reference_Data_Curation/plot_istag_dx-all.png" alt=""/>
+          </div>
+          <i>Figure 2. Examples of disease subgroups in the reference dataset</i>
+          </p>
+          </center>
+         
+      </div>
       </>
     ),
     'Image Processing': (
       <>
-        <div className={styles.subsection} id="DLICV, DLMUSE">
-          <h1>DLICV method:</h1>
-          <p></p>
-          <div>
-            Some Images here
-          </div>
-          <h1>DLMUSE Method:</h1>
-          <p></p>
-          <div>
-            Some Images here
-          </div>
+        <div className={styles.subsection}>
+          <h1><font color="#3333ee">NiChart Image Processing</font></h1>
+                    
+          <p>NiChart Image Processing Pipelines is <font color="#aa00dd">a set of advanced tools</font> that can be used to extract features from multi-modal MRI data. The pipelines are made up of individual components that can be <font color="#aa00dd">installed and run independently</font>. Users can choose the specific components that they need for their analyses. NiChart pipelines are available both as <font color="#aa00dd">installation packages</font> and <font color="#aa00dd">software containers</font>. This ensures 100% reproducibility across different platforms, and allows users to easily install and run the pipelines without having to worry about installing any additional software dependencies."</p>
         </div>
-        <div className={styles.subsection} id="sopNMF">
-          <h1>sopNMF</h1>
-          <p>The sopNMF method, short for Stochastic Orthogonally Projective Non-negative Matrix Factorization, is an algorithm optimized for large-scale multivariate structural analysis of human brain data (<a href="https://www.researchgate.net/figure/Study-workflow-for-mega-analysis-of-human-brain-structural-covariance_fig1_359749441" target="_blank">source</a>).</p>
-          <p>This method has a Python implementation called SOPNMF, which is a conversion of the MATLAB version of Orthogonal Projective Non-negative Matrix Factorization (<a href="https://github.com/anbai106/SOPNMF" target="_blank">source</a>)(<a href="https://github.com/anbai106/SOPNMF" target="_blank">source</a>).</p>
-          <p>The algorithm has been utilized in studies to explore patterns of structural covariance in the human brain. In particular, a study cited on the project's GitHub page mentions the application of the method to identify novel genomic loci and pathways that influence these structural covariance patterns. Another publication cited is related to finding imaging patterns of structural covariance via non-negative matrix factorization (<a href="https://github.com/anbai106/SOPNMF" target="_blank">source</a>).</p>
-          <p>For more in-depth technical details, you might want to look into the mentioned publications or the code repository on GitHub, which, is under development (<a href="https://github.com/anbai106/SOPNMF" target="_blank">source</a>).</p>
+          <hr/>
+        <div className={styles.subsection} id="sMRIProcessing">
+          <h2><font color="#3333bb">Structural MRI</font></h2>
+
+          <p>NiChart uses a combination of established and cutting-edge techniques to extract imaging features that quantify both normal and abnormal brain structures. Alongside conventional <font color="#aa00dd">atlas-based segmentation</font> methods for segmenting intra-cranial volume (ICV), anatomical regions of interest (ROIs), and white matter lesions (WMLs), we also offer an alternative  parcellation method using <font color="#aa00dd">non-negative matrix factorization</font> for generating multi-resolution data-driven components. Our atlas-based segmentation methods are powered by deep learning networks that enable rapid segmentation.
+          </p>
+          
+          <h3><font color="#333399">DLICV:</font></h3>
+          <p>DLICV is a new deep learning (DL)-based tool to accurately segment the intracranial volume (ICV) from a raw T1-weighted MRI image. It's easy to use, requires minimal data preprocessing, and is robust against various factors that can affect segmentation accuracy. DLICV specifically segments the overall cerebrospinal fluid (CSF) surrounding the brain, rather than just the brain tissues themselves, providing an ICV estimation that is not influenced by overall cortical atrophy due to aging or disease.</p>
           <div>
+            <img src="/images/Components/ImageProcessing/sMRI/dlicv_ex1.png" alt=""/>
           </div>
+          <i>Figure 1. Example segmentatation using DLICV (green) for cases with significant cortical atrophy</i>
+
+          <h3><font color="#333399">DLMUSE:</font></h3>
+          <p>DLMUSE is a powerful tool for automatically segmenting T1-weighted brain MRI scans. It is accurate, robust, easy to use, and fast. DLMUSE is built on a 3D convolutional neural network (CNN) architecture that has been extensively validated for various neuroimaging segmentation tasks. DLMUSE model was trained on a large and diverse training set, with ROI labels derived using a computationally intensive multi-atlas segmentation method.</p>
+
+          <h3><font color="#333399">DLWMLS:</font></h3>
+            DLWMLS is a multi-modal segmentation method for segmenting white mater hyper-intensities (brain lesions) from T1-weighted and FLAIR MRI images. DLWMLS model was trained on a large and diverse training set, with semi-automatically segmented labels for lesions.
+
+          <div>
+            <img src="/images/Components/ImageProcessing/sMRI/dl_ex2.png" alt=""/>
+          </div>
+          <i>Figure 2. Example segmentatation using DLICV, DLMUSE and DLWMLS</i>
+          
+
+          <h3><font color="#333399">sopNMF</font></h3>
+          <p></p>
+          <p>Stochastic Orthogonally Projective Non-negative Matrix Factorization (sopNMF) is an algorithm for large-scale multivariate structural analysis of human brain data. Using sopNMF, the MuSIC atlas parcellates the human brain by structural covariance in MRI data over the lifespan and a wide range of disease populations, allowing to explore the phenotypic landscape and genetic architecture of the human brain. (<a href="https://www.cbica.upenn.edu/bridgeport" target="_blank">source</a>).</p>
+          
+          <div>
+            <img src="/images/Components/ImageProcessing/sMRI/bridgeport.png" alt=""/>
+          </div>
+          <i>Figure 3. Multi-resolution MuSIC atlas parcellation</i>
+          
         </div>
-        <div className={styles.subsection} id="fMRIPrep, XCPEngine, QSIPrep, pNet">
-          <h1>fMRIPrep</h1>
+
+        <hr/>
+        <div className={styles.subsection} id="DTIProcessing">
+          <h2>Diffusion Tensor Imaging</h2>
+          <h3>QSIPrep:</h3>
+          <p>QSIPrep is a specialized software platform designed for the preprocessing of diffusion MRI datasets, ensuring the deployment of adequate workflows for the task. It primarily focuses on diffusion-weighted magnetic resonance imaging (dMRI), a pivotal method for non-invasively examining the organization of white matter in the human brain. QSIPrep stands out for its integrative nature, being compatible with nearly all dMRI sampling schemes, thus providing a broad spectrum of utility in diffusion image processing.</p>
+          <p>The platform employs an automated approach, configuring pipelines for processing dMRI data. It adheres to a BIDS-app methodology for preprocessing, which encompasses a variety of modern diffusion MRI data types. The preprocessing pipelines generated by QSIPrep are automatic, accurately grouping, distortion correcting, motion correcting, denoising, and coregistering the data, among other operations, to ensure the integrity and quality of the processed images.</p>
+            <div>
+              <img src="/images/Components/Machine_Learning_Models/QSIPrep/Picture1.png" alt=""/>
+            </div>
+        </div>
+          
+        <div className={styles.subsection} id="fMRIProcessing">
+          <h1>Functional MRI</h1>
             <p>fMRIPrep is a robust preprocessing pipeline tailored for the analysis of functional Magnetic Resonance Imaging (fMRI) data. The pipeline leverages a combination of well-regarded software packages including FSL, ANTs, FreeSurfer, and AFNI to ensure optimal software implementation for each preprocessing stage. Designed to minimize manual intervention, fMRIPrep facilitates a transparent workflow that enhances the reproducibility of fMRI data analyses. It is suited for handling both task-based and resting-state fMRI data, adapting to the nuances of different datasets to provide high-quality preprocessing without requiring manual intervention.</p>
             <div>
               Some Images here
@@ -82,14 +133,7 @@ const Components = () => {
             <img src="/images/Components/Machine_Learning_Models/XCP-D/Picture2.png" alt=""/>
             </div>
         </div>
-        <div className={styles.subsection} id="QSIPrep">
-          <h1>QSIPrep</h1>
-          <p>QSIPrep is a specialized software platform designed for the preprocessing of diffusion MRI datasets, ensuring the deployment of adequate workflows for the task. It primarily focuses on diffusion-weighted magnetic resonance imaging (dMRI), a pivotal method for non-invasively examining the organization of white matter in the human brain. QSIPrep stands out for its integrative nature, being compatible with nearly all dMRI sampling schemes, thus providing a broad spectrum of utility in diffusion image processing.</p>
-          <p>The platform employs an automated approach, configuring pipelines for processing dMRI data. It adheres to a BIDS-app methodology for preprocessing, which encompasses a variety of modern diffusion MRI data types. The preprocessing pipelines generated by QSIPrep are automatic, accurately grouping, distortion correcting, motion correcting, denoising, and coregistering the data, among other operations, to ensure the integrity and quality of the processed images.</p>
-            <div>
-              <img src="/images/Components/Machine_Learning_Models/QSIPrep/Picture1.png" alt=""/>
-            </div>
-        </div>
+
         <div className={styles.subsection} id="pNet">
           <h1>pNet</h1>
           <p>

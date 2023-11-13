@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from '../../styles/Components_Sidebar.module.css';
 
 const Sidebar = ({ updateExpandedSection }) => {
-  const [expandedSection, setExpandedSection] = useState("Reference data curation");
+  const [expandedSection, setExpandedSection] = useState("Reference Dataset");
 
   const handleItemClick = (section) => {
     const element = document.getElementById(section);
@@ -26,30 +26,33 @@ const Sidebar = ({ updateExpandedSection }) => {
       <nav>
         <ul>
           <li className={styles.collapsibleSection}>
-            <a onClick={() => toggleSection('Reference data curation')}>
-              <span className={expandedSection === 'Reference data curation' ? styles.rotated : ''}></span>
-              Reference Data Curation
+            <a onClick={() => toggleSection('Reference Dataset')}>
+              <span className={expandedSection === 'Reference Dataset' ? styles.rotated : ''}></span>
+              <font color="#3333ee">Reference Dataset</font>
             </a>
-            {expandedSection === 'Reference data curation' && (
+            {expandedSection === 'Reference Dataset' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('iSTAGING')}>iSTAGING</a></li>
-                <li><a onClick={() => handleItemClick('Clinical Variables')}>Clinical Variables</a></li>
+                <li><a onClick={() => handleItemClick('RefVars')}>
+                <font color="#333399">Demographics and Clinical Variables</font></a></li>
               </ul>
             )}
           </li>
           <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Image Processing')}>
               <span className={expandedSection === 'Image Processing' ? styles.rotated : ''}></span>
-              Image Processing
+              <font color="#3333ee">Image Processing</font>
             </a>
             {expandedSection === 'Image Processing' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('DLICV, DLMUSE')}>DLICV, DLMUSE</a></li>
-                <li><a onClick={() => handleItemClick('sopNMF')}>sopNMF</a></li>
-                <li><a onClick={() => handleItemClick('fMRIPrep')}>fMRIPrep</a></li>
-                <li><a onClick={() => handleItemClick('XCPEngine')}>XCPEngine</a></li>
-                <li><a onClick={() => handleItemClick('QSIPrep')}>QSIPrep</a></li>
-                <li><a onClick={() => handleItemClick('pNet')}>pNet</a></li>
+                <li><a onClick={() => handleItemClick('sMRIProcessing')}>
+                    <font color="#3333bb">sMRI</font>
+                </a></li>
+                <li><a onClick={() => handleItemClick('DTIProcessing')}>
+                    <font color="#3333bb">DTI</font>                
+                </a></li>
+                <li><a onClick={() => handleItemClick('fMRIProcessing')}>
+                    <font color="#3333bb">fMRI</font>                
+                </a></li>
               </ul>
             )}
           </li>

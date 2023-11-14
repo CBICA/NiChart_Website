@@ -152,44 +152,48 @@ const Components = () => {
     ),
     'Harmonization': (
       <>
-        <div className={styles.subsection} id="Combat Family">
-          <h1>Combat Family</h1>
+          <h1>Combat Family of Statistical Harmonization Tools</h1>
           <p>
-              The <strong>ComBat</strong> method is a Bayesian statistical technique aimed at removing <em>batch effects</em> in high-dimensional datasets. ComBat estimates and adjusts for the unwanted variations introduced during the data collection process, such as those due to different MRI machines or settings.
+          To estimate and remove scanner-related batch effects in imaging variables we apply a statistical harmonization method, <strong>Combat</strong>. The <strong>ComBat</strong> method is a Bayesian statistical technique aimed at removing <em>batch effects</em> in high-dimensional datasets. The method estimates both the mean (<em>location</em>) and the variance (<em>scale</em>) of the residuals across batches using <em>Empirical Bayes</em> estimation, after correcting for additional covariates, such as age, sex and ICV. Variants like <strong>ComBat-GAM</strong> offer the psosibility to model selected covariates using splines, providing flexible adjustments to non-linear covariate associations. Combat can be used through a train/test paradigm, applying it on a training set to estimate batch effect parameters, and using the existing model to harmonize new data from the same batches.
+
           </p>
-          <p>
-              It uses <em>Empirical Bayes</em> estimates to improve the accuracy of batch effect removal. The method adjusts both the mean (<em>location</em>) and variance (<em>scale</em>) across batches, thereby preserving biological variance. It can also incorporate additional covariates like age or sex for more nuanced adjustments.
-          </p>
-          <p>
-              Variants like <strong>ComBat-GAM</strong> offer more flexible adjustments using generalized additive models. Software implementations are commonly found in R, as part of the <code>sva</code> package, but Python versions are also available.
-          </p>
-          <p>
-              It is a tool for making high-dimensional data more robust for subsequent analyses.
-          </p>
+
           <div>
-          <img src="/images/Components/Data_Harmonization/Picture1.png" alt=""/>
-          <img src="/images/Components/Data_Harmonization/Picture2.png" alt=""/>
-          <img src="/images/Components/Data_Harmonization/Picture3.png" alt=""/>
+          <img src="/images/Components/Data_Harmonization/Picture1b.png" alt=""/>
+          </div>
+          <i>Figure 1. Combat family of tools</i>
+
+        <div className={styles.subsection} id="CombatQC">
+          <h2>Combat Visualization and QC</h2>
+          
+          <p>
+          Combat visualization and quality control (QC) package provides tools for evaluating batch effects and estimated parameters before and/or after harmonization
+          </p>
+
+          <div>
+          
           <img src="/images/Components/Data_Harmonization/Picture4.png" alt=""/>
-          <img src="/images/Components/Data_Harmonization/Picture5.png" alt=""/>
+                    <img src="/images/Components/Data_Harmonization/Picture5.png" alt=""/>
           <img src="/images/Components/Data_Harmonization/Picture6.png" alt=""/>
+          <img src="/images/Components/Data_Harmonization/Picture3.png" alt=""/>
           </div>
-        </div>
-        <div className={styles.subsection} id="Complementary tools">
-          <h1>Complementary tools</h1>
-          <p>
-            Some Text here
-          </p>
-          <div>
-            Some Images here
-          </div>
+          <i>Figure 2. Combat visualization and QC tool functions</i>
         </div>
       </>
     ),
     'Machine Learning Models': (
       <>
-        <div className={styles.subsection} id="SPARE-AD, SPARE-BA, SPARE-CVD">
-          <h1>SPARE-AD, SPARE-BA, SPARE-CVD</h1>
+          <h1>NiChart ML Models</h1>
+          <p>
+          NiChart offers a rich and extensible library of pre-trained machine learning (ML) models that can convert high-dimensional imaging data into low-dimensional representations. These representations effectively capture and quantify brain changes associated with specific diseases or neurodegenerative conditions. The models are trained on carefully selected subsets of imaging features and data samples, tailored to each task and target disease/condition. The collection of NiChart imaging signatures forms the neuroimaging chart dimensional system. NiChart's rich library of pre-trained ML models offers a range of advantages for researchers and clinicians alike. The models are readily available and easy to use, eliminating the need for extensive training or expertise in machine learning. Additionally, the extensibility of the NiChart library allows researchers to develop their own specialized models, tailored to specific research questions or clinical needs.
+          </p>
+          
+          <p>
+          NiChart ML models employ methodologies that encompass a broad spectrum of applications, ranging from supervised learning to semi-supervised learning and deep learning (DL) techniques for the direct extraction of biomarkers from MRI images. NiChart's ML methods are continuously refined to incorporate the latest advancements in machine learning, keeping NiChart competitive in the field of medical imaging analysis.
+          </p>
+          
+        <div className={styles.subsection} id="SupervisedML">
+          <h2>Supervised models</h2>
           <p>
             Some Text here
           </p>
@@ -197,16 +201,17 @@ const Components = () => {
             Some Images here
           </div>
         </div>
-        <div className={styles.subsection} id="smileGAN, surrealGAN">
-          <h1>smileGAN, surrealGAN</h1>
+        <div className={styles.subsection} id="SemisupervisedML ">
+          <h2>Semi-supervised models</h2>
           <p>
             Some Text here
           </p>
           <div>
             Some Images here
           </div></div>
+          
         <div className={styles.subsection} id="DL-SPARE">
-          <h1>DL-SPARE</h1>
+          <h2>DL models using raw images</h2>
           <p>
             Some Text here
           </p>
@@ -218,17 +223,26 @@ const Components = () => {
     ),
     'Data Visualization': (
       <>
-        <div className={styles.subsection} id="NiChart_Viewer">
-          <h1>NiChart_Viewer</h1>
+          <h1>NiChart Data Visualization</h1>
+          <p>
+          NiChart's visualization tools offer a suite of valuable features to aid users in comparing their data against established NiChart reference distributions. These tools enable users to effectively visualize and interpret their data, gaining meaningful insights into their individual profiles.
+          </p>
+          
+          <p>
+          NiChart offers two convenient options for visualizing user data: A client-side visualization tool integrated with the cloud portal enables users to derive and visualize NiChart dimensions for their data on the browser. An installable PyQT utility provides extended capabilities for exploring and analyzing user data.
+          </p>
+      
+        <div className={styles.subsection} id="NiChart_Webviewer">
+
+          <h2>NiChart Web Viewer</h2>
           <p>
             Some Text here
           </p>
           <div>
             Some Images here
           </div>
-        </div>
-        <div className={styles.subsection} id="NiChart_Webviewer">
-          <h1>NiChart_Webviewer</h1>
+
+          <h2>NiChart Web Viewer</h2>
           <p>
             Some Text here
           </p>

@@ -4,6 +4,10 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 6px 20px rgba(0, 0, 0, 0.05);
   }
   
+  .sidebar nav {
+    position: sticky;
+    top: 15%;
+  }
   .sidebar ul {
     list-style-type: none;
     padding: 0;

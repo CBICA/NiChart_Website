@@ -6,15 +6,15 @@ import styles from '../styles/Publications.module.css';
 import Favicons from '../components/Favicons/Favicons';
 import newsStories from '/public/content/Publications/news_stories.js'
 
-const News = () => {
+const Publications = () => {
     return (
       <div className={styles.container}>
         <Head>
-          <title>NiChart | News</title>
+          <title>NiChart | Publications</title>
           <Favicons />
         </Head>
         <Header />
-        <h2 className={styles.newsTitle}>News</h2>
+        <h2 className={styles.newsTitle}>Publications</h2>
         <div className={styles.newsPage}>
           <div className={styles.newsStories}>
             {newsStories.map((story, index) => (
@@ -32,24 +32,10 @@ const News = () => {
               </a>
             ))}
           </div>
-          <div className={styles.twitterFeed}>
-            <a
-              className="twitter-timeline"
-              data-tweet-limit="3"
-              href="https://twitter.com/CBICAannounce?ref_src=twsrc%5Etfw"
-            >
-              Tweets by CBICAannounce
-            </a>
-            <script
-              async
-              src="https://platform.twitter.com/widgets.js"
-              charSet="utf-8"
-            ></script>
-          </div>
         </div>
         <Footer />
       </div>
     );
   };
   
-  export default News;
+  export default Publications;

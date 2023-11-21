@@ -184,56 +184,37 @@ const Components = () => {
     'Machine Learning Models': (
       <>
           <h1>NiChart ML Models</h1>
-          <p>
-          NiChart offers a rich and extensible <font color="#aa00dd">library of pre-trained machine learning (ML) 
-models</font> that can convert high-dimensional imaging data into low-dimensional representations. These 
-representations effectively capture and quantify brain changes associated with specific diseases or neurodegenerative 
-conditions. The models are trained on carefully selected subsets of imaging features and data samples, tailored to each 
-task and target disease/condition. The collection of NiChart imaging signatures forms the neuroimaging chart dimensional 
-system. NiChart's pre-trained ML models are readily available and easy to use, eliminating the need for extensive 
-training or expertise in machine learning. Additionally, the extensibility of the NiChart library will allow 
-researchers to develop their own specialized models, tailored to specific research questions or clinical needs.
-          </p>
           
-          <p>
-          NiChart ML models employ methodologies that encompass a broad spectrum of applications. NiChart's ML methods 
-will be continuously refined to incorporate the latest advancements in machine learning, keeping NiChart competitive in 
-the field of medical imaging analysis.
-          </p>
+          <p>NiChart offers an extensible <font color="#aa00dd">library of pre-trained machine learning (ML) models</font> that can convert high-dimensional imaging data into low-dimensional imaging signatures. These representations effectively capture and quantify brain changes associated with specific diseases or neurodegenerative conditions.</p>
           
-        <div className={styles.subsection} id="SupervisedML">
-          <h2>Disease prediction models</h2>
-          <p>
-            Nichart predictive models are based on supervised learning methods that have been extensively 
-validated. These models are trained using carefully curated samples for specific types of diseases or conditions, using 
-imaging features extracted from single or multi-modal MRI scans. The models use these features to learn how to 
-identify patterns in the brain that are associated with different diseases. Initial models are trained for brain age and 
-Alzheimer's Disease prediction, while models for other diseases and conditions will be included in future releases.
-          </p>
+          <p>The collection of NiChart imaging signatures forms the <font color="#aa00dd">neuroimaging chart dimensional system</font>. NiChart's pre-trained ML models are readily available and easy to use, eliminating the need for extensive training or expertise in machine learning. Additionally, the extensibility of the NiChart library will allow researchers to add their own specialized models.</p>
+          
+          <p>The models are trained on carefully <font color="#aa00dd">selected subsets of the reference dataset, tailored to each task and target disease/condition</font>.</p>
+          
+          <p>NiChart ML models incorporate a wide range of <font color="#aa00dd">innovative research methodologies</font>. NiChart's ML methods will be continuously refined to incorporate the latest advancements in machine learning and deep learning, keeping NiChart competitive in the field of medical imaging analysis.</p>
+          
+        <div className={styles.subsection} id="SPARE Models">
+          <h2>SPARE Models (Spatial Patterns of Abnormality for Recognition of Disease)</h2>
+          <p>SPARE-models are predictive <font color="#aa00dd">supervised learning methods</font> that have been extensively validated. SPARE models train on imaging features extracted from single or multi-modal MRI scans. The models use these features to learn how to identify patterns in the brain that are associated with different diseases. Initial models are provided for <font color="#aa00dd">SPARE-BA</font> (brain age) and <font color="#aa00dd">SPARE-AD</font> (Alzheimer's disease). Additional models for <font color="#aa00dd">SPARE-CVD</font> (cardio-vascular disease risk), <font color="#aa00dd">SPARE-DM</font> (Type2 diabetes), <font color="#aa00dd">SPARE-SCZ</font> (schizophrenia) and <font color="#aa00dd">SPARE-CD</font> (chronic depression) will be added in future releases.</p>
+
           <div>
-            Some Images here
+          <img src="/images/Components/Machine_Learning_Models/aibil/sparead_frombrainpaper.gif" alt=""/>
           </div>
+          <i>Figure 1. Grey matter and white matter group differences between individuals with low vs high SPARE-AD values (from <a href="https://academic.oup.com/brain/article/132/8/2026/266984">1</a>).</i>
+
         </div>
-        <div className={styles.subsection} id="SemisupervisedML ">
-          <h2>Semi-supervised models</h2>
-          <p>
-          Heterogeneity of brain diseases is a challenge for precision diagnosis. Our semi-supervised 
-clustering methods aim to identify and quantify this heterogeneity contrasted against normal brain structure, to 
-identify disease subtypes through neuroimaging signatures.
-          </p>
+        
+        <div className={styles.subsection} id="Heterogeneity Models">
+          <h2>Image-based Disease Heterogeneity Models</h2>
+          <p>Our research team has developed advanced analytical tools to uncover <font color="#aa00dd">imaging patterns of disease heterogeneity</font> from MRI data. These tools help us identify distinct disease subtypes that shed light on the underlying neuroanatomical differences associated with various pathologies. Our previous work has identified <font color="#aa00dd">four distinct disease subtypes for Alzheimer's disease and two subtypes for schizophrenia</font>. The pre-trained models provided in NiChart will enable users to obtain more nuanced measures beyond the traditional disease scores.</p>
+
           <div>
-            Some Images here
-          </div></div>
-          
-        <div className={styles.subsection} id="DL-SPARE">
-          <h2>DL models using raw images</h2>
-          <p>
-            Some Text here
-          </p>
-          <div>
-            Some Images here
+          <img src="/images/Components/Machine_Learning_Models/aibil/smilegan_naturefig.png" alt=""/>
           </div>
+          <i>Figure 2. Alzheimer's disease subtypes identified by the SMILE-GAN method (from <a href="https://www.nature.com/articles/s41467-021-26703-z">2</a>).</i>
+
         </div>
+          
       </>
     ),
     'Data Visualization': (

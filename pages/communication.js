@@ -25,7 +25,7 @@ const Communication = () => {
               class="twitter-timeline" 
               href="https://twitter.com/NiChart_AIBIL?ref_src=twsrc%5Etfw">Tweets by NiChart_AIBIL
             </a> 
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
           </div>
           <div className={styles.contactInfo}>
             <h2 className="footer-heading">CBICA</h2>

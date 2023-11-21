@@ -260,6 +260,7 @@ export const DefaultStorageManagerExample = () => {
           });
         }}
       />
+      <ScrollView height="100px">
       {Object.keys(files).map((key) => {
         return files[key] ? (
           <div>
@@ -267,6 +268,7 @@ export const DefaultStorageManagerExample = () => {
           </div>
         ) : null;
       })}
+      </ScrollView>
     </>
   );
 };
@@ -427,7 +429,7 @@ export const JobList = ({jobQueue}) => {
   
   return (
   <>
-    <ScrollView>
+    <ScrollView height="300px">
     <Collection 
       items={Object.values(jobs)}
       type="list"
@@ -613,6 +615,7 @@ export const SpareScoresInputStorageManager = () => {
           });
         }}
       />
+      <ScrollView height="100px">
       {Object.keys(files).map((key) => {
         return files[key] ? (
           <div>
@@ -620,6 +623,7 @@ export const SpareScoresInputStorageManager = () => {
           </div>
         ) : null;
       })}
+      </ScrollView>
     </>
   );
 };
@@ -675,6 +679,7 @@ export const SpareScoresDemographicStorageManager = () => {
           });
         }}
       />
+      <ScrollView height="100px">
       {Object.keys(files).map((key) => {
         return files[key] ? (
           <div>
@@ -682,6 +687,7 @@ export const SpareScoresDemographicStorageManager = () => {
           </div>
         ) : null;
       })}
+      </ScrollView>
     </>
   );
 };

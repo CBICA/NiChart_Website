@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaBars } from 'react-icons/fa';
 import styles from '/styles/Header.module.css';
 import Link from 'next/link';
+import ReactGA from 'react-ga';
+const GA_TRACKING_ID = "G-CES0G22JMD";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -9,16 +11,16 @@ const Header = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+  
+  
+
+  ReactGA.initialize(GA_TRACKING_ID);
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
 
   return (
     <header className={styles.header}>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-CES0G22JMD"></script>
-      <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
-         gtag('config', 'G-CES0G22JMD');
-      </script>
       <div className={styles.logo}>
         <Link href="/">
           <a>

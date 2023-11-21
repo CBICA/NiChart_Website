@@ -39,9 +39,9 @@ function Portal() {
             {selectedModule === 'module2' && <Module_2 moduleSelector={handleModuleSelection} />}
             {selectedModule === 'module3' && <Module_3 moduleSelector={handleModuleSelection} />}
             <div>
-              <h4> By using niCHART Pipelines, you agree to share your uploaded image data with the University of Pennsylvania for processing only. All data is deleted after 24 hours. </h4>
+              <h4> By using niCHART Pipelines, you agree to share your uploaded image data with the University of Pennsylvania for processing only. All data is deleted after a maximum of 36 hours. </h4>
               To use, drop files into the box on the left. When results are available, click to download.
-              Jobs may take up to 2 minutes to start depending on resource availability and other conditions.
+              Jobs may take up to 5 minutes to start depending on resource availability and other conditions. 
             </div>
         </div>
       </div> 

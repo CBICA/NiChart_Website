@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { Flex, Heading, Divider, Button } from '@aws-amplify/ui-react';
-import { SpareScoresInputStorageManager, SpareScoresDemographicStorageManager, JobList, launchSpareScores, getSpareScoresOutput, emptyBucketForUser, uploadToModule2 } from '../../utils/uploadFiles.js'
+import { SpareScoresInputStorageManager, SpareScoresDemographicStorageManager, JobList, launchSpareScores, getSpareScoresOutput, emptyBucketForUser, uploadToModule2, getCombinedCSV } from '../../utils/uploadFiles.js'
 import { getUseModule1Results, setUseModule1Results, setUseModule2Results, getModule2Cache } from '../../utils/NiChartPortalCache.js'
 import styles from '../../styles/Portal_Module_2.module.css'
 
@@ -45,24 +45,31 @@ function Module_2({moduleSelector}) {
       <div className={styles.moduleContainer}>
           <Divider orientation="horizontal" />
           <Flex direction={{ base: 'column', large: 'row' }} maxWidth="100%" padding="1rem" width="100%" justifyContent="flex-start">
-              <Flex justifyContent="space-between" direction="column">
+              <Flex justifyContent="space-between" direction="column" width="33%">
               <Heading level={3}>Upload Subject CSV</Heading>
+              Upload your ROI volume CSV as output by Module 1. Alternatively, upload your own ROI volume CSV.
               { !getUseModule1Results() && (<SpareScoresInputStorageManager />)}
               { !getUseModule1Results() && (<Button onClick={async () => await enableModule1Results()}>Import from Module 1</Button>)}
               { getUseModule1Results() && (<p>Using results from Module 1!</p>)}
               { getUseModule1Results() && (<Button onClick={async () => await disableModule1Results()}>Upload a CSV Instead</Button>) }
               <Heading level={3}>Upload Demographic CSV</Heading>
-              <p>This file should correspond to the subjects uploaded above and contain demographic data (Age, Sex).</p>
+              <p>This file should correspond to the subjects uploaded above and contain demographic data (Age, Sex). Subjects should be on individual rows and subject IDs should correspond to the original T1 filename (without the extension).</p>
               <SpareScoresDemographicStorageManager />
-              <Button onClick={async () => launchSpareScores() } >Generate SPARE scores</Button>
+              <Button variation="primary" onClick={async () => launchSpareScores() } >Generate SPARE scores</Button>
               </Flex>
-              <Flex direction="column">
+              <Divider orientation="vertical" />
+              <Flex direction="column" width="33%">
+              <Heading level={3}>Jobs in Progress</Heading>
+              SPARE scores that are currently being calculated will appear here. Finished jobs will be marked with green. Please wait for your jobs to finish before proceeding. If your job fails, please contact us and provide the job ID listed below.
               <JobList jobQueue="cbica-nichart-sparescores-jobqueue" />
               </Flex>
-              <Flex direction="column">
-              <Button onClick={async () => getSpareScoresOutput(true) } >Download SPARE score CSV</Button>
+              <Divider orientation="vertical" />
+              <Flex direction="column" width="33%">
+              <Heading level={3}>Download SPARE Output</Heading>
+              All finished subjects will be included in the output when you click Download.
+              <Button variation="primary" onClick={async () => getSpareScoresOutput(true) } >Download SPARE score CSV</Button>
               <Button onClick={async () => exportModule2Results(moduleSelector) } >Export to Module 3</Button>
-              <Button onClick={async () => emptyBucketForUser('cbica-nichart-sparescores-io')} >Clear All Data</Button>
+              <Button variation="warning" onClick={async () => emptyBucketForUser('cbica-nichart-sparescores-io')} >Clear All Data</Button>
               </Flex>
           </Flex>
       </div>

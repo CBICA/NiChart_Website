@@ -254,7 +254,8 @@ const Components = () => {
           <p>We provide a web viewer that is <myemp>integrated with our cloud portal</myemp> to provide a more practical option for visualization of derived imaging features and final signatures. The web viewer was built using javascript. The viewer is designed as a client application to provide very fast rendering of visualizations. The application provides options to select the target variable for visualization, and the reference data used as the comparison set. This will allow users to <myemp>compare their selected data to different disease or demographic groups</myemp>. 
           </p>
           <div>
-            FIXME: A snapshot of the web viewer
+            <img src="/images/Components/DataViewers/nichart_webviewer_mri.png" alt=""/>
+            <img src="/images/Components/DataViewers/nichart_webviewer_plots.png" alt=""/>
           </div>
         </div>
 

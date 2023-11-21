@@ -1,117 +1,49 @@
 .container{
   display: grid;
-  grid-template-rows:auto auto 1fr auto;
-  grid-template-columns:100%;
-
-  /* fallback height */
-  min-height:100vh;
-
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  justify-content: center; /* This will center the .mainContent horizontally */
+  align-items: start; /* This will align the .mainContent to the start of the container vertically */
   /* new small viewport height for modern browsers */
   min-height:100svh;  
 }
 
-.newsTitle {
-  font-size: 3rem; /* Adjust the font size as desired */
-  font-weight: bold;
-  text-align: left;
-  margin-bottom: 2rem; /* Add some spacing below the title */
-  margin-left: 3rem;
-}
 
-.newsPage {
-  display:block;
-}
-
-/* columns */
-.newsPage > * {
-  padding:1rem;
-}
-
-/* tablet breakpoint */
-@media (min-width:768px) {
-  .newsPage {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-  }
-}
-  
-.newsStories {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: auto 1fr auto;
-  gap: 20px; /* Padding between rows */
-}
-
-.newsStory {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;;
-  text-align: left;
+.mainContent {
+  width: 100%;
+  max-width: 100%;
   padding: 2rem;
 }
 
-.newsContent {
-  display: flex;
-  align-items: flex-start;
-}
-
-.newsImage {
-  width: 40%; 
-  max-width: 200px; 
-  height: auto;
-  margin-right: 1rem; 
-  margin-top: 1rem;
+.title {
+  font-size: 2.5rem;
+  color: #333;
+  text-align: left;
   margin-bottom: 1rem;
 }
 
-.newsDetails {
-  flex-grow: 1; /* Allow the details section to expand and fill the remaining space */
-}
-
-.newsStoryTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.newsStoryDescription {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-.newsStoryDate {
+.description {
   font-size: 1rem;
-  color: #888;
-}
-.twitterFeed {
-  width: auto;
-  padding-left: 10%;
-  padding-right: 10%;
-  min-width: 340px;
-  max-width: 800px;
-  min-height: 1000px;
-}
-  
-.newsStories a {
-  text-decoration: none;
-  color: black;
+  text-align: left;
+  margin-bottom: 2rem;
 }
 
-.newsPage h1c {
-  font-size: 1.1rem;
-  color: #3333ee;
+.publicationSection {
+  margin-bottom: 2rem;
 }
 
-.newsPage h2c {
-  font-size: 1.1rem;
-  color: #3333bb;
+.sectionHeader {
+  font-size: 1.8rem;
+  color: #444;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.newsPage h3c {
-  font-size: 1.1rem;
-  color: #333399;
-}
-
-.newsPage myemp {
-  color: #aa00dd;
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .mainContent {
+    width: 90%;
+  }
 }

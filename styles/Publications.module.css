@@ -96,3 +96,22 @@
   text-decoration: none;
   color: black;
 }
+
+.newsPage h1c {
+  font-size: 1.1rem;
+  color: #3333ee;
+}
+
+.newsPage h2c {
+  font-size: 1.1rem;
+  color: #3333bb;
+}
+
+.newsPage h3c {
+  font-size: 1.1rem;
+  color: #333399;
+}
+
+.newsPage myemp {
+  color: #aa00dd;
+}

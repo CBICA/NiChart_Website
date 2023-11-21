@@ -1,7 +1,7 @@
 const Psychiatry = [
     {
       name: 'Wolf, Daniel',
-      image: '/images/Team/user_stock_photo.png',
+      image: '/images/Team/Wolf_Daniel.jpg',
       bio: 'danwolf@pennmedicine.upenn.edu',
     },
   ];

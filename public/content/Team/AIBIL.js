@@ -1,37 +1,37 @@
 const AIBIL = [
     {
       name: 'Davatzikos, Christos',
-      image: '/images/Team/user_stock_photo.png',
+      image: '/images/Team/Christos_Davatzikos.jpeg',
       bio: 'Christos.Davatzikos@pennmedicine.upenn.edu',
     },
     {
       name: 'Erus, Guray',
-      image: '/images/Team/user_stock_photo.png',
+      image: '/images/Team/Guray_Erus.jpg',
       bio: 'Guray.Erus@pennmedicine.upenn.edu',
     },
     {
       name: 'Getka, Alexander',
-      image: '/images/Team/user_stock_photo.png',
+      image: '/images/Team/Alexander_Getka.jpg',
       bio: 'Alexander.Getka@Pennmedicine.upenn.edu',
     },
     {
       name: 'Aidinis, George ',
-      image: '/images/Team/user_stock_photo.png',
+      image: '/images/Team/Aidinis_George.jpg',
       bio: 'George.Aidinis@Pennmedicine.upenn.edu',
     },
     {
       name: 'Wu, Di',
-      image: '/images/Team/user_stock_photo.png',
+      image: '/images/Team/Di_Wu.jpeg',
       bio: 'Di.Wu@Pennmedicine.upenn.edu',
     },
     {
       name: 'Cui, Yuhan',
-      image: '/images/Team/user_stock_photo.png',
+      image: '/images/Team/Cui_Yuhan.jpg',
       bio: 'Yuhan.Cui@Pennmedicine.upenn.edu',
     },
     {
       name: 'Srinivasan, Dhivya',
-      image: '/images/Team/user_stock_photo.png',
+      image: '/images/Team/Dhivya_Srinivasan.jpg',
       bio: 'Dhivya.Srinivasan@Pennmedicine.upenn.edu',
     },
     {

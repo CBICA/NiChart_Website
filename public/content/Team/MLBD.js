@@ -1,7 +1,7 @@
 const MLBD = [
   {
     name: 'Fan, Yong',
-    image: '/images/Team/user_stock_photo.png',
+    image: '/images/Team/Yong_Fan.jpg',
     bio: 'Yong.Fan@pennmedicine.upenn.edu',
   },
   {

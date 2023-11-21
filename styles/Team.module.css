@@ -33,10 +33,10 @@
 }
 
 .member img {
-  max-width: 100%;
-  min-width: 10%;
-  height: auto;
-  border-radius: 50%;
+  width: 200px; /* Fixed width */
+  height: 200px; /* Fixed height to match width, ensuring a square */
+  object-fit: cover; /* This will cover the area without stretching the image */
+  border-radius: 50%; /* This will make the square a circle */
 }
 
 .member h3 {

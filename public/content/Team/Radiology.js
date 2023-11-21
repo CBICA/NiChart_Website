@@ -1,7 +1,7 @@
 const Radiology = [
     {
       name: 'Nasrallah, Ilya ',
-      image: '/images/Team/user_stock_photo.png',
+      image: '/images/Team/Ilya_Nasrallah.jpg',
       bio: 'Ilya.Nasrallah@pennmedicine.upenn.edu',
     },
 

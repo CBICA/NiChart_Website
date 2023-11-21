@@ -103,15 +103,7 @@
     position: relative;
   }
 }
-.portalItem {
-  /* border: 2px solid  #4397F8;  */
-  border-radius: 8px;  /* Rounded corners */
-}
 
-.portal {
-  color:   #4397F8;
-  padding: 2px 8px; /* Add padding to make the rectangle roomier */
-}
 
 .divider {
   padding: 0 5px; /* Add space around the divider */
@@ -120,4 +112,40 @@
   font-size: xx-large;
   align-self: center;
   transform: translateY(-10px);
+}
+
+/* Portal Item (The box around the link) */
+.portalItem {
+  border: 3px solid #fff;  /* White border */
+  transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+  align-self: center; /* Align the item vertically */
+  transform: translateY(-10px);
+}
+
+/* Portal Link (The text inside the box) */
+.portal {
+  color: #4397F8;
+  padding: 5px 10px; /* Add padding to make the rectangle roomier */
+  display: block; /* Change to block to fill the .portalItem area */
+  text-decoration: none; /* Removes underline from the link */
+}
+
+/* Hover effect for the portal item */
+.portalItem:hover {
+  transform: scale(1.1); /* Zoom effect on hover for the whole item */
+}
+
+/* Ensure the underline does not appear for the portal item */
+.portalItem a::after {
+  display: none; /* This will ensure the underline doesn't show */
+}
+
+/* Adjust hover effect for non-portal links */
+.navList li a:hover::after {
+  width: 100%;
+}
+
+/* Specific rule to remove underline effect on hover for the portal */
+.portal:hover::after {
+  width: 0; /* Remove the effect entirely for the portal link */
 }

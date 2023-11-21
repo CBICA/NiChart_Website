@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FormControl, MenuItem, Select, Button, InputLabel } from '@mui/material';
+import { Divider } from '@aws-amplify/ui-react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'; 
 import Papa from 'papaparse';
 import Chart from './Chart';
@@ -157,6 +158,9 @@ const Module_3 = ({moduleSelector}) => {
 
   return (
     <div>
+      <h2>Module 3: Visualization</h2>
+      <Divider orientation="horizontal" />
+      <div className={styles.moduleContainer}>
       <div className={styles.controlsContainer}>
         <div className={styles.controlsGrid}>
           <div className={styles.controlItem}>
@@ -250,6 +254,7 @@ const Module_3 = ({moduleSelector}) => {
             </div>
           ))}
       </div>
+    </div>
     </div>
   );
 };

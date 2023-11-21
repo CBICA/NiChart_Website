@@ -59,6 +59,10 @@ const About = () => {
         Rapidly growing neuroimaging data that was acquired over decades in multiple studies, in conjunction with the advent of advanced machine learning methods, has created 
         tremendous potential for <font color="#aa00dd">knowledge discovery at a large scale</font>. NiChart (NeuroImaging Chart) is an ecosystem of software components enabling <font color="#aa00dd">constructive integration, statistical harmonization, and ML-centric data analyses</font> across studies.
         
+        <div>
+            <img src="/images/About/nichart_logo_anim_v22_C_ms150.gif" alt=""/>
+        </div>
+        
         <h2>Applications</h2>
         NiChart enables mapping of large-scale multi-modal brain MRI data into a dimensional system of neuroimaging signatures implemented by our ML models. 
         

@@ -152,61 +152,81 @@ const Components = () => {
     ),
     'Harmonization': (
       <>
-        <div className={styles.subsection} id="Combat Family">
-          <h1>Combat Family</h1>
+          <h1>Combat Family of Statistical Harmonization Tools</h1>
           <p>
-              The <strong>ComBat</strong> method is a Bayesian statistical technique aimed at removing <em>batch effects</em> in high-dimensional datasets. ComBat estimates and adjusts for the unwanted variations introduced during the data collection process, such as those due to different MRI machines or settings.
+          To estimate and remove scanner-related batch effects in imaging variables we apply a statistical harmonization method, <strong>Combat</strong>. The <strong>ComBat</strong> method is a Bayesian statistical technique aimed at removing <em>batch effects</em> in high-dimensional datasets. The method estimates both the mean (<em>location</em>) and the variance (<em>scale</em>) of the residuals across batches using <em>Empirical Bayes</em> estimation, after correcting for additional covariates, such as age, sex and ICV. Variants like <strong>ComBat-GAM</strong> offer the psosibility to model selected covariates using splines, providing flexible adjustments to non-linear covariate associations. Combat can be used through a train/test paradigm, applying it on a training set to estimate batch effect parameters, and using the existing model to harmonize new data from the same batches.
+
           </p>
-          <p>
-              It uses <em>Empirical Bayes</em> estimates to improve the accuracy of batch effect removal. The method adjusts both the mean (<em>location</em>) and variance (<em>scale</em>) across batches, thereby preserving biological variance. It can also incorporate additional covariates like age or sex for more nuanced adjustments.
-          </p>
-          <p>
-              Variants like <strong>ComBat-GAM</strong> offer more flexible adjustments using generalized additive models. Software implementations are commonly found in R, as part of the <code>sva</code> package, but Python versions are also available.
-          </p>
-          <p>
-              It is a tool for making high-dimensional data more robust for subsequent analyses.
-          </p>
+
           <div>
-          <img src="/images/Components/Data_Harmonization/Picture1.png" alt=""/>
-          <img src="/images/Components/Data_Harmonization/Picture2.png" alt=""/>
-          <img src="/images/Components/Data_Harmonization/Picture3.png" alt=""/>
+          <img src="/images/Components/Data_Harmonization/Picture1b.png" alt=""/>
+          </div>
+          <i>Figure 1. Combat family of tools</i>
+
+        <div className={styles.subsection} id="CombatQC">
+          <h2>Combat Visualization and QC</h2>
+          
+          <p>
+          Combat visualization and quality control (QC) package provides tools for evaluating batch effects and estimated parameters before and/or after harmonization
+          </p>
+
+          <div>
+          
           <img src="/images/Components/Data_Harmonization/Picture4.png" alt=""/>
-          <img src="/images/Components/Data_Harmonization/Picture5.png" alt=""/>
+                    <img src="/images/Components/Data_Harmonization/Picture5.png" alt=""/>
           <img src="/images/Components/Data_Harmonization/Picture6.png" alt=""/>
+          <img src="/images/Components/Data_Harmonization/Picture3.png" alt=""/>
           </div>
-        </div>
-        <div className={styles.subsection} id="Complementary tools">
-          <h1>Complementary tools</h1>
-          <p>
-            Some Text here
-          </p>
-          <div>
-            Some Images here
-          </div>
+          <i>Figure 2. Combat visualization and QC tool functions</i>
         </div>
       </>
     ),
     'Machine Learning Models': (
       <>
-        <div className={styles.subsection} id="SPARE-AD, SPARE-BA, SPARE-CVD">
-          <h1>SPARE-AD, SPARE-BA, SPARE-CVD</h1>
+          <h1>NiChart ML Models</h1>
           <p>
-            Some Text here
+          NiChart offers a rich and extensible <font color="#aa00dd">library of pre-trained machine learning (ML) 
+models</font> that can convert high-dimensional imaging data into low-dimensional representations. These 
+representations effectively capture and quantify brain changes associated with specific diseases or neurodegenerative 
+conditions. The models are trained on carefully selected subsets of imaging features and data samples, tailored to each 
+task and target disease/condition. The collection of NiChart imaging signatures forms the neuroimaging chart dimensional 
+system. NiChart's pre-trained ML models are readily available and easy to use, eliminating the need for extensive 
+training or expertise in machine learning. Additionally, the extensibility of the NiChart library will allow 
+researchers to develop their own specialized models, tailored to specific research questions or clinical needs.
+          </p>
+          
+          <p>
+          NiChart ML models employ methodologies that encompass a broad spectrum of applications. NiChart's ML methods 
+will be continuously refined to incorporate the latest advancements in machine learning, keeping NiChart competitive in 
+the field of medical imaging analysis.
+          </p>
+          
+        <div className={styles.subsection} id="SupervisedML">
+          <h2>Disease prediction models</h2>
+          <p>
+            Nichart predictive models are based on supervised learning methods that have been extensively 
+validated. These models are trained using carefully curated samples for specific types of diseases or conditions, using 
+imaging features extracted from single or multi-modal MRI scans. The models use these features to learn how to 
+identify patterns in the brain that are associated with different diseases. Initial models are trained for brain age and 
+Alzheimer's Disease prediction, while models for other diseases and conditions will be included in future releases.
           </p>
           <div>
             Some Images here
           </div>
         </div>
-        <div className={styles.subsection} id="smileGAN, surrealGAN">
-          <h1>smileGAN, surrealGAN</h1>
+        <div className={styles.subsection} id="SemisupervisedML ">
+          <h2>Semi-supervised models</h2>
           <p>
-            Some Text here
+          Heterogeneity of brain diseases is a challenge for precision diagnosis. Our semi-supervised 
+clustering methods aim to identify and quantify this heterogeneity contrasted against normal brain structure, to 
+identify disease subtypes through neuroimaging signatures.
           </p>
           <div>
             Some Images here
           </div></div>
+          
         <div className={styles.subsection} id="DL-SPARE">
-          <h1>DL-SPARE</h1>
+          <h2>DL models using raw images</h2>
           <p>
             Some Text here
           </p>
@@ -218,17 +238,26 @@ const Components = () => {
     ),
     'Data Visualization': (
       <>
-        <div className={styles.subsection} id="NiChart_Viewer">
-          <h1>NiChart_Viewer</h1>
+          <h1>NiChart Data Visualization</h1>
+          <p>
+          NiChart's visualization tools offer a suite of valuable features to aid users in comparing their data against established NiChart reference distributions. These tools enable users to effectively visualize and interpret their data, gaining meaningful insights into their individual profiles.
+          </p>
+          
+          <p>
+          NiChart offers two convenient options for visualizing user data: A client-side visualization tool integrated with the cloud portal enables users to derive and visualize NiChart dimensions for their data on the browser. An installable PyQT utility provides extended capabilities for exploring and analyzing user data.
+          </p>
+      
+        <div className={styles.subsection} id="NiChart_Webviewer">
+
+          <h2>NiChart Web Viewer</h2>
           <p>
             Some Text here
           </p>
           <div>
             Some Images here
           </div>
-        </div>
-        <div className={styles.subsection} id="NiChart_Webviewer">
-          <h1>NiChart_Webviewer</h1>
+
+          <h2>NiChart Web Viewer</h2>
           <p>
             Some Text here
           </p>
@@ -240,32 +269,51 @@ const Components = () => {
     ),
     'Deployment': (
       <>
-        <div className={styles.subsection} id="Github">
-          <h1>Our Github repos</h1>
-          <p>
-            Some Text here
+          <h1>NiChart Installation Options</h1>
+          <p>NiChart provides three installation options to accommodate a wide range of end-users: local user-managed 
+installation, local containerized installation, and web portal. 
           </p>
-          <div>
-            Some Images here
-          </div>
+          
+          <p>
+The choice of installation option depends on the user's technical expertise, computational resources, and desired level 
+of control. For users with strong technical skills and a need for maximum flexibility, local user-managed or 
+containerized installation is recommended. For users who require a highly accessible and user-friendly solution, the web 
+portal is the ideal choice.
+          </p>
+
+          <p>
+The web portal currently provides a simplified pipeline that is limited to structural MRI images.
+          </p>
+          
+        <div className={styles.subsection} id="Github">
+          <h1>Open-source installation packages</h1>
+          <p>
+        NiChart is designed with a modular architecture, consisting of independent software components that can be 
+ installed and applied individually. This modular approach was chosen to ensure the extensibility of NiChart in the 
+future without creating a dependency nightmare. Users can easily download these components followink the links at the 
+NiChart_Project GitHub page. The installation process typically involves downloading the component, extracting the 
+files, and running a setup script.
+          </p>
+
+          <p>
+NiChart_Project Github page: https://github.com/FIXME
+          </p>
         </div>
-        <div className={styles.subsection} id="Docker and Singularity">
+
+        <div className={styles.subsection} id="Containerized installation">
           <h1>Docker and Singularity</h1>
           <p>
-            Some Text here
+We use the power of containerization technology for major image processing modules to simplify complex workflows and to 
+ensure compatibility across different computing environments.
           </p>
-          <div>
-            Some Images here
-          </div>
         </div>
         <div className={styles.subsection} id="AWS">
-          <h1>AWS</h1>
+          <h1>NiChart Web Portal</h1>
           <p>
-            Some Text here
+          The Nichart web portal is a user-friendly online platform that streamlines the process of analyzing structural 
+magnetic resonance imaging (sMRI). It provides a straightforward interface that allows users to upload their sMRI 
+images, apply pre-trained ML models to extract meaningful biomarkers, and visualize the results in an intuitive manner.
           </p>
-          <div>
-            Some Images here
-          </div>
         </div>
       </>
     ),

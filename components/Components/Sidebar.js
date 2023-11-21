@@ -17,9 +17,16 @@ const Sidebar = ({ updateExpandedSection }) => {
   };
 
   const toggleSection = (section) => {
+    // Scroll to the top of the page when a new section is toggled
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  
     setExpandedSection(expandedSection === section ? null : section);
     updateExpandedSection(section);
   };
+  
 
   return (
     <aside className={styles.sidebar}>

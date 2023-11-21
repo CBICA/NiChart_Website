@@ -185,17 +185,30 @@ const Components = () => {
       <>
           <h1>NiChart ML Models</h1>
           <p>
-          NiChart offers a rich and extensible library of pre-trained machine learning (ML) models that can convert high-dimensional imaging data into low-dimensional representations. These representations effectively capture and quantify brain changes associated with specific diseases or neurodegenerative conditions. The models are trained on carefully selected subsets of imaging features and data samples, tailored to each task and target disease/condition. The collection of NiChart imaging signatures forms the neuroimaging chart dimensional system. NiChart's rich library of pre-trained ML models offers a range of advantages for researchers and clinicians alike. The models are readily available and easy to use, eliminating the need for extensive training or expertise in machine learning. Additionally, the extensibility of the NiChart library allows researchers to develop their own specialized models, tailored to specific research questions or clinical needs.
+          NiChart offers a rich and extensible <font color="#aa00dd">library of pre-trained machine learning (ML) 
+models</font> that can convert high-dimensional imaging data into low-dimensional representations. These 
+representations effectively capture and quantify brain changes associated with specific diseases or neurodegenerative 
+conditions. The models are trained on carefully selected subsets of imaging features and data samples, tailored to each 
+task and target disease/condition. The collection of NiChart imaging signatures forms the neuroimaging chart dimensional 
+system. NiChart's pre-trained ML models are readily available and easy to use, eliminating the need for extensive 
+training or expertise in machine learning. Additionally, the extensibility of the NiChart library will allow 
+researchers to develop their own specialized models, tailored to specific research questions or clinical needs.
           </p>
           
           <p>
-          NiChart ML models employ methodologies that encompass a broad spectrum of applications, ranging from supervised learning to semi-supervised learning and deep learning (DL) techniques for the direct extraction of biomarkers from MRI images. NiChart's ML methods are continuously refined to incorporate the latest advancements in machine learning, keeping NiChart competitive in the field of medical imaging analysis.
+          NiChart ML models employ methodologies that encompass a broad spectrum of applications. NiChart's ML methods 
+will be continuously refined to incorporate the latest advancements in machine learning, keeping NiChart competitive in 
+the field of medical imaging analysis.
           </p>
           
         <div className={styles.subsection} id="SupervisedML">
-          <h2>Supervised models</h2>
+          <h2>Disease prediction models</h2>
           <p>
-            Some Text here
+            Nichart predictive models are based on supervised learning methods that have been extensively 
+validated. These models are trained using carefully curated samples for specific types of diseases or conditions, using 
+imaging features extracted from single or multi-modal MRI scans. The models use these features to learn how to 
+identify patterns in the brain that are associated with different diseases. Initial models are trained for brain age and 
+Alzheimer's Disease prediction, while models for other diseases and conditions will be included in future releases.
           </p>
           <div>
             Some Images here
@@ -204,7 +217,9 @@ const Components = () => {
         <div className={styles.subsection} id="SemisupervisedML ">
           <h2>Semi-supervised models</h2>
           <p>
-            Some Text here
+          Heterogeneity of brain diseases is a challenge for precision diagnosis. Our semi-supervised 
+clustering methods aim to identify and quantify this heterogeneity contrasted against normal brain structure, to 
+identify disease subtypes through neuroimaging signatures.
           </p>
           <div>
             Some Images here
@@ -254,32 +269,51 @@ const Components = () => {
     ),
     'Deployment': (
       <>
-        <div className={styles.subsection} id="Github">
-          <h1>Our Github repos</h1>
-          <p>
-            Some Text here
+          <h1>NiChart Installation Options</h1>
+          <p>NiChart provides three installation options to accommodate a wide range of end-users: local user-managed 
+installation, local containerized installation, and web portal. 
           </p>
-          <div>
-            Some Images here
-          </div>
+          
+          <p>
+The choice of installation option depends on the user's technical expertise, computational resources, and desired level 
+of control. For users with strong technical skills and a need for maximum flexibility, local user-managed or 
+containerized installation is recommended. For users who require a highly accessible and user-friendly solution, the web 
+portal is the ideal choice.
+          </p>
+
+          <p>
+The web portal currently provides a simplified pipeline that is limited to structural MRI images.
+          </p>
+          
+        <div className={styles.subsection} id="Github">
+          <h1>Open-source installation packages</h1>
+          <p>
+        NiChart is designed with a modular architecture, consisting of independent software components that can be 
+ installed and applied individually. This modular approach was chosen to ensure the extensibility of NiChart in the 
+future without creating a dependency nightmare. Users can easily download these components followink the links at the 
+NiChart_Project GitHub page. The installation process typically involves downloading the component, extracting the 
+files, and running a setup script.
+          </p>
+
+          <p>
+NiChart_Project Github page: https://github.com/FIXME
+          </p>
         </div>
-        <div className={styles.subsection} id="Docker and Singularity">
+
+        <div className={styles.subsection} id="Containerized installation">
           <h1>Docker and Singularity</h1>
           <p>
-            Some Text here
+We use the power of containerization technology for major image processing modules to simplify complex workflows and to 
+ensure compatibility across different computing environments.
           </p>
-          <div>
-            Some Images here
-          </div>
         </div>
         <div className={styles.subsection} id="AWS">
-          <h1>AWS</h1>
+          <h1>NiChart Web Portal</h1>
           <p>
-            Some Text here
+          The Nichart web portal is a user-friendly online platform that streamlines the process of analyzing structural 
+magnetic resonance imaging (sMRI). It provides a straightforward interface that allows users to upload their sMRI 
+images, apply pre-trained ML models to extract meaningful biomarkers, and visualize the results in an intuitive manner.
           </p>
-          <div>
-            Some Images here
-          </div>
         </div>
       </>
     ),

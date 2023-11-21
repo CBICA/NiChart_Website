@@ -28,81 +28,78 @@ const Sidebar = ({ updateExpandedSection }) => {
           <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Reference Dataset')}>
               <span className={expandedSection === 'Reference Dataset' ? styles.rotated : ''}></span>
-              <font color="#3333ee">Reference Dataset</font>
+              <h1c>Reference Dataset</h1c>
             </a>
             {expandedSection === 'Reference Dataset' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('RefVars')}>
-                <font color="#333399">Demographics and Clinical Variables</font></a></li>
+                <li><a onClick={() => handleItemClick('ref_data_overview')}><h2c>Overview</h2c></a></li>
+                <li><a onClick={() => handleItemClick('RefVars')}><h2c>Demographics and Clinical Variables</h2c></a></li>
               </ul>
             )}
           </li>
           <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Image Processing')}>
-              <span className={expandedSection === 'Image Processing' ? styles.rotated : ''}></span>
-              <font color="#3333ee">Image Processing</font>
+              <span className={expandedSection === 'Image Processing' ? styles.rotated : ''}></span><h1c>Image Processing</h1c>
             </a>
             {expandedSection === 'Image Processing' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('sMRIProcessing')}>
-                    <font color="#3333bb">sMRI</font>
-                </a></li>
-                <li><a onClick={() => handleItemClick('DTIProcessing')}>
-                    <font color="#3333bb">DTI</font>                
-                </a></li>
-                <li><a onClick={() => handleItemClick('fMRIProcessing')}>
-                    <font color="#3333bb">fMRI</font>                
+                <li><a onClick={() => handleItemClick('img_proc_overview')}><h2c>Overview</h2c></a></li>
+                <li><a onClick={() => handleItemClick('sMRIProcessing')}><h2c>sMRI</h2c></a></li>
+                <li><a onClick={() => handleItemClick('DTIProcessing')}><h2c>DTI</h2c></a></li>
+                <li><a onClick={() => handleItemClick('fMRIProcessing')}><h2c>fMRI</h2c>                
                 </a></li>
               </ul>
             )}
           </li>
           <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Harmonization')}>
-              <span className={expandedSection === 'Harmonization' ? styles.rotated : ''}></span>
-              Data Harmonization
+              <span className={expandedSection === 'Harmonization' ? styles.rotated : ''}></span><h1c>Data Harmonization</h1c>
             </a>
             {expandedSection === 'Harmonization' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('Combat Family')}>Combat Family</a></li>
-                <li><a onClick={() => handleItemClick('Complementary tools')}>Complementary tools</a></li>
+                <li><a onClick={() => handleItemClick('combat_overview')}><h2c>Overview</h2c></a></li>
+                <li><a onClick={() => handleItemClick('combat_family')}><h2c>Combat Family</h2c></a></li>
+                <li><a onClick={() => handleItemClick('combat_tools')}><h2c>Complementary Tools</h2c></a></li>
               </ul>
             )}
           </li>
           <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Machine Learning Models')}>
               <span className={expandedSection === 'Machine Learning Models' ? styles.rotated : ''}></span>
-              Machine Learning Models
+              <h1c>Machine Learning Models</h1c>
             </a>
             {expandedSection === 'Machine Learning Models' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('Supervised')}>Supervised</a></li>
-                <li><a onClick={() => handleItemClick('Semisupervised')}>Semi-Supervised</a></li>
-                <li><a onClick={() => handleItemClick('DL')}>DL Models</a></li>
+                <li><a onClick={() => handleItemClick('ml_overview')}><h2c>Overview</h2c></a></li>
+                <li><a onClick={() => handleItemClick('ml_supervised')}><h2c>Supervised Models</h2c></a></li>
+                <li><a onClick={() => handleItemClick('ml_semisupervised')}><h2c>Semi-Supervised Models</h2c></a></li>
               </ul>
             )}
           </li>
           <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Data Visualization')}>
               <span className={expandedSection === 'Data Visualization' ? styles.rotated : ''}></span>
-              Data Visualization
+              <h1c>Data Visualization</h1c>
             </a>
             {expandedSection === 'Data Visualization' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('NiChart_Viewer')}>NiChart_Viewer</a></li>
-                <li><a onClick={() => handleItemClick('NiChart_Webviewer')}>NiChart_Webviewer</a></li>
+                <li><a onClick={() => handleItemClick('datavis_overview')}><h2c>Overview</h2c></a></li>
+                <li><a onClick={() => handleItemClick('datavis_viewer')}><h2c>NiChart Viewer</h2c></a></li>
+                <li><a onClick={() => handleItemClick('datavis_webviewer')}><h2c>NiChart Web Viewer</h2c></a></li>
               </ul>
             )}
           </li>
           <li className={styles.collapsibleSection}>
             <a onClick={() => toggleSection('Deployment')}>
               <span className={expandedSection === 'Deployment' ? styles.rotated : ''}></span>
-              Deployment
+              <h1c>Deployment</h1c>
             </a>
             {expandedSection === 'Deployment' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('AWS')}>AWS</a></li>
-                <li><a onClick={() => handleItemClick('Singularity')}>Singularity</a></li>
-                <li><a onClick={() => handleItemClick('Github')}>Github</a></li>
+                <li><a onClick={() => handleItemClick('deploy_overview')}><h2c>Overview</h2c></a></li>
+                <li><a onClick={() => handleItemClick('deploy_install')}><h2c>Software Packages</h2c></a></li>
+                <li><a onClick={() => handleItemClick('deploy_container')}><h2c>Software Containers</h2c></a></li>
+                <li><a onClick={() => handleItemClick('deploy_cloud')}><h2c>Cloud Portal</h2c></a></li>
               </ul>
             )}
           </li>

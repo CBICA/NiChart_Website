@@ -239,37 +239,36 @@ const Components = () => {
       
         <h1>NiChart Data Visualization</h1>
           <p>
-          NiChart's visualization tools offer a suite of valuable features to aid users in comparing their data against established NiChart reference distributions. These tools enable users to effectively visualize and interpret their data, gaining meaningful insights into their individual profiles.
+          NiChart's visualization modules offer tools to assist users in <myemp>comparing outcome variables</myemp> extracted from their MRI data against <myemp>established NiChart reference distributions</myemp>. Users can effectively visualize and interpret their data, gaining meaningful insights into their individual profiles.
           </p>
           
           <p>
-          NiChart offers two convenient options for visualizing user data: A client-side visualization tool integrated with the cloud portal enables users to derive and visualize NiChart dimensions for their data on the browser. An installable PyQT utility provides extended capabilities for exploring and analyzing user data.
+          NiChart offers two convenient options for visualizing user data: A <myemp>client-side visualization tool</myemp> integrated with the cloud portal enables users to derive and visualize NiChart dimensions for their data on the browser. A PyQT-based <myemp>installable package</myemp> provides extended capabilities for exploring and analyzing user data.
           </p>
         
         </div>
       
+        <div className={styles.subsection} id="datavis_webviewer">          
+
+        <h2>NiChart Web Viewer</h2>
+          <p>We provide a web viewer that is <myemp>integrated with our cloud portal</myemp> to provide a more practical option for visualization of derived imaging features and final signatures. The web viewer was built using javascript. The viewer is designed as a client application to provide very fast rendering of visualizations. The application provides options to select the target variable for visualization, and the reference data used as the comparison set. This will allow users to <myemp>compare their selected data to different disease or demographic groups</myemp>. 
+          </p>
+          <div>
+            FIXME: A snapshot of the web viewer
+          </div>
+        </div>
+
         <div className={styles.subsection} id="datavis_viewer">
 
           <h2>NiChart Viewer</h2>
-          <p>
-            Some Text here
+          <p>Alternatively, users can install the NiChart viewer, a PyQT-based package that provides <myemp>an extended set of visualization functionality</myemp>. 
           </p>
           <div>
-            Some Images here
+            FIXME: A snapshot of the PyQT viewer
           </div>
 
         </div>
       
-        <div className={styles.subsection} id="datavis_webviewer">
-          
-          <h2>NiChart Web Viewer</h2>
-          <p>
-            Some Text here
-          </p>
-          <div>
-            Some Images here
-          </div>
-        </div>
       </>
     ),
     'Deployment': (
@@ -278,13 +277,13 @@ const Components = () => {
         <div className={styles.subsection} id="deploy_overview">
       
           <h1>NiChart Software Deployment and Application</h1>
-          <p>NiChart provides three installation options to accommodate a wide range of end-users: local user-managed installation, local containerized installation, and web portal.
+          <p>NiChart provides <myemp>three installation options</myemp> to accommodate a wide range of end-users: local user-managed installation, local containerized installation, and web portal.
           </p>
 
-          <p>The choice of installation option depends on the user's technical expertise, computational resources, and desired level of control. For users with strong technical skills and a need for maximum flexibility, local user-managed or containerized installation is recommended. For users who require a highly accessible and user-friendly solution, the web portal is the ideal choice.
+          <p>The choice of installation option depends on the <myemp>user's technical expertise, computational resources, and desired level of control</myemp>. For users with strong technical skills and a need for maximum flexibility, local user-managed or containerized installation is recommended. For users who require a highly accessible and user-friendly solution, the web portal is the ideal choice.
           </p>
 
-          <p>The web portal currently provides a simplified pipeline that is limited to structural MRI images.
+          <p>Currently, the web portal provides a restricted pipeline that is limited to structural MRI images.
           </p>
           
         </div>
@@ -294,7 +293,7 @@ const Components = () => {
           <p>NiChart is designed with a modular architecture, consisting of independent software components that can be installed and applied individually. This modular approach was chosen to ensure the extensibility of NiChart in the future without creating a dependency nightmare. Users can easily download these components followink the links at the NiChart_Project GitHub page. The installation process typically involves downloading the component, extracting the files, and running a setup script.
           </p>
 
-          <p>NiChart_Project Github page: https://github.com/FIXME
+          <p><a href="https://github.com/FIXME">NiChart_Project Github page</a> 
           </p>
         </div>
 

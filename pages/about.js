@@ -5,6 +5,7 @@ import Footer from '../components/Layout/Footer';
 import Favicons from '../components/Favicons/Favicons';
 import styles from '../styles/About.module.css';
 import { Grid, Typography, Paper } from '@mui/material';
+import Link from 'next/link';
 
 const About = () => {
   return (
@@ -57,6 +58,14 @@ const About = () => {
           <div className={styles.imageContainer}>
             <img src="/images/About/nichart_logo_anim_v22_C_ms150.gif" alt="" className={styles.image} />
           </div>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper className={styles.paper}>
+            <Typography variant="body1" align="center">
+              Have feedback on NiChart? We'd love to hear from you. 
+              <Link href="https://forms.gle/e3msfZUGAKib6vu78" style={{ textDecoration: 'none', color: '#aa00dd' }}>Provide Feedback</Link>
+            </Typography>
+          </Paper>
         </Grid>
       </Grid>
       <Footer />

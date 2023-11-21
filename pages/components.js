@@ -264,8 +264,9 @@ const Components = () => {
           <p>Alternatively, users can install the NiChart viewer, a PyQT-based package that provides <myemp>an extended set of visualization functionality</myemp>. 
           </p>
           <div>
-            FIXME: A snapshot of the PyQT viewer
+          <img src="/images/Components/DataViewers/nichart_viewer.png" alt=""/>
           </div>
+          <i>Figure 2. NiChart Viewer.</i>
 
         </div>
       

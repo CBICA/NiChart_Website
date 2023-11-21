@@ -58,8 +58,8 @@ The NiChart Website provides the following main sections:
 - **About**: Detailed information about the features, applications, and benefits of NiChart.
 - **Components**: Resources and guides for using NiChart and its associated pre-processing tools.
 - **Team**: Information about the team members involved in the development of NiChart.
-- **News**: Latest news and updates related to NiChart and the field of neuro imaging.
-- **Contact**: Contact information and a form for reaching out to the NiChart team.
+- **Publications**: Latest news and updates related to NiChart and the field of neuro imaging.
+- **Communication**: Contact information and a form for reaching out to the NiChart team.
 - **Portal**: Link to the NiChart portal for accessing the software and related resources.
 
 Feel free to explore the website and navigate to the desired sections using the header navigation.

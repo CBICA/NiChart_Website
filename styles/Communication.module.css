@@ -22,7 +22,7 @@
 @media (min-width:768px) {
   .contactContainer {
       display: grid;
-      grid-template-columns: 65% 35%;
+      grid-template-columns: 50% 50%;
       gap: 10px;
       padding: 5%;
   }

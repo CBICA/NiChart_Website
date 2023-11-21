@@ -13,6 +13,7 @@ Thumbs.db
 # Ignore package manager files
 /yarn.lock
 /package-lock.json
+*.lockb
 
 # Ignore IDE and editor files
 .idea

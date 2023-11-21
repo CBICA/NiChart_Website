@@ -31,7 +31,7 @@ const Header = () => {
           <li><Link href="/team"><a>Team</a></Link></li>
           <li><Link href="/publications"><a>Publications</a></Link></li>
           <li><Link href="https://forms.gle/e3msfZUGAKib6vu78"><a>Feedback</a></Link></li>
-          <li><Link href="/contact"><a className={styles.contact}>Contact</a></Link></li>
+          <li><Link href="/communication"><a className={styles.communication}>Communication</a></Link></li>
           <li className={styles.divider}>|</li>
           <li className={styles.portalItem}><Link href="/portal"><a className={styles.portal}>Portal</a></Link></li>
         </ul>

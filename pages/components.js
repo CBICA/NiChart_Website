@@ -13,13 +13,14 @@ const Components = () => {
   const contentBySection = {
     'Reference Dataset': (
       <>
-        <div className={styles.subsection}>
-          <h1><font color="#3333ee">NiChart Reference Dataset</font></h1>
+        <div className={styles.subsection} id='ref_data_overview'>
+          <h1>NiChart Reference Dataset</h1>
+
           <p>
             NiChart Reference Dataset is a large and diverse collection of MRI images from multiple studies. It was created as part of the ISTAGING project [FIXME: cite/link] to develop a system for identifying imaging biomarkers of aging and neurodegenerative diseases. The dataset includes multi-modal MRI data, as well as carefully curated demographic, clinical, and cognitive variables from participants with a variety of health conditions.
           </p>
           <p>
-            The reference dataset is a key component of NiChart <font color="#aa00dd">for training machine learning models</font> and <font color="#aa00dd">for creating reference distributions of imaging measures and signatures</font>, which can be used to compare NiChart values that are computed from the user data to normative or disease-related reference values.
+            The reference dataset is a key component of NiChart <myemp>for training machine learning models</myemp> and <myemp>for creating reference distributions of imaging measures and signatures</myemp>, which can be used to compare NiChart values that are computed from the user data to normative or disease-related reference values.
           </p>
 
           <div>
@@ -33,61 +34,58 @@ const Components = () => {
 
       <hr/>
       <div className={styles.subsection} id="RefVars">
-         <h2><font color="#3333bb">Demographics and Clinical Variables</font></h2>
+         <h2>Demographics and Clinical Variables</h2>
           <p>
-            The reference dataset includes a large number of samples from people of different ethnic groups, with a focus on older adults. This diversity is important because it allows to train machine learning models that are more accurate for people of diverse backgrounds.
+            The reference dataset includes a large number of samples from <myemp>people of different ethnic groups</myemp>, with a focus on older adults. This diversity is important because it allows to train machine learning models that are more accurate for people of diverse backgrounds.
           </p>
 
-          <center>
           <div>
-            <img src="/images/Components/Reference_Data_Curation/plot_istag_age-sex-race.png" alt=""/>
+            <img src="/images/Components/Reference_Data_Curation/figISTAGData_1.png" alt=""/>
           </div>
           <p>
           <i>Figure 1. Reference dataset demographics </i>
           </p>
-          </center>
           
           <p>
-            The reference dataset contains data from individuals with various diseases. Disease subgroups were used to train machine learning models specifically tailored to each disease and to calculate disease-specific reference distributions.
+            The reference dataset contains data from <myemp>individuals with various neuro-degenerative diseases</myemp>. Disease subgroups were used to train machine learning models specifically tailored to each disease and to calculate disease-specific reference distributions.
           </p>
 
-          <center>
           <p>
           <div>
-            <img src="/images/Components/Reference_Data_Curation/plot_istag_dx-all.png" alt=""/>
+            <img src="/images/Components/Reference_Data_Curation/figISTAGData_2.png" alt=""/>
           </div>
           <i>Figure 2. Examples of disease subgroups in the reference dataset</i>
           </p>
-          </center>
          
       </div>
       </>
     ),
     'Image Processing': (
       <>
-        <div className={styles.subsection}>
-          <h1><font color="#3333ee">NiChart Image Processing</font></h1>
+        <div className={styles.subsection} id="img_proc_overview">
+          <h1>NiChart Image Processing</h1>
                     
-          <p>NiChart Image Processing Pipelines is <font color="#aa00dd">a set of advanced tools</font> that can be used to extract features from multi-modal MRI data. The pipelines are made up of individual components that can be <font color="#aa00dd">installed and run independently</font>. Users can choose the specific components that they need for their analyses. NiChart pipelines are available both as <font color="#aa00dd">installation packages</font> and <font color="#aa00dd">software containers</font>. This ensures 100% reproducibility across different platforms, and allows users to easily install and run the pipelines without having to worry about installing any additional software dependencies."</p>
+          <p>NiChart Image <myemp>Processing</myemp> Pipelines is <myemp>a set of advanced tools</myemp> that can be used to extract features from multi-modal MRI data. The pipelines are made up of individual components that can be <myemp>installed and run independently</myemp>. Users can choose the specific components that they need for their analyses. NiChart pipelines are available both as <myemp>installation packages</myemp> and <myemp>software containers</myemp>. This ensures 100% reproducibility across different platforms, and allows users to easily install and run the pipelines without having to worry about installing any additional software dependencies."</p>
         </div>
-          <hr/>
+        
+        <hr/>
         <div className={styles.subsection} id="sMRIProcessing">
-          <h2><font color="#3333bb">Structural MRI</font></h2>
+          <h2>Structural MRI</h2>
 
-          <p>NiChart uses a combination of established and cutting-edge techniques to extract imaging features that quantify both normal and abnormal brain structures. Alongside conventional <font color="#aa00dd">atlas-based segmentation</font> methods for segmenting intra-cranial volume (ICV), anatomical regions of interest (ROIs), and white matter lesions (WMLs), we also offer an alternative  parcellation method using <font color="#aa00dd">non-negative matrix factorization</font> for generating multi-resolution data-driven components. Our atlas-based segmentation methods are powered by deep learning networks that enable rapid segmentation.
+          <p>NiChart uses a combination of established and cutting-edge techniques to extract imaging features that quantify both normal and abnormal brain structures. Alongside conventional <myemp>atlas-based segmentation</myemp> methods for segmenting intra-cranial volume (ICV), anatomical regions of interest (ROIs), and white matter lesions (WMLs), we also offer an alternative  parcellation method using <myemp>non-negative matrix factorization</myemp> for generating multi-resolution data-driven components. Our atlas-based segmentation methods are powered by deep learning networks that enable rapid segmentation.
           </p>
           
-          <h3><font color="#333399">DLICV:</font></h3>
+          <h3>DLICV:</h3>
           <p>DLICV is a new deep learning (DL)-based tool to accurately segment the intracranial volume (ICV) from a raw T1-weighted MRI image. It's easy to use, requires minimal data preprocessing, and is robust against various factors that can affect segmentation accuracy. DLICV specifically segments the overall cerebrospinal fluid (CSF) surrounding the brain, rather than just the brain tissues themselves, providing an ICV estimation that is not influenced by overall cortical atrophy due to aging or disease.</p>
           <div>
             <img src="/images/Components/ImageProcessing/sMRI/dlicv_ex1.png" alt=""/>
           </div>
           <i>Figure 1. Example segmentatation using DLICV (green) for cases with significant cortical atrophy</i>
 
-          <h3><font color="#333399">DLMUSE:</font></h3>
+          <h3>DLMUSE:</h3>
           <p>DLMUSE is a powerful tool for automatically segmenting T1-weighted brain MRI scans. It is accurate, robust, easy to use, and fast. DLMUSE is built on a 3D convolutional neural network (CNN) architecture that has been extensively validated for various neuroimaging segmentation tasks. DLMUSE model was trained on a large and diverse training set, with ROI labels derived using a computationally intensive multi-atlas segmentation method.</p>
 
-          <h3><font color="#333399">DLWMLS:</font></h3>
+          <h3>DLWMLS:</h3>
             DLWMLS is a multi-modal segmentation method for segmenting white mater hyper-intensities (brain lesions) from T1-weighted and FLAIR MRI images. DLWMLS model was trained on a large and diverse training set, with semi-automatically segmented labels for lesions.
 
           <div>
@@ -96,7 +94,7 @@ const Components = () => {
           <i>Figure 2. Example segmentatation using DLICV, DLMUSE and DLWMLS</i>
           
 
-          <h3><font color="#333399">sopNMF</font></h3>
+          <h3>sopNMF</h3>
           <p></p>
           <p>Stochastic Orthogonally Projective Non-negative Matrix Factorization (sopNMF) is an algorithm for large-scale multivariate structural analysis of human brain data. Using sopNMF, the MuSIC atlas parcellates the human brain by structural covariance in MRI data over the lifespan and a wide range of disease populations, allowing to explore the phenotypic landscape and genetic architecture of the human brain. (<a href="https://www.cbica.upenn.edu/bridgeport" target="_blank">source</a>).</p>
           
@@ -152,22 +150,33 @@ const Components = () => {
     ),
     'Harmonization': (
       <>
-          <h1>Combat Family of Statistical Harmonization Tools</h1>
-          <p>
-          To estimate and remove scanner-related batch effects in imaging variables we apply a statistical harmonization method, <strong>Combat</strong>. The <strong>ComBat</strong> method is a Bayesian statistical technique aimed at removing <em>batch effects</em> in high-dimensional datasets. The method estimates both the mean (<em>location</em>) and the variance (<em>scale</em>) of the residuals across batches using <em>Empirical Bayes</em> estimation, after correcting for additional covariates, such as age, sex and ICV. Variants like <strong>ComBat-GAM</strong> offer the psosibility to model selected covariates using splines, providing flexible adjustments to non-linear covariate associations. Combat can be used through a train/test paradigm, applying it on a training set to estimate batch effect parameters, and using the existing model to harmonize new data from the same batches.
+      
+      <div className={styles.subsection} id="combat_overview">
 
-          </p>
+      <h1>NiChart Data Harmonization</h1>
+        <p>
+          To estimate and remove scanner-related batch effects in imaging variables we apply <myemp>a statistical harmonization method, Combat</myemp>. The ComBat method is a Bayesian statistical technique aimed at removing <em>batch effects</em> in high-dimensional datasets. The method estimates both the mean (<em>location</em>) and the variance (<em>scale</em>) of the residuals across batches using <em>Empirical Bayes</em> estimation, after correcting for additional covariates, such as age, sex and ICV.
+        </p>
+      </div>
+      
+      <div className={styles.subsection} id="combat_family">
+
+      <h2>Combat Family of Statistical Harmonization Tools</h2>
+        <p>
+          NiChart data harmonization will be powered by the Combat-family software package that provides <myemp>an ensemble of harmonization tools</myemp>. Variants like <myemp>ComBat-GAM</myemp> offer the psosibility to model selected covariates using splines, providing flexible adjustments to non-linear covariate associations. Combat can be used through a train/test paradigm, applying it on a training set to estimate batch effect parameters, and using the existing model to harmonize new data from the same batches.
+        </p>
 
           <div>
           <img src="/images/Components/Data_Harmonization/Picture1b.png" alt=""/>
           </div>
           <i>Figure 1. Combat family of tools</i>
-
-        <div className={styles.subsection} id="CombatQC">
+       </div>
+          
+        <div className={styles.subsection} id="combat_tools">
           <h2>Combat Visualization and QC</h2>
           
           <p>
-          Combat visualization and quality control (QC) package provides tools for evaluating batch effects and estimated parameters before and/or after harmonization
+          Combat visualization and quality control (QC) package provides tools for <myemp>evaluating batch effects and estimated parameters</myemp> before and/or after harmonization
           </p>
 
           <div>
@@ -183,19 +192,25 @@ const Components = () => {
     ),
     'Machine Learning Models': (
       <>
+
+        <div className={styles.subsection} id="ml_overview">
+      
           <h1>NiChart ML Models</h1>
           
-          <p>NiChart offers an extensible <font color="#aa00dd">library of pre-trained machine learning (ML) models</font> that can convert high-dimensional imaging data into low-dimensional imaging signatures. These representations effectively capture and quantify brain changes associated with specific diseases or neurodegenerative conditions.</p>
+          <p>NiChart offers an extensible <myemp>library of pre-trained machine learning (ML) models</myemp> that can convert high-dimensional imaging data into low-dimensional imaging signatures. These representations effectively capture and quantify brain changes associated with specific diseases or neurodegenerative conditions.</p>
           
-          <p>The collection of NiChart imaging signatures forms the <font color="#aa00dd">neuroimaging chart dimensional system</font>. NiChart's pre-trained ML models are readily available and easy to use, eliminating the need for extensive training or expertise in machine learning. Additionally, the extensibility of the NiChart library will allow researchers to add their own specialized models.</p>
+          <p>The collection of NiChart imaging signatures forms the <myemp>neuroimaging chart dimensional system</myemp>. NiChart's pre-trained ML models are readily available and easy to use, eliminating the need for extensive training or expertise in machine learning. Additionally, the extensibility of the NiChart library will allow researchers to add their own specialized models.</p>
           
-          <p>The models are trained on carefully <font color="#aa00dd">selected subsets of the reference dataset, tailored to each task and target disease/condition</font>.</p>
+          <p>The models are trained on carefully <myemp>selected subsets of the reference dataset, tailored to each task and target disease/condition</myemp>.</p>
           
-          <p>NiChart ML models incorporate a wide range of <font color="#aa00dd">innovative research methodologies</font>. NiChart's ML methods will be continuously refined to incorporate the latest advancements in machine learning and deep learning, keeping NiChart competitive in the field of medical imaging analysis.</p>
+          <p>NiChart ML models incorporate a wide range of <myemp>innovative research methodologies</myemp>. NiChart's ML methods will be continuously refined to incorporate the latest advancements in machine learning and deep learning, keeping NiChart competitive in the field of medical imaging analysis.</p>
           
-        <div className={styles.subsection} id="SPARE Models">
+        </div>
+        
+        <div className={styles.subsection} id="ml_supervised">
+        
           <h2>SPARE Models (Spatial Patterns of Abnormality for Recognition of Disease)</h2>
-          <p>SPARE-models are predictive <font color="#aa00dd">supervised learning methods</font> that have been extensively validated. SPARE models train on imaging features extracted from single or multi-modal MRI scans. The models use these features to learn how to identify patterns in the brain that are associated with different diseases. Initial models are provided for <font color="#aa00dd">SPARE-BA</font> (brain age) and <font color="#aa00dd">SPARE-AD</font> (Alzheimer's disease). Additional models for <font color="#aa00dd">SPARE-CVD</font> (cardio-vascular disease risk), <font color="#aa00dd">SPARE-DM</font> (Type2 diabetes), <font color="#aa00dd">SPARE-SCZ</font> (schizophrenia) and <font color="#aa00dd">SPARE-CD</font> (chronic depression) will be added in future releases.</p>
+          <p>SPARE-models are predictive <myemp>supervised learning methods</myemp> that have been extensively validated. SPARE models train on imaging features extracted from single or multi-modal MRI scans. The models use these features to learn how to identify patterns in the brain that are associated with different diseases. Initial models are provided for <myemp>SPARE-BA</myemp> (brain age) and <myemp>SPARE-AD</myemp> (Alzheimer's disease). Additional models for <myemp>SPARE-CVD</myemp> (cardio-vascular disease risk), <myemp>SPARE-DM</myemp> (Type2 diabetes), <myemp>SPARE-SCZ</myemp> (schizophrenia) and <myemp>SPARE-CD</myemp> (chronic depression) will be added in future releases.</p>
 
           <div>
           <img src="/images/Components/Machine_Learning_Models/aibil/sparead_frombrainpaper.gif" alt=""/>
@@ -204,9 +219,9 @@ const Components = () => {
 
         </div>
         
-        <div className={styles.subsection} id="Heterogeneity Models">
+        <div className={styles.subsection} id="ml_semisupervised">
           <h2>Image-based Disease Heterogeneity Models</h2>
-          <p>Our research team has developed advanced analytical tools to uncover <font color="#aa00dd">imaging patterns of disease heterogeneity</font> from MRI data. These tools help us identify distinct disease subtypes that shed light on the underlying neuroanatomical differences associated with various pathologies. Our previous work has identified <font color="#aa00dd">four distinct disease subtypes for Alzheimer's disease and two subtypes for schizophrenia</font>. The pre-trained models provided in NiChart will enable users to obtain more nuanced measures beyond the traditional disease scores.</p>
+          <p>Our research team has developed advanced analytical tools to uncover <myemp>imaging patterns of disease heterogeneity</myemp> from MRI data. These tools help us identify distinct disease subtypes that shed light on the underlying neuroanatomical differences associated with various pathologies. Our previous work has identified <myemp>four distinct disease subtypes for Alzheimer's disease and two subtypes for schizophrenia</myemp>. The pre-trained models provided in NiChart will enable users to obtain more nuanced measures beyond the traditional disease scores.</p>
 
           <div>
           <img src="/images/Components/Machine_Learning_Models/aibil/smilegan_naturefig.png" alt=""/>
@@ -219,7 +234,10 @@ const Components = () => {
     ),
     'Data Visualization': (
       <>
-          <h1>NiChart Data Visualization</h1>
+
+        <div className={styles.subsection} id="datavis_overview">
+      
+        <h1>NiChart Data Visualization</h1>
           <p>
           NiChart's visualization tools offer a suite of valuable features to aid users in comparing their data against established NiChart reference distributions. These tools enable users to effectively visualize and interpret their data, gaining meaningful insights into their individual profiles.
           </p>
@@ -227,10 +245,12 @@ const Components = () => {
           <p>
           NiChart offers two convenient options for visualizing user data: A client-side visualization tool integrated with the cloud portal enables users to derive and visualize NiChart dimensions for their data on the browser. An installable PyQT utility provides extended capabilities for exploring and analyzing user data.
           </p>
+        
+        </div>
       
-        <div className={styles.subsection} id="NiChart_Webviewer">
+        <div className={styles.subsection} id="datavis_viewer">
 
-          <h2>NiChart Web Viewer</h2>
+          <h2>NiChart Viewer</h2>
           <p>
             Some Text here
           </p>
@@ -238,6 +258,10 @@ const Components = () => {
             Some Images here
           </div>
 
+        </div>
+      
+        <div className={styles.subsection} id="datavis_webviewer">
+          
           <h2>NiChart Web Viewer</h2>
           <p>
             Some Text here
@@ -250,50 +274,39 @@ const Components = () => {
     ),
     'Deployment': (
       <>
-          <h1>NiChart Installation Options</h1>
-          <p>NiChart provides three installation options to accommodate a wide range of end-users: local user-managed 
-installation, local containerized installation, and web portal. 
-          </p>
-          
-          <p>
-The choice of installation option depends on the user's technical expertise, computational resources, and desired level 
-of control. For users with strong technical skills and a need for maximum flexibility, local user-managed or 
-containerized installation is recommended. For users who require a highly accessible and user-friendly solution, the web 
-portal is the ideal choice.
+      
+        <div className={styles.subsection} id="deploy_overview">
+      
+          <h1>NiChart Software Deployment and Application</h1>
+          <p>NiChart provides three installation options to accommodate a wide range of end-users: local user-managed installation, local containerized installation, and web portal.
           </p>
 
-          <p>
-The web portal currently provides a simplified pipeline that is limited to structural MRI images.
-          </p>
-          
-        <div className={styles.subsection} id="Github">
-          <h1>Open-source installation packages</h1>
-          <p>
-        NiChart is designed with a modular architecture, consisting of independent software components that can be 
- installed and applied individually. This modular approach was chosen to ensure the extensibility of NiChart in the 
-future without creating a dependency nightmare. Users can easily download these components followink the links at the 
-NiChart_Project GitHub page. The installation process typically involves downloading the component, extracting the 
-files, and running a setup script.
+          <p>The choice of installation option depends on the user's technical expertise, computational resources, and desired level of control. For users with strong technical skills and a need for maximum flexibility, local user-managed or containerized installation is recommended. For users who require a highly accessible and user-friendly solution, the web portal is the ideal choice.
           </p>
 
-          <p>
-NiChart_Project Github page: https://github.com/FIXME
+          <p>The web portal currently provides a simplified pipeline that is limited to structural MRI images.
+          </p>
+          
+        </div>
+
+        <div className={styles.subsection} id="deploy_install">
+          <h2>Open-source Software Packages</h2>
+          <p>NiChart is designed with a modular architecture, consisting of independent software components that can be installed and applied individually. This modular approach was chosen to ensure the extensibility of NiChart in the future without creating a dependency nightmare. Users can easily download these components followink the links at the NiChart_Project GitHub page. The installation process typically involves downloading the component, extracting the files, and running a setup script.
+          </p>
+
+          <p>NiChart_Project Github page: https://github.com/FIXME
           </p>
         </div>
 
-        <div className={styles.subsection} id="Containerized installation">
-          <h1>Docker and Singularity</h1>
-          <p>
-We use the power of containerization technology for major image processing modules to simplify complex workflows and to 
-ensure compatibility across different computing environments.
+        <div className={styles.subsection} id="deploy_container">
+          <h2>Docker and Singularity Containers</h2>
+          <p>We use the power of containerization technology for major image processing modules to simplify complex workflows and to ensure compatibility across different computing environments.
           </p>
         </div>
-        <div className={styles.subsection} id="AWS">
-          <h1>NiChart Web Portal</h1>
-          <p>
-          The Nichart web portal is a user-friendly online platform that streamlines the process of analyzing structural 
-magnetic resonance imaging (sMRI). It provides a straightforward interface that allows users to upload their sMRI 
-images, apply pre-trained ML models to extract meaningful biomarkers, and visualize the results in an intuitive manner.
+        
+        <div className={styles.subsection} id="deploy_cloud">
+          <h2>NiChart Web Portal</h2>
+          <p>The Nichart web portal is a user-friendly online platform that streamlines the process of analyzing structural magnetic resonance imaging (sMRI). It provides a straightforward interface that allows users to upload their sMRI images, apply pre-trained ML models to extract meaningful biomarkers, and visualize the results in an intuitive manner.
           </p>
         </div>
       </>

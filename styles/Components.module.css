@@ -32,3 +32,19 @@
   max-width: 100%;
   height: auto;
 }
+
+.subsection h1 {
+  color: #3333ee;
+}
+
+.subsection h2 {
+  color: #3333bb;
+}
+
+.subsection h3 {
+  color: #333399;
+}
+
+.subsection myemp {
+  color: #aa00dd;
+}

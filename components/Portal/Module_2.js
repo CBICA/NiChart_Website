@@ -1,9 +1,44 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { Flex, Heading, Divider, Button } from '@aws-amplify/ui-react';
-import { SpareScoresInputStorageManager, SpareScoresDemographicStorageManager, JobList, launchSpareScores, getSpareScoresOutput } from '../../utils/uploadFiles.js'
+import { SpareScoresInputStorageManager, SpareScoresDemographicStorageManager, JobList, launchSpareScores, getSpareScoresOutput, emptyBucketForUser, uploadToModule2 } from '../../utils/uploadFiles.js'
+import { getUseModule1Results, setUseModule1Results, setUseModule2Results, getModule2Cache } from '../../utils/NiChartPortalCache.js'
 import styles from '../../styles/Portal_Module_2.module.css'
 
-function Module_2() {
+function exportModule2Results(moduleSelector) {
+    // Perform the caching transfer operation
+    setUseModule2Results(true);
+    getSpareScoresOutput(false);
+    let cachedResult = getModule2Cache();
+    if (Object.keys(cachedResult).length === 0) {
+        alert("We couldn't export your results because there doesn't appear to be output from Module 2. Please generate the output first or upload the file to Module 3 manually.")
+        return;
+    }
+    // Switch to module 3
+    moduleSelector("module3");
+}
+
+function Module_2({moduleSelector}) {
+  const [useModule1Cache, setUseModule1Cache] = useState(getUseModule1Results());
+  
+  async function disableModule1Results() {
+      setUseModule1Results(false);
+      setUseModule1Cache(false);
+  }
+  
+  async function enableModule1Results() {
+      setUseModule1Results(true);
+      setUseModule1Cache(true);
+      getCombinedCSV(false);
+      let cachedResult = getModule1Cache();
+      if (Object.keys(cachedResult).length === 0) {
+         alert("We couldn't import your results because there doesn't appear to be output from Module 1. Please generate the output first or upload the file to Module 2 manually.")
+         return;
+      }
+      await uploadToModule2(cachedResult.csv)
+      
+
+  }
+    
   return (
     <div>
       <h2>Module 2: Machine Learning</h2>
@@ -12,8 +47,12 @@ function Module_2() {
           <Flex direction={{ base: 'column', large: 'row' }} maxWidth="100%" padding="1rem" width="100%" justifyContent="flex-start">
               <Flex justifyContent="space-between" direction="column">
               <Heading level={3}>Upload Subject CSV</Heading>
-              <SpareScoresInputStorageManager />
+              { !getUseModule1Results() && (<SpareScoresInputStorageManager />)}
+              { !getUseModule1Results() && (<Button onClick={async () => await enableModule1Results()}>Import from Module 1</Button>)}
+              { getUseModule1Results() && (<p>Using results from Module 1!</p>)}
+              { getUseModule1Results() && (<Button onClick={async () => await disableModule1Results()}>Upload a CSV Instead</Button>) }
               <Heading level={3}>Upload Demographic CSV</Heading>
+              <p>This file should correspond to the subjects uploaded above and contain demographic data (Age, Sex).</p>
               <SpareScoresDemographicStorageManager />
               <Button onClick={async () => launchSpareScores() } >Generate SPARE scores</Button>
               </Flex>
@@ -21,7 +60,9 @@ function Module_2() {
               <JobList jobQueue="cbica-nichart-sparescores-jobqueue" />
               </Flex>
               <Flex direction="column">
-              <Button onClick={async () => getSpareScoresOutput() } >Download SPARE score CSV</Button>
+              <Button onClick={async () => getSpareScoresOutput(true) } >Download SPARE score CSV</Button>
+              <Button onClick={async () => exportModule2Results(moduleSelector) } >Export to Module 3</Button>
+              <Button onClick={async () => emptyBucketForUser('cbica-nichart-sparescores-io')} >Clear All Data</Button>
               </Flex>
           </Flex>
       </div>

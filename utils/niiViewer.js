@@ -1,17 +1,18 @@
 import { useRef, useEffect, useState } from "react";
 import { Niivue } from "@niivue/niivue";
 import { Button, Select, MenuItem, Modal, Paper } from "@mui/material";
+import { generatePresignedScanURL, generatePresignedROIURL } from './uploadFiles.js'
 
 
-const NiiVue = ({ subjectID, roi, closeModal }) => {
+const NiiVue = async ({ subjectID, roi, closeModal }) => {
   const canvas = useRef(null);
   const [isError, setIsError] = useState(false);
   const [intensityValue, setIntensityValue] = useState(0); // State for intensity
   const [xCoord, setXCoord] = useState(0); // State for x coordinate
   const [yCoord, setYCoord] = useState(0); // State for y coordinate
   const [zCoord, setZCoord] = useState(0); // State for z coordinate
-  const originalScanURL = `/content/Portal/Visualization/Subject_Scans/in/${subjectID}.nii.gz`;
-  const overlayURL = `/content/Portal/Visualization/Subject_Scans/out/${subjectID}_DLMUSE_${roi}.nii.gz`;
+  const originalScanURL = await generatePresignedScanURL(subjectID);
+  const overlayURL = await generatePresignedROIURL(subjectID, roi);
   
   let nv;
   

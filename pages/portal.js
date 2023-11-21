@@ -35,9 +35,9 @@ function Portal() {
             <Flex direction = {{ base: 'row' }} height="60px" justifyContent="flex-start">
                 <h3> Hello, {user.attributes.email}! </h3><Button onClick={signOut}> Sign Out </Button>
             </Flex>
-            {selectedModule === 'module1' && <Module_1 />}
-            {selectedModule === 'module2' && <Module_2 />}
-            {selectedModule === 'module3' && <Module_3 />}
+            {selectedModule === 'module1' && <Module_1 moduleSelector={handleModuleSelection} />}
+            {selectedModule === 'module2' && <Module_2 moduleSelector={handleModuleSelection} />}
+            {selectedModule === 'module3' && <Module_3 moduleSelector={handleModuleSelection} />}
             <div>
               <h4> By using niCHART Pipelines, you agree to share your uploaded image data with the University of Pennsylvania for processing only. All data is deleted after 24 hours. </h4>
               To use, drop files into the box on the left. When results are available, click to download.

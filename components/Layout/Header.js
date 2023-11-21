@@ -12,6 +12,14 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-CES0G22JMD"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         gtag('config', 'G-CES0G22JMD');
+      </script>
       <div className={styles.logo}>
         <Link href="/">
           <a>

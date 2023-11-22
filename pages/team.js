@@ -132,22 +132,6 @@ const Team = () => {
           </div>
         </div>
         <div className={styles.team_members}>
-          <h2>Department of Radiology UPENN:</h2>
-          <div className={styles.grid}>
-            {Radiology.map((collaborator, index) => (
-              <div
-                key={index}
-                className={`${styles.member} ${RadiologyExpandedIndex === index ? styles.expanded : ''}`}
-                onClick={() => handleClick(index, 'Radiology')}
-              >
-                <img src={collaborator.image} alt={collaborator.name} />
-                <h3>{collaborator.name}</h3>
-                {RadiologyExpandedIndex === index && <p>{collaborator.bio}</p>}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className={styles.team_members}>
           <h2>Department of Biostatistics UPENN:</h2>
           <div className={styles.grid}>
             {Biostatistics.map((collaborator, index) => (

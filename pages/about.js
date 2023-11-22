@@ -40,7 +40,7 @@ const About = () => {
                 <Typography variant="body1">ML models, which are previously trained on carefully processed and curated reference samples, allow users to calculate <font color="#aa00dd">imaging signatures that quantify complex multi-variate imaging patterns of brain changes</font> mapping the image data into a small but informative set of neuroimaging chart dimensions.</Typography>
               </li>
               <li>
-                <Typography variant="body1">ML models capture heterogeneity of brain aging and neurodegeneration, and atrophy patterns due to <font color="#aa00dd">various diseases and conditions</font>, such as Alzheimer's disease, neuropsychiatic disorders, or cardio-vascular risk factors. </Typography>
+                <Typography variant="body1">ML models capture <font color="#aa00dd">heterogeneity of brain aging and neurodegeneration</font>, and atrophy patterns due to <font color="#aa00dd">various diseases and conditions</font>, such as Alzheimer's disease, neuropsychiatic disorders, or cardio-vascular risk factors. </Typography>
               </li>
               <li>
                 <Typography variant="body1">Standardized values from the large reference set allow users to compare their data with <font color="#aa00dd">NiChart-based normative ranges</font> or distributions from <font color="#aa00dd">specific disease subgroups</font>.</Typography>

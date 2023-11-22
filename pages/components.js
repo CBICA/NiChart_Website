@@ -17,7 +17,7 @@ const Components = () => {
           <h1>NiChart Reference Dataset</h1>
 
           <p>
-            NiChart Reference Dataset is a large and diverse collection of MRI images from multiple studies. It was created as part of the ISTAGING project [FIXME: cite/link] to develop a system for identifying imaging biomarkers of aging and neurodegenerative diseases. The dataset includes multi-modal MRI data, as well as carefully curated demographic, clinical, and cognitive variables from participants with a variety of health conditions.
+            NiChart Reference Dataset is a large and diverse collection of MRI images from multiple studies. It was created as part of the <a href="https://www.med.upenn.edu/cbica/imaging-consortia-increasing-sample-size-and-understanding-heterogeneity-in-health-and-disease.html">ISTAGING project</a> to develop a system for identifying imaging biomarkers of aging and neurodegenerative diseases. The dataset includes multi-modal MRI data, as well as carefully curated demographic, clinical, and cognitive variables from participants with a variety of health conditions.
           </p>
           <p>
             The reference dataset is a key component of NiChart <myemp>for training machine learning models</myemp> and <myemp>for creating reference distributions of imaging measures and signatures</myemp>, which can be used to compare NiChart values that are computed from the user data to normative or disease-related reference values.
@@ -295,7 +295,7 @@ const Components = () => {
           <p>NiChart is designed with a modular architecture, consisting of independent software components that can be installed and applied individually. This modular approach was chosen to ensure the extensibility of NiChart in the future without creating a dependency nightmare. Users can easily download these components followink the links at the NiChart_Project GitHub page. The installation process typically involves downloading the component, extracting the files, and running a setup script.
           </p>
 
-          <p><a href="https://github.com/FIXME">NiChart_Project Github page</a> 
+          <p><a href="https://github.com/CBICA/NiChart_Project">NiChart_Project Github</a> 
           </p>
         </div>
 

@@ -9,6 +9,7 @@ import MUSEROICompleteList from '/public/content/Portal/Visualization/Dicts/MUSE
 import { setUseModule2Results, getUseModule2Results, getModule2Cache } from '../../utils/NiChartPortalCache.js'
 import { getSpareScoresOutput } from '../../utils/uploadFiles.js'
 
+
 function getDefaultCSV () {
     let cachedResult = getModule2Cache();
     if (Object.keys(cachedResult).length === 0) {

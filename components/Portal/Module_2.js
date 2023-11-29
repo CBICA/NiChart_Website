@@ -1,8 +1,10 @@
 import { React, useState } from 'react';
-import { Flex, Heading, Divider, Button } from '@aws-amplify/ui-react';
-import { SpareScoresInputStorageManager, SpareScoresDemographicStorageManager, JobList, launchSpareScores, getSpareScoresOutput, emptyBucketForUser, uploadToModule2, getCombinedCSV } from '../../utils/uploadFiles.js'
+import { Flex, Heading, Divider} from '@aws-amplify/ui-react';
+import { SpareScoresInputStorageManager, SpareScoresDemographicStorageManager, JobList, launchSpareScores, getSpareScoresOutput, emptyBucketForUser, uploadToModule2, getCombinedCSV, downloadBlob } from '../../utils/uploadFiles.js'
 import { getUseModule1Results, setUseModule1Results, setUseModule2Results, getModule2Cache } from '../../utils/NiChartPortalCache.js'
 import styles from '../../styles/Portal_Module_2.module.css'
+import { ResponsiveButton as Button } from '../Components/ResponsiveButton.js'
+
 
 function exportModule2Results(moduleSelector) {
     // Perform the caching transfer operation
@@ -38,6 +40,44 @@ function Module_2({moduleSelector}) {
       
 
   }
+  
+  async function downloadTemplateDemographics() {
+    const referenceFilePath = '/content/Portal/TemplateDemographicsCSV.csv'
+    try {
+        const response = await fetch(referenceFilePath);
+        if (response.status === 404) {
+            console.error('Error loading template CSV:', response.statusText);
+            alert("We couldn't download the template CSV. Please submit a bug report.")
+            return;
+        }
+        const content = await response.text();
+        //referenceData = Papa.parse(content, { header: true }).data;
+        
+        const fileName = "Template-Demographics-CSV.csv";
+        const fileType = "text/csv";
+        const blob = new Blob([content], { type: fileType });
+        
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName || 'download';
+        const clickHandler = () => {
+            setTimeout(() => {
+            URL.revokeObjectURL(url);
+            a.removeEventListener('click', clickHandler);
+            }, 150);
+        };
+        a.addEventListener('click', clickHandler, false);
+        a.click();
+        
+    } catch (error) {
+        console.error('Error loading template CSV:', error);
+        alert("We couldn't download the template CSV. Please check your connection or submit a bug report.")
+        return;
+    }
+
+
+  }
     
   return (
     <div>
@@ -46,30 +86,35 @@ function Module_2({moduleSelector}) {
           <Divider orientation="horizontal" />
           <Flex direction={{ base: 'column', large: 'row' }} maxWidth="100%" padding="1rem" width="100%" justifyContent="flex-start">
               <Flex justifyContent="space-between" direction="column" width="33%">
-              <Heading level={3}>Upload Subject CSV</Heading>
-              Upload your ROI volume CSV as output by Module 1. Alternatively, upload your own ROI volume CSV.
-              { !getUseModule1Results() && (<SpareScoresInputStorageManager />)}
-              { !getUseModule1Results() && (<Button onClick={async () => await enableModule1Results()}>Import from Module 1</Button>)}
-              { getUseModule1Results() && (<p>Using results from Module 1!</p>)}
-              { getUseModule1Results() && (<Button onClick={async () => await disableModule1Results()}>Upload a CSV Instead</Button>) }
-              <Heading level={3}>Upload Demographic CSV</Heading>
-              <p>This file should correspond to the subjects uploaded above and contain demographic data (Age, Sex). Subjects should be on individual rows and subject IDs should correspond to the original T1 filename (without the extension).</p>
-              <SpareScoresDemographicStorageManager />
-              <Button variation="primary" onClick={async () => launchSpareScores() } >Generate SPARE scores</Button>
+                <Heading level={3}>Upload Subject CSV</Heading>
+                Upload your ROI volume CSV. Alternatively, import your results directly from Module 1.
+                { !getUseModule1Results() && (<SpareScoresInputStorageManager />)}
+                { !getUseModule1Results() && (<Button loadingText="Importing..." onClick={async () => await enableModule1Results()}>Import from Module 1</Button>)}
+                { getUseModule1Results() && (<p>Using results from Module 1!</p>)}
+                { getUseModule1Results() && (<Button onClick={async () => await disableModule1Results()}>Upload a CSV Instead</Button>) }
+                <Heading level={3}>Upload Demographic CSV</Heading>
+                <p>This file should correspond to the scans present in the ROI CSV, and should contain demographic data. Scans should be on individual rows and IDs should correspond to the original T1 filename (without the extension). At minimum, your file should have columns for ID, Age (in years) and Sex (M or F).</p>
+                <p>You may download an example template for this file with the "Download Template" button.</p>
+                <SpareScoresDemographicStorageManager />
+                <div>
+                    <Heading level={3}>!PLACEHOLDER FOR MODEL-SELECT!</Heading>
+                </div>
+                <Button loadingText="Submitting..." variation="primary" onClick={async () => launchSpareScores() } >Generate SPARE scores</Button>
+                <Button loadingText="Downloading..." onClick={async () => downloadTemplateDemographics() }>Download Template</Button>
               </Flex>
               <Divider orientation="vertical" />
               <Flex direction="column" width="33%">
-              <Heading level={3}>Jobs in Progress</Heading>
-              SPARE scores that are currently being calculated will appear here. Finished jobs will be marked with green. Please wait for your jobs to finish before proceeding. If your job fails, please contact us and provide the job ID listed below.
-              <JobList jobQueue="cbica-nichart-sparescores-jobqueue" />
+                <Heading level={3}>Jobs in Progress</Heading>
+                SPARE scores that are currently being calculated will appear here. Finished jobs will be marked with green. Please wait for your jobs to finish before proceeding. If your job fails, please contact us and provide the job ID listed below.
+                <JobList jobQueue="cbica-nichart-sparescores-jobqueue" />
               </Flex>
               <Divider orientation="vertical" />
               <Flex direction="column" width="33%">
-              <Heading level={3}>Download SPARE Output</Heading>
-              All finished subjects will be included in the output when you click Download.
-              <Button variation="primary" onClick={async () => getSpareScoresOutput(true) } >Download SPARE score CSV</Button>
-              <Button onClick={async () => exportModule2Results(moduleSelector) } >Export to Module 3</Button>
-              <Button variation="warning" onClick={async () => emptyBucketForUser('cbica-nichart-sparescores-io')} >Clear All Data</Button>
+                <Heading level={3}>Download SPARE Output</Heading>
+                All finished subjects will be included in the output when you click Download.
+                <Button loadingText="Downloading CSV..." variation="primary" onClick={async () => getSpareScoresOutput(true) } >Download SPARE score CSV</Button>
+                <Button loadingText="Exporting..." onClick={async () => exportModule2Results(moduleSelector) } >Export to Module 3</Button>
+                <Button loadingText="Emptying..." variation="destructive" onClick={async () => emptyBucketForUser('cbica-nichart-sparescores-io')} >Clear All Data</Button>
               </Flex>
           </Flex>
       </div>

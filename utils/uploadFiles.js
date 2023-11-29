@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Collection, ScrollView, Button, Flex, Text, Divider, Loader, Link, Badge } from '@aws-amplify/ui-react';
+import { Collection, ScrollView, Flex, Text, Divider, Loader, Link, Badge } from '@aws-amplify/ui-react';
 import { StorageManager } from '@aws-amplify/ui-react-storage';
 import { Amplify, Auth, Storage } from 'aws-amplify';
-import { BatchClient, ListJobsCommand }  from "@aws-sdk/client-batch";
+import { BatchClient, ListJobsCommand, TerminateJobCommand }  from "@aws-sdk/client-batch";
 import { InvokeCommand, LambdaClient, LogType } from "@aws-sdk/client-lambda";
 import { HttpRequest } from "@aws-sdk/protocol-http";
 import { S3RequestPresigner } from "@aws-sdk/s3-request-presigner";
@@ -13,6 +13,8 @@ import { formatUrl } from "@aws-sdk/util-format-url";
 import '@aws-amplify/ui-react/styles.css';
 import awsconfig from './aws-exports';
 import { getUseModule1Results, getUseModule2Results, getModule1Cache, getModule2Cache, getModule3Cache, setModule1Cache, setModule2Cache, setModule3Cache } from './NiChartPortalCache'
+import { ResponsiveButton as Button } from '../components/Components/ResponsiveButton.js'
+
 
 Amplify.configure(awsconfig)
 Auth.configure(awsconfig)
@@ -214,9 +216,9 @@ export const DefaultStorageManagerExample = () => {
   return (
    <>
     <StorageManager
-      acceptedFileTypes={['.nii.gz']}
+      acceptedFileTypes={['.nii.gz', '.nii', '.zip']}
       accessLevel="private"
-      maxFileCount={1024}
+      maxFileCount={5}
       shouldAutoProceed={false}
       processFile={processFile}
       isResumable
@@ -276,6 +278,8 @@ export const DefaultStorageManagerExample = () => {
 export const JobList = ({jobQueue}) => {
   let [jobs, setJobs] = useState({});
   let [currentUsername, setCurrentUsername] = useState('');
+  // Create job checkpoint at default 24 hours before (don't show jobs older than this)
+  let [checkpointDate, setCheckpointDate] = useState(new Date(new Date().getTime() - (24 * 60 * 60 * 1000)));
   //let [jobQueue, setJobQueue] = useState('');
 
   
@@ -288,6 +292,74 @@ export const JobList = ({jobQueue}) => {
       const result = await Storage.get(key, {bucket:'cbica-nichart-outputdata', download:true, level:'private'})
       downloadBlob(result.Body, job_id + ".zip");
       
+  }
+  
+  async function clearPreviousJobs (doConfirm = true) {
+     if (doConfirm) {
+      if (confirm("Are you sure you want to clear all jobs? This will terminate any jobs in progress and remove all jobs from the list.")) {
+          console.log("User confirmed job list clearing.")
+      } else {
+          return;
+      }
+     }
+     
+     terminateAllJobs(false);
+     
+      // TODO: Set a new timestamp at the current time.
+      // Jobs before this timestamp should not be rendered (so update should reference this value also)
+      setCheckpointDate(new Date());
+      
+      // Now update the list to reflect this
+      update();
+      alert("All prior jobs have been cleared.")
+  }
+  
+  async function terminateAllJobs (doConfirm = true) {
+      if (doConfirm) {
+        if (confirm("Are you sure you want to terminate all jobs? All jobs in-progress will be interrupted and will be considered failed.")) {
+          console.log("User confirmed job list termination.")
+        } else {
+          return;
+        }
+      }
+
+      const credentials = await Auth.currentCredentials();
+      //console.log(credentials)
+      //newCreds = Auth.essentialCredentials(credentials);
+      //newCreds
+      const batchClient = new BatchClient({
+          credentials: Auth.essentialCredentials(credentials),
+          region: 'us-east-1',
+       });
+      //console.log(batchClient)
+      
+      const userInfo = await Auth.currentAuthenticatedUser();
+      setCurrentUsername(userInfo.username);
+      let username = userInfo.username;
+      //console.log("username: " + username);
+      const list_input  = {
+          jobQueue: jobQueue,
+          filters: [{
+              name: "JOB_NAME",
+              values: [username+"*"]
+          }]
+      };
+    const command = new ListJobsCommand(list_input);
+    const response = await batchClient.send(command);
+    
+    for (const item of response.jobSummaryList) {
+        const terminate_input = { // TerminateJobRequest
+            jobId: item['jobId'], // required
+            reason: "Terminated by user " + username, // required
+        };
+        
+        const terminate_command = new TerminateJobCommand(terminate_input);
+        client.send(command);
+    }
+    
+    alert("All termination requests were sent and should be reflected shortly.")
+    
+    
   }
   
   async function update () {
@@ -427,6 +499,17 @@ export const JobList = ({jobQueue}) => {
       if ( created > pastDay ) { return true } else { return false}
   }
   
+  function wasCreatedAfter(date, job) {
+      //console.log(job)
+      //console.log("Checking date")
+      //console.log(job.created_at)
+      let created = new Date(job.created_at);
+      let checkpoint = date
+      //console.log(created)
+      //console.log(pastDay)
+      if ( created > checkpoint ) { return true } else { return false}
+  }
+  
   return (
   <>
     <ScrollView height="300px">
@@ -438,7 +521,7 @@ export const JobList = ({jobQueue}) => {
       wrap="nowrap"
     >
     {(item, index) => (
-     <div hidden={!wasCreatedWithin24Hours(item)}>
+     <div hidden={!wasCreatedAfter(checkpointDate, item)}>
       <Flex direction={{ base: 'row' }} width="100%" justifyContent="space-between">
       { item.download_ready? <Badge variation="success">:)</Badge> : item.terminated? <Badge variation="error">:(</Badge> : <Loader size="large"/> }
       <Text>{item.job_id} - {item.status}</Text>
@@ -448,7 +531,10 @@ export const JobList = ({jobQueue}) => {
     )}
     </Collection>
     </ScrollView>
-    <Button variation="secondary" onClick={update}>Refresh</Button>
+    <Button isDisabled={true} variation="secondary" onClick={update}>Refresh</Button>
+
+    <Button variation="destructive" onClick={terminateAllJobs}>Terminate All</Button>
+    <Button variation="destructive" onClick={clearPreviousJobs}>Terminate + Clear List</Button>
     </>
   );  
 };
@@ -466,6 +552,13 @@ export const JobListForPipelines = () => {
 }
 
 export async function emptyBucketForUser(bucket) {
+    if (confirm("Are you sure you want to clear all files for this module?"))
+    {
+        console.log("User confirmed data deletion.")
+    }
+    else { return; }
+    
+    
     console.log("emptyBucketForUser")
     console.log("PLACEHOLDER, FIX ME")
 
@@ -485,6 +578,46 @@ export async function emptyBucketForUser(bucket) {
 
     //if (listedObjects.IsTruncated) await emptyBucketForUser(bucket, user);
 
+}
+
+export async function listBucketContentsForUser(bucket) {
+    const listedObjects = await Storage.list('', {'bucket': bucket,'level': 'private', 'pageSize': 'ALL'});
+    //console.log("listedObjects")
+    //console.log(listedObjects)
+    if (listedObjects.results.length === 0) return;
+    
+    return listedObjects.results;
+
+    //for (const result of listedObjects.results) {
+    //
+    //}
+
+}
+
+export async function deleteKeyForUser(bucket, key) {
+    try {
+        await Storage.remove(key, {'bucket': bucket, 'level': 'private' });
+    } catch (error) {
+        console.log('Error ', error);
+        alert("There was a problem deleting the selected object from your bucket.")
+    }
+}
+
+export async function getKeyMetadata(bucket, key) {
+  try {
+    const result = await getProperties({
+        key: key,
+        options: {
+            bucket: bucket,
+            accessLevel: 'private',
+        }
+    });
+    console.log('File Properties ', result);
+  } catch (error) {
+    console.log('Error while retrieving file metadata ', error);
+    return {};
+  }
+  return result;
 }
 
 export async function runModule1Jobs() {

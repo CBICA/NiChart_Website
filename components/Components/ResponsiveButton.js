@@ -23,7 +23,7 @@ export const ResponsiveButton = props => {
             return;
         }
         setIsActive(true);
-        await test_delay(2000);
+        //await test_delay(2000);
         await onClick();
         setIsActive(false);
     }

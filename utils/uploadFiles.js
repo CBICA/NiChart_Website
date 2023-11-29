@@ -346,7 +346,8 @@ export const JobList = ({jobQueue}) => {
       };
     const command = new ListJobsCommand(list_input);
     const response = await batchClient.send(command);
-    
+    console.log("Jobs to be terminated:")
+    console.log(response.jobSummaryList)
     for (const item of response.jobSummaryList) {
         const terminate_input = { // TerminateJobRequest
             jobId: item['jobId'], // required
@@ -354,10 +355,12 @@ export const JobList = ({jobQueue}) => {
         };
         
         const terminate_command = new TerminateJobCommand(terminate_input);
-        client.send(command);
+        const terminate_response = await batchClient.send(command);
+        console.log("Terminate response:")
+        console.log(terminate_response)
     }
     
-    alert("All termination requests were sent and should be reflected shortly.")
+    alert("All termination requests were sent and should be reflected shortly. Jobs which are STARTING may only reflect this change once they reach the next step.")
     
     
   }
@@ -384,23 +387,34 @@ export const JobList = ({jobQueue}) => {
       setCurrentUsername(userInfo.username);
       let username = userInfo.username;
       //console.log("username: " + username);
-      const input  = {
+      var input = {
           jobQueue: jobQueue,
           filters: [{
               name: "JOB_NAME",
               values: [username+"*"]
           }]
       };
-      const command = new ListJobsCommand(input);
-      const response = await batchClient.send(command);
+      var command = new ListJobsCommand(input);
+      var response = await batchClient.send(command);
+      var totalList = response.jobSummaryList;
+      while (response.nextToken) {
+          input['nextToken'] = response.nextToken
+          command = new ListJobsCommand(input);
+          response = await batchClient.send(command)
+          totalList = totalList.concat(response.jobSummaryList)
+      }
+      console.log("Total List:")
+      console.log(totalList)
       //console.log(response);
       var newJobs = {};
-      for (const item of response.jobSummaryList) {
+      for (const item of totalList) {
           //console.log("CREATED AT: " + item['createdAt']);
           if (!(item['jobId'] in jobs)) {
               //addNewJob(item.jobId, item.status)
               newJobs[item['jobId']] = {
                     job_id: item['jobId'],
+                    job_name: item['jobName'],
+                    job_display_name: item['jobName'].split('-SID-').slice(1).join('-SID-'),
                     status: item['status'],
                     created_at: item['createdAt'],
                     download_ready: false,
@@ -459,17 +473,18 @@ export const JobList = ({jobQueue}) => {
       );
   }
   
-  function addNewJob(job_id, job_status) {
+  function addNewJob(job_id, job_status, job_name) {
       setJobs(
       {...jobs, [job_id]:
           {
             job_id: job_id,
+            job_name: job_name,
             status: job_status
           }
       });
   }
   
-  function removeJob(job_id, job_status) {
+  function removeJob(job_id, job_status, job_name) {
       setJobs(
       {...jobs, [job_id]:undefined
       });
@@ -524,15 +539,16 @@ export const JobList = ({jobQueue}) => {
      <div hidden={!wasCreatedAfter(checkpointDate, item)}>
       <Flex direction={{ base: 'row' }} width="100%" justifyContent="space-between">
       { item.download_ready? <Badge variation="success">:)</Badge> : item.terminated? <Badge variation="error">:(</Badge> : <Loader size="large"/> }
-      <Text>{item.job_id} - {item.status}</Text>
+      <Text>{item.job_display_name} : {item.status}</Text>
       </Flex>
      <Divider />
     </div> 
     )}
     </Collection>
     </ScrollView>
-    <Button isDisabled={true} variation="secondary" onClick={update}>Refresh</Button>
-
+    <div hidden>
+        <Button isDisabled={true} variation="secondary" onClick={update}>Refresh</Button>
+    </div>
     <Button variation="destructive" onClick={terminateAllJobs}>Terminate All</Button>
     <Button variation="destructive" onClick={clearPreviousJobs}>Terminate + Clear List</Button>
     </>
@@ -551,7 +567,7 @@ export const JobListForPipelines = () => {
     return list;
 }
 
-export async function emptyBucketForUser(bucket) {
+export async function emptyBucketForUser(bucket, prefix='') {
     if (confirm("Are you sure you want to clear all files for this module?"))
     {
         console.log("User confirmed data deletion.")
@@ -562,7 +578,7 @@ export async function emptyBucketForUser(bucket) {
     console.log("emptyBucketForUser")
     console.log("PLACEHOLDER, FIX ME")
 
-    const listedObjects = await Storage.list('', {'bucket': bucket,'level': 'private', 'pageSize': 'ALL'});
+    const listedObjects = await Storage.list(prefix, {'bucket': bucket,'level': 'private', 'pageSize': 'ALL'});
     console.log("listedObjects")
     console.log(listedObjects)
     if (listedObjects.results.length === 0) return;
@@ -639,6 +655,28 @@ export async function runModule1Jobs() {
   console.log("logs: " + logs)
   return result.replaceAll('"', '');
 }
+
+export async function resubmitModule1Jobs() {
+    console.log("runModule1Jobs")
+    const credentials = await Auth.currentCredentials();
+    const client = new LambdaClient({
+          credentials: Auth.essentialCredentials(credentials),
+          region: 'us-east-1',
+       });
+    const payload = { 'only_resubmit': "True" }
+    const command = new InvokeCommand({
+         FunctionName: 'cbica-nichart-helloworld-jobprocessor',
+         Payload: JSON.stringify(payload),
+         LogType: LogType.Tail,
+       });
+  const { Payload, LogResult } = await client.send(command);
+  const result = Buffer.from(Payload).toString();
+  const logs = Buffer.from(LogResult, "base64").toString();
+  console.log("result: " + result)
+  console.log("logs: " + logs)
+  return result.replaceAll('"', '');
+}
+
 //async function submitButtonClicked() {
 //    alert('Starting Job!');
 //    let userInfo = await Auth.currentAuthenticatedUser();

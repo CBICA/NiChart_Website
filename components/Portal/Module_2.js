@@ -4,13 +4,14 @@ import { SpareScoresInputStorageManager, SpareScoresDemographicStorageManager, J
 import { getUseModule1Results, setUseModule1Results, setUseModule2Results, getModule2Cache } from '../../utils/NiChartPortalCache.js'
 import styles from '../../styles/Portal_Module_2.module.css'
 import { ResponsiveButton as Button } from '../Components/ResponsiveButton.js'
+import Modal from '../Components/Modal';
+import { ModelSelectionMenu } from '../Components/ModelSelectionMenu.js'
 
-
-function exportModule2Results(moduleSelector) {
+async function exportModule2Results(moduleSelector) {
     // Perform the caching transfer operation
     setUseModule2Results(true);
-    getSpareScoresOutput(false);
-    let cachedResult = getModule2Cache();
+    await getSpareScoresOutput(false);
+    let cachedResult = await getModule2Cache();
     if (Object.keys(cachedResult).length === 0) {
         alert("We couldn't export your results because there doesn't appear to be output from Module 2. Please generate the output first or upload the file to Module 3 manually.")
         return;
@@ -22,6 +23,11 @@ function exportModule2Results(moduleSelector) {
 function Module_2({moduleSelector}) {
   const [useModule1Cache, setUseModule1Cache] = useState(getUseModule1Results());
   
+  // Modal dialog stuff for model selection
+  const [modelSelectionModalOpen, setModelSelectionModalOpen] = useState(false);
+  const handleModelSelectionOpen = () => setModelSelectionModalOpen(true);
+  const handleModelSelectionClose = () => setModelSelectionModalOpen(false);
+  
   async function disableModule1Results() {
       setUseModule1Results(false);
       setUseModule1Cache(false);
@@ -30,8 +36,8 @@ function Module_2({moduleSelector}) {
   async function enableModule1Results() {
       setUseModule1Results(true);
       setUseModule1Cache(true);
-      getCombinedCSV(false);
-      let cachedResult = getModule1Cache();
+      await getCombinedCSV(false);
+      let cachedResult = await getModule1Cache();
       if (Object.keys(cachedResult).length === 0) {
          alert("We couldn't import your results because there doesn't appear to be output from Module 1. Please generate the output first or upload the file to Module 2 manually.")
          return;
@@ -96,9 +102,15 @@ function Module_2({moduleSelector}) {
                 <p>This file should correspond to the scans present in the ROI CSV, and should contain demographic data. Scans should be on individual rows and IDs should correspond to the original T1 filename (without the extension). At minimum, your file should have columns for ID, Age (in years) and Sex (M or F).</p>
                 <p>You may download an example template for this file with the "Download Template" button.</p>
                 <SpareScoresDemographicStorageManager />
-                <div>
-                    <Heading level={3}>!PLACEHOLDER FOR MODEL-SELECT!</Heading>
-                </div>
+                <Button loadingText="Selecting..." variation="primary" onClick={handleModelSelectionOpen}>Select Models</Button> 
+                <Modal
+                    open={modelSelectionModalOpen}
+                    handleClose={handleModelSelectionClose}
+                    title="Select SPARE models"
+                    content="Check any number of models to use during SPARE score generation."
+                >
+                    <ModelSelectionMenu />
+                </Modal>
                 <Button loadingText="Submitting..." variation="primary" onClick={async () => launchSpareScores() } >Generate SPARE scores</Button>
                 <Button loadingText="Downloading..." onClick={async () => downloadTemplateDemographics() }>Download Template</Button>
               </Flex>
@@ -106,15 +118,16 @@ function Module_2({moduleSelector}) {
               <Flex direction="column" width="33%">
                 <Heading level={3}>Jobs in Progress</Heading>
                 SPARE scores that are currently being calculated will appear here. Finished jobs will be marked with green. Please wait for your jobs to finish before proceeding. If your job fails, please contact us and provide the job ID listed below.
+                <p>Jobs should reach the RUNNING phase in under a minute and complete within 30 seconds.</p>
                 <JobList jobQueue="cbica-nichart-sparescores-jobqueue" />
               </Flex>
               <Divider orientation="vertical" />
               <Flex direction="column" width="33%">
                 <Heading level={3}>Download SPARE Output</Heading>
-                All finished subjects will be included in the output when you click Download.
+                Here you can download the results (a CSV with both ROI volumes and the calculated SPARE scores for each scan).
                 <Button loadingText="Downloading CSV..." variation="primary" onClick={async () => getSpareScoresOutput(true) } >Download SPARE score CSV</Button>
                 <Button loadingText="Exporting..." onClick={async () => exportModule2Results(moduleSelector) } >Export to Module 3</Button>
-                <Button loadingText="Emptying..." variation="destructive" onClick={async () => emptyBucketForUser('cbica-nichart-sparescores-io')} >Clear All Data</Button>
+                <Button loadingText="Emptying..." variation="destructive" onClick={async () => emptyBucketForUser('cbica-nichart-outputdata', 'sparescores/')} >Clear All Data</Button>
               </Flex>
           </Flex>
       </div>

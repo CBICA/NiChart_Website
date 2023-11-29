@@ -9,17 +9,37 @@ import { ResponsiveButton as Button } from '../components/ResponsiveButton.js'
 export const RemoteFileDisplay = ({bucket}) =>  {
     
     let [remoteFiles, setRemoteFiles] = useState({});
+    let [justCreated, setJustCreated] = useState(true);
+    let [numberOfFiles, setNumberOfFiles] = useState(0);
+    let [numberOfArchives, setNumberOfArchives] = useState(0);
+    let [numberOfScans, setNumberOfScans] = useState(0);
     
     async function update() {
       console.log("Updating RemoteFileDisplay")
       const out_list = await listBucketContentsForUser(bucket)
       setRemoteFiles(out_list)
+      
+      var n_archives = 0;
+      var n_scans = 0;
+      var n_files = 0;
+      if (out_list === undefined || out_list.length == 0) {
+        return;
+      }
+      for (const item of out_list) {
+          n_files += 1;
+          if (fileIsArchive(item.key)) {
+              n_archives += 1;
+          }      
+        }
+      setNumberOfFiles(n_files)
+      setNumberOfArchives(n_archives)
+      setNumberOfScans(n_files - n_archives)
       console.log(remoteFiles)
     } 
     
     async function deleteKeyFromBucket(key) {
         await deleteKeyForUser(bucket, key)
-        alert("Placeholder From RemoteFileDisplay: User attempting to delete key " + key);
+        //alert("Placeholder From RemoteFileDisplay: User attempting to delete key " + key);
         update()
     }
     
@@ -58,11 +78,16 @@ export const RemoteFileDisplay = ({bucket}) =>  {
     return () => clearInterval(interval);
     }, [remoteFiles]);
     
+    if (justCreated) {
+        update();
+        setJustCreated(false);
+    }
+    
     return (
         <div>
         <Divider orientation="horizontal" />
         <h2>Successfully uploaded scans:</h2>
-            <ScrollView> 
+            <ScrollView height='400px'> 
                 <Collection 
                     items={remoteFiles}
                     type="list"
@@ -83,6 +108,7 @@ export const RemoteFileDisplay = ({bucket}) =>  {
                     )}
                 </Collection>
             </ScrollView>
+        <p><b>Total files: {numberOfFiles} ({numberOfArchives} archives, {numberOfScans} scans)</b></p>
         <Divider orientation="horizontal" />
         </div>
     )

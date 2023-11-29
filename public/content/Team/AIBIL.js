@@ -5,6 +5,11 @@ const AIBIL = [
       bio: 'Christos.Davatzikos@pennmedicine.upenn.edu',
     },
     {
+      name: 'Nasrallah, Ilya ',
+      image: '/images/Team/Ilya_Nasrallah.jpg',
+      bio: 'Ilya.Nasrallah@pennmedicine.upenn.edu',
+    },
+    {
       name: 'Erus, Guray',
       image: '/images/Team/Guray_Erus.jpg',
       bio: 'Guray.Erus@pennmedicine.upenn.edu',
@@ -38,6 +43,11 @@ const AIBIL = [
       name: 'Bergman, Mark',
       image: '/images/Team/user_stock_photo.png',
       bio: 'Mark.Bergman@Pennmedicine.upenn.edu',
+    },
+    {
+      name: 'Baik, Kyunglok',
+      image: '/images/Team/Baik_Kyunglok.jpg',
+      bio: 'Kyunglok.Baik@Pennmedicine.upenn.edu',
     },
   ];
 

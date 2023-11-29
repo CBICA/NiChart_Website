@@ -1,13 +1,18 @@
-import React from 'react';
-import { Flex, Heading, Divider, Button, Text } from '@aws-amplify/ui-react';
+import React, { useState } from 'react';
+import { Flex, Heading, Divider, Text } from '@aws-amplify/ui-react';
 import styles from '../../styles/Portal_Module_1.module.css'
-import { DefaultStorageManagerExample, JobList, getCombinedImageZip, getCombinedCSV, runModule1Jobs, emptyBucketForUser, uploadToModule2 } from '../../utils/uploadFiles.js'
+import { DefaultStorageManagerExample, JobList, getCombinedImageZip, getCombinedCSV, runModule1Jobs, resubmitModule1Jobs, emptyBucketForUser, uploadToModule2 } from '../../utils/uploadFiles.js'
 import { setUseModule1Results, getModule1Cache } from '../../utils/NiChartPortalCache.js'
+import { RemoteFileDisplay } from './RemoteFileDisplay.js'
+import { ResponsiveButton as Button } from '../Components/ResponsiveButton.js'
+import Modal from '../Components/Modal'
+
+
 async function exportModule1Results(moduleSelector) {
     // Perform the caching transfer operation
     setUseModule1Results(true);
-    getCombinedCSV(false);
-    let cachedResult = getModule1Cache();
+    await getCombinedCSV(false);
+    let cachedResult = await getModule1Cache();
     if (Object.keys(cachedResult).length === 0) {
         alert("We couldn't export your results because there doesn't appear to be output from Module 1. Please generate the output first or upload the file to Module 2 manually.")
         return;
@@ -18,34 +23,79 @@ async function exportModule1Results(moduleSelector) {
     moduleSelector("module2");
 }
 
+async function getCSV () {
+    
+}
+
+async function getImages () {
+    
+}
+
+
+
 function Module_1({moduleSelector}) {
+  const [fileBrowserModalOpen, setFileBrowserModalOpen] = useState(false);
+  const [userReceivedWarning, setUserReceivedWarning] = useState(false);
+
+  const handleFileBrowserOpen = () => setFileBrowserModalOpen(true);
+  const handleFileBrowserClose = () => setFileBrowserModalOpen(false);
+  
+  async function submitJobs () {
+    if (!userReceivedWarning) {
+        // Warn user to browse files first
+        let userVerify = confirm("This is your first time submitting jobs during this session, but you may have other files on our processing server. Before continuing, we suggest that you double-check the files to be processed using the View Uploaded Files button. Would you like to view that menu now? Hit OK to view or Cancel to continue without viewing. (You will not be reminded again until you refresh the page.)")
+        setUserReceivedWarning(true);
+        if (userVerify) {
+            handleFileBrowserOpen()
+            return;
+        }
+    }
+        await runModule1Jobs();
+    }
+    
   return (
     <div>
+      
+      <Modal
+            open={fileBrowserModalOpen}
+            handleClose={handleFileBrowserClose}
+            width="50%"
+            title="Uploads"
+            content="Files you have uploaded are visible here. You can also see some basic status information and delete files if desired."
+      >
+         <RemoteFileDisplay bucket="cbica-nichart-inputdata" />
+      </Modal>
+      
       <h2>Module 1: Image Processing</h2>
       <div className={styles.moduleContainer}>
           <Divider orientation="horizontal" />
           <Flex direction={{ base: 'column', large: 'row' }} maxWidth="100%" padding="1rem" width="100%" justifyContent="flex-start">
               <Flex justifyContent="space-between" direction="column" width="33%">
               <Heading level={3}>Upload Input T1 Scans</Heading>
-              Upload NIfTI-format (.nii.gz) T1 MRI brain scans only. Please, no spaces in filenames.
+              <p>Upload NIfTI-format (.nii.gz) T1 MRI brain scans only. Please, limit filenames to alphanumeric characters, hyphens and underscores (no spaces or other characters).</p>       
+              <p><b>Alternatively,</b> you may upload a .zip file containing your .nii.gz files. We <b>strongly</b> recommend this option if you are uploading more than 5 scans. The system will unpack the archive which may take up to a minute after the upload succeeds (you may check using <b>View Uploaded Files</b>). Note that we cannot support archives greater than 10GB.</p>
+              <p>When uploading large files, you may see fluctuations in the displayed progress. Do not worry -- as long as the upload does not fail, it will correct itself.</p>
               <DefaultStorageManagerExample/>
-              <Button variation="primary" onClick={async () => runModule1Jobs()} >Submit</Button> 
-              <Button variation="warning" onClick={async () => emptyBucketForUser('cbica-nichart-inputdata')}>Remove All Data</Button>
+              <Button variation="secondary" onClick={handleFileBrowserOpen}>View Uploaded Files</Button>
+              <Button variation="primary" loadingText="Submitting..." onClick={async () => submitJobs()} >Submit Jobs</Button> 
+              <Button variation="destructive" loadingText="Emptying..." onClick={async () => emptyBucketForUser('cbica-nichart-inputdata')}>Remove All Data</Button>
               </Flex>
               <Divider orientation="vertical" />
               <Flex direction="column" width="33%">
                   <Heading level={3}>Jobs in Progress</Heading>
-                  <p>Jobs will appear here a few seconds after submission. Finished jobs will be marked with green. Please wait jobs to finish before proceeding. If your job fails, please contact us and provide the job ID listed below.</p>
+                  <p>Jobs will appear here a few seconds after submission. Each job corresponds to one scan. Finished jobs will be marked with green. Please wait for jobs to finish before proceeding. If your job fails, please contact us and provide the job ID listed below.</p>
+                  <p>The first set of scans may take up to 6 minutes to start (time spent in both RUNNABLE and STARTING phases). After this spin-up period, jobs (up to 48 concurrently) should take approximately 1 minute to finish .</p>
                   <JobList jobQueue="cbica-nichart-helloworld-jobqueue2"/>
+                  <Button variation="primary" loadingText="Re-submitting..." onClick={async () => await resubmitModule1Jobs()}>Re-submit Failed Jobs</Button>
               </Flex>
               <Divider orientation="vertical" />
               <Flex direction="column" width="33%">
                   <Heading level={3}>Download Results</Heading>
-                  <Text>Results will be downloaded for all subjects that have finished processing (those marked green on the job list). All other subjects will continue running but will not be included. We recommend that you download your results. You can also directly export your results to the next module.</Text>
-                  <Button variation="primary" onClick={async () => getCombinedCSV(true) } >Download MUSE CSV</Button>
-                  <Button variation="primary" onClick={async () => getCombinedImageZip(true) } >Download MUSE ROIs</Button>
-                  <Button onClick={async () => await exportModule1Results(moduleSelector) } >Export to Module 2</Button>
-                  <Button variation="warning" onClick={async () => emptyBucketForuser('cbica-nichart-outputdata') }>Clear All Output Data</Button>
+                  <Text>Results will be downloaded for all scans that have finished processing (those marked green on the job list). All other scans will continue running but will not be included unless you re-download after they complete. In addition to downloads, you can also directly export your results to the next module.</Text>
+                  <Button loadingText="Downloading CSV..." variation="primary" onClick={async () => getCombinedCSV(true) } >Download MUSE CSV</Button>
+                  <Button loadingText="Downloading Images..." variation="primary" onClick={async () => getCombinedImageZip(true) } >Download MUSE ROIs</Button>
+                  <Button loadingText="Exporting..." onClick={async () => await exportModule1Results(moduleSelector) } >Export to Module 2</Button>
+                  <Button loadingText="Emptying..." variation="destructive" onClick={async () => emptyBucketForuser('cbica-nichart-outputdata') }>Clear All Output Data</Button>
               </Flex>
           </Flex>
       </div>

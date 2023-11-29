@@ -9,8 +9,9 @@ import MUSEROICompleteList from '/public/content/Portal/Visualization/Dicts/MUSE
 import { setUseModule2Results, getUseModule2Results, getModule2Cache } from '../../utils/NiChartPortalCache.js'
 import { getSpareScoresOutput } from '../../utils/uploadFiles.js'
 
-function getDefaultCSV () {
-    let cachedResult = getModule2Cache();
+
+async function getDefaultCSV () {
+    let cachedResult = await getModule2Cache();
     if (Object.keys(cachedResult).length === 0) {
         alert("We couldn't import your results because there doesn't appear to be output from Module 2. Please generate the output first or upload the file to Module 3 manually.")
         return null;

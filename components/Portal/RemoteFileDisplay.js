@@ -29,11 +29,14 @@ export const RemoteFileDisplay = ({bucket}) =>  {
           n_files += 1;
           if (fileIsArchive(item.key)) {
               n_archives += 1;
-          }      
+          }
+          if (fileIsImage(item.key)) {
+              n_scans += 1;
+          }
         }
       setNumberOfFiles(n_files)
       setNumberOfArchives(n_archives)
-      setNumberOfScans(n_files - n_archives)
+      setNumberOfScans(n_scans)
       console.log(remoteFiles)
     } 
     

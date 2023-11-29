@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import { Flex, Heading, Divider} from '@aws-amplify/ui-react';
 import { SpareScoresInputStorageManager, SpareScoresDemographicStorageManager, JobList, launchSpareScores, getSpareScoresOutput, emptyBucketForUser, uploadToModule2, getCombinedCSV, downloadBlob } from '../../utils/uploadFiles.js'
-import { getUseModule1Results, setUseModule1Results, setUseModule2Results, getModule2Cache } from '../../utils/NiChartPortalCache.js'
+import { getUseModule1Results, setUseModule1Results, setUseModule2Results, getModule2Cache, getModule1Cache } from '../../utils/NiChartPortalCache.js'
 import styles from '../../styles/Portal_Module_2.module.css'
 import { ResponsiveButton as Button } from '../Components/ResponsiveButton.js'
 import Modal from '../Components/Modal';

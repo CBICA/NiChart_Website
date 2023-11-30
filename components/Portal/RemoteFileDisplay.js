@@ -55,10 +55,18 @@ export const RemoteFileDisplay = ({bucket}) =>  {
     
     function fileIsImage (key) {
         return key.endsWith(".nii.gz") ? true
+        : key.endsWith(".nii") ? true
         : false
     }
     
+    function fileIsMacThumbnail (key) {
+        return key.toLowerCase().includes("_macosx")
+    }
+    
     async function getFileStatus (key) {
+        if (fileIsMacThumbnail(key)) {
+            return "macOS thumbnail file (will not be processed)"
+        }
         if (fileIsArchive(key)) {
             const meta = await getKeyMetadata(bucket, key)
             return "Placeholder Archive Status" 
@@ -102,7 +110,7 @@ export const RemoteFileDisplay = ({bucket}) =>  {
                     <div>
                     <Flex direction={{ base: 'row' }} width="100%" justifyContent="space-between">
                     <Text>File key: {item.key}</Text>
-                    <Text>Type: {fileIsArchive(item.key)? "Archive" : fileIsImage(item.key)? "Scan" : "Other"}</Text>
+                    <Text>Type: { fileIsMacThumbnail(item.key)? "macOS Thumbnail (Won't be processed)" : fileIsArchive(item.key)? "Archive" : fileIsImage(item.key)? "Scan" : "Other"}</Text>
                     
                     <Button loadingText="Deleting..." variation="destructive" onClick={async () => {deleteKeyFromBucket(item.key)}}>Delete</Button>
                     </Flex>

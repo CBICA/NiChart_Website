@@ -30,10 +30,10 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
   useEffect(() => {
     // Calculate the marker size based on the number of data points
     const calculateMarkerSize = (dataLength) => {
-      const minSize = 12;
-      const maxSize = 6;
+      const minSize = 8;
+      const maxSize = 4;
       const minDataLength = 10;
-      const maxDataLength = 1000;
+      const maxDataLength = 100;
 
       // Clamp dataLength between minDataLength and maxDataLength
       const clampedDataLength = Math.min(Math.max(dataLength, minDataLength), maxDataLength);

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { FormControl, MenuItem, Select, Button, InputLabel } from '@mui/material';
+import { Autocomplete } from '@mui/material';
+import TextField from '@mui/material/TextField';
 import { Divider } from '@aws-amplify/ui-react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'; 
 import Papa from 'papaparse';
@@ -86,8 +88,30 @@ const Module_3 = ({moduleSelector}) => {
       setReferenceDataOption('Error loading reference data');
       return;
     }
-
-    if (!uploadedFile) {
+    
+    if (uploadedFile && uploadedFile instanceof File) {
+      Papa.parse(uploadedFile, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (results) => {
+          const parsedData = results.data;
+          const selectedROI = roiFullNames.find((roi) => roi.id === roiColumn);
+          const plotName = `${selectedROI.id}: ${selectedROI.fullName} | ${referenceDataOption} | ${uploadedFile.name}`;
+          const newPlot = {
+            name: plotName,
+            data: parsedData,
+            reference: referenceData,
+            referenceOption: referenceDataOption,
+            roi: roiColumn,
+          };
+      
+          setPlots([...plots, newPlot]);
+        },
+        error: (error) => {
+          console.error('Error parsing CSV file:', error);
+        },
+      });
+    } else{
       const selectedROI = roiFullNames.find((roi) => roi.id === roiColumn);
       const newPlot = {
         name: `${selectedROI.id}: ${selectedROI.fullName} | ${referenceDataOption}`,
@@ -99,28 +123,6 @@ const Module_3 = ({moduleSelector}) => {
       setPlots([...plots, newPlot]);
       return;
     };
-
-    Papa.parse(uploadedFile, {
-      header: true,
-      skipEmptyLines: true,
-      complete: (results) => {
-        const parsedData = results.data;
-        const selectedROI = roiFullNames.find((roi) => roi.id === roiColumn);
-        const plotName = `${selectedROI.id}: ${selectedROI.fullName} | ${referenceDataOption} | ${uploadedFile.name}`;
-        const newPlot = {
-          name: plotName,
-          data: parsedData,
-          reference: referenceData,
-          referenceOption: referenceDataOption,
-          roi: roiColumn,
-        };
-    
-        setPlots([...plots, newPlot]);
-      },
-      error: (error) => {
-        console.error('Error parsing CSV file:', error);
-      },
-    });
   }    
 
   const handleDeletePlot = (plotName) => {
@@ -179,26 +181,19 @@ const Module_3 = ({moduleSelector}) => {
               </FormControl>
           </div>
           <div className={styles.controlItem}>
-          <FormControl variant="standard">
-            <InputLabel>Select ROI column</InputLabel>
-            <Select
-              defaultValue="702"
-              value={roiColumn}
-              onChange={(e) => setROIColumn(e.target.value)}
-              label="ROI column"
-              inputProps={{
-                name: 'ROI-column',
-                id: 'ROI-column-select',
+            <Autocomplete
+              value={roiFullNames.find(roi => roi.id === roiColumn) || null}
+              onChange={(event, newValue) => {
+                // If newValue is null (input cleared), use the default ROI ID
+                setROIColumn(newValue ? newValue.id : "702: Intra Cranial Volume");
               }}
-            >
-              {roiFullNames.map(({ id, fullName }) => (
-                <MenuItem key={id} value={id}>
-                  {`${id}: ${fullName}`}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
+              options={roiFullNames}
+              getOptionLabel={(option) => `${option.id}: ${option.fullName}`}
+              renderInput={(params) => (
+                <TextField {...params} label="Select ROI column" variant="standard" />
+              )}
+              disableClearable
+            />
           </div>
         </div>
 

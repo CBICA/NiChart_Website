@@ -233,7 +233,9 @@ const Module_3 = ({moduleSelector}) => {
           </div>
         </div>
       </div>
-
+      <div className={styles.instructions}>
+        <p>Hover over points to see more details. </p>
+      </div>
       <div className={styles.plotsContainer}>
           {plots.map(plot => (
             <div key={plot.name} className={styles.plotItem}>

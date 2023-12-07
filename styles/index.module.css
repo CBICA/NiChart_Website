@@ -26,3 +26,44 @@
     object-fit: contain;
   }
 }
+
+.logo {
+  position: absolute;
+  top: 20px; /* adjust as necessary */
+  left: 20px; /* adjust as necessary */
+}
+
+.NiChart_info_pic_student {
+  position: absolute;
+  bottom: 20px; /* adjust as necessary */
+  left: 20px; /* adjust as necessary */
+}
+
+.circle {
+  border-radius: 50%;
+  width: 100px; /* adjust as necessary */
+  height: 100px; /* adjust as necessary */
+  line-height: 100px; /* adjust for vertical alignment */
+  text-align: center;
+  position: absolute;
+  /* Use additional classes for positioning each circle */
+}
+
+/* Example for one of the circle positions */
+.top-right {
+  top: 50px; /* adjust as necessary */
+  right: 50px; /* adjust as necessary */
+}
+
+/* You can create classes for each text element based on its position */
+.text.top-left {
+  position: absolute;
+  top: 100px; /* adjust as necessary */
+  left: 100px; /* adjust as necessary */
+}
+
+/* Use SVG or CSS to draw lines between circles */
+.line {
+  position: absolute;
+  /* use CSS or SVG attributes to draw lines */
+}

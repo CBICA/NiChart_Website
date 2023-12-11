@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '../components/Layout/Header';
@@ -9,6 +9,22 @@ import styles from '../styles/Components.module.css'
 
 const Components = () => {
   const [expandedSection, setExpandedSection] = useState('Reference Dataset');
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = decodeURIComponent(window.location.hash.replace('#', ''));
+      setExpandedSection(hash || 'Reference Dataset');
+    };
+  
+    handleHashChange(); // Call on initial render
+    window.addEventListener('hashchange', handleHashChange);
+  
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [router.events]);
+  
 
   const contentBySection = {
     'Reference Dataset': (
@@ -323,7 +339,7 @@ const Components = () => {
       </Head>
       <Header />
       <div className={styles.componentsPage}>
-        <Sidebar updateExpandedSection={setExpandedSection} />
+        <Sidebar currentSection={expandedSection} updateExpandedSection={setExpandedSection}/>
         <div>
           <div className={styles.componentsContainer}>
             {contentBySection[expandedSection]}

@@ -21,7 +21,7 @@ const HomePage = () => {
     updateWindowWidth();
     const handleResize = () => {
       if (window.innerWidth < 600) {
-        setSvgSize(200); // Size for extra small devices
+        setSvgSize(150); // Size for extra small devices
       } else if (window.innerWidth < 1000) {
         setSvgSize(250); // Size for small devices
       } else if (window.innerWidth < 1200) {
@@ -32,6 +32,11 @@ const HomePage = () => {
         setSvgSize(175); // Size for largest devices
       } else if (window.innerWidth < 1900) {
         setSvgSize(200); // Size for largest devices
+      } 
+      if (window.innerWidth > 2100) {
+        setSvgSize(250); // Size for largest devices
+      } else if (window.innerWidth > 2300) {
+        setSvgSize(275); // Size for largest devices
       }
     };
 
@@ -150,7 +155,7 @@ const HomePage = () => {
       </div>
       <div className={styles.bottom}>
         <div className={styles.bottomDivision}>
-          <div className={styles.bottomTextColumn}>
+          <div>
             <p>A framework to:</p>
             <ul>
               <li>Process multi-modal MRI images</li>
@@ -159,12 +164,13 @@ const HomePage = () => {
               <li>Derive individualized biomarkers "Neuroimaging Chart Dimensions"</li>
             </ul>
           </div>
-          <div className={styles.bottomTextColumn}>
+          {/* Remove this */}
+          {/* <div className={styles.bottomTextColumn}>
             <p>NiChart aims to facilitate large-scale neuroimaging research and the wider use of advanced neuroimage analysis methods by non-experts.</p>
             <p>User-friendly web application hosted in the AWS cloud enables rapid processing of single scans and large image datasets.</p>
             <p>Data harmonization and pre-trained machine learning models provide imaging biomarkers (NiChart dimensions) that capture brain changes due to aging and disease.</p>
             <p>Users can use visualization tools to locate a subject's position within NiChart space in comparison to reference.</p>
-          </div>
+          </div> */}
         </div>
       </div>
       <Footer />

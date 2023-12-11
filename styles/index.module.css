@@ -54,7 +54,6 @@
   font-weight: bold; 
   font-size: 3.5vw; 
   color: #7A5471;
-  text-shadow: 2px 2px 4px #000000; /* Optional: Adds a shadow to the text for depth */
   margin-bottom: 20px;
 }
 
@@ -88,20 +87,21 @@
 
 .stepCircleContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   margin: 20px;
-  cursor: pointer; /* Changes the cursor to a pointer on hover */
-  transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
+
 
 .stepCircleContainer:hover {
   transform: scale(1.1); /* Scales up the container slightly on hover */
 }
 
 .stepCircleSVG {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   fill: transparent;
 }
 
@@ -118,6 +118,7 @@
 .circleLabel {
   font-size: 13px;
   font-weight: 700;
+  letter-spacing: 8px;
   fill: white;
   stroke: black;
   stroke-width: 1px;
@@ -133,13 +134,16 @@
   font-family: 'Arial', sans-serif; /* Choose a font similar to NiChart text */
   background-color: #491260; 
   font-weight: bold; 
-  font-size: 1vw; 
+  font-size: 2vw; 
   color: white;
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Creates two columns */
+  display: flex;
+  width: 100%;
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr; /* Creates two columns */
   padding: 2%; /* Adjust padding as needed */
   box-sizing: border-box; /* Ensures padding is included in the width */
   max-height: max-content;
+  margin: 2%;
 }
 
 .bottomTextColumn {
@@ -160,8 +164,8 @@
   .textNiChart .title, .textNiChart .text {
     font-size: 5.5vw; /* Larger font size since vw units will be smaller on smaller screens */
   }
-  .bottomDivision .bottomTextColumn{
-    font-size: 3.5vw;
+  .bottomDivision .bottomTextColumn p, .bottomDivision .bottomTextColumn li{
+    font-size: 5.5vw;
   }
 }
 
@@ -174,8 +178,8 @@
   .textNiChart .text {
     font-size: 7vw; /* Slightly smaller than title to maintain hierarchy */
   }
-  .bottomDivision .bottomTextColumn{
-    font-size: 4vw;
+  .bottomDivision .bottomTextColumn p, .bottomDivision .bottomTextColumn li {
+    font-size: 7vw;
   }
 }
 
@@ -188,7 +192,7 @@
 /* For screens narrower than 1000px and wider than 500px */
 @media only screen and (min-width: 500px) and (max-width: 1000px) {
   .verticalLayoutContainer {
-    grid-template-rows: repeat(3, 1fr); /* 3 rows */
+    grid-template-rows: repeat(3, 0.5fr); /* 3 rows */
     grid-template-columns: auto auto;
   }
 }

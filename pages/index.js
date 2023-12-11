@@ -130,6 +130,7 @@ const HomePage = () => {
       />
     ));
   }
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -148,8 +149,13 @@ const HomePage = () => {
           </div>
         </div>
         <div className={styles.rightSide}>
-          <div className={windowWidth > 1000 ? styles.semiCircleContainer : styles.verticalLayoutContainer}>
-            {stepElements}
+        <div className={windowWidth > 1000 ? styles.semiCircleContainer : styles.verticalLayoutContainer}>
+          {windowWidth > 1000 && (
+            <>
+              <img src={"/images/Home/NiChart_cloud_transparent.png"} alt="NiChart cloud" className={styles.centralImage} />
+            </>
+          )}
+          {stepElements}
           </div>
         </div>
       </div>
@@ -164,7 +170,7 @@ const HomePage = () => {
               <li>Derive individualized biomarkers "Neuroimaging Chart Dimensions"</li>
             </ul>
           </div>
-          {/* Remove this */}
+          {/* Removed this ----- TODO: Do we need this language?*/}
           {/* <div className={styles.bottomTextColumn}>
             <p>NiChart aims to facilitate large-scale neuroimaging research and the wider use of advanced neuroimage analysis methods by non-experts.</p>
             <p>User-friendly web application hosted in the AWS cloud enables rapid processing of single scans and large image datasets.</p>

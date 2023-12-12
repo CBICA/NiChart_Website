@@ -39,7 +39,6 @@ const Sidebar = ({ currentSection, updateExpandedSection }) => {
             </a>
             {currentSection === 'Reference Dataset' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('ref_data_overview')}><h2c>Overview</h2c></a></li>
                 <li><a onClick={() => handleItemClick('RefVars')}><h2c>Demographics and Clinical Variables</h2c></a></li>
               </ul>
             )}
@@ -50,7 +49,6 @@ const Sidebar = ({ currentSection, updateExpandedSection }) => {
             </a>
             {currentSection === 'Image Processing' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('img_proc_overview')}><h2c>Overview</h2c></a></li>
                 <li><a onClick={() => handleItemClick('sMRIProcessing')}><h2c>sMRI</h2c></a></li>
                 <li><a onClick={() => handleItemClick('DTIProcessing')}><h2c>DTI</h2c></a></li>
                 <li><a onClick={() => handleItemClick('fMRIProcessing')}><h2c>fMRI</h2c>                
@@ -64,7 +62,6 @@ const Sidebar = ({ currentSection, updateExpandedSection }) => {
             </a>
             {currentSection === 'Harmonization' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('combat_overview')}><h2c>Overview</h2c></a></li>
                 <li><a onClick={() => handleItemClick('combat_family')}><h2c>Combat Family</h2c></a></li>
                 <li><a onClick={() => handleItemClick('combat_tools')}><h2c>Complementary Tools</h2c></a></li>
               </ul>
@@ -77,7 +74,6 @@ const Sidebar = ({ currentSection, updateExpandedSection }) => {
             </a>
             {currentSection === 'Machine Learning Models' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('ml_overview')}><h2c>Overview</h2c></a></li>
                 <li><a onClick={() => handleItemClick('ml_supervised')}><h2c>Supervised Models</h2c></a></li>
                 <li><a onClick={() => handleItemClick('ml_semisupervised')}><h2c>Semi-Supervised Models</h2c></a></li>
               </ul>
@@ -90,7 +86,6 @@ const Sidebar = ({ currentSection, updateExpandedSection }) => {
             </a>
             {currentSection === 'Data Visualization' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('datavis_overview')}><h2c>Overview</h2c></a></li>
                 <li><a onClick={() => handleItemClick('datavis_viewer')}><h2c>NiChart Viewer</h2c></a></li>
                 <li><a onClick={() => handleItemClick('datavis_webviewer')}><h2c>NiChart Web Viewer</h2c></a></li>
               </ul>
@@ -103,7 +98,6 @@ const Sidebar = ({ currentSection, updateExpandedSection }) => {
             </a>
             {currentSection === 'Deployment' && (
               <ul className={styles.innerSection}>
-                <li><a onClick={() => handleItemClick('deploy_overview')}><h2c>Overview</h2c></a></li>
                 <li><a onClick={() => handleItemClick('deploy_install')}><h2c>Software Packages</h2c></a></li>
                 <li><a onClick={() => handleItemClick('deploy_container')}><h2c>Software Containers</h2c></a></li>
                 <li><a onClick={() => handleItemClick('deploy_cloud')}><h2c>Cloud Portal</h2c></a></li>

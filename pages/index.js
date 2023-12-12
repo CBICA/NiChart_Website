@@ -94,12 +94,12 @@ const HomePage = () => {
 
   // Usage inside a parent component
   const steps = [
-    { label: "Curate", color: "#a11f25", image: "images/Home/curate.jpg"},
-    { label: "Process", color: "#2152ad", image: "images/Home/curate.jpg"},
-    { label: "Harmonize", color: "#92da44", image: "images/Home/curate.jpg"},
-    { label: "Learn", color: "#e9a944", image: "images/Home/curate.jpg"},
+    { label: "Curate", color: "#a11f25", image: "images/Home/curate.png"},
+    { label: "Process", color: "#2152ad", image: "images/Home/process.png"},
+    { label: "Harmonize", color: "#92da44", image: "images/Home/harmonize.png"},
+    { label: "Learn", color: "#e9a944", image: "images/Home/learn.png"},
     { label: "Visualize", color: "#f5e852", image: "images/Home/visualize.png"},
-    { label: "Deploy", color: "#ac29d8", image: "images/Home/curate.jpg"},
+    { label: "Deploy", color: "#ac29d8", image: "images/Home/deploy.png"},
                 ];
 
   let stepElements;

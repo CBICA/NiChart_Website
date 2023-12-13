@@ -81,7 +81,7 @@ const HomePage = () => {
       position: 'absolute',
       left: `${x}px`,
       bottom: `${y}px`, // Adjust based on the radius
-      transform: 'translate(-10%, 0)' // Center the item on the calculated position
+      transform: 'translate(-20%, 0)' // Center the item on the calculated position
     };
 
 

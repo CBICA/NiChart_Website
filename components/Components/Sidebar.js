@@ -100,7 +100,7 @@ const Sidebar = ({ currentSection, updateExpandedSection }) => {
               <ul className={styles.innerSection}>
                 <li><a onClick={() => handleItemClick('deploy_install')}><h2c>Software Packages</h2c></a></li>
                 <li><a onClick={() => handleItemClick('deploy_container')}><h2c>Software Containers</h2c></a></li>
-                <li><a onClick={() => handleItemClick('deploy_cloud')}><h2c>Cloud Portal</h2c></a></li>
+                <li><a onClick={() => handleItemClick('deploy_cloud')}><h2c>Portal</h2c></a></li>
               </ul>
             )}
           </li>

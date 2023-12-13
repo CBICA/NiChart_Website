@@ -2,13 +2,6 @@ import React from 'react';
 import styles from '../../styles/Footer.module.css';
 import { VERSION } from '../../utils/Version.js';
 
-console.log("###############")
-console.log("###############")
-console.log("###############")
-console.log("###############")
-console.log("###############")
-console.log("###############")
-console.log(VERSION)
 const Footer = () => {
   return (
     <footer className={styles.footer}>

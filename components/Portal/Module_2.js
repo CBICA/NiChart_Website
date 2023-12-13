@@ -87,7 +87,7 @@ function Module_2({moduleSelector}) {
     
   return (
     <div>
-      <h2>Module 2: Machine Learning</h2>
+      <Heading level={1}>Module 2: Machine Learning</Heading>
       <div className={styles.moduleContainer}>
           <Divider orientation="horizontal" />
           <Flex direction={{ base: 'column', large: 'row' }} maxWidth="100%" padding="1rem" width="100%" justifyContent="flex-start">

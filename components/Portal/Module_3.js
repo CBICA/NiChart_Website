@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FormControl, MenuItem, Select, Button, InputLabel } from '@mui/material';
+import { Heading } from '@aws-amplify/ui-react'
 import { Autocomplete } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { Divider } from '@aws-amplify/ui-react';
@@ -161,7 +162,7 @@ const Module_3 = ({moduleSelector}) => {
 
   return (
     <div>
-      <h2>Module 3: Visualization</h2>
+      <Heading level={1}>Module 3: Visualization</Heading>
       <Divider orientation="horizontal" />
       <div className={styles.moduleContainer}>
       <div className={styles.controlsContainer}>

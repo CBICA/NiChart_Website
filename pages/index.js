@@ -7,6 +7,7 @@ import Circle from '../components/Components/Circle'
 import Favicons from '../components/Favicons/Favicons';
 import reportWebVitals from '/utils/reportWebVitals';
 import styles from '../styles/index.module.css';
+import {Image} from '@aws-amplify/ui-react'
 
 const HomePage = () => {
   const [windowWidth, setWindowWidth] = useState(null);
@@ -140,6 +141,7 @@ const HomePage = () => {
       <Header />
       <div className={styles.mainContent}>
         <div className={styles.leftSide}>
+          <Image src="/images/Logo/upenn-logo-png.png" width="50%" height="10%"></Image>
           <div className={styles.textNiChart}>
             <p className={styles.title}>NiChart</p>
             <p className={styles.text}>Neuro Imaging Chart <br></br> of AI-based Imaging Biomarkers</p>

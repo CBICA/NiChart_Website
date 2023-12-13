@@ -4,7 +4,7 @@ import { VERSION, LASTUPDATED } from '../../utils/Version.js';
 import { PinDropSharp } from '@mui/icons-material';
 
 
-const Footer = props => {
+const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContent}>

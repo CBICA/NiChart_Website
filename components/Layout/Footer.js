@@ -17,7 +17,7 @@ const Footer = props => {
           <br></br> Version {VERSION}. Last updated {LASTUPDATED}. <br/>
           <a rel="noopener noreferrer" href="https://www.upenn.edu/about/privacy-policy" className={styles.cbicaLink}> Privacy Policy </a>
              | 
-            <a target="_blank" rel="noopener noreferrer" href="https://www.upenn.edu/about/disclaimer" className={styles.cbicaLink}>UPenn Disclaimer </a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.upenn.edu/about/disclaimer" className={styles.cbicaLink}> UPenn Disclaimer </a>
         </p>
       </div>
     </footer>

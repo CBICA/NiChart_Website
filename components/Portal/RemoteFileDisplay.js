@@ -69,11 +69,27 @@ export const RemoteFileDisplay = ({bucket}) =>  {
         }
         if (fileIsArchive(key)) {
             const meta = await getKeyMetadata(bucket, key)
-            return "Placeholder Archive Status" 
+            if (meta['ARCHIVE_STATUS'] == 'EXTRACTED') {
+                return "Archive (Extracted)"
+            }
+            else if (meta['ARCHIVE_STATUS'] == 'FAILED') {
+                return "Failed to Extract"
+            }
+            else {
+                return "Archive (awaiting extraction)" 
+            }
         }
         else if (fileIsImage(key)) {
             const meta = await getKeyMetadata(bucket, key)
-            return "Placeholder Image Status"
+            if (meta['QC_STATUS'] == 'SUCCEEDED') {
+                return "Image (QC Passed)"
+            }
+            else if (meta['QC_STATUS'] == 'FAILED'){
+                return "QC Failed: " + meta['QC_REASON']
+            }
+            else {
+                return "Image (Status Unknown)"
+            }
         }
         else {
             return "N/A";
@@ -111,7 +127,7 @@ export const RemoteFileDisplay = ({bucket}) =>  {
                     <Flex direction={{ base: 'row' }} width="100%" justifyContent="space-between">
                     <Text>File key: {item.key}</Text>
                     <Text>Type: { fileIsMacThumbnail(item.key)? "macOS Thumbnail (Won't be processed)" : fileIsArchive(item.key)? "Archive" : fileIsImage(item.key)? "Scan" : "Other"}</Text>
-                    
+                    <Text>Status: { getFileStatus (item.key) }</Text>
                     <Button loadingText="Deleting..." variation="destructive" onClick={async () => {deleteKeyFromBucket(item.key)}}>Delete</Button>
                     </Flex>
                     <Divider />

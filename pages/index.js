@@ -7,7 +7,6 @@ import Circle from '../components/Components/Circle'
 import Favicons from '../components/Favicons/Favicons';
 import reportWebVitals from '/utils/reportWebVitals';
 import styles from '../styles/index.module.css';
-import {Image} from '@aws-amplify/ui-react'
 
 const HomePage = () => {
   const [windowWidth, setWindowWidth] = useState(null);
@@ -23,20 +22,20 @@ const HomePage = () => {
     const handleResize = () => {
       if (window.innerWidth < 600) {
         setSvgSize(150); // Size for extra small devices
-      } else if (window.innerWidth < 1000) {
+      } else if (window.innerWidth < 1250) {
         setSvgSize(250); // Size for small devices
-      } else if (window.innerWidth < 1200) {
+      } else if (window.innerWidth < 1450) {
         setSvgSize(125); // Size for medium devices
-      } else if (window.innerWidth < 1500) {
+      } else if (window.innerWidth < 1750) {
         setSvgSize(150); // Size for large devices
-      } else if (window.innerWidth < 1700) {
+      } else if (window.innerWidth < 1950) {
         setSvgSize(175); // Size for largest devices
-      } else if (window.innerWidth < 1900) {
+      } else if (window.innerWidth < 2150) {
         setSvgSize(200); // Size for largest devices
       } 
-      if (window.innerWidth > 2100) {
+      if (window.innerWidth > 2350) {
         setSvgSize(250); // Size for largest devices
-      } else if (window.innerWidth > 2300) {
+      } else if (window.innerWidth > 2550) {
         setSvgSize(275); // Size for largest devices
       }
     };
@@ -66,7 +65,7 @@ const HomePage = () => {
   };
     
   const semiCircleAngleSpread = 180; // Angle spread for semi-circle (in degrees)
-  const semiCircleRadius = svgSize * 1.8; // Adjust radius based on svgSize
+  const semiCircleRadius = svgSize * 1.7; // Adjust radius based on svgSize
   const centerPoint = semiCircleRadius; // Center of the semi-circle
   const StepCircle = ({ label, imageUrl, onClick, strokeColor, index, total, svgSize }) => {
     // Calculate the angle for this item
@@ -82,7 +81,7 @@ const HomePage = () => {
       position: 'absolute',
       left: `${x}px`,
       bottom: `${y}px`, // Adjust based on the radius
-      transform: 'translate(-20%, 0)' // Center the item on the calculated position
+      transform: 'translate(-20%, 20%)' // Center the item on the calculated position
     };
 
 
@@ -104,7 +103,7 @@ const HomePage = () => {
                 ];
 
   let stepElements;
-  if (windowWidth > 1000) {
+  if (windowWidth > 1250) {
     // Semicircle layout
     stepElements = steps.map((step, index) => (
       <StepCircle
@@ -141,20 +140,18 @@ const HomePage = () => {
       <Header />
       <div className={styles.mainContent}>
         <div className={styles.leftSide}>
-          <Image src="/images/Logo/upenn-logo-png.png" width="50%" height="10%"></Image>
           <div className={styles.textNiChart}>
-            <p className={styles.title}>NiChart</p>
-            <p className={styles.text}>Neuro Imaging Chart <br></br> of AI-based Imaging Biomarkers</p>
+            <p><a className={styles.title}>NiChart:</a><a className={styles.text}>Neuro Imaging Chart of AI-based Imaging Biomarkers</a></p>
           </div>
           <div className={styles.studentPhoto}>
             <img className={styles.infographic} src="/images/Home/NiChart_info_pic_student_no_background.png" alt=""/>
           </div>
         </div>
         <div className={styles.rightSide}>
-        <div className={windowWidth > 1000 ? styles.semiCircleContainer : styles.verticalLayoutContainer}>
-          {windowWidth > 1000 && (
+        <div className={windowWidth > 1250 ? styles.semiCircleContainer : styles.verticalLayoutContainer}>
+          {windowWidth > 1250 && (
             <>
-              <img src={"/images/Home/NiChart_cloud_transparent.png"} alt="NiChart cloud" className={styles.centralImage} />
+              <img src={"/images/Home/chart.jpg"} alt="NiChart" className={styles.centralImage} />
             </>
           )}
           {stepElements}
@@ -164,13 +161,7 @@ const HomePage = () => {
       <div className={styles.bottom}>
         <div className={styles.bottomDivision}>
           <div>
-            <p>A framework to:</p>
-            <ul>
-              <li>Process multi-modal MRI images</li>
-              <li>Harmonize to reference data</li>
-              <li>Apply machine learning models</li>
-              <li>Derive individualized biomarkers "Neuroimaging Chart Dimensions"</li>
-            </ul>
+            <p>A framework to process multi-modal MRI images, harmonize to reference data, apply machine learning models and derive individualized biomarkers called "Neuroimaging Chart Dimensions"</p>
           </div>
           {/* Removed this ----- TODO: Do we need this language?*/}
           {/* <div className={styles.bottomTextColumn}>

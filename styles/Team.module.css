@@ -41,6 +41,7 @@
 
 .member h3 {
   margin-top: 1rem;
+  margin-bottom: 0px;
 }
 
 .member p {
@@ -55,4 +56,13 @@
 
 .member.expanded p {
   display: block;
+}
+
+.team_members a {
+  text-decoration: none;
+  color: #000;
+}
+
+.team_members a:hover {
+  text-decoration: underline;
 }

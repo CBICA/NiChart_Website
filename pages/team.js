@@ -68,7 +68,7 @@ const Team = () => {
       <Header />
       <div className={styles.team_page}>
         <div className={styles.team_members}>
-          <h2>AIBIL/CBICA</h2>
+          <a href="https://aibil.med.upenn.edu/"><h2>AIBIL / CBICA:</h2></a>
           <div className={styles.grid}>
             {AIBIL.map((member, index) => (
               <div
@@ -78,71 +78,76 @@ const Team = () => {
               >
                 <img src={member.image} alt={member.name} />
                 <h3>{member.name}</h3>
+                <a>{member.role}</a>
                 {AIBILExpandedIndex === index && <p>{member.bio}</p>}
               </div>
             ))}
           </div>
         </div>
         <div className={styles.team_members}>
-          <h2>Machine Learning for Biomedical Data / CBICA:</h2>
+          <a href="https://www.med.upenn.edu/cbica/"><h2>Machine Learning for Biomedical Data / CBICA:</h2></a>
           <div className={styles.grid}>
-            {MLBD.map((collaborator, index) => (
+            {MLBD.map((member, index) => (
               <div
                 key={index}
                 className={`${styles.member} ${MLBDExpandedIndex === index ? styles.expanded : ''}`}
                 onClick={() => handleClick(index, 'MLBD')}
               >
-                <img src={collaborator.image} alt={collaborator.name} />
-                <h3>{collaborator.name}</h3>
-                {MLBDExpandedIndex === index && <p>{collaborator.bio}</p>}
+                <img src={member.image} alt={member.name} />
+                <h3>{member.name}</h3>
+                <a>{member.role}</a>
+                {MLBDExpandedIndex === index && <p>{member.bio}</p>}
               </div>
             ))}
           </div>
         </div>
         <div className={styles.team_members}>
-          <h2>Penn Lifespan Informatics and Neuroimaging Center:</h2>
+          <a href="https://www.pennlinc.io/"><h2>Penn Lifespan Informatics and Neuroimaging Center:</h2></a>
           <div className={styles.grid}>
-            {PLINC.map((collaborator, index) => (
+            {PLINC.map((member, index) => (
               <div
                 key={index}
                 className={`${styles.member} ${PLINCExpandedIndex === index ? styles.expanded : ''}`}
                 onClick={() => handleClick(index, 'PLINC')}
               >
-                <img src={collaborator.image} alt={collaborator.name} />
-                <h3>{collaborator.name}</h3>
-                {PLINCExpandedIndex === index && <p>{collaborator.bio}</p>}
+                <img src={member.image} alt={member.name} />
+                <h3>{member.name}</h3>
+                <a>{member.role}</a>
+                {PLINCExpandedIndex === index && <p>{member.bio}</p>}
               </div>
             ))}
           </div>
         </div>
         <div className={styles.team_members}>
-          <h2>Department of Psychiatry UPENN:</h2>
+          <a href="https://www.pennmedicine.org/departments-and-centers/department-of-psychiatry"><h2>Department of Psychiatry UPENN:</h2></a>
           <div className={styles.grid}>
-            {Psychiatry.map((collaborator, index) => (
+            {Psychiatry.map((member, index) => (
               <div
                 key={index}
                 className={`${styles.member} ${PsychiatryExpandedIndex === index ? styles.expanded : ''}`}
                 onClick={() => handleClick(index, 'Psychiatry')}
               >
-                <img src={collaborator.image} alt={collaborator.name} />
-                <h3>{collaborator.name}</h3>
-                {PsychiatryExpandedIndex === index && <p>{collaborator.bio}</p>}
+                <img src={member.image} alt={member.name} />
+                <h3>{member.name}</h3>
+                <a>{member.role}</a>
+                {PsychiatryExpandedIndex === index && <p>{member.bio}</p>}
               </div>
             ))}
           </div>
         </div>
         <div className={styles.team_members}>
-          <h2>Department of Biostatistics UPENN:</h2>
+          <a href="https://www.dbeicoe.med.upenn.edu/pennsive"><h2>Department of Biostatistics UPENN:</h2></a>
           <div className={styles.grid}>
-            {Biostatistics.map((collaborator, index) => (
+            {Biostatistics.map((member, index) => (
               <div
                 key={index}
                 className={`${styles.member} ${BiostatisticsExpandedIndex === index ? styles.expanded : ''}`}
                 onClick={() => handleClick(index, 'Biostatistics')}
               >
-                <img src={collaborator.image} alt={collaborator.name} />
-                <h3>{collaborator.name}</h3>
-                {BiostatisticsExpandedIndex === index && <p>{collaborator.bio}</p>}
+                <img src={member.image} alt={member.name} />
+                <h3>{member.name}</h3>
+                <a>{member.role}</a>
+                {BiostatisticsExpandedIndex === index && <p>{member.bio}</p>}
               </div>
             ))}
           </div>

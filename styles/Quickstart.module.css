@@ -1,0 +1,38 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    justify-content: center; /* This will center the .mainContent horizontally */
+    align-items: start; /* This will align the .mainContent to the start of the container vertically */
+    max-width: 100%;
+    padding: 20px;
+    background: #f4f4f4;
+  }
+  
+  .mainContent {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .paper {
+    padding: 20px;
+  }
+  
+  .heading {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .paragraph {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  /* Add more styling as per your requirements */
+  

@@ -1,0 +1,29 @@
+.container {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto auto 1fr auto;
+  min-height: 100vh;
+}
+
+.newsLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 2rem;
+}
+
+.newsArticles {
+  /* Styles for the news articles section */
+}
+
+.twitterFeed {
+  /* Styles for the Twitter feed */
+}
+
+@media (min-width: 768px) {
+  .newsLayout {
+    grid-template-columns: 2fr 1fr; /* Adjust the ratio as needed */
+    gap: 20px;
+  }
+}
+
+/* Additional styles as required */

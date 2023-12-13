@@ -20,11 +20,12 @@
   font-size: 16px; /* Increased font size */
   color: #fff;
   padding: 5%;
+  margin: 5%;
 }
 
 .cbicaLink {
   color: #E0E0E0; /* Lighter shade for better readability */
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .cbicaLink:hover {

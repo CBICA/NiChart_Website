@@ -15,7 +15,7 @@
   }
   
   .sidebar li {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
   }
   
   .sidebar a {
@@ -33,6 +33,7 @@
   /* Indentation for subsections */
   .sidebar ul ul {
     margin-left: 1.5rem;
+    padding-top: 1rem;
   }
   
   .sidebar ul ul li {
@@ -62,19 +63,3 @@
   .innerSection a {
     font-size: 0.95rem;
   }
-  
-.sidebar h1c {
-  color: #3333ee;
-}
-
-.sidebar h2c {
-  color: #3333bb;
-}
-
-.sidebar h3c {
-  color: #333399;
-}
-
-  
-  
-  

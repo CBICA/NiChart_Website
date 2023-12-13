@@ -66,13 +66,13 @@ function Module_1({moduleSelector}) {
          <RemoteFileDisplay bucket="cbica-nichart-inputdata" />
       </Modal>
       
-      <h2>Module 1: Image Processing</h2>
+      <Heading level={1}>Module 1: Image Processing</Heading>
       <div className={styles.moduleContainer}>
           <Divider orientation="horizontal" />
           <Flex direction={{ base: 'column', large: 'row' }} maxWidth="100%" padding="1rem" width="100%" justifyContent="flex-start">
               <Flex justifyContent="space-between" direction="column" width="33%">
               <Heading level={3}>Upload Input T1 Scans</Heading>
-              <p>Upload NIfTI-format (.nii.gz) T1 MRI brain scans only. Please, limit filenames to alphanumeric characters, hyphens and underscores (no spaces or other characters).</p>       
+              <p>Upload NIfTI-format (.nii.gz) T1 MRI brain scans only. Please be aware that filenames with characters other than alphanumerics, hyphens or underscores will be changed automatically.</p>       
               <p><b>Alternatively,</b> you may upload a .zip file containing your .nii.gz files. We <b>strongly</b> recommend this option if you are uploading more than 5 scans. The system will unpack the archive which may take up to a minute after the upload succeeds (you may check using <b>View Uploaded Files</b>). Note that we cannot support archives greater than 10GB.</p>
               <p>When uploading large files, you may see fluctuations in the displayed progress. Do not worry -- as long as the upload does not fail, it will correct itself.</p>
               <DefaultStorageManagerExample/>
@@ -86,7 +86,7 @@ function Module_1({moduleSelector}) {
                   <p>Jobs will appear here a few seconds after submission. Each job corresponds to one scan. Finished jobs will be marked with green. Please wait for jobs to finish before proceeding. If your job fails, please contact us and provide the job ID listed below.</p>
                   <p>The first set of scans may take up to 6 minutes to start (time spent in both RUNNABLE and STARTING phases). After this spin-up period, jobs (up to 48 concurrently) should take approximately 1 minute to finish .</p>
                   <JobList jobQueue="cbica-nichart-helloworld-jobqueue2"/>
-                  <Button variation="primary" loadingText="Re-submitting..." onClick={async () => await resubmitModule1Jobs()}>Re-submit Failed Jobs</Button>
+                  <Button variation="primary" loadingText="Re-submitting..." onClick={async () => await resubmitModule1Jobs()}>Re-submit Incomplete Jobs</Button>
               </Flex>
               <Divider orientation="vertical" />
               <Flex direction="column" width="33%">

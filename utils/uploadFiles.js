@@ -199,10 +199,14 @@ async function processFile ({ file, key }) {
     const credentials = await Auth.currentCredentials();
     console.log("Auth.currentCredentials:")
     console.log(credentials)
+    console.log("Key before processing")
+    console.log(key)
+
+    var processedKey = key.replace(' ', '_') 
     
     return {
         file,
-        key,
+        processedKey,
         metadata: {
           uploadedByUser: credentials.identityId,
           uploadedByUsername: userInfo.username

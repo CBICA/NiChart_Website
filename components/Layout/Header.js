@@ -17,7 +17,7 @@ const Header = props => {
 
   const GoToCloudPortal = props => {
     return (
-    <Link className={styles.portalItem} href="/portal"><a className={styles.portal}>NiChart Cloud</a></Link>
+    <Link href="/portal"><a className={styles.portal}>NiChart Cloud</a></Link>
     )
   }
   
@@ -41,14 +41,22 @@ const Header = props => {
   }, []);
 
   return (
-    <>
     <header className={styles.header}>
-      <div className={styles.logo}>
-        <Link href="/">
-          <a>
-            <img src="/images/Logo/brain_transparent_logo_cropped.png" alt="NiChart Logo - Image by Gerd Altmann from Pixabay" className={styles.logoImage} />
-          </a>
-        </Link>
+      <div className={styles.logos}>
+        <div className={styles.logo}>
+          <Link href="/">
+            <a>
+              <img src="/images/Logo/brain_transparent_logo_cropped.png" alt="NiChart Logo - Image by Gerd Altmann from Pixabay" className={styles.logoImage} />
+            </a>
+          </Link>
+        </div>
+        <div className={styles.logo}>
+          <Link href="https://www.med.upenn.edu/cbica/">
+            <a>
+              <img src="/images/Logo/upenn-logo-png.png" alt="UPenn Logo"  />
+            </a>
+          </Link>
+        </div>
       </div>
       <nav>
         <div className={styles.menuIcon} onClick={toggleMenu}>
@@ -58,21 +66,18 @@ const Header = props => {
         <ul className={`${styles.navList} ${menuOpen ? styles.show : ''}`}>
           <li><Link href="/about"><a>About</a></Link></li>
           <li><Link href="/quickstart"><a>Quickstart</a></Link></li>
+          <li><Link href="/news"><a>News</a></Link></li>
           <li><Link href="/components"><a>Components</a></Link></li>
           <li><Link href="/team"><a>Team</a></Link></li>
           <li><Link href="/publications"><a>Publications</a></Link></li>
-          <li><Link href="https://forms.gle/e3msfZUGAKib6vu78"><a>Feedback</a></Link></li>
-          <li><Link href="/communication"><a className={styles.communication}>Communication</a></Link></li>
-          <li className={styles.divider}>|</li>
-          <li >{user? <SignoutWidget/> : <GoToCloudPortal/> }</li>
+          <li><Link href="/feedback"><a>Feedback</a></Link></li>
+          <li><Link href="/contact"><a>Contact</a></Link></li>
+          <li className={styles.divider}></li>
+          <li>{user? <SignoutWidget/> : <GoToCloudPortal/> }</li>
         </ul>
 
       </nav>
-      <p>
-      
-      </p>
     </header>
-    </>
   );
 };
 

@@ -9,54 +9,46 @@
   /* new small viewport height for modern browsers */
   min-height:100svh;
 }
-  
+
+.title {
+  padding: 1rem;
+}
+
 .contactContainer {
-  display:block;
-
+  display: block; /* Default to block layout */
+  padding: 1rem;
 }
 
-.contactContainer > * {
-  padding:1rem;
+.contactForm {
+  max-width: 700px;
+  margin-top: 10%;
+  padding: 1rem;
+  align-self: start; /* Align to the top of the grid area */
 }
 
-/* tablet breakpoint */
-@media (min-width:768px) {
+.googleMaps {
+  min-height: 700px;
+  padding: 5%;
+  margin-bottom: 5%;
+}
+
+@media (min-width: 1200px) {
   .contactContainer {
       display: grid;
-      grid-template-columns: 50% 50%;
-      gap: 10px;
+      grid-template-columns: 0.8fr 1fr;
+      gap: 50px;
       padding: 5%;
+  }
+
+  .contactForm {
+    max-width: 700px;
   }
 }
 
-.formContainer {
-  margin-top: 2rem;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.form label {
-  font-weight: bold;
-}
-
-.form input,
-.form textarea {
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  /* Adjust form width for screens smaller than or equal to 768px */
-  .form {
-    max-width: 400px;
+@media (max-width: 1200px) {
+  .contactContainer {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; 
   }
 }

@@ -3,24 +3,27 @@
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
-  justify-content: center; /* This will center the .mainContent horizontally */
-  align-items: start; /* This will align the .mainContent to the start of the container vertically */
+  justify-content: center;
+  align-items: start;
 }
 
 .mainContent {
-  padding: 20px;
-  max-width: 90%; /* or any other value you prefer */
-  margin: auto; /* This centers the content */
+  margin-top: 3%;
+  margin-bottom: 1%;
+  margin-left: 5%;
+  margin-right: 5%;
+  max-width: 90%;
 }
 
 .paper {
-  padding: 20px;
-  margin-bottom: 20px;
-  background-color: #f5f5f5; /* Light grey background */
+  padding: 5%;
+  margin-bottom: 5%;
+  background-color: #f5f5f5;
 }
 
 .imageContainer {
-  text-align: center; /* Center the image */
+  text-align: center;
+  grid-row: 1;
 }
 
 .image {
@@ -29,24 +32,13 @@
   max-height: 35vh;
 }
 
-.title {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-.text {
-  font-size: 1.1em;
-}
-
-/* Additional styles for MUI Typography */
-.Typography h2 {
-  color: #aa00dd;
-}
-
-/* Additional responsive styling */
+/* Responsive Design */
 @media (max-width: 768px) {
   .mainContent {
     padding: 10px;
+    grid-template-columns: 1fr;
+  }
+  .imageContainer {
+    grid-row: auto;
   }
 }

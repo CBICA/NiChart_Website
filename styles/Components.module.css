@@ -39,12 +39,23 @@
   }
 }
 
-.section div {
+.section {
 
 }
 
 .section p {
 
+}
+
+.headerFlex {
+  display: flex;
+  align-items: center; /* Vertically align items in the center */
+  justify-content: flex-start; /* Align items to the start of the container */
+}
+
+.brainImage {
+  margin-right: 10px; /* Add some space between the image and the title */
+  max-width: 80px;
 }
 
 .section hr {

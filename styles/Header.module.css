@@ -16,25 +16,24 @@
 
 .logos {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .logo {
   display: flex;
-  align-items: flex-start;
-  transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+  align-items: center;
   margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.logo img {
+  max-height: 130px;
+  height: auto;
 }
 
 .logo:hover {
   transform: scale(1.05); /* Scales up the container slightly on hover */
-}
-
-.logo img {
-  max-width: 100%; /* Logo can scale up to 100% of its container */
-  height: auto; /* Maintain aspect ratio */
-  max-height: 130px; /* Maximum height to start with */
-  transition: transform 0.3s ease; /* Smooth transition for zoom effect */
 }
 
 .header nav {

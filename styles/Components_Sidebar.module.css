@@ -63,3 +63,28 @@
   .innerSection a {
     font-size: 0.95rem;
   }
+
+  .referenceDataset:hover {
+    color: #a11f25
+  }
+  
+  .imageProcessing:hover {
+    color: #2152ad
+  }
+  
+  .harmonization:hover {
+    color: #92da44
+  }
+  
+  .machineLearning:hover {
+    color: #e9a944
+  }
+  
+  .dataVisualization:hover {
+    color: #f5e852
+  }
+  
+  .deployment:hover {
+    color: #ac29d8
+  }
+  

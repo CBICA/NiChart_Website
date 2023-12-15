@@ -5,7 +5,7 @@ import { getUseModule1Results, setUseModule1Results, setUseModule2Results, getMo
 import styles from '../../styles/Portal_Module_2.module.css'
 import { ResponsiveButton as Button } from '../Components/ResponsiveButton.js'
 import Modal from '../Components/Modal';
-import { ModelSelectionMenu } from '../Components/ModelSelectionMenu.js'
+import { ModelSelectionMenu } from './ModelSelectionMenu.js'
 
 async function exportModule2Results(moduleSelector) {
     // Perform the caching transfer operation

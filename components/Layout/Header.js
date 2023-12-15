@@ -44,16 +44,16 @@ const Header = props => {
     <header className={styles.header}>
       <div className={styles.logos}>
         <div className={styles.logo}>
-          <Link href="/">
+          <Link href="https://www.med.upenn.edu/cbica/">
             <a>
-              <img src="/images/Logo/brain_transparent_logo_cropped.png" alt="NiChart Logo - Image by Gerd Altmann from Pixabay" className={styles.logoImage} />
+              <img src="/images/Logo/upenn-logo-png-white.png" alt="UPenn Logo"/>
             </a>
           </Link>
         </div>
         <div className={styles.logo}>
-          <Link href="https://www.med.upenn.edu/cbica/">
+          <Link href="/">
             <a>
-              <img src="/images/Logo/upenn-logo-png.png" alt="UPenn Logo"  />
+              <img src="/images/Logo/brain_transparent_logo_cropped.png" alt="NiChart Logo - Image by Gerd Altmann from Pixabay" className={styles.logoImage} />
             </a>
           </Link>
         </div>

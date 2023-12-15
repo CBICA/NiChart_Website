@@ -30,7 +30,10 @@ const Components = () => {
     'Reference Dataset': (
       <>
         <div className={styles.section} id='ref_data_overview'>
-          <h1>NiChart Reference Dataset</h1>
+          <div className={styles.headerFlex}>
+            <img className={styles.brainImage} src="/images/Components/brain_curate.png"/>
+            <h1 style={{ color: '#a11f25' }}>NiChart Reference Dataset</h1>
+          </div>
           <p>
             NiChart Reference Dataset is a large and diverse collection of MRI images from multiple studies. It was created as part of the <a href="https://www.med.upenn.edu/cbica/imaging-consortia-increasing-sample-size-and-understanding-heterogeneity-in-health-and-disease.html">ISTAGING project</a> to develop a system for identifying imaging biomarkers of aging and neurodegenerative diseases. The dataset includes multi-modal MRI data, as well as carefully curated demographic, clinical, and cognitive variables from participants with a variety of health conditions.
             The reference dataset is a key component of NiChart for training machine learning models and for creating reference distributions of imaging measures and signatures, which can be used to compare NiChart values that are computed from the user data to normative or disease-related reference values.
@@ -64,7 +67,10 @@ const Components = () => {
     'Image Processing': (
       <>
         <div className={styles.section} id="img_proc_overview">
-          <h1>Image Processing</h1>
+          <div className={styles.headerFlex}>
+            <img className={styles.brainImage} src="/images/Components/brain_process.png"/>
+            <h1 style={{ color: '#2152ad' }}>Image Processing</h1>
+          </div>
           <p>NiChart Image Processing Pipelines is a set of advanced tools that can be used to extract features from multi-modal MRI data. The pipelines are made up of individual components that can be installed and run independently. Users can choose the specific components that they need for their analyses. NiChart pipelines are available both as <a href="https://github.com/CBICA/NiChart_Project">installation packages</a> and <a href="https://hub.docker.com/repository/docker/aidinisg/nichart_dlmuse/general">software containers</a>. This ensures 100% reproducibility across different platforms, and allows users to easily install and run the pipelines without having to worry about installing any additional software dependencies.</p>
         
           <br></br><br></br><hr/><br></br><br></br>
@@ -137,9 +143,11 @@ const Components = () => {
     ),
     'Harmonization': (
       <>
-      
       <div className={styles.section} id="combat_overview">
-        <h1>NiChart Data Harmonization</h1>
+        <div className={styles.headerFlex}>
+          <img className={styles.brainImage} src="/images/Components/brain_harmonize.png"/>
+          <h1 style={{ color: '#92da44' }}>NiChart Data Harmonization</h1>
+        </div>
         <p>To estimate and remove scanner-related batch effects in imaging variables we apply a statistical harmonization method, <a href="https://github.com/Zheng206/ComBatFam_Pipeline">ComBat</a>. The ComBat method is a Bayesian statistical technique aimed at removing <em>batch effects</em> in high-dimensional datasets.</p>
         <p>The method estimates both the mean (<em>location</em>) and the variance (<em>scale</em>) of the residuals across batches using <em>Empirical Bayes</em> estimation, after correcting for additional covariates, such as age, sex and ICV.</p>
 
@@ -170,11 +178,11 @@ const Components = () => {
     ),
     'Machine Learning Models': (
       <>
-
         <div className={styles.section} id="ml_overview">
-      
-          <h1>NiChart ML Models</h1>
-          
+          <div className={styles.headerFlex}>
+            <img className={styles.brainImage} src="/images/Components/brain_learn.png"/>      
+            <h1 style={{ color: '#e9a944' }}>NiChart ML Models</h1>
+          </div>
           <p>NiChart offers an extensible library of pre-trained machine learning (ML) models that can convert high-dimensional imaging data into low-dimensional imaging signatures. These representations effectively capture and quantify brain changes associated with specific diseases or neurodegenerative conditions.</p>
           <p>The collection of NiChart imaging signatures forms the neuroimaging chart dimensional system. NiChart's pre-trained ML models are <a href="https://hub.docker.com/r/cbica/nichart-sparescores">readily available</a> and easy to use, eliminating the need for extensive training or expertise in machine learning. Additionally, the extensibility of the NiChart library will allow researchers to add their own specialized models.</p>
           <p>The models are trained on carefully selected subsets of the reference dataset, tailored to each task and target disease/condition.</p>
@@ -205,10 +213,11 @@ const Components = () => {
     ),
     'Data Visualization': (
       <>
-
         <div className={styles.section} id="datavis_overview">
-      
-          <h1>NiChart Data Visualization</h1>
+          <div className={styles.headerFlex}>
+            <img className={styles.brainImage} src="/images/Components/brain_visualize.png"/>
+            <h1 style={{ color: '#f5e852' }}>NiChart Data Visualization</h1>
+          </div>
           <p>NiChart's visualization modules offer tools to assist users in comparing outcome variables extracted from their MRI data against established NiChart reference distributions. Users can effectively visualize and interpret their data, gaining meaningful insights into their individual profiles.</p>
           <p>NiChart offers two convenient options for visualizing user data: A client-side visualization tool integrated with the cloud portal enables users to derive and visualize NiChart dimensions for their data on the browser. A PyQT-based installable package provides extended capabilities for exploring and analyzing user data.</p>
           
@@ -230,16 +239,15 @@ const Components = () => {
             <img src="/images/Components/DataViewers/nichart_webviewer_plots.png" alt=""/>
           </div>
         </div>
-      
-      
       </>
     ),
     'Deployment': (
       <>
-      
-        <div className={styles.section} id="deploy_overview">
-      
-          <h1>NiChart Software Deployment and Application</h1>
+        <div className={styles.section} id="deploy_overview">      
+          <div className={styles.headerFlex}>
+            <img className={styles.brainImage} src="/images/Components/brain_deploy.png"/>
+            <h1 style={{ color: '#ac29d8' }}>NiChart Software Deployment and Application</h1>
+          </div>
           <p>NiChart provides three installation options to accommodate a wide range of end-users: <a href="https://github.com/CBICA/NiChart_Project">local</a> installation, <a href="https://hub.docker.com/repository/docker/aidinisg/nichart_dlmuse/general">containerized</a> installation, and the <a href="/portal">portal</a>.</p>
           <p>The choice of installation option depends on the user's technical expertise, computational resources, and desired level of control. For users with strong technical skills and a need for maximum flexibility, local user-managed or containerized installation is recommended. For users who require a highly accessible and user-friendly solution, the portal is the ideal choice.</p>
           <p>Currently, the portal provides a restricted pipeline that is limited to structural MRI images.</p>
@@ -265,7 +273,6 @@ const Components = () => {
             <p>The Nichart portal is a user-friendly online platform that streamlines the process of analyzing structural magnetic resonance imaging (sMRI). It provides a straightforward interface that allows users to upload their sMRI images, apply pre-trained ML models to extract meaningful biomarkers, and visualize the results in an intuitive manner.</p>
           </div>
         </div>
-
       </>
     ),
     

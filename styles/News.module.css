@@ -18,11 +18,10 @@
 .newsLayout {
   display: grid;
   grid-template-columns: 1fr;
-  padding: 2rem;
 }
 
 .newsArticles {
-  /* Styles for the news articles section */
+  margin-bottom: 2%;
 }
 
 .twitterFeed {

@@ -69,4 +69,5 @@ amplifytools.xcconfig
 *.csv
 
 # Apart from the reference data folder:
-!/public/content/Portal/Visualization/Reference_Data
+!/public/content/Portal/Visualization/Reference_Data/*.csv
+!/public/content/Portal/Visualization/Dicts/*.csv

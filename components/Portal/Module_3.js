@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormControl, MenuItem, Select, Button, InputLabel } from '@mui/material';
+import { Button } from '@mui/material';
 import { Heading } from '@aws-amplify/ui-react'
 import { Autocomplete } from '@mui/material';
 import TextField from '@mui/material/TextField';
@@ -11,7 +11,7 @@ import styles from '../../styles/Portal_Module_3.module.css';
 import MUSEROICompleteList from '/public/content/Portal/Visualization/Dicts/MUSE_ROI_complete_list.json';
 import { setUseModule2Results, getUseModule2Results, getModule2Cache } from '../../utils/NiChartPortalCache.js'
 import { getSpareScoresOutput } from '../../utils/uploadFiles.js'
-import { ToggleButton, ToggleButtonGroup, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 
 
 async function getDefaultCSV () {
@@ -113,15 +113,29 @@ const Module_3 = ({moduleSelector}) => {
       setReferenceDataOption('Error loading reference data');
       return;
     }
-    
+    const selectedROI = roiFullNames.find((roi) => roi.id === roiColumn);
+    let plotName;
+    if (selectedROI.id === "SPARE_score_AD") {
+      plotName = "SPARE AD score";
+    } else if (selectedROI.id === "SPARE_score_BA") {
+      plotName = "SPARE BA score";
+    } else {
+      plotName = `${selectedROI.id}: ${selectedROI.fullName}`;
+    }
+
     if (uploadedFile && uploadedFile instanceof File && uploadedFile.name) {
       Papa.parse(uploadedFile, {
         header: true,
         skipEmptyLines: true,
         complete: (results) => {
           const parsedData = results.data;
+          // Filter the data by sex if "Male only" or "Female only" is selected
+          if (sex === 'Male only' || sex === 'Female only') {
+            const sexFilter = sex === 'Male only' ? 'M' : 'F';
+            parsedData = parsedData.filter(row => row.Sex === sexFilter);
+          }
           const selectedROI = roiFullNames.find((roi) => roi.id === roiColumn);
-          const plotName = `${selectedROI.id}: ${selectedROI.fullName} | ${referenceDataOption} | ${uploadedFile.name}`;
+          plotName += ` | ${referenceDataOption} | ${uploadedFile.name}`;
           const newPlot = {
             name: plotName,
             data: parsedData,
@@ -138,6 +152,7 @@ const Module_3 = ({moduleSelector}) => {
       });
     } else{
       const selectedROI = roiFullNames.find((roi) => roi.id === roiColumn);
+      plotName += ` | ${referenceDataOption}`;
       const newPlot = {
         name: `${selectedROI.id}: ${selectedROI.fullName} | ${referenceDataOption}`,
         data: [],
@@ -160,11 +175,19 @@ const Module_3 = ({moduleSelector}) => {
         if (plot.name === plotName) {
           const selectedROI = roiFullNames.find(roi => roi.id === newROI);
           if (selectedROI) {
-            let newName = plotName;
-            if ( uploadedFile && uploadedFile instanceof File ) {
-              newName = `${selectedROI.id}: ${selectedROI.fullName} | ${plot.referenceOption} | ${uploadedFile.name}`;
+            let newName;
+            if (selectedROI.id === "SPARE_score_AD") {
+              newName = "SPARE AD score";
+            } else if (selectedROI.id === "SPARE_score_BA") {
+              newName = "SPARE BA score";
             } else {
-              newName = `${selectedROI.id}: ${selectedROI.fullName} | ${plot.referenceOption}`;
+              newName = `${selectedROI.id}: ${selectedROI.fullName}`;
+            }
+
+            if (uploadedFile && uploadedFile instanceof File) {
+              newName += ` | ${plot.referenceOption} | ${uploadedFile.name}`;
+            } else {
+              newName += ` | ${plot.referenceOption}`;
             }
             return { ...plot, roi: newROI, name: newName };
           }
@@ -178,29 +201,39 @@ const Module_3 = ({moduleSelector}) => {
 
   const handleReferenceChange = async (plotName, newReference) => {
     let newReferenceFilePath;
+    let sexFilter;
     // CN
     if (newReference === 'CN') {
       newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_ALL_CN_Centiles.csv';
+      sexFilter = "All";
     } else if (newReference === 'CN - Female only') {
       newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_F_CN_Centiles.csv';
+      sexFilter = "F";
     } else if (newReference === 'CN - Male only') {
       newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_M_CN_Centiles.csv';
+      sexFilter = "M";
     } 
     // AD
       else if (newReference === 'AD') {
       newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_ALL_AD_Centiles.csv';
+      sexFilter = "All";
     } else if (newReference === 'AD - Female only') {
       newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_F_AD_Centiles.csv';
+      sexFilter = "F";
     } else if (newReference === 'AD - Male only') {
       newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_M_AD_Centiles.csv';
+      sexFilter = "M";
     } 
     // MCI
       else if (newReference === 'MCI') {
       newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_ALL_MCI_Centiles.csv';
+      sexFilter = "All";
     } else if (newReference === 'MCI - Female only') {
       newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_F_MCI_Centiles.csv';
+      sexFilter = "F";
     } else if (newReference === 'MCI - Male only') {
       newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_M_MCI_Centiles.csv';
+      sexFilter = "M";
     } 
     // Backup
     else {
@@ -213,25 +246,49 @@ const Module_3 = ({moduleSelector}) => {
         console.error('Error loading reference data:', response.statusText);
         return;
       }
-      const content = await response.text();
-      const newReferenceData = Papa.parse(content, { header: true }).data;
-  
-      // Update the plots state with the new reference data
-      setPlots(prevPlots => {
-        return prevPlots.map(plot => {
-          if (plot.name === plotName) {
-            const selectedROI = roiFullNames.find(roi => roi.id === plot.roi);
-            let newPlotName = plotName;
-            if ( uploadedFile && uploadedFile instanceof File) {
-              newPlotName = `${selectedROI.id}: ${selectedROI.fullName} | ${newReference} | ${uploadedFile.name}`;
-            } else {
-              newPlotName = `${selectedROI.id}: ${selectedROI.fullName} | ${newReference}`;
-            }
-            return { ...plot, reference: newReferenceData, referenceOption: newReference, name: newPlotName };
-          }
-          return plot;
+    const content = await response.text();
+    const newReferenceData = Papa.parse(content, { header: true }).data;
+    // If there is an uploaded file, parse it to get the user's data
+    let parsedData;
+    if (uploadedFile && uploadedFile instanceof File) {
+      const parseResult = await new Promise((resolve, reject) => {
+        Papa.parse(uploadedFile, {
+          header: true,
+          skipEmptyLines: true,
+          complete: resolve,
+          error: reject,
         });
       });
+
+      // Apply sex filter to the user's data if needed
+      parsedData = parseResult.data;
+      if (sexFilter === 'M' || sexFilter === 'F') {
+        parsedData = parsedData.filter(row => row.Sex === sexFilter);
+      }
+    }
+
+      // Update the plots state with the new reference data
+    setPlots(prevPlots => {
+      return prevPlots.map(plot => {
+        if (plot.name === plotName) {
+          const selectedROI = roiFullNames.find(roi => roi.id === plot.roi);
+          let newPlotName = selectedROI.id === "SPARE_score_AD" ? "SPARE AD score" :
+                            selectedROI.id === "SPARE_score_BA" ? "SPARE BA score" :
+                            `${selectedROI.id}: ${selectedROI.fullName}`;
+
+          // Append the reference and file name to the plot name
+          newPlotName += ` | ${newReference}`;
+          if (uploadedFile && uploadedFile instanceof File) {
+            newPlotName += ` | ${uploadedFile.name}`;
+          }
+
+          // Update plot with new name and reference data
+          // Use parsedData if it's available, otherwise keep the existing plot.data
+          return { ...plot, data: parsedData || plot.data, reference: newReferenceData, referenceOption: newReference, name: newPlotName };
+        }
+        return plot;
+      });
+    });
   
     } catch (error) {
       console.error('Error loading reference data:', error);
@@ -298,7 +355,15 @@ const Module_3 = ({moduleSelector}) => {
                 setROIColumn(newValue ? newValue.id : "702: Intra Cranial Volume");
               }}
               options={roiFullNames.filter(roi => roi.available === 'Yes')}
-              getOptionLabel={(option) => `${option.id}: ${option.fullName}`}
+              getOptionLabel={(option) => {
+                if (option.id === "SPARE_score_AD") {
+                  return "SPARE AD score";
+                } else if (option.id === "SPARE_score_BA") {
+                  return "SPARE BA score";
+                } else {
+                  return `${option.id}: ${option.fullName}`;
+                }
+              }}
               renderInput={(params) => (
                 <TextField {...params} label="Select ROI column" variant="standard" />
               )}

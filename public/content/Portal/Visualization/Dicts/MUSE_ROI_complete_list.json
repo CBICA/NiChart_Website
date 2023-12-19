@@ -2078,5 +2078,20 @@
         "Consisting_of_ROIS": "207",
         "MUSE_ROI_Name": "M0_ttg_transverse_temporal_gyrus_L",
         "Available": "No"
+    },
+    "SPARE_score_AD": {
+        "ID": "SPARE_score_AD",
+        "Name": "Left TTG   transverse temporal gyrus",
+        "Full_Name": "SPARE score for Alzheimer's Disease",
+        "Consisting_of_ROIS": "",
+        "MUSE_ROI_Name": "SPARE_AD",
+        "Available": "Yes"},
+    "SPARE_score_BA": {
+        "ID": "SPARE_score_BA",
+        "Name": "SPARE_AD",
+        "Full_Name": "SPARE score for Brain Age",
+        "Consisting_of_ROIS": "",
+        "MUSE_ROI_Name": "SPARE_BA",
+        "Available": "Yes"
     }
 }

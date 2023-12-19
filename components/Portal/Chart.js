@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic';
 import NiiVue from '../../utils/niiViewer.js';
 import Modal from 'react-modal';
 import { FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 import { breakStringIntoParts } from '../../utils/chartTitleBreaker.js';
 import styles from '../../styles/Chart.module.css';
 import MUSEROICompleteList from '/public/content/Portal/Visualization/Dicts/MUSE_ROI_complete_list.json';
@@ -187,21 +189,34 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
       <div className={styles.controlsContainer}>
         <div className={styles.chartControls}>
           <div className={styles.chartControl}>
-            {/* Dropdown to select ROI */}
-            <FormControl variant="standard">
-              <InputLabel>Change ROI</InputLabel>
-              <Select value={roi} onChange={(e) => onROIChange(e.target.value)}>
-                {Object.entries(MUSEROICompleteList).map(([id, roiData]) => (
-                  <MenuItem key={id} value={id}>
-                    {`${id}: ${roiData.Full_Name}`}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <Autocomplete
+              value={MUSEROICompleteList[roi]}
+              onChange={(event, newValue) => {
+                onROIChange(newValue ? newValue.ID : "");
+              }}
+              options={Object.values(MUSEROICompleteList)}
+              getOptionLabel={(option) => {
+                if (option.ID === "SPARE_score_AD") {
+                  return "SPARE AD score";
+                } else if (option.ID === "SPARE_score_BA") {
+                  return "SPARE BA score";
+                } else {
+                  return `${option.ID}: ${option.Full_Name}`;
+                }
+              }}
+              renderInput={(params) => (
+                <TextField 
+                  {...params} 
+                  label="Change ROI" 
+                  variant="standard" 
+                  style={{ minWidth: '250px' }} // Set a minimum width or adapt as needed
+                />
+              )}
+            />
           </div>
           <div className={styles.chartControl}>
             {/* Dropdown to select reference data */}
-            <FormControl variant="standard">
+            <FormControl variant="standard" style={{ minWidth: '250px' }}>
               <InputLabel>Change Reference Data</InputLabel>
               <Select value={referenceOption} onChange={(e) => onReferenceDataChange(e.target.value)}>
                   <MenuItem value="CN">CN</MenuItem>

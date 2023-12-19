@@ -159,14 +159,14 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
           setClickedDataPointId(id);
           // Do whatever you need to do with the ID
           const message = `Clicked Data Point:\nX: ${x}\nY: ${y}\nCurve Number: ${curveNumber} \nID: ${id}`;
-          // console.log(message);
-          openModal({
-            x,
-            y,
-            curveNumber,
-            id,
-            // Other data you want to pass to the modal, e.g., URL
-          });
+          console.log(message);
+          // Disable Modal for now. TODO: fix display of scan.
+          // openModal({
+          //   x,
+          //   y,
+          //   curveNumber,
+          //   id,
+          // });
         }
       }
     };

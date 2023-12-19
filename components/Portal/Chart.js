@@ -48,8 +48,8 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
 
     // Convert ROI index (ID) to Full Name
     const roiFullName = MUSEROICompleteList[roi]?.Full_Name || roi;
-
-    const filteredData = reference.filter((row) => row.ROI === roi);
+    const roi_MUSE_ROI_Name =  MUSEROICompleteList[roi]?.MUSE_ROI_Name || roi;
+    const filteredData = reference.filter((row) => row.ROI_Name === roi_MUSE_ROI_Name);
     const updatedData = [];
     const referenceDataKeys = ["centile_5", "centile_10", "centile_25", "centile_50", "centile_75", "centile_90", "centile_95"];
     const redColors = referenceDataKeys.map((key, index) => {
@@ -63,7 +63,8 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
     for (let i = 0; i < referenceDataKeys.length; i++) {
       const key = referenceDataKeys[i];
       updatedData.push({
-        x: filteredData.map((row) => row.Age_At_Visit),
+        // x: filteredData.map((row) => row.Age_At_Visit),
+        x: filteredData.map((row) => row.Age),
         y: filteredData.map((row) => row[key]),
         mode: 'line',
         line: {
@@ -203,10 +204,15 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
             <FormControl variant="standard">
               <InputLabel>Change Reference Data</InputLabel>
               <Select value={referenceOption} onChange={(e) => onReferenceDataChange(e.target.value)}>
-                <MenuItem value="All data">All data</MenuItem>
-                <MenuItem value="iSTAGING data">iSTAGING data</MenuItem>
-                <MenuItem value="UK Biobank data">UK Biobank data</MenuItem>
-                <MenuItem value="ADNI data">ADNI data</MenuItem>
+                  <MenuItem value="CN">CN</MenuItem>
+                  <MenuItem value="CN - Female only">CN - Female only</MenuItem>
+                  <MenuItem value="CN - Male only">CN - Male only</MenuItem>
+                  <MenuItem value="AD">AD</MenuItem>
+                  <MenuItem value="AD - Female only">AD - Female only</MenuItem>
+                  <MenuItem value="AD - Male only">AD - Male only</MenuItem>
+                  <MenuItem value="MCI">MCI</MenuItem>
+                  <MenuItem value="MCI - Female only">MCI - Female only</MenuItem>
+                  <MenuItem value="MCI - Male only">MCI - Male only</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -221,8 +227,8 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
         contentLabel="NiiVue Modal"
         style={{
           content: {
-            width: '45%',    // Adjust the width as needed
-            height: '65%',   // Adjust the height as needed
+            width: '45%',
+            height: '65%',
             marginTop: '10%', 
             margintBottom: '10%',
             marginLeft: 'auto',

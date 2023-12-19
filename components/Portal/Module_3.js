@@ -11,6 +11,7 @@ import styles from '../../styles/Portal_Module_3.module.css';
 import MUSEROICompleteList from '/public/content/Portal/Visualization/Dicts/MUSE_ROI_complete_list.json';
 import { setUseModule2Results, getUseModule2Results, getModule2Cache } from '../../utils/NiChartPortalCache.js'
 import { getSpareScoresOutput } from '../../utils/uploadFiles.js'
+import { ToggleButton, ToggleButtonGroup, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 
 
 async function getDefaultCSV () {
@@ -23,7 +24,7 @@ async function getDefaultCSV () {
 }
 
 const Module_3 = ({moduleSelector}) => {
-  const [referenceDataOption, setReferenceDataOption] = useState('iSTAGING data');
+  const [referenceDataOption, setReferenceDataOption] = useState('CN');
   const [roiColumn, setROIColumn] = useState('702');
   const [uploadedFile, setUploadedFile] = useState(getDefaultCSV);
   const [plots, setPlots] = useState([]);
@@ -52,7 +53,11 @@ const Module_3 = ({moduleSelector}) => {
    
   const roiFullNames = Object.entries(MUSEROICompleteList).map(([id, roiData]) => ({
     id,
+    name: roiData.Name,
     fullName: roiData.Full_Name,
+    consisting_of_ROIS: roiData.Consisting_of_ROIS,
+    MUSE_ROI_Name: roiData.MUSE_ROI_Name,
+    available: roiData.Available,
   }));
 
   const handleFileUpload = (event) => {
@@ -66,13 +71,32 @@ const Module_3 = ({moduleSelector}) => {
     
     let referenceData;
     let referenceFilePath;
-    if (referenceDataOption === 'iSTAGING data') {
-      referenceFilePath = '/content/Portal/Visualization/Reference_Data/iSTAGING_Data.csv';
-    } else if (referenceDataOption === 'UK Biobank data') {
-      // referenceFilePath = '/public/content/Portal/Visualization/Reference_Data/UK_Biobank_Data.csv';
-    } else if (referenceDataOption === 'ADNI data') {
-      // referenceFilePath = '/public/content/Portal/Visualization/Reference_Data/ADNI_Data.csv';
-    } else {
+    // CN
+      if (referenceDataOption === 'CN') {
+      referenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_ALL_CN_Centiles.csv';
+    } else if (referenceDataOption === 'CN - Female only') {
+      referenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_F_CN_Centiles.csv';
+    } else if (referenceDataOption === 'CN - Male only') {
+      referenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_M_CN_Centiles.csv';
+    } 
+    // AD
+      else if (referenceDataOption === 'AD') {
+      referenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_ALL_AD_Centiles.csv';
+    } else if (referenceDataOption === 'AD - Female only') {
+      referenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_F_AD_Centiles.csv';
+    } else if (referenceDataOption === 'AD - Male only') {
+      referenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_M_AD_Centiles.csv';
+    } 
+    // MCI
+      else if (referenceDataOption === 'MCI') {
+      referenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_ALL_MCI_Centiles.csv';
+    } else if (referenceDataOption === 'MCI - Female only') {
+      referenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_F_MCI_Centiles.csv';
+    } else if (referenceDataOption === 'MCI - Male only') {
+      referenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_M_MCI_Centiles.csv';
+    } 
+    // Backup
+    else {
       return;
     }
     try {
@@ -90,7 +114,7 @@ const Module_3 = ({moduleSelector}) => {
       return;
     }
     
-    if (uploadedFile && uploadedFile instanceof File) {
+    if (uploadedFile && uploadedFile instanceof File && uploadedFile.name) {
       Papa.parse(uploadedFile, {
         header: true,
         skipEmptyLines: true,
@@ -136,7 +160,12 @@ const Module_3 = ({moduleSelector}) => {
         if (plot.name === plotName) {
           const selectedROI = roiFullNames.find(roi => roi.id === newROI);
           if (selectedROI) {
-            const newName = `${selectedROI.id}: ${selectedROI.fullName} | ${plot.referenceOption}`;
+            let newName = plotName;
+            if ( uploadedFile && uploadedFile instanceof File ) {
+              newName = `${selectedROI.id}: ${selectedROI.fullName} | ${plot.referenceOption} | ${uploadedFile.name}`;
+            } else {
+              newName = `${selectedROI.id}: ${selectedROI.fullName} | ${plot.referenceOption}`;
+            }
             return { ...plot, roi: newROI, name: newName };
           }
         }
@@ -147,17 +176,90 @@ const Module_3 = ({moduleSelector}) => {
   };
   
 
-  const handleReferenceChange = (plotName, newReference) => {
-    setPlots(prevPlots => {
-      const updatedPlots = prevPlots.map(plot => {
-        if (plot.name === plotName) {
-          const newName = plot.name.replace(plot.referenceOption, newReference);
-          return { ...plot, referenceOption: newReference, name: newName };
-        }
-        return plot;
+  const handleReferenceChange = async (plotName, newReference) => {
+    let newReferenceFilePath;
+    // CN
+    if (newReference === 'CN') {
+      newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_ALL_CN_Centiles.csv';
+    } else if (newReference === 'CN - Female only') {
+      newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_F_CN_Centiles.csv';
+    } else if (newReference === 'CN - Male only') {
+      newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_M_CN_Centiles.csv';
+    } 
+    // AD
+      else if (newReference === 'AD') {
+      newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_ALL_AD_Centiles.csv';
+    } else if (newReference === 'AD - Female only') {
+      newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_F_AD_Centiles.csv';
+    } else if (newReference === 'AD - Male only') {
+      newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_M_AD_Centiles.csv';
+    } 
+    // MCI
+      else if (newReference === 'MCI') {
+      newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_ALL_MCI_Centiles.csv';
+    } else if (newReference === 'MCI - Female only') {
+      newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_F_MCI_Centiles.csv';
+    } else if (newReference === 'MCI - Male only') {
+      newReferenceFilePath = '/content/Portal/Visualization/Reference_Data/NiChart_M_MCI_Centiles.csv';
+    } 
+    // Backup
+    else {
+      return;
+    }
+  
+    try {
+      const response = await fetch(newReferenceFilePath);
+      if (response.status === 404) {
+        console.error('Error loading reference data:', response.statusText);
+        return;
+      }
+      const content = await response.text();
+      const newReferenceData = Papa.parse(content, { header: true }).data;
+  
+      // Update the plots state with the new reference data
+      setPlots(prevPlots => {
+        return prevPlots.map(plot => {
+          if (plot.name === plotName) {
+            const selectedROI = roiFullNames.find(roi => roi.id === plot.roi);
+            let newPlotName = plotName;
+            if ( uploadedFile && uploadedFile instanceof File) {
+              newPlotName = `${selectedROI.id}: ${selectedROI.fullName} | ${newReference} | ${uploadedFile.name}`;
+            } else {
+              newPlotName = `${selectedROI.id}: ${selectedROI.fullName} | ${newReference}`;
+            }
+            return { ...plot, reference: newReferenceData, referenceOption: newReference, name: newPlotName };
+          }
+          return plot;
+        });
       });
-      return updatedPlots;
-    });
+  
+    } catch (error) {
+      console.error('Error loading reference data:', error);
+    } 
+  };
+  
+  const [diagnosis, setDiagnosis] = useState('CN');
+  const [sex, setSex] = useState('All');
+  const handleDiagnosisChange = (event, newDiagnosis) => {
+    if (newDiagnosis !== null) {
+      setDiagnosis(newDiagnosis);
+      updateReferenceDataOption(newDiagnosis, sex);
+    }
+  };
+
+  const handleSexChange = (event, newSex) => {
+    if (newSex !== null) {
+      setSex(newSex);
+      updateReferenceDataOption(diagnosis, newSex);
+    }
+  };
+
+  const updateReferenceDataOption = (selectedDiagnosis, selectedSex) => {
+    let option = selectedDiagnosis;
+    if (selectedSex !== 'All') {
+      option += ` - ${selectedSex}`;
+    }
+    setReferenceDataOption(option);
   };
 
   return (
@@ -168,18 +270,25 @@ const Module_3 = ({moduleSelector}) => {
       <div className={styles.controlsContainer}>
         <div className={styles.controlsGrid}>
           <div className={styles.controlItem}>
-            <FormControl variant="standard">
-                <InputLabel>Select Reference Data</InputLabel>
-                <Select
-                  value={referenceDataOption}
-                  onChange={(e) => setReferenceDataOption(e.target.value)}
-                >
-                  <MenuItem value="All data">All data</MenuItem>
-                  <MenuItem value="iSTAGING data">iSTAGING data</MenuItem>
-                  <MenuItem value="UK Biobank data">UK Biobank data</MenuItem>
-                  <MenuItem value="ADNI data">ADNI data</MenuItem>
-                </Select>
-              </FormControl>
+            <p>Select the reference data characteristics:</p>
+          </div>
+          <div className={styles.controlItem}>
+            <ToggleButtonGroup
+              value={diagnosis}
+              exclusive
+              onChange={handleDiagnosisChange}
+              aria-label="Diagnosis"
+            >
+              <ToggleButton value="CN" aria-label="CN">
+                CN
+              </ToggleButton>
+              <ToggleButton value="MCI" aria-label="MCI">
+                MCI
+              </ToggleButton>
+              <ToggleButton value="AD" aria-label="AD">
+                AD
+              </ToggleButton>
+            </ToggleButtonGroup>
           </div>
           <div className={styles.controlItem}>
             <Autocomplete
@@ -188,7 +297,7 @@ const Module_3 = ({moduleSelector}) => {
                 // If newValue is null (input cleared), use the default ROI ID
                 setROIColumn(newValue ? newValue.id : "702: Intra Cranial Volume");
               }}
-              options={roiFullNames}
+              options={roiFullNames.filter(roi => roi.available === 'Yes')}
               getOptionLabel={(option) => `${option.id}: ${option.fullName}`}
               renderInput={(params) => (
                 <TextField {...params} label="Select ROI column" variant="standard" />
@@ -196,6 +305,25 @@ const Module_3 = ({moduleSelector}) => {
               disableClearable
             />
           </div>
+          <div className={styles.controlItem}>
+            <ToggleButtonGroup
+              value={sex}
+              exclusive
+              onChange={handleSexChange}
+              aria-label="Sex"
+            >
+              <ToggleButton value="All" aria-label="All">
+                All
+              </ToggleButton>
+              <ToggleButton value="Female only" aria-label="Female only">
+                Female only
+              </ToggleButton>
+              <ToggleButton value="Male only" aria-label="Male only">
+                Male only
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </div>
+          
         </div>
 
         <div className={styles.controlsGrid}>
@@ -235,8 +363,8 @@ const Module_3 = ({moduleSelector}) => {
         </div>
       </div>
       <div className={styles.instructions}>
-        <p>Hover over points to see more details. </p>
-      </div>
+        <p>Explore the chart for a detailed view: Hover over data points to reveal more information. Click and drag to zoom into specific areas; double-click to return to the original view. Use the toolbar for additional functionalities like adjusting the scale, panning across the chart, or saving the chart as an image. Toggling data series on or off is also possible by interacting with the legend entries.</p>
+    </div>
       <div className={styles.plotsContainer}>
           {plots.map(plot => (
             <div key={plot.name} className={styles.plotItem}>

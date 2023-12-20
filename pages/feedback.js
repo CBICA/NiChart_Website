@@ -18,6 +18,10 @@ const Feedback = () => {
         <h1>We Value Your Feedback</h1>
         <p>Your insights and experiences are crucial for us to continuously improve NiChart. We would greatly appreciate it if you could spare a few moments to share your thoughts and feedback. Your perspective is vital in shaping the future of NiChart.</p>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSddH_eg5RHI94Ph7KYAGibzRSVfXOKReGXbj0Z2YBfF_6c8SA/viewform?usp=sf_link" className={styles.feedbackLink}>Take our 3-minute Feedback Survey</a>
+
+        <br></br><br></br>
+
+        <p>Please visit the <a href="/faq">Frequently Asked Questions</a> if you have questions!</p>
       </div>
 
       <Footer />

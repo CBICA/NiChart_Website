@@ -97,7 +97,7 @@ export const RemoteFileDisplay = ({bucket}) =>  {
                 return "Failed to Extract"
             }
             else {
-                return "Archive (awaiting extraction)" 
+                return "Archive (extraction pending)" 
             }
         }
         else if (fileIsImage(key)) {
@@ -110,7 +110,7 @@ export const RemoteFileDisplay = ({bucket}) =>  {
                 return "QC Failed: " + meta['qc_reason']
             }
             else {
-                return "Image (Status Unknown)"
+                return "Image (status pending)"
             }
         }
         else {

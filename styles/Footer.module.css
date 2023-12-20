@@ -1,16 +1,15 @@
 .footer {
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 5rem;
+  width: calc(100% - 2rem);
   background-color: #000000;
   margin: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.05);
+  padding: 5px 5px; /* Adjust top and bottom padding as needed */
 }
 
 .footerContent {
   display: flex;
-  height: inherit;
   justify-content: center;
   align-items: center;
 }
@@ -19,8 +18,7 @@
   margin: 1;
   font-size: 16px; /* Increased font size */
   color: #fff;
-  padding: 5%;
-  margin: 5%;
+  padding: 1rem; /* Adjust padding for better visibility */
 }
 
 .cbicaLink {

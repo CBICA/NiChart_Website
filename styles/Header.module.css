@@ -14,18 +14,26 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.05);
 }
 
-.logo {
+.logos {
   display: flex;
-  transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.logo:hover {
-  transform: scale(1.1); /* Scales up the container slightly on hover */
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
 }
 
 .logo img {
-  height: 130px;
-  border-radius: 15px;
+  max-height: 130px;
+  height: auto;
+}
+
+.logo:hover {
+  transform: scale(1.05); /* Scales up the container slightly on hover */
 }
 
 .header nav {
@@ -39,8 +47,9 @@
 }
 
 .navList {
-  list-style: none;
   display: flex;
+  align-items: center;
+  list-style: none;
   gap: 2rem;
 }
 
@@ -73,7 +82,49 @@
   display: none;
 }
 
-@media (max-width: 1100px) {
+
+.divider {
+  border-right: 4px solid #fff; /* White vertical line */
+  height: 40px; /* Adjust height as needed */
+  align-self: center; /* To vertically center the divider */
+}
+
+/* Portal Link (The text inside the box) */
+.portal {
+  padding: 5px 10px;
+  display: block; /* Change to block to fill the .portalItem area */
+  text-decoration: none; /* Removes underline from the link */
+  border: 3px solid #fff;  /* White border */
+  transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+}
+
+/* Hover effect for the portal item */
+.portal:hover {
+  transform: scale(1.1); /* Zoom effect on hover for the whole item */
+}
+
+/* Hover effect for the portal item */
+.portal a:hover {
+  transform: scale(1.1); /* Zoom effect on hover for the whole item */
+}
+
+/* Ensure the underline does not appear for the portal item */
+.portal a::after {
+  display: none; /* This will ensure the underline doesn't show */
+}
+
+/* Adjust hover effect for non-portal links */
+.navList li a:hover::after {
+  width: 100%;
+}
+
+/* Specific rule to remove underline effect on hover for the portal */
+.portal:hover::after {
+  width: 0; /* Remove the effect entirely for the portal link */
+}
+
+
+@media (max-width: 1650px) {
   .menuIcon {
     display: block;
     color: #fff;
@@ -81,15 +132,17 @@
   .divider {
     display: none; /* Hide the divider entirely */
   }
+
   .navList {
     display: none;
     flex-direction: column;
+    align-items: flex-start;
     position: absolute;
-    top: 100%;
+    top: 90%;
     left: 0;
     background-color: #f2f2f2;
     padding: 1rem;
-    width: 100%;
+    width: calc(100% - 2rem);
   }
 
   .navList.show {
@@ -107,50 +160,16 @@
     font-weight: bold;
     position: relative;
   }
-}
 
-
-.divider {
-  padding: 0 5px; /* Add space around the divider */
-  color: #333;
-  /* font-weight: bold; */
-  font-size: xx-large;
-  align-self: center;
-  transform: translateY(-10px);
-}
-
-/* Portal Item (The box around the link) */
-.portalItem {
-  border: 3px solid #fff;  /* White border */
-  transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
-  align-self: center; /* Align the item vertically */
-  transform: translateY(-10px);
-}
-
-/* Portal Link (The text inside the box) */
-.portal {
-  color: #4397F8;
-  padding: 5px 10px; /* Add padding to make the rectangle roomier */
-  display: block; /* Change to block to fill the .portalItem area */
-  text-decoration: none; /* Removes underline from the link */
-}
-
-/* Hover effect for the portal item */
-.portalItem:hover {
-  transform: scale(1.1); /* Zoom effect on hover for the whole item */
-}
-
-/* Ensure the underline does not appear for the portal item */
-.portalItem a::after {
-  display: none; /* This will ensure the underline doesn't show */
-}
-
-/* Adjust hover effect for non-portal links */
-.navList li a:hover::after {
-  width: 100%;
-}
-
-/* Specific rule to remove underline effect on hover for the portal */
-.portal:hover::after {
-  width: 0; /* Remove the effect entirely for the portal link */
+  .portal {
+    padding: 0px;
+    display: block; /* Change to block to fill the .portalItem area */
+    text-decoration: none; /* Removes underline from the link */
+    border: none;
+    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+  }
+  
+  .logo img {
+    max-height: 100px; /* Reduce the height for smaller screens */
+  }
 }

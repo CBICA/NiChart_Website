@@ -32,7 +32,7 @@
 }
 
 /* Styles for screens that are less than 1000px wide */
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1250px) {
   .mainContent {
     grid-template-columns: 1fr; /* Sets one column layout */
     grid-template-rows: auto auto; /* Creates two rows */
@@ -49,12 +49,21 @@
   }
 }
 
+
+.textNiChart .titleBox {
+  display: flex;
+  align-items: center ;
+  margin-bottom: 20px;
+}
+
+
 .textNiChart .title{
   font-family: 'Arial', sans-serif; /* TODO Choose a font that closely matches the image */
   font-weight: bold; 
   font-size: 3.5vw; 
   color: #7A5471;
-  margin-bottom: 20px;
+  align-items: center;
+  margin-right: 50px;
 }
 
 .textNiChart .text {
@@ -149,9 +158,9 @@
   position: absolute;
   left: 50%;
   bottom: 50%;
-  transform: translate(-35%, 50%);
+  transform: translate(-55%, 45%);
   opacity: 0.8;
-  width: 70%; /* Set your desired width */
+  width: 50%; /* Set your desired width */
   height: auto; /* Maintain aspect ratio */
   z-index: 1; /* Ensure it's above the background but below the step circles */
 }
@@ -160,16 +169,16 @@
   font-family: 'Arial', sans-serif; /* Choose a font similar to NiChart text */
   background-color: #491260; 
   font-weight: bold; 
-  font-size: 2vw; 
+  font-size: 1.5vw; 
   color: white;
   display: flex;
   width: 100%;
   /* display: grid; */
   /* grid-template-columns: 1fr 1fr; /* Creates two columns */
-  padding: 2%; /* Adjust padding as needed */
+  padding: 1%; /* Adjust padding as needed */
   box-sizing: border-box; /* Ensures padding is included in the width */
   max-height: max-content;
-  margin: 2%;
+  margin: 1%;
 }
 
 .bottomTextColumn {
@@ -216,7 +225,7 @@
 }
 
 /* For screens narrower than 1000px and wider than 500px */
-@media only screen and (min-width: 500px) and (max-width: 1000px) {
+@media only screen and (min-width: 500px) and (max-width: 1250px) {
   .verticalLayoutContainer {
     grid-template-rows: repeat(3, 0.5fr); /* 3 rows */
     grid-template-columns: auto auto;

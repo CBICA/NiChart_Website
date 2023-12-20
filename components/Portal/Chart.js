@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic';
 import NiiVue from '../../utils/niiViewer.js';
 import Modal from 'react-modal';
 import { FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 import { breakStringIntoParts } from '../../utils/chartTitleBreaker.js';
 import styles from '../../styles/Chart.module.css';
 import MUSEROICompleteList from '/public/content/Portal/Visualization/Dicts/MUSE_ROI_complete_list.json';
@@ -48,8 +50,8 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
 
     // Convert ROI index (ID) to Full Name
     const roiFullName = MUSEROICompleteList[roi]?.Full_Name || roi;
-
-    const filteredData = reference.filter((row) => row.ROI === roi);
+    const roi_MUSE_ROI_Name =  MUSEROICompleteList[roi]?.MUSE_ROI_Name || roi;
+    const filteredData = reference.filter((row) => row.ROI_Name === roi_MUSE_ROI_Name);
     const updatedData = [];
     const referenceDataKeys = ["centile_5", "centile_10", "centile_25", "centile_50", "centile_75", "centile_90", "centile_95"];
     const redColors = referenceDataKeys.map((key, index) => {
@@ -63,7 +65,8 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
     for (let i = 0; i < referenceDataKeys.length; i++) {
       const key = referenceDataKeys[i];
       updatedData.push({
-        x: filteredData.map((row) => row.Age_At_Visit),
+        // x: filteredData.map((row) => row.Age_At_Visit),
+        x: filteredData.map((row) => row.Age),
         y: filteredData.map((row) => row[key]),
         mode: 'line',
         line: {
@@ -158,14 +161,14 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
           setClickedDataPointId(id);
           // Do whatever you need to do with the ID
           const message = `Clicked Data Point:\nX: ${x}\nY: ${y}\nCurve Number: ${curveNumber} \nID: ${id}`;
-          // console.log(message);
-          openModal({
-            x,
-            y,
-            curveNumber,
-            id,
-            // Other data you want to pass to the modal, e.g., URL
-          });
+          console.log(message);
+          // Disable Modal for now. TODO: fix display of scan.
+          // openModal({
+          //   x,
+          //   y,
+          //   curveNumber,
+          //   id,
+          // });
         }
       }
     };
@@ -186,27 +189,45 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
       <div className={styles.controlsContainer}>
         <div className={styles.chartControls}>
           <div className={styles.chartControl}>
-            {/* Dropdown to select ROI */}
-            <FormControl variant="standard">
-              <InputLabel>Change ROI</InputLabel>
-              <Select value={roi} onChange={(e) => onROIChange(e.target.value)}>
-                {Object.entries(MUSEROICompleteList).map(([id, roiData]) => (
-                  <MenuItem key={id} value={id}>
-                    {`${id}: ${roiData.Full_Name}`}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <Autocomplete
+              value={MUSEROICompleteList[roi]}
+              onChange={(event, newValue) => {
+                onROIChange(newValue ? newValue.ID : "");
+              }}
+              options={Object.values(MUSEROICompleteList)}
+              getOptionLabel={(option) => {
+                if (option.ID === "SPARE_score_AD") {
+                  return "SPARE AD score";
+                } else if (option.ID === "SPARE_score_BA") {
+                  return "SPARE BA score";
+                } else {
+                  return `${option.ID}: ${option.Full_Name}`;
+                }
+              }}
+              renderInput={(params) => (
+                <TextField 
+                  {...params} 
+                  label="Change ROI" 
+                  variant="standard" 
+                  style={{ minWidth: '250px' }} // Set a minimum width or adapt as needed
+                />
+              )}
+            />
           </div>
           <div className={styles.chartControl}>
             {/* Dropdown to select reference data */}
-            <FormControl variant="standard">
+            <FormControl variant="standard" style={{ minWidth: '250px' }}>
               <InputLabel>Change Reference Data</InputLabel>
               <Select value={referenceOption} onChange={(e) => onReferenceDataChange(e.target.value)}>
-                <MenuItem value="All data">All data</MenuItem>
-                <MenuItem value="iSTAGING data">iSTAGING data</MenuItem>
-                <MenuItem value="UK Biobank data">UK Biobank data</MenuItem>
-                <MenuItem value="ADNI data">ADNI data</MenuItem>
+                  <MenuItem value="CN">CN</MenuItem>
+                  <MenuItem value="CN - Female only">CN - Female only</MenuItem>
+                  <MenuItem value="CN - Male only">CN - Male only</MenuItem>
+                  <MenuItem value="AD">AD</MenuItem>
+                  <MenuItem value="AD - Female only">AD - Female only</MenuItem>
+                  <MenuItem value="AD - Male only">AD - Male only</MenuItem>
+                  <MenuItem value="MCI">MCI</MenuItem>
+                  <MenuItem value="MCI - Female only">MCI - Female only</MenuItem>
+                  <MenuItem value="MCI - Male only">MCI - Male only</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -221,8 +242,8 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
         contentLabel="NiiVue Modal"
         style={{
           content: {
-            width: '45%',    // Adjust the width as needed
-            height: '65%',   // Adjust the height as needed
+            width: '45%',
+            height: '65%',
             marginTop: '10%', 
             margintBottom: '10%',
             marginLeft: 'auto',

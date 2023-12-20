@@ -73,3 +73,5 @@ amplifytools.xcconfig
 !/public/content/Portal/Visualization/Reference_Data
 # And other explicit exceptions
 !/public/content/Portal/Module2
+!/public/content/Portal/Visualization/Reference_Data/*.csv
+!/public/content/Portal/Visualization/Dicts/*.csv

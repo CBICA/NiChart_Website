@@ -16,7 +16,7 @@ const Publications = () => {
         <main className={styles.mainContent}>
           <h1 className={styles.title}>Publications</h1>
           <p className={styles.description}>
-          NiChart is built upon the foundation of extensive research <myemp>conducted by a diverse group of contributors</myemp>. This page highlights a <myemp>selection of published papers</myemp> that have directly <myemp>influenced or been utilized within NiChart components</myemp>. This list will be continuously updated to reflect the latest NiChart-related publications.</p>
+          NiChart is built upon the foundation of extensive research conducted by a diverse group of contributors. This page highlights a selection of published papers that have directly influenced or been utilized within NiChart components. This list will be continuously updated to reflect the latest NiChart-related publications.</p>
           <section className={styles.publicationSection}>
             <h2 className={styles.sectionHeader}>sMRI Image Processing</h2>
               <ul>

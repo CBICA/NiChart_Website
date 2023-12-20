@@ -15,6 +15,7 @@ import awsconfig from './aws-exports';
 import { getUseModule1Results, getUseModule2Results, getModule1Cache, getModule2Cache, getModule3Cache, setModule1Cache, setModule2Cache, setModule3Cache } from './NiChartPortalCache'
 import { ResponsiveButton as Button } from '../components/Components/ResponsiveButton.js'
 
+import { getProperties } from '@aws-amplify/storage'
 
 Amplify.configure(awsconfig)
 Auth.configure(awsconfig)
@@ -188,7 +189,8 @@ export async function uploadToModule2(file) {
     const result = await Storage.put(key, file, {'bucket': 'cbica-nichart-inputdata', 'level': 'private', 'metadata': {'uploadedByUser': credentials.identityId, 'uploadedByUsername': username}})
 }
 
-async function processFile ({ file, key }) {
+
+const processFile = async ({ file, key }) => {
     
     let userInfo = await Auth.currentAuthenticatedUser();
     //console.log(userInfo);
@@ -201,12 +203,12 @@ async function processFile ({ file, key }) {
     console.log(credentials)
     console.log("Key before processing")
     console.log(key)
-
-    var processedKey = key.replace(' ', '_') 
-    
+    var processedKey = key;
+    processedKey = key.replace(' ', '_') 
+    console.log("Key after processing:", processedKey)
     return {
         file,
-        processedKey,
+        key: processedKey,
         metadata: {
           uploadedByUser: credentials.identityId,
           uploadedByUsername: userInfo.username
@@ -223,11 +225,13 @@ export const DefaultStorageManagerExample = () => {
       acceptedFileTypes={['.nii.gz', '.nii', '.zip']}
       accessLevel="private"
       maxFileCount={5}
-      shouldAutoProceed={false}
+      shouldAutoProceed={true}
       processFile={processFile}
       isResumable
       //onSuccess={onSuccess}
       onFileRemove={({ key }) => {
+          console.log("OnFileRemove")
+          console.log(key)
           setFiles((prevFiles) => {
             return {
               ...prevFiles,
@@ -236,6 +240,9 @@ export const DefaultStorageManagerExample = () => {
           });
         }}
       onUploadError={(error, { key }) => {
+        console.log("OnUploadError")
+        console.log(key)
+        console.log(error)
           setFiles((prevFiles) => {
             return {
               ...prevFiles,
@@ -246,6 +253,8 @@ export const DefaultStorageManagerExample = () => {
           });
         }}
       onUploadSuccess={({ key }) => {
+        console.log("OnUploadSuccess")
+        console.log(key)
           setFiles((prevFiles) => {
             return {
               ...prevFiles,
@@ -256,6 +265,8 @@ export const DefaultStorageManagerExample = () => {
           });
         }}
       onUploadStart={({ key }) => {
+         console.log("OnUploadStart")
+         console.log(key)
           setFiles((prevFiles) => {
             return {
               ...prevFiles,
@@ -601,12 +612,17 @@ export async function emptyBucketForUser(bucket, prefix='') {
 }
 
 export async function listBucketContentsForUser(bucket) {
-    const listedObjects = await Storage.list('', {'bucket': bucket,'level': 'private', 'pageSize': 'ALL'});
-    //console.log("listedObjects")
-    //console.log(listedObjects)
-    if (listedObjects.results.length === 0) return;
+    try {
+      const listedObjects = await Storage.list('', {'bucket': bucket,'level': 'private', 'pageSize': 'ALL'});
+      //console.log("listedObjects")
+      //console.log(listedObjects)
+      if (listedObjects.results.length === 0) return [];
     
-    return listedObjects.results;
+      return listedObjects.results;
+    } catch (error) {
+      console.log("Error caught in listBucketContentsForUser:", error)
+      return false
+    }
 
     //for (const result of listedObjects.results) {
     //
@@ -624,20 +640,22 @@ export async function deleteKeyForUser(bucket, key) {
 }
 
 export async function getKeyMetadata(bucket, key) {
+  //console.log("GetKeyMetadata")
+  //console.log("Key:", key)
   try {
-    const result = await getProperties({
-        key: key,
-        options: {
-            bucket: bucket,
-            accessLevel: 'private',
+    const result = await Storage.getProperties(
+        key,
+        {
+        bucket: bucket,
+        level: 'private',
         }
-    });
-    console.log('File Properties ', result);
+    );
+    //console.log('File Properties ', result);
+    return result;
   } catch (error) {
-    console.log('Error while retrieving file metadata ', error);
+    //console.log('Error while retrieving file metadata ', error);
     return {};
   }
-  return result;
 }
 
 export async function runModule1Jobs() {

@@ -38,6 +38,7 @@ Thumbs.db
 
 # Ignore next.js build artifacts
 .next
+/out
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
@@ -69,5 +70,8 @@ amplifytools.xcconfig
 *.csv
 
 # Apart from the reference data folder:
+!/public/content/Portal/Visualization/Reference_Data
+# And other explicit exceptions
+!/public/content/Portal/Module2
 !/public/content/Portal/Visualization/Reference_Data/*.csv
 !/public/content/Portal/Visualization/Dicts/*.csv

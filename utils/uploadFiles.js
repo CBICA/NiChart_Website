@@ -673,6 +673,10 @@ export async function runModule1Jobs() {
   const { Payload, LogResult } = await client.send(command);
   const result = Buffer.from(Payload).toString();
   const logs = Buffer.from(LogResult, "base64").toString();
+  if (result.includes("Lifetime job limit exceed")) {
+     console.log("User exceeded lifetime job limit.")
+     alert("According to our records, you have reached the 5000 job limit on this account. If you require assistance in running additional jobs, or if you believe this message is in error, please contact us at nichart-devs@cbica.upenn.edu and we'll be happy to help.");
+  }
   console.log("result: " + result)
   console.log("logs: " + logs)
   return result.replaceAll('"', '');

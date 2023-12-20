@@ -16,8 +16,27 @@ export const RemoteFileDisplay = ({bucket}) =>  {
     
     async function update() {
       console.log("Updating RemoteFileDisplay")
-      const out_list = await listBucketContentsForUser(bucket)
-      setRemoteFiles(out_list)
+      var out_list = await listBucketContentsForUser(bucket)
+      if (!out_list) {
+        alert ("We couldn't find anything to browse in your bucket. If this is in error, please contact nichart-devs@cbica.upenn.edu.")
+      }
+      //console.log("out_list", out_list)
+
+      await Promise.all(out_list.map(async (element) => {
+        //console.log("RFS Update: element:", element)
+        element.meta = await getKeyMetadata(bucket, element.key);
+      }))
+
+      //console.log("out_list", out_list)
+      var out_dict = {};
+      for (const item of out_list) {
+        //console.log("item:", item)
+        const key = item.key;
+        //console.log("Key for this file: ", key)
+        out_dict[item.key] = item;
+      }
+      console.log("out_dict:", out_dict)
+      setRemoteFiles(out_dict)
       
       var n_archives = 0;
       var n_scans = 0;
@@ -42,6 +61,7 @@ export const RemoteFileDisplay = ({bucket}) =>  {
     
     async function deleteKeyFromBucket(key) {
         await deleteKeyForUser(bucket, key)
+        console.log("Deleting key based on RFD selection")
         //alert("Placeholder From RemoteFileDisplay: User attempting to delete key " + key);
         update()
     }
@@ -63,16 +83,17 @@ export const RemoteFileDisplay = ({bucket}) =>  {
         return key.toLowerCase().includes("_macosx")
     }
     
-    async function getFileStatus (key) {
+    function getFileStatus (key) {
         if (fileIsMacThumbnail(key)) {
             return "macOS thumbnail file (will not be processed)"
         }
         if (fileIsArchive(key)) {
-            const meta = await getKeyMetadata(bucket, key)
-            if (meta['ARCHIVE_STATUS'] == 'EXTRACTED') {
+            //const meta = await getKeyMetadata(bucket, key)
+            const meta = remoteFiles[key].meta.metadata
+            if (meta['archive_status'] == 'EXTRACTED') {
                 return "Archive (Extracted)"
             }
-            else if (meta['ARCHIVE_STATUS'] == 'FAILED') {
+            else if (meta['archive_status'] == 'FAILED') {
                 return "Failed to Extract"
             }
             else {
@@ -80,12 +101,13 @@ export const RemoteFileDisplay = ({bucket}) =>  {
             }
         }
         else if (fileIsImage(key)) {
-            const meta = await getKeyMetadata(bucket, key)
-            if (meta['QC_STATUS'] == 'SUCCEEDED') {
+            //const meta = await getKeyMetadata(bucket, key)
+            const meta = remoteFiles[key].meta.metadata
+            if (meta['qc_status'] == 'SUCCEEDED') {
                 return "Image (QC Passed)"
             }
-            else if (meta['QC_STATUS'] == 'FAILED'){
-                return "QC Failed: " + meta['QC_REASON']
+            else if (meta['qc_status'] == 'FAILED'){
+                return "QC Failed: " + meta['qc_reason']
             }
             else {
                 return "Image (Status Unknown)"
@@ -112,17 +134,18 @@ export const RemoteFileDisplay = ({bucket}) =>  {
     
     return (
         <div>
+        <Text><b>Please note</b> that even if your scans fail our quality control checks, you can still attempt to run image processing on them. However, we cannot make any guarantees about the quality of results from data that fails these checks.</Text>
         <Divider orientation="horizontal" />
         <h2>Successfully uploaded scans:</h2>
             <ScrollView height='400px'> 
                 <Collection 
-                    items={remoteFiles}
+                    items={Object.entries(remoteFiles)}
                     type="list"
                     direction="column"
                     gap="10px"
                     wrap="nowrap"
                  >
-                {(item, index) => (
+                {([key, item], index) => (
                     <div>
                     <Flex direction={{ base: 'row' }} width="100%" justifyContent="space-between">
                     <Text>File key: {item.key}</Text>

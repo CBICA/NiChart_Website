@@ -23,7 +23,7 @@ const Quickstart = () => {
                 <Heading level={1}>Quickstart Guide</Heading>
                 <p>If you already know you're interested in NiChart, this guide will help you get started as fast as possible.</p>
                 <p>There are two ways to use NiChart: from your own machine, or via NiChart Cloud.</p>
-                <p>The easiest way to get started is to use NiChart Cloud, accessible from this site.</p>
+                <p>The easiest way to get started is to use NiChart Cloud, accessible from this site. <b>Please note that as of December 19, 2023, NiChart Cloud only supports structural MRI pipelines.</b> Other pipelines such as for functional MRI can be used from the standalone software packages listed on the <Link href="/components">components page.</Link></p>
                 <p>To begin, click the "NiChart Cloud" button in the header.</p>
 
                 <Heading level={2}>Using NiChart Cloud</Heading>
@@ -33,7 +33,7 @@ const Quickstart = () => {
 
                 <Heading level={3}>Module 1: Image Processing</Heading>
                 <p>The box on the left allows you to upload your T1 NIFTI brain scans.</p>
-                <p>(If you have a lot of scans, you can also upload a .zip archive.)</p>
+                <p>(If you have a lot of scans, you can also upload a .zip archive, which makes uploads much faster.)</p>
                 <p>You can drag and drop, or use the upload button.</p>
                 <p>Wait for your files to upload. You can check the files currently on the backend server with the "View Uploaded Files" button.</p>
                 <p>When uploading large files, you may see fluctuations in the displayed progress. Do not worry -- as long as the upload does not fail, it will correct itself.</p>

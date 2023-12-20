@@ -45,7 +45,7 @@ const About = () => {
           <Grid item xs={12} md={6}>
             <Paper className={styles.paper} square={false}>
               <Typography variant="h4" gutterBottom>FDA Disclaimer</Typography>
-              <Typography variant="body1">Please be advised that NiChart is a set of free software tools provided for research purposes. The statements made regarding the products have not been evaluated by the Food and Drug Administration. The efficacy of these products has not been confirmed by FDA-approved research. These products are not intended to diagnose, treat, cure or prevent any disease. All information presented here is not meant as a substitute for or alternative to information from health care practitioners. Please consult your health care professional about potential interactions or other possible complications before using any product.</Typography>
+              <Typography variant="body1">Please be advised that NiChart is a set of free software tools provided for research purposes <b>ONLY</b>. NiChart and its related software tools are <b>NOT INTENDED FOR CLINICAL USE</b>. The statements made regarding the products have not been evaluated by the Food and Drug Administration. The efficacy of these products has not been confirmed by FDA-approved research. These products are not intended to diagnose, treat, cure or prevent any disease. All information presented here is not meant as a substitute for or alternative to information from health care practitioners. Please consult your health care professional about potential interactions or other possible complications before using any product.</Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} md={6}>

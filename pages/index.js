@@ -161,7 +161,7 @@ const HomePage = () => {
       <div className={styles.bottom}>
         <div className={styles.bottomDivision}>
           <div>
-            <p>A framework to process multi-modal MRI images, harmonize to reference data, apply machine learning models and derive individualized biomarkers called "Neuroimaging Chart Dimensions"</p>
+            <p>A framework to process multi-modal MRI images, harmonize to reference data, apply and contribute machine learning models and derive individualized biomarkers called "Neuroimaging Chart Dimensions"</p>
           </div>
           {/* Removed this ----- TODO: Do we need this language?*/}
           {/* <div className={styles.bottomTextColumn}>

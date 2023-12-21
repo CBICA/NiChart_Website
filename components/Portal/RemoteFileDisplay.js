@@ -82,6 +82,10 @@ export const RemoteFileDisplay = ({bucket}) =>  {
     function fileIsMacThumbnail (key) {
         return key.toLowerCase().includes("_macosx")
     }
+
+    function fileIsCSV (key) {
+        return key.endsWith(".csv")
+    }
     
     function getFileStatus (key) {
         if (fileIsMacThumbnail(key)) {
@@ -91,10 +95,10 @@ export const RemoteFileDisplay = ({bucket}) =>  {
             //const meta = await getKeyMetadata(bucket, key)
             const meta = remoteFiles[key].meta.metadata
             if (meta['archive_status'] == 'EXTRACTED') {
-                return "Archive (Extracted)"
+                return (<font color="green">Archive (Extracted)</font>)
             }
             else if (meta['archive_status'] == 'FAILED') {
-                return "Failed to Extract"
+                return (<font color="red">Failed to Extract</font>)
             }
             else {
                 return "Archive (extraction pending)" 
@@ -104,13 +108,13 @@ export const RemoteFileDisplay = ({bucket}) =>  {
             //const meta = await getKeyMetadata(bucket, key)
             const meta = remoteFiles[key].meta.metadata
             if (meta['qc_status'] == 'SUCCEEDED') {
-                return "Image (QC Passed)"
+                return (<font color="green">Image (QC Passed)</font>)
             }
             else if (meta['qc_status'] == 'FAILED'){
-                return "QC Failed: " + meta['qc_reason']
+                return (<font color="red">QC Failed: + {meta['qc_reason']}</font>)
             }
             else {
-                return "Image (status pending)"
+                return (<font>Image (status pending)</font>)
             }
         }
         else {
@@ -137,7 +141,7 @@ export const RemoteFileDisplay = ({bucket}) =>  {
         <Text><b>Please note</b> that even if your scans fail our quality control checks, you can still attempt to run image processing on them. However, we cannot make any guarantees about the quality of results from data that fails these checks.</Text>
         <Divider orientation="horizontal" />
         <h2>Successfully uploaded scans:</h2>
-            <ScrollView height='400px'> 
+            <ScrollView height='75%' width='100%'> 
                 <Collection 
                     items={Object.entries(remoteFiles)}
                     type="list"
@@ -147,9 +151,9 @@ export const RemoteFileDisplay = ({bucket}) =>  {
                  >
                 {([key, item], index) => (
                     <div>
-                    <Flex direction={{ base: 'row' }} width="100%" justifyContent="space-between">
+                    <Flex direction={{ base: 'row' }} width="100%" justifyContent="space-between" height="10%">
                     <Text>File key: {item.key}</Text>
-                    <Text>Type: { fileIsMacThumbnail(item.key)? "macOS Thumbnail (Won't be processed)" : fileIsArchive(item.key)? "Archive" : fileIsImage(item.key)? "Scan" : "Other"}</Text>
+                    <Text>Type: { fileIsMacThumbnail(item.key)? "macOS Thumbnail (not used)" : fileIsArchive(item.key)? "Archive" : fileIsImage(item.key)? "Scan" : fileIsCSV(item.key)? "Tabular" : "Other"}</Text>
                     <Text>Status: { getFileStatus (item.key) }</Text>
                     <Button loadingText="Deleting..." variation="destructive" onClick={async () => {deleteKeyFromBucket(item.key)}}>Delete</Button>
                     </Flex>

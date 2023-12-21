@@ -5,7 +5,7 @@ import Footer from '../components/Layout/Footer';
 import Favicons from '../components/Favicons/Favicons';
 import styles from '../styles/About.module.css';
 import { Grid, Paper, Box, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import { Heading, Divider } from '@aws-amplify/ui-react';
+import { Heading, Divider, Link } from '@aws-amplify/ui-react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Quickstart = () => {
@@ -24,7 +24,7 @@ const Quickstart = () => {
           </Box>
           <Box>
             <p>If you already know you're interested in NiChart, this guide will help you get started as fast as possible.</p>
-            <p>There are two ways to use NiChart: from your own machine, or via NiChart Cloud. The easiest way to get started is to use NiChart Cloud, accessible from this site.</p>
+            <p>There are two ways to use NiChart: from your own machine, or via <Link href="/portal">NiChart Cloud</Link>. The easiest way to get started is to use <Link href="/portal">NiChart Cloud</Link>, accessible from this site.</p>
             <br></br>
 
             <Accordion>

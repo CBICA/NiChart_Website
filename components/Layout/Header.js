@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaBars } from 'react-icons/fa';
 import styles from '/styles/Header.module.css';
 import Link from 'next/link';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import {Heading, Flex, Button} from '@aws-amplify/ui-react'
 const GA_TRACKING_ID = "G-CES0G22JMD";
 
@@ -37,7 +37,7 @@ const Header = props => {
 
   ReactGA.initialize(GA_TRACKING_ID);
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    ReactGA.send("pageview");
   }, []);
 
   return (

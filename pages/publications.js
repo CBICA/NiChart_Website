@@ -22,14 +22,14 @@ const Publications = () => {
               <ul>
                 <li>Doshi J, Erus G, Habes M, Davatzikos C. DeepMRSeg: A convolutional deep neural network for anatomy and abnormality segmentation on MR images. ArXiv Prepr ArXiv190702110. Published online 2019.</li>
                 <li>Doshi J, Erus G, Ou Y, et al. MUSE: MUlti-atlas region Segmentation utilizing Ensembles of registration algorithms and parameters, and locally optimal atlas selection. NeuroImage. 2016;127:186–195.</li>
-                <li>Ou, Y., Sotiras, A., Paragios, N. & Davatzikos, C. DRAMMS: Deformable registration via attribute matching and mutual-saliency weighting. Med Image Anal 15, 622-639.</li>
                 <li>Junhao, W.E.N., Abdulkadir, A., Satterthwaite, T.D., Robert-Fitzgerald, T., Chen, J., Schnack, H., Zanetti, M., Meisenzahl, E., Busatto, G., Crespo-Facorro, B. and Pantelis, C., 2022. Novel genomic loci and pathways influence patterns of structural covariance in the human brain. medRxiv. - In review</li>
+                <li>Ou, Y., Sotiras, A., Paragios, N. & Davatzikos, C. DRAMMS: Deformable registration via attribute matching and mutual-saliency weighting. Med Image Anal 15, 622-639.</li>
               </ul>
           <h2 className={styles.sectionHeader}>fMRI and DTI Image Processing</h2>
             <ul>
+              <li>Cieslak, M., Cook, P.A., He, X. et al. QSIPrep: an integrative platform for preprocessing and reconstructing diffusion MRI data. Nat Methods 18, 775–778 (2021). https://doi.org/10.1038/s41592-021-01185-5</li>
               <li>Esteban, O., Markiewicz, C.J., Blair, R.W. et al. fMRIPrep: a robust preprocessing pipeline for functional MRI. Nat Methods 16, 111–116 (2019). https://doi.org/10.1038/s41592-018-0235-4</li>
               <li>Mehta K, Salo T, Madison T, Adebimpe A, Bassett DS, Bertolero M, Cieslak M, Covitz S, Houghton A, Keller AS, Luo A, Miranda-Dominguez O, Nelson SM, Shafiei G, Shanmugan S, Shinohara RT, Sydnor VJ, Feczko E, Fair DA, Satterthwaite TD. XCP-D: A Robust Pipeline for the post-processing of fMRI data. bioRxiv [Preprint]. 2023 Nov 21:2023.11.20.567926. doi: 10.1101/2023.11.20.567926. PMID: 38045258; PMCID: PMC10690221.</li>
-              <li>Cieslak, M., Cook, P.A., He, X. et al. QSIPrep: an integrative platform for preprocessing and reconstructing diffusion MRI data. Nat Methods 18, 775–778 (2021). https://doi.org/10.1038/s41592-021-01185-5</li>
             </ul>
 
           <h2 className={styles.sectionHeader}>Harmonization</h2>
@@ -40,8 +40,8 @@ const Publications = () => {
             
           <h2 className={styles.sectionHeader}>MRI Analysis</h2>
             <ul>
-              <li>Davatzikos C, Xu F, An Y, Fan Y, Resnick SM. Longitudinal progression of Alzheimer’s-like patterns of atrophy in normal older adults: the SPARE-AD index. Brain. 2009;132(8):2026–2035.</li>
               <li>Da X, Toledo JB, Zee J, et al. Integration and relative value of biomarkers for prediction of MCI to AD progression: Spatial patterns of brain atrophy, cognitive scores, APOE genotype and CSF biomarkers. NeuroImage Clin. 2014;4(0):164–173.</li>
+              <li>Davatzikos C, Xu F, An Y, Fan Y, Resnick SM. Longitudinal progression of Alzheimer’s-like patterns of atrophy in normal older adults: the SPARE-AD index. Brain. 2009;132(8):2026–2035.</li>
             </ul>
 
           <h2 className={styles.sectionHeader}>Supervised Machine Learning</h2>

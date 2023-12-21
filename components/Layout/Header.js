@@ -65,15 +65,15 @@ const Header = props => {
         
         <ul className={`${styles.navList} ${menuOpen ? styles.show : ''}`}>
           <li><Link href="/about"><a>About</a></Link></li>
-          <li><Link href="/quickstart"><a>Quickstart</a></Link></li>
-          <li><Link href="/news"><a>News</a></Link></li>
           <li><Link href="/components"><a>Components</a></Link></li>
           <li><Link href="/team"><a>Team</a></Link></li>
           <li><Link href="/publications"><a>Publications</a></Link></li>
           <li><Link href="/feedback"><a>Feedback</a></Link></li>
           <li><Link href="/faq"><a>FAQ</a></Link></li>
+          <li><Link href="/news"><a>News</a></Link></li>
           <li><Link href="/contact"><a>Contact</a></Link></li>
           <li className={styles.divider}></li>
+          <li><Link href="/quickstart"><a>Quickstart</a></Link></li>
           <li>{user? <SignoutWidget/> : <GoToCloudPortal/> }</li>
         </ul>
 

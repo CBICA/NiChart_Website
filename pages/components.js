@@ -38,6 +38,7 @@ const Components = () => {
             NiChart Reference Dataset is a large and diverse collection of MRI images from multiple studies. It was created as part of the <a href="https://www.med.upenn.edu/cbica/imaging-consortia-increasing-sample-size-and-understanding-heterogeneity-in-health-and-disease.html">ISTAGING project</a> to develop a system for identifying imaging biomarkers of aging and neurodegenerative diseases. The dataset includes multi-modal MRI data, as well as carefully curated demographic, clinical, and cognitive variables from participants with a variety of health conditions.
             The reference dataset is a key component of NiChart for training machine learning models and for creating reference distributions of imaging measures and signatures, which can be used to compare NiChart values that are computed from the user data to normative or disease-related reference values.
           </p>
+          <p>The following table is as of this version incomplete; it will be updated as soon as possible.</p>
           <img src="/images/Components/Reference_Data_Curation/Picture7.png" alt=""/>
           <p>
           <i>Table 1. Overview of studies that are part of the NiChart Reference Dataset</i>

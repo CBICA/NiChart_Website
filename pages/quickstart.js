@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import Favicons from '../components/Favicons/Favicons';
-import styles from '../styles/About.module.css';
+import styles from '../styles/Quickstart.module.css';
 import { Grid, Paper, Box, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { Heading, Divider } from '@aws-amplify/ui-react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -77,14 +77,39 @@ const Quickstart = () => {
                 <Typography variant="h6">Module 3: Visualization</Typography>
               </AccordionSummary>
               <AccordionDetails>
+                <p>This module allows you to view age trends of selected Regions of Interest in your data together with centile curves that were derived from NiChart reference samples.</p>
                 <p>Either upload your CSV from Module 2, or upload your own file. Be aware that if you upload your own file, it may not have all the fields needed to perform charting against reference datasets.</p>
                 <p>Select the ROI you want to know about and click "Add Plot". This will show you how the scans you uploaded compare to the trends for the reference data.</p>
                 <p>At any time, you can change the reference dataset to view your scans in comparison to a different reference set.</p>
               </AccordionDetails>
-            </Accordion>                
+            </Accordion>
+
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography variant="h6">Running the pipelines locally</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <p><b>Image Processing:</b></p>
+                <p>You can access the image processing pipeline we utilize in the <a href="https://github.com/CBICA/NiChart_DLMUSE">NiChart_DLMUSE</a> package. This pipeline is built on the <a href="https://github.com/MIC-DKFZ/nnUNet/tree/nnunetv1">nnUNet</a> framework, and detailed instructions are available in the repository's <a href="https://github.com/CBICA/NiChart_DLMUSE/blob/main/README.md">Readme</a>. Models for all pipelines are located in the <a href="https://github.com/CBICA/NiChart_DLMUSE/releases">Releases</a> section as release <a href="https://github.com/CBICA/NiChart_DLMUSE/releases/tag/0.1.7">assets</a>. All pipelines are accompanied with a docker container, which you can easily download and run without any installation procedure. More information can be found in the repositories' installation and usage instructions.</p>
+                <p>More pipelines are scheduled to be integrated in the NiChart Cloud, and of course made available through public repositories for local execution.</p>
+                <br></br>
+                <p><b>Machine Learning:</b></p>
+                <p>We provide the <a href="https://github.com/CBICA/spare_score">spare_score</a> pipeline. The necessary models to operate the SPARE_scores pipeline are conveniently located in the repository's <a href="https://github.com/CBICA/spare_score/tree/main/spare_scores/mdl">/spare_scores/mdl/</a> directory. Alternatively, you can find the pipeline as a <a href="https://hub.docker.com/repository/docker/aidinisg/spare_scores/general">docker container</a> (models included).</p>
+                <p>Machine learning pipelines are models are constantly under development and will be integrated to the NiChart Cloud as soon as possible and we will be providing public repositories for local execution.</p>
+                <br></br>
+                <p><b>Visualization:</b></p>
+                <p>While we recommend visualizing the results of your pipeline through the NiChart Cloud, we are commited to providing alternatives for local execution and visualization. To that end, we have an open-source, PyQT-based alternative called <a href="https://github.com/gurayerus/NiChart_Viewer">NiChart_Viewer</a>.</p>
+                <br></br>
+                <p><b>Data:</b></p>
+                <p>The data we've used for model training, reference centile curves, testing and validation come from the <a href="https://www.med.upenn.edu/cbica/imaging-consortia-increasing-sample-size-and-understanding-heterogeneity-in-health-and-disease.html">iSTAGING</a> project.</p>
+                <p>For more information, or inquiries about the data, please contact us at <a href="mailto:nichart-devs@cbica.upenn.edu">nichart-devs@cbica.upenn.edu</a>.</p>
+                <p>We will be happy to help you and answer any questions that you might have!</p>
+              </AccordionDetails>
+            </Accordion>
+
             <br></br><br></br>
-            <Heading level={2}>Frequently Asked Questions</Heading>
-            <b>We will update this FAQ as we receive more feedback. Stay tuned!</b>
+
+            <Heading level={3}>Please visit the <a href="/faq">Frequently Asked Questions</a> if you have more questions!</Heading>
           </Box>
 
         </Paper>

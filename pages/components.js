@@ -235,9 +235,12 @@ const Components = () => {
 
           <div className={styles.subsection} id="datavis_webviewer">          
             <h2>NiChart Web Viewer</h2>
-            <p>We provide a web viewer that is integrated with our cloud <a href="/portal">portal</a> to provide a more practical option for visualization of derived imaging features and final signatures. The web viewer was built using javascript. The viewer is designed as a client application to provide very fast rendering of visualizations. The application provides options to select the target variable for visualization, and the reference data used as the comparison set. This will allow users to compare their selected data to different disease or demographic groups. </p>
-            <img src="/images/Components/DataViewers/nichart_webviewer_mri.png" alt=""/>
+            <p>We also provide a web viewer that is integrated with our <a href="/portal">cloud portal</a> to provide a more practical option for visualization of derived imaging features and final signatures.The viewer is designed as an in-browser application to provide very fast rendering of visualizations. The application provides options to select the target variable for visualization, and the reference data used as the comparison set. This will allow users to compare their selected data to different disease or demographic groups directly from the cloud portal. </p>
+
             <img src="/images/Components/DataViewers/nichart_webviewer_plots.png" alt=""/>
+            <h3>Coming Soon: Scan Visualization</h3>
+            <p>In a near future (Q1 2024) release, we will also provide in-browser viewing of scans with region-of-interest overlays, directly from the visualization page. This feature will allow users to view scans and their selected region of interest highlighted with just a click.</p>
+            <img src="/images/Components/DataViewers/nichart_webviewer_mri.png" alt=""/>
           </div>
         </div>
       </>
@@ -249,8 +252,8 @@ const Components = () => {
             <img className={styles.brainImage} src="/images/Components/brain_deploy.png"/>
             <h1 style={{ color: '#ac29d8' }}>NiChart Software Deployment and Application</h1>
           </div>
-          <p>NiChart provides three installation options to accommodate a wide range of end-users: <a href="https://github.com/CBICA/NiChart_Project">local</a> installation, <a href="https://hub.docker.com/repository/docker/aidinisg/nichart_dlmuse/general">containerized</a> installation, and the <a href="/portal">portal</a>.</p>
-          <p>The choice of installation option depends on the user's technical expertise, computational resources, and desired level of control. For users with strong technical skills and a need for maximum flexibility, local user-managed or containerized installation is recommended. For users who require a highly accessible and user-friendly solution, the portal is the ideal choice.</p>
+          <p>NiChart provides three installation options to accommodate a wide range of end-users: <a href="https://github.com/CBICA/NiChart_Project">local</a> installation, <a href="https://hub.docker.com/repository/docker/aidinisg/nichart_dlmuse/general">containerized</a> installation, and the <a href="/portal">cloud portal</a>.</p>
+          <p>The choice of installation option depends on the user's technical expertise, computational resources, and desired level of control. For users with strong technical skills and a need for maximum flexibility, local user-managed or containerized installation is recommended. For users who require a highly accessible and user-friendly solution, the cloud portal is the ideal choice.</p>
           <p>Currently, the portal provides a restricted pipeline that is limited to structural MRI images.</p>
 
           <br></br><br></br><hr/><br></br><br></br>
@@ -270,8 +273,8 @@ const Components = () => {
           <br></br><br></br><hr/><br></br><br></br>
           
           <div className={styles.subsection} id="deploy_cloud">
-            <h2>NiChart Portal</h2>
-            <p>The Nichart portal is a user-friendly online platform that streamlines the process of analyzing structural magnetic resonance imaging (sMRI). It provides a straightforward interface that allows users to upload their sMRI images, apply pre-trained ML models to extract meaningful biomarkers, and visualize the results in an intuitive manner.</p>
+            <h2>NiChart Cloud Portal</h2>
+            <p>The NiChart cloud portal is a user-friendly online platform that streamlines the process of analyzing structural magnetic resonance imaging (sMRI). It provides a straightforward interface that allows users to upload their sMRI images, apply pre-trained ML models to extract meaningful biomarkers, and visualize the results in an intuitive manner.</p>
           </div>
         </div>
       </>

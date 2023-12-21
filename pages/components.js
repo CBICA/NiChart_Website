@@ -72,22 +72,22 @@ const Components = () => {
             <img className={styles.brainImage} src="/images/Components/brain_process.png"/>
             <h1 style={{ color: '#2152ad' }}>Image Processing</h1>
           </div>
-          <p>NiChart Image Processing Pipelines is a set of advanced tools that can be used to extract features from multi-modal MRI data. The pipelines are made up of individual components that can be installed and run independently. Users can choose the specific components that they need for their analyses. NiChart pipelines are available both as <a href="https://github.com/CBICA/NiChart_Project">installation packages</a> and <a href="https://hub.docker.com/repository/docker/aidinisg/nichart_dlmuse/general">software containers</a>. This ensures 100% reproducibility across different platforms, and allows users to easily install and run the pipelines without having to worry about installing any additional software dependencies.</p>
+          <p>NiChart Image Processing Pipelines is a set of tools that can be used to extract features from multi-modal MRI data. The pipelines are made up of individual components that can be installed and run independently. Users can choose the specific components that they need for their analyses. NiChart pipelines are available both as <a href="https://github.com/CBICA/NiChart_Project">installation packages</a> and <a href="https://hub.docker.com/repository/docker/aidinisg/nichart_dlmuse/general">software containers</a>. This ensures reproducibility across different platforms, and allows users to easily install and run the pipelines without having to worry about installing any additional software dependencies.</p>
         
           <br></br><br></br><hr/><br></br><br></br>
 
           <div className={styles.subsection} id="sMRIProcessing">
             <h2>Structural MRI</h2>
 
-            <p style={{padding: "2%"}}>NiChart uses a combination of established and cutting-edge techniques to extract imaging features that quantify both normal and abnormal brain structures. Alongside conventional atlas-based segmentation methods for segmenting intra-cranial volume (ICV), anatomical regions of interest (ROIs), and white matter lesions (WMLs), we also offer an alternative  parcellation method using non-negative matrix factorization for generating multi-resolution data-driven components. Our atlas-based segmentation methods are powered by deep learning networks that enable rapid segmentation.</p>
+            <p style={{padding: "2%"}}>NiChart uses a combination of both established and state of the art techniques to extract imaging features that quantify both normal and abnormal brain structures. Alongside conventional atlas-based segmentation methods for segmenting intra-cranial volume (ICV), anatomical regions of interest (ROIs), and white matter lesions (WMLs), we also offer an alternative  parcellation method using non-negative matrix factorization for generating multi-resolution data-driven structural covariance components. Our atlas-based segmentation methods are facilitated by deep learning networks that enable rapid segmentation.</p>
             
             <h3>DLICV:</h3>
             <p>Deep Learning Intra Cranial Volume (<a href="https://github.com/CBICA/DLICV">DLICV</a>) is a new deep learning (DL)-based tool to accurately segment the intracranial volume (ICV) from a raw T1-weighted MRI image. It's easy to use, requires minimal data preprocessing, and is robust against various factors that can affect segmentation accuracy. DLICV specifically segments the overall cerebrospinal fluid (CSF) surrounding the brain, rather than just the brain tissues themselves, providing an ICV estimation that is not influenced by overall cortical atrophy due to aging or disease.</p>
             <img src="/images/Components/ImageProcessing/sMRI/dlicv_ex1.png" alt=""/>
-            <i>Figure 1. Example segmentatation using DLICV (green) for cases with significant cortical atrophy</i>
+            <i>Figure 1. Example segmentation using DLICV (green) for cases with significant cortical atrophy</i>
 
             <h3>DLMUSE:</h3>
-            <p>Deep Learning MUlti-atlas region Segmentation utilizing Ensembles of registration algorithms and parameters (<a href="https://github.com/CBICA/DLMUSE">DLMUSE</a>) is a powerful tool for automatically segmenting T1-weighted brain MRI scans. It is accurate, robust, easy to use, and fast. DLMUSE is built on a 3D convolutional neural network (CNN) architecture that has been extensively validated for various neuroimaging segmentation tasks. DLMUSE model was trained on a large and diverse training set, with ROI labels derived using a computationally intensive multi-atlas segmentation method.</p>
+            <p>Deep Learning MUlti-atlas region Segmentation utilizing Ensembles of registration algorithms and parameters (<a href="https://github.com/CBICA/DLMUSE">DLMUSE</a>) is a tool for automatically segmenting T1-weighted brain MRI scans. It is accurate, robust, easy to use, and fast. DLMUSE is built on a 3D convolutional neural network (CNN) architecture that has been extensively validated for various neuroimaging segmentation tasks. DLMUSE model was trained on a large and diverse training set, with ROI labels derived using a computationally intensive multi-atlas segmentation method.</p>
 
             <h3>DLWMLS:</h3>
             <p>Deep Learning White Matter Lesion Segmentation (DLWMLS) is a multi-modal segmentation method for segmenting white mater hyper-intensities (brain lesions) from T1-weighted and FLAIR MRI images. DLWMLS model was trained on a large and diverse training set, with semi-automatically segmented labels for lesions.</p>
@@ -185,16 +185,16 @@ const Components = () => {
             <h1 style={{ color: '#e9a944' }}>NiChart ML Models</h1>
           </div>
           <p>NiChart offers an extensible library of pre-trained machine learning (ML) models that can convert high-dimensional imaging data into low-dimensional imaging signatures. These representations effectively capture and quantify brain changes associated with specific diseases or neurodegenerative conditions.</p>
-          <p>The collection of NiChart imaging signatures forms the neuroimaging chart dimensional system. NiChart's pre-trained ML models are <a href="https://hub.docker.com/r/cbica/nichart-sparescores">readily available</a> and easy to use, eliminating the need for extensive training or expertise in machine learning. Additionally, the extensibility of the NiChart library will allow researchers to add their own specialized models.</p>
+          <p>The collection of NiChart imaging signatures contributes to the neuroimaging chart dimensional system. NiChart's pre-trained ML models are <a href="https://hub.docker.com/r/cbica/nichart-sparescores">readily available</a>, thereby eliminating the need for extensive training or expertise in machine learning. Additionally, the extensibility of the NiChart library will allow researchers to add their own specialized models, after harmonizing their data with NiChart.</p>
           <p>The models are trained on carefully selected subsets of the reference dataset, tailored to each task and target disease/condition.</p>
-          <p>NiChart ML models incorporate a wide range of innovative research methodologies. NiChart's ML methods will be continuously refined to incorporate the latest advancements in machine learning and deep learning, keeping NiChart competitive in the field of medical imaging analysis.</p>
+        
           
           <br></br><br></br><hr/><br></br><br></br>
 
           <div className={styles.subsection} id="ml_supervised">
             <h2>Supervised models</h2>
             <h3>SPARE Models</h3>
-            <p><a href="https://github.com/CBICA/spare_score">SPARE</a> or Spatial Patterns of Abnormality for Recognition of Disease models are predictive supervised learning methods that have been extensively validated. SPARE models train on imaging features extracted from single or multi-modal MRI scans. The models use these features to learn how to identify patterns in the brain that are associated with different diseases. Initial models are provided for SPARE-BA (brain age) and SPARE-AD (Alzheimer's disease). Additional models for SPARE-CVD (cardio-vascular disease risk), SPARE-DM (Type2 diabetes), SPARE-SCZ (schizophrenia) and SPARE-CD (chronic depression) will be added in future releases.</p>
+            <p><a href="https://github.com/CBICA/spare_score">SPARE</a> or Spatial Patterns of Abnormality for Recognition of Disease models are predictive supervised learning methods that have been extensively validated. SPARE models train on imaging features extracted from single or multi-modal MRI scans. The models use these features to learn how to identify patterns in the brain that are associated with different diseases. Initial models are provided for SPARE-BA (brain age) and SPARE-AD (Alzheimer's disease). Additional models for SPARE-CVD (cardio-vascular disease risk), SPARE-DM (Type2 diabetes), SPARE-SCZ (schizophrenia) and SPARE-CD (chronic depression) as well as models derived from weakly supervised methods and which identify subtypes of these diseases, will be added in future releases.</p>
             <img src="/images/Components/Machine_Learning_Models/aibil/sparead_frombrainpaper.gif" alt=""/>
             <i>Figure 1. Grey matter and white matter group differences between individuals with low vs high SPARE-AD values (from <a href="https://academic.oup.com/brain/article/132/8/2026/266984">1</a>).</i>
           </div>
@@ -202,9 +202,9 @@ const Components = () => {
           <br></br><br></br><hr/><br></br><br></br>
 
           <div className={styles.subsection} id="ml_semisupervised">
-            <h2>Semi-supervised models</h2>
+            <h2>Weakly-supervised models</h2>
             <h3>Image-based Disease Heterogeneity Models</h3>
-            <p>Our research team has developed advanced analytical tools to uncover imaging patterns of disease heterogeneity from MRI data. These tools help us identify distinct disease subtypes that shed light on the underlying neuroanatomical differences associated with various pathologies. Our previous work has identified four distinct disease subtypes for Alzheimer's disease and two subtypes for schizophrenia. The pre-trained models provided in NiChart will enable users to obtain more nuanced measures beyond the traditional disease scores.</p>
+            <p>Our research team has developed ML tools to uncover imaging patterns of disease heterogeneity from MRI data. These tools help us identify distinct disease subtypes that shed light on the underlying neuroanatomical differences associated with various pathologies. Our previous work has identified four distinct disease subtypes for Alzheimer's disease and two subtypes for schizophrenia. The pre-trained models provided in NiChart will enable users to obtain more nuanced measures beyond the traditional disease scores.</p>
             <img src="/images/Components/Machine_Learning_Models/aibil/smilegan_naturefig.png" alt=""/>
             <i>Figure 2. Alzheimer's disease subtypes identified by the SMILE-GAN method (from <a href="https://www.nature.com/articles/s41467-021-26703-z">2</a>).</i>
           </div>  

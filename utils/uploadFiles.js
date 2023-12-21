@@ -224,12 +224,19 @@ export const DefaultStorageManagerExample = () => {
     <StorageManager
       acceptedFileTypes={['.nii.gz', '.nii', '.zip']}
       accessLevel="private"
-      maxFileCount={5}
+      maxFileCount={10}
       shouldAutoProceed={true}
       processFile={processFile}
+      displayText={{
+        dropFilesText: "Drag and drop NIfTI scans here",
+        browseFilesText: "Or browse individual files",
+        getFilesUploadedText(count) {
+          return '${count} '
+        }
+      }}
       isResumable
       //onSuccess={onSuccess}
-      onFileRemove={({ key }) => {
+      /*onFileRemove={({ key }) => {
           console.log("OnFileRemove")
           console.log(key)
           setFiles((prevFiles) => {
@@ -275,7 +282,7 @@ export const DefaultStorageManagerExample = () => {
               },
             };
           });
-        }}
+        }}*/
       />
       <ScrollView height="100px">
       {Object.keys(files).map((key) => {
@@ -913,7 +920,8 @@ export async function getSpareScoresOutput(doBrowserDownload) {
     try {
         let resp = await downloadOutputFile("sparescores/output.csv", doBrowserDownload);
         if (getUseModule2Results()) {
-            setModule2Cache({'csv': resp})
+            const file = new File([resp], "sparescores_output.csv", {type: 'text/csv'})
+            setModule2Cache({'csv': file})
         }
     } catch (e) {
         console.log("Caught an exception while downloading.")

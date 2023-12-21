@@ -36,7 +36,7 @@ const Contact = () => {
       <div>
         <div className={styles.title}>
           <h1>Contact Us</h1>
-          <p>NiChart is a project that's constantly under development. For that reason, we are eager for your feedback, input, ideas and questions. Please consider filling in our <a href="https://docs.google.com/forms/d/e/1FAIpQLSddH_eg5RHI94Ph7KYAGibzRSVfXOKReGXbj0Z2YBfF_6c8SA/viewform?usp=sf_link">short survey</a> (~3 minutes). Your help is greatly appreciated!</p>
+          <p>NiChart is a project that's constantly under development. For that reason, we are eager for your feedback, input, ideas and questions. Please consider filling in our <a href="https://docs.google.com/forms/d/e/1FAIpQLSddH_eg5RHI94Ph7KYAGibzRSVfXOKReGXbj0Z2YBfF_6c8SA/viewform?usp=sf_link">short survey</a> (~5 minutes). Your help is greatly appreciated!</p>
           <p>Have a question or need assistance? We're here to help!</p>
         </div>
         <div className={styles.contactContainer}>

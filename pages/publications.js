@@ -22,7 +22,7 @@ const Publications = () => {
               <ul>
                 <li>Doshi J, Erus G, Habes M, Davatzikos C. DeepMRSeg: A convolutional deep neural network for anatomy and abnormality segmentation on MR images. ArXiv Prepr ArXiv190702110. Published online 2019.</li>
                 <li>Doshi J, Erus G, Ou Y, et al. MUSE: MUlti-atlas region Segmentation utilizing Ensembles of registration algorithms and parameters, and locally optimal atlas selection. NeuroImage. 2016;127:186–195.</li>
-                <li>Junhao, W.E.N., Abdulkadir, A., Satterthwaite, T.D., Robert-Fitzgerald, T., Chen, J., Schnack, H., Zanetti, M., Meisenzahl, E., Busatto, G., Crespo-Facorro, B. and Pantelis, C., 2022. Novel genomic loci and pathways influence patterns of structural covariance in the human brain. medRxiv. - In review</li>
+                <li>Wen, J., Nasrallah, I. M., Abdulkadir, A., Satterthwaite, T. D., Yang, Z., Erus, G., Singh, A., Sotiras, A., Mamourian, E., Doshi, J., Cui, Y., Srinivasan, D., Skampardoni, I., Chen, J., Hwang, G., Bergman, M., Bao, J., Veturi, Y., Zhou, Z., Davatzikos, C. (2023). Genomic loci influence patterns of structural covariance in the human brain. Proceedings of the National Academy of Sciences, 120(52), e2300842120. https://doi.org/10.1073/pnas.2300842120</li>
                 <li>Ou, Y., Sotiras, A., Paragios, N. & Davatzikos, C. DRAMMS: Deformable registration via attribute matching and mutual-saliency weighting. Med Image Anal 15, 622-639.</li>
               </ul>
           <h2 className={styles.sectionHeader}>fMRI and DTI Image Processing</h2>

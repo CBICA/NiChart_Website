@@ -71,26 +71,27 @@ function Module_1({moduleSelector}) {
           <Flex direction={{ base: 'column', large: 'row' }} maxWidth="100%" padding="1rem" width="100%" justifyContent="flex-start">
               <Flex justifyContent="space-between" direction="column" width="33%">
               <Heading level={3}>Upload Input T1 Scans</Heading>
-              <p>Upload NIfTI-format (.nii.gz) T1 MRI brain scans only. Please be aware that filenames with characters other than alphanumerics, hyphens or underscores will be changed automatically.</p>       
-              <p><b>Alternatively,</b> you may upload a .zip file containing your .nii.gz files. <b>We strongly recommend this option if you are uploading more than 5 scans</b>. The system will unpack the archive which may take up to a minute after the upload succeeds (you may check using <b>Browse Uploads + Check QC</b> below). Note that we cannot support archives greater than 10GB, but you can upload multiple archives.</p>
-              <p>When uploading large files, you may see fluctuations in the displayed progress. Do not worry -- as long as the upload does not fail, it will correct itself.</p>
               <DefaultStorageManagerExample/>
               <Button variation="primary" colorTheme="info" onClick={handleFileBrowserOpen}>Browse Uploads + Check QC</Button>
               <Button variation="primary" loadingText="Submitting..." onClick={async () => submitJobs()} >Submit Jobs</Button> 
               <Button variation="destructive" loadingText="Emptying..." onClick={async () => emptyBucketForUser('cbica-nichart-inputdata')}>Remove All Data</Button>
+              <p>Upload NIfTI-format (.nii.gz) T1 MRI brain scans only. Please be aware that filenames with characters other than alphanumerics, hyphens or underscores will be changed automatically.</p>       
+              <p><b>Alternatively,</b> you may upload a .zip file containing your .nii.gz files. <b>We strongly recommend this option if you are uploading more than 5 scans</b>. The system will unpack the archive which may take up to a minute after the upload succeeds (you may check using <b>Browse Uploads + Check QC</b> below). Note that we cannot support archives greater than 10GB, but you can upload multiple archives.</p>
+              <p>When uploading large files, you may see fluctuations in the displayed progress. Do not worry -- as long as the upload does not fail, it will correct itself.</p>
               </Flex>
               <Divider orientation="vertical" />
               <Flex direction="column" width="33%">
                   <Heading level={3}>Jobs in Progress</Heading>
-                  <p>Jobs will appear here a few seconds after submission. Each job corresponds to one scan. Finished jobs will be marked SUCCEEDED. Please wait for jobs to finish before proceeding. If your job fails, please contact us and provide the job ID listed below.</p>
-                  <p>The first set of scans may take up to 6 minutes to start (time spent in both RUNNABLE and STARTING phases). After this spin-up period, jobs (up to 48 concurrently) should take approximately 1 minute to finish .</p>
                   <JobList jobQueue="cbica-nichart-helloworld-jobqueue2"/>
                   <Button variation="primary" loadingText="Re-submitting..." onClick={async () => await resubmitModule1Jobs()}>Re-submit Incomplete Jobs</Button>
+                  <p>Jobs will appear here a few seconds after submission. Each job corresponds to one scan. Finished jobs will be marked SUCCEEDED. Please wait for jobs to finish before proceeding. If your job fails, please contact us and provide the job ID listed below.</p>
+                  <p>The first set of scans may take up to 6 minutes to start (time spent in both RUNNABLE and STARTING phases). After this spin-up period, jobs (up to 48 concurrently) should take approximately 1 minute to finish .</p>
               </Flex>
               <Divider orientation="vertical" />
               <Flex direction="column" width="33%">
                   <Heading level={3}>Download Results</Heading>
                   <Text>Results will be downloaded for all scans that have finished processing (those marked green on the job list). All other scans will continue running but will not be included unless you re-download after they complete. In addition to downloads, you can also directly export your results to the next module.</Text>
+                  <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
                   <Button loadingText="Downloading CSV..." variation="primary" onClick={async () => await getCombinedCSV(true) } >Download MUSE CSV</Button>
                   <Button loadingText="Downloading Images..." variation="primary"  onClick={async () => {alert("Please be aware that this operation might take some time while we prepare your images. Your download will be interrupted if you leave this page."); await getCombinedImageZip(true)} } >Download MUSE ROIs</Button>
                   <Button loadingText="Exporting..." variation="primary" colorTheme="info" onClick={async () => await exportModule1Results(moduleSelector) } >Export to Module 2: Machine Learning</Button>

@@ -107,7 +107,7 @@ function Module_2({moduleSelector}) {
                     open={modelSelectionModalOpen}
                     handleClose={handleModelSelectionClose}
                     title="Select SPARE models"
-                    content="Check any number of models to use during SPARE score generation."
+                    content="Check any number of models to use during SPARE score generation. This list will be expanded as we release new models."
                 >
                     <ModelSelectionMenu />
                 </Modal>

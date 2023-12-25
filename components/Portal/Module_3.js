@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import { Heading } from '@aws-amplify/ui-react'
 import { Autocomplete } from '@mui/material';
@@ -9,7 +9,7 @@ import Papa from 'papaparse';
 import Chart from './Chart';
 import styles from '../../styles/Portal_Module_3.module.css';
 import MUSEROICompleteList from '/public/content/Portal/Visualization/Dicts/MUSE_ROI_complete_list.json';
-import { setUseModule2Results, getUseModule2Results, getModule2Cache } from '../../utils/NiChartPortalCache.js'
+import { setUseModule2Results, getUseModule2Results, getUseModule2Cache, getModule2Cache, getUseModule1Results } from '../../utils/NiChartPortalCache.js'
 import { getSpareScoresOutput } from '../../utils/uploadFiles.js'
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 
@@ -45,11 +45,24 @@ const Module_3 = ({moduleSelector}) => {
         return;
     }
     //console.log("cachedResult", cachedResult);
-    const csvText = await cachedResult.csv.text()
-    //console.log("csvText", csvText);
-    setUploadedFile(csvText);
+    const csvFile = cachedResult.csv;
+    console.log("Module 3: csvText From Module 2 import", csvFile);
+    setUploadedFile(csvFile);
     
   }
+
+  useEffect(() => {
+    if (useModule2Cache && getUseModule2Results()) {
+      let cachedResult = getModule2Cache();
+      if (Object.keys(cachedResult).length === 0) {
+        alert("There was a problem importing your results from Module 2. Please reload the page and try again.")
+        return;
+      }
+      console.log("Module 3: CSV loaded on module render")
+      setUploadedFile(cachedResult.csv)
+    }
+    
+  });
    
   const roiFullNames = Object.entries(MUSEROICompleteList).map(([id, roiData]) => ({
     id,
@@ -63,6 +76,7 @@ const Module_3 = ({moduleSelector}) => {
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
+      console.log("Module 3: file data from File Upload", file)
       setUploadedFile(file);
     }
   };
@@ -124,6 +138,7 @@ const Module_3 = ({moduleSelector}) => {
     }
 
     if (uploadedFile && uploadedFile instanceof File && uploadedFile.name) {
+      console.log("Module 3: Our Attempting CSV Parse")
       Papa.parse(uploadedFile, {
         header: true,
         skipEmptyLines: true,

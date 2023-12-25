@@ -140,8 +140,8 @@ export const RemoteFileDisplay = ({bucket}) =>  {
         <div>
         <Text><b>Please note</b> that even if your scans fail our quality control checks, you can still attempt to run image processing on them. However, we cannot make any guarantees about the quality of results from data that fails these checks.</Text>
         <Divider orientation="horizontal" />
-        <h2>Successfully uploaded scans:</h2>
-            <ScrollView height='75%' width='100%'> 
+        <h2>Successfully uploaded scans (scroll to view):</h2>
+            <ScrollView height='400px' width='100%'> 
                 <Collection 
                     items={Object.entries(remoteFiles)}
                     type="list"

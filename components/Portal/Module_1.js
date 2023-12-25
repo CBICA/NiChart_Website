@@ -62,7 +62,7 @@ function Module_1({moduleSelector}) {
             title="Uploads and Quality Control"
             content="Files you have uploaded are visible here. You can also see some basic status information (including initial QC results) and delete files from the server if desired."
       >
-         <RemoteFileDisplay bucket="cbica-nichart-inputdata" />
+         <RemoteFileDisplay bucket="cbica-nichart-inputdata" height="75%" />
       </Modal>
       
       <Heading level={1}>Module 1: Image Processing</Heading>
@@ -75,9 +75,9 @@ function Module_1({moduleSelector}) {
               <Button variation="primary" colorTheme="info" onClick={handleFileBrowserOpen}>Browse Uploads + Check QC</Button>
               <Button variation="primary" loadingText="Submitting..." onClick={async () => submitJobs()} >Submit Jobs</Button> 
               <Button variation="destructive" loadingText="Emptying..." onClick={async () => emptyBucketForUser('cbica-nichart-inputdata')}>Remove All Data</Button>
-              <p>Upload NIfTI-format (.nii.gz) T1 MRI brain scans only. Please be aware that filenames with characters other than alphanumerics, hyphens or underscores will be changed automatically.</p>       
-              <p><b>Alternatively,</b> you may upload a .zip file containing your .nii.gz files. <b>We strongly recommend this option if you are uploading more than 5 scans</b>. The system will unpack the archive which may take up to a minute after the upload succeeds (you may check using <b>Browse Uploads + Check QC</b> below). Note that we cannot support archives greater than 10GB, but you can upload multiple archives.</p>
-              <p>When uploading large files, you may see fluctuations in the displayed progress. Do not worry -- as long as the upload does not fail, it will correct itself.</p>
+              <p>Drag and drop NIfTI-format (.nii, .nii.gz) T1 MRI brain scans only. Please be aware that filenames with characters other than alphanumerics, hyphens or underscores will be changed automatically.</p>       
+              <p><b>Alternatively,</b> you may upload a .zip file containing your .nii.gz files. <b>We strongly recommend this option if you are uploading multiple scans, and require it if you are uploading more than 10 simultaneously.</b>. The system will unpack the archive which may take up to a minute after the upload succeeds (you may check using <b>Browse Uploads + Check QC</b> below). Note that we cannot support archives greater than 10GB, but you can upload multiple archives.</p>
+              <p>When uploading multiple files or large files, you may see fluctuations in the displayed progress. Do not worry -- as long as the upload does not fail, it will correct itself. When you see the green check marks, your upload is complete.</p>
               </Flex>
               <Divider orientation="vertical" />
               <Flex direction="column" width="33%">

@@ -35,7 +35,7 @@ export const RemoteFileDisplay = ({bucket}) =>  {
         //console.log("Key for this file: ", key)
         out_dict[item.key] = item;
       }
-      console.log("out_dict:", out_dict)
+      //console.log("out_dict:", out_dict)
       setRemoteFiles(out_dict)
       
       var n_archives = 0;
@@ -148,7 +148,7 @@ export const RemoteFileDisplay = ({bucket}) =>  {
                     direction="column"
                     gap="10px"
                     wrap="nowrap"
-                 >
+                >
                 {([key, item], index) => (
                     <div>
                     <Flex direction={{ base: 'row' }} width="100%" justifyContent="space-between" height="10%">

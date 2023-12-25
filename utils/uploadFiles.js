@@ -15,11 +15,53 @@ import awsconfig from './aws-exports';
 import { getUseModule1Results, getUseModule2Results, getModule1Cache, getModule2Cache, getModule3Cache, setModule1Cache, setModule2Cache, setModule3Cache } from './NiChartPortalCache'
 import { ResponsiveButton as Button } from '../components/Components/ResponsiveButton.js'
 
-import { getProperties } from '@aws-amplify/storage'
+
+import { getProperties, uploadData } from '@aws-amplify/storage'
 
 Amplify.configure(awsconfig)
 Auth.configure(awsconfig)
 Storage.configure(awsconfig)
+
+export async function uploadFileMultipart(bucket, filename, blob, uploadProgressCallback, uploadCompleteCallback, uploadErrorCallback) {
+  console.log("uploadFiles: Initiating multipart upload")
+  // signature of onProgress: (progress)
+  // signature of onComplete: (event)
+  // signature of onError: (error)
+  try {
+    let userInfo = await Auth.currentAuthenticatedUser();
+    //console.log(userInfo);
+    let username = userInfo.username
+    //console.log("userInfo:")
+    //console.log(userInfo)
+    const credentials = await Auth.currentCredentials();
+    console.log("blob", blob)
+    var blob;
+    if (blob instanceof ArrayBuffer || blob instanceof Uint8Array) {
+      blob = new Blob([blob]);
+    }
+    const result = await Storage.put(
+      filename,
+      blob,
+      {
+        level: 'private', 
+        bucket: bucket,
+        resumable: true,
+        metadata: {
+          uploadedByUser: credentials.identityId,
+          uploadedByUsername: userInfo.username
+        },
+        progressCallback: uploadProgressCallback,
+        completeCallback: uploadCompleteCallback,
+        errorCallback: uploadErrorCallback,
+      }
+    );
+    console.log("Multipart file upload succeeded!", result)
+    return result;
+  } catch (error) {
+    console.log("Multipart file upload failed!", error, blob)
+    return error
+  }
+}
 
 export async function generatePresignedScanURL (subjectID) {
     const credentials = await Auth.currentCredentials();
@@ -425,8 +467,8 @@ export const JobList = ({jobQueue}) => {
           response = await batchClient.send(command)
           totalList = totalList.concat(response.jobSummaryList)
       }
-      console.log("Total List:")
-      console.log(totalList)
+      //console.log("Total List:")
+      //console.log(totalList)
       //console.log(response);
       var newJobs = {};
       for (const item of totalList) {

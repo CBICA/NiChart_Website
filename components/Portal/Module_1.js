@@ -6,6 +6,7 @@ import { setUseModule1Results, getModule1Cache } from '../../utils/NiChartPortal
 import { RemoteFileDisplay } from './RemoteFileDisplay.js'
 import { ResponsiveButton as Button } from '../Components/ResponsiveButton.js'
 import Modal from '../Components/Modal'
+import { DragAndDropUploader, TestUpload } from './DragAndDropUploader.js';
 
 
 async function exportModule1Results(moduleSelector) {
@@ -65,20 +66,22 @@ function Module_1({moduleSelector}) {
          <RemoteFileDisplay bucket="cbica-nichart-inputdata" height="75%" />
       </Modal>
       
+
       <Heading level={1}>Module 1: Image Processing</Heading>
       <div className={styles.moduleContainer}>
           <Divider orientation="horizontal" />
           <Flex direction={{ base: 'column', large: 'row' }} maxWidth="100%" padding="1rem" width="100%" justifyContent="flex-start">
               <Flex justifyContent="space-between" direction="column" width="33%">
+                
               <Heading level={3}>Upload Input T1 Scans</Heading>
               <DefaultStorageManagerExample/>
+              {/*<DragAndDropUploader />*/}
               <Button variation="primary" colorTheme="info" onClick={handleFileBrowserOpen}>Browse Uploads + Check QC</Button>
               <Button variation="primary" loadingText="Submitting..." onClick={async () => submitJobs()} >Submit Jobs</Button> 
               <Button variation="destructive" loadingText="Emptying..." onClick={async () => emptyBucketForUser('cbica-nichart-inputdata')}>Remove All Data</Button>
-              <p>Drag and drop NIfTI-format (.nii, .nii.gz) T1 MRI brain scans only. Please be aware that filenames with characters other than alphanumerics, hyphens or underscores will be changed automatically.</p>       
+              <p>Drag and drop NIfTI-format (.nii, .nii.gz) T1 MRI brain scans only, or .zip archives containing them. Please be aware that filenames with characters other than alphanumerics, hyphens or underscores will be changed automatically.</p>       
               <p><b>Alternatively,</b> you may upload a .zip file containing your .nii.gz files. <b>We strongly recommend this option if you are uploading multiple scans, and require it if you are uploading more than 10 simultaneously.</b>. The system will unpack the archive which may take up to a minute after the upload succeeds (you may check using <b>Browse Uploads + Check QC</b> below). Note that we cannot support archives greater than 10GB, but you can upload multiple archives.</p>
-              <p>When uploading multiple files or large files, you may see fluctuations in the displayed progress. Do not worry -- as long as the upload does not fail, it will correct itself. When you see the green check marks, your upload is complete.</p>
-              </Flex>
+              <p>Depending on your connection, you may see fluctuations in the displayed progress, or the download may appear to be stuck at 0%. Do not worry -- as long as the upload does not fail, it will correct itself. Your upload is complete when you see the check mark next to all files.</p></Flex>
               <Divider orientation="vertical" />
               <Flex direction="column" width="33%">
                   <Heading level={3}>Jobs in Progress</Heading>

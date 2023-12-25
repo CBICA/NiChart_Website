@@ -19,6 +19,12 @@ const About = () => {
         <Grid container rowSpacing={{xs: 3, sm: 4, md: 20}} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={12} md={6}>
             <Paper className={styles.paper} square={false}>
+              <Typography variant="h2" gutterBottom>About NiChart</Typography>
+              <Typography variant="body1">
+                NiChart is a set of modular but integrated software tools for neuroimaging research, and a cloud-based web application to provide wide access to these tools.
+                This work was supported, in part, by NIH grants U24NS130411 and RF1AG054409. The Cloud implementation was also supported by Amazon Web Services (AWS).
+                <br></br>
+              </Typography>
               <Typography variant="h2" gutterBottom>Applications</Typography>
               <Typography variant="body1">NiChart enables mapping of large-scale multi-modal brain MRI data into a dimensional system of neuroimaging derived measures, including signatures implemented by machine learning (ML) models. </Typography>
               <ul>

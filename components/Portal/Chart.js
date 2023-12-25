@@ -233,7 +233,7 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
           </div>
         </div>
         {/* Button to destroy the plot */}
-        <Button  variant="contained" color="primary" onClick={onDelete}>Destroy Chart</Button>
+        <Button  variant="contained" color="primary" onClick={onDelete}>Close Chart</Button>
       </div>
       {/* Modal to show the NiiVue component */}
       <Modal id='niivue_modal'

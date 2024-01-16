@@ -175,7 +175,7 @@
   width: 100%;
   /* display: grid; */
   /* grid-template-columns: 1fr 1fr; /* Creates two columns */
-  padding: 1%; /* Adjust padding as needed */
+  padding: 3%; /* Adjust padding as needed */
   box-sizing: border-box; /* Ensures padding is included in the width */
   max-height: max-content;
   margin: 1%;

@@ -6,6 +6,7 @@ import Footer from '../components/Layout/Footer';
 import Circle from '../components/Components/Circle'
 import Favicons from '../components/Favicons/Favicons';
 import reportWebVitals from '/utils/reportWebVitals';
+import { Typography }from '@mui/material';
 import styles from '../styles/index.module.css';
 
 const HomePage = () => {
@@ -144,7 +145,13 @@ const HomePage = () => {
             <p><a className={styles.title}>NiChart:</a><a className={styles.text}>Neuro Imaging Chart of AI-based Imaging Biomarkers</a></p>
           </div>
           <div>
-            <p>Want to help shape the future of NiChart? Take our <a href="/feedback"> 5-minute survey</a>!</p>
+            <br></br>
+            <Typography variant='h5'>
+              Want to help shape the future of NiChart? 
+              <br></br>
+              <b>Please take our <a href="https://docs.google.com/forms/d/e/1FAIpQLSddH_eg5RHI94Ph7KYAGibzRSVfXOKReGXbj0Z2YBfF_6c8SA/viewform"> 5-minute survey</a>!</b>
+            </Typography>
+            <br></br>
           </div>
           <div className={styles.studentPhoto}>
             <img className={styles.infographic} src="/images/Home/NiChart_info_pic_student_no_background.png" alt=""/>
@@ -164,7 +171,7 @@ const HomePage = () => {
       <div className={styles.bottom}>
         <div className={styles.bottomDivision}>
           <div>
-            <p>A framework to process multi-modal MRI images, harmonize to reference data, apply and contribute machine learning models and derive individualized biomarkers called "Neuroimaging Chart Dimensions"</p>
+            <Typography variant='h5'>A framework to process multi-modal MRI images, harmonize to reference data, apply and contribute machine learning models and derive individualized biomarkers called "Neuroimaging Chart Dimensions"</Typography>
           </div>
           {/* Removed this ----- TODO: Do we need this language?*/}
           {/* <div className={styles.bottomTextColumn}>

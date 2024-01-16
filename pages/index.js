@@ -143,6 +143,9 @@ const HomePage = () => {
           <div className={styles.textNiChart}>
             <p><a className={styles.title}>NiChart:</a><a className={styles.text}>Neuro Imaging Chart of AI-based Imaging Biomarkers</a></p>
           </div>
+          <div>
+            <p>Want to help shape the future of NiChart? Take our <a href="/feedback"> 5-minute survey</a>!</p>
+          </div>
           <div className={styles.studentPhoto}>
             <img className={styles.infographic} src="/images/Home/NiChart_info_pic_student_no_background.png" alt=""/>
           </div>

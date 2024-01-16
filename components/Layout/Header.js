@@ -64,6 +64,7 @@ const Header = props => {
         </div>
         
         <ul className={`${styles.navList} ${menuOpen ? styles.show : ''}`}>
+          <li><Link href="/"><a>Home</a></Link></li>
           <li><Link href="/about"><a>About</a></Link></li>
           <li><Link href="/components"><a>Components</a></Link></li>
           <li><Link href="/team"><a>Team</a></Link></li>

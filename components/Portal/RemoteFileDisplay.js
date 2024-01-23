@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { Flex, Heading, Divider, Text, ScrollView, Collection } from '@aws-amplify/ui-react';
 import styles from '../../styles/Portal_Module_1.module.css'
 import { listBucketContentsForUser, deleteKeyForUser, getKeyMetadata } from '../../utils/uploadFiles.js'
-import { ResponsiveButton as Button } from '../components/ResponsiveButton.js'
+import { ResponsiveButton as Button } from '../Components/ResponsiveButton.js'
 // This widget uses the user's Cognito credentials to list that user's bucket contents for a given bucket.
 // It also provides functionality to individually delete/remove those contents.
 

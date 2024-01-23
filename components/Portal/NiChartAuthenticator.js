@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Heading, Text, Button, Link, View, CheckboxField, Flex, Authenticator, Image, useTheme, useAuthenticator, TextField } from '@aws-amplify/ui-react';
 import { Auth } from '@aws-amplify/auth';
+import TermsModal from '../Components/TermsModal'
 import Modal from '../Components/Modal'
 import { Typography } from '@mui/material';
 
@@ -21,43 +22,7 @@ const validateEmail = (email) => {
         console.log('error resending code: ', err);
     }
 }
-const TermsModal = ({ isOpen, onClose, onBottomReached }) => {
-    const contentRef = useRef(null);
 
-    const handleScroll = () => {
-        const element = contentRef.current;
-        if (element) {
-            const atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
-            if (atBottom) {
-                onBottomReached(true);
-            }
-        }
-    };
-
-    useEffect(() => {
-        if (!isOpen) {
-            onBottomReached(false);
-        }
-    }, [isOpen, onBottomReached]);
-
-    return (
-        <Modal open={isOpen} handleClose={onClose}>
-            <div ref={contentRef} onScroll={handleScroll} style={{ overflowY: 'scroll', height: '300px', scrollbarWidth: 'thin' }}>
-            <Typography variant="h6" gutterBottom>! Please read the terms and scroll to the end of the text before closing this window !</Typography>
-                <br></br>
-                <br></br>
-                <Typography variant="h4" gutterBottom>NiChart Cloud Privacy Statement</Typography>
-                <Typography variant="body1">For convenience, NiChart is offered as a web service via NiChart Cloud, a service hosted using Amazon Web Services infrastructure. By uploading your data to NiChart, you are agreeing that you have valid, authorized access to that data and are not uploading personally-identifiable health information as defined by HIPAA. Uploaded scans are placed in a secure backend storage location in a private segment of the Amazon infrastructure  accessible via your login account. Individuals having root access to this server could also access your data for system maintenance purposes (e.g. to occasionally monitor folder size and delete data). Other than for system maintenance operations,  individuals with root access will never access, use or share your data with anyone.  Any uploaded data is retained for a maximum of 36 hours before being deleted. You may also choose to delete data immediately from the NiChart Cloud interface. By choosing to use NiChart Cloud, you agree that you understand these terms. If you wish to revoke this agreement at any time, simply discontinue using the service. You may contact us directly at <b><a href="mailto:nichart-devs@cbica.upenn.edu">nichart-devs@cbica.upenn.edu</a></b> about concerns related to the handling of your data. At your preference, you may also download the NiChart software tools for use on your own machine. Please see the components page for details.</Typography>
-                <br></br>
-                <br></br>
-                <Typography variant="h4" gutterBottom>FDA Disclaimer</Typography>
-                <Typography variant="body1">Please be advised that NiChart is a set of free software tools provided for research purposes. The statements made regarding the products have not been evaluated by the Food and Drug Administration. The efficacy of these products has not been confirmed by FDA-approved research. These products are not intended for clinical purposes. All information presented here is not meant as a substitute for or alternative to information from health care practitioners.</Typography>
-                <br></br>
-                <br></br>
-            </div>
-        </Modal>
-    );
-};
 export const NiChartAuthenticator = props => {
     const [verificationCodeModalOpen, setVerificationCodeModalOpen] = useState(false);
     const [verifyError, setVerifyError] = useState('');
@@ -186,10 +151,11 @@ export const NiChartAuthenticator = props => {
     const [termsModalOpen, setTermsModalOpen] = useState(false);
     const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
     const handleCheckboxChange = (event) => {
-        if (!isCheckboxChecked) {
+        if (!termsModalOpen && !isCheckboxChecked) {
             setTermsModalOpen(true);
-        } else {
-            setIsCheckboxChecked(false);
+        }
+        else if (!termsModalOpen && isCheckboxChecked){
+            setIsCheckboxChecked(false)
         }
     };
 
@@ -209,25 +175,25 @@ export const NiChartAuthenticator = props => {
           // Customize `Authenticator.SignUp.FormFields`
           components={{
 
-            Header() {
-                const { tokens } = useTheme();
-            
-                return (
-                  <View textAlign="center" padding={tokens.space.large}>
-                  
-                    <Flex direction="row">
-                    <Image
-                      alt="NiChart Logo"
-                      src="/images/Logo/brain_transparent_logo_cropped.png"
-                    />
-                    <Flex direction="column" justifyContent="space-around" alignContent="center" >
-                        <Heading level={1}>NiChart Cloud Login</Heading>
-                    </Flex>
-                    </Flex>
+              Header() {
+                  const { tokens } = useTheme();
+              
+                  return (
+                    <View textAlign="center" padding={tokens.space.large}>
                     
-                  </View>
-                );
-              },
+                      <Flex direction="row">
+                      <Image
+                        alt="NiChart Logo"
+                        src="/images/Logo/brain_transparent_logo_cropped.png"
+                      />
+                      <Flex direction="column" justifyContent="space-around" alignContent="center" >
+                          <Heading level={1}>NiChart Cloud Login</Heading>
+                      </Flex>
+                      </Flex>
+                      
+                    </View>
+                  );
+                },
             
               Footer() {
                 const { tokens } = useTheme();
@@ -280,77 +246,79 @@ export const NiChartAuthenticator = props => {
               },
             
 
-            SignUp: {
-              Header() {
-                const { tokens } = useTheme();
+              SignUp: {
+                Header() {
+                  const { tokens } = useTheme();
 
-                return (
-                    <>
-                    <View textAlign="center" padding={tokens.space.large}>
-                        <Text>Please ensure you have fully read the statements on the <Link href="/about">About page</Link> and <Link href="https://www.upenn.edu/about/privacy-policy">the general University of Pennsylvania Privacy Policy</Link> before continuing.</Text>
-                        <Text></Text>
-                    </View>
-                    <View textAlign="center" padding={tokens.space.large}>
-                        <Text><b>Already have a verification code?</b> Click 
-                        <Button
-                            fontWeight="normal"
-                            onClick={handleVerificationCodeOpen}
-                            size="small"
-                            variation="link"
-                        >here</Button> to verify your account.</Text>
-                        <VerificationCodeModal/>
+                  return (
+                      <>
+                      <View textAlign="center" padding={tokens.space.large}>
+                          <Text>Please ensure you have fully read the statements on the <Link href="/about">About page</Link> and <Link href="https://www.upenn.edu/about/privacy-policy">the general University of Pennsylvania Privacy Policy</Link> before continuing.</Text>
+                          <Text></Text>
                       </View>
-                      <View textAlign="left" padding={tokens.space.large}>
-                      <CheckboxField
-                          id="termsCheckbox"
-                          name="acknowledgement"
-                          label="I have fully read and agreed with the terms on the About page."
-                          onChange={handleCheckboxChange}
-                          checked={isCheckboxChecked}
+                      <View textAlign="center" padding={tokens.space.large}>
+                          <Text><b>Already have a verification code?</b> Click 
+                          <Button
+                              fontWeight="normal"
+                              onClick={handleVerificationCodeOpen}
+                              size="small"
+                              variation="link"
+                          >here</Button> to verify your account.</Text>
+                          <VerificationCodeModal/>
+                        </View>
+                        <View textAlign="left" padding={tokens.space.large}>
+                        <CheckboxField
+                            id="termsCheckbox"
+                            name="acknowledgement"
+                            label="I have fully read and agreed with the terms on the About page."
+                            onChange={handleCheckboxChange}
+                            checked={isCheckboxChecked}
+                        />
+                        <TermsModal
+                            open={termsModalOpen}
+                            handleClose={handleTermsModalClose}
+                            title="Terms and Conditions"
+                            onBottomReached={handleBottomReached}
+                        />
+
+                      </View>
+                      </>
+                  )
+                },
+                Footer() {
+                  const {tokens } = useTheme();
+
+                  return (
+                      <></>
+                  )
+                },
+
+                FormFields() {
+                  const { validationErrors } = useAuthenticator();
+                  const { tokens } = useTheme();
+      
+                  return (
+                    <>
+                      {/* Re-use default `Authenticator.SignUp.FormFields` */}
+                      <Authenticator.SignUp.FormFields />
+                      
+                      <View textAlign="center" padding={tokens.space.large}>
+                      <Text>Passwords must be at least 8 characters and contain at least one number, one uppercase letter, one lowercase letter, and one special character.</Text>
+                      </View>
+
+                      <TextField
+                        name="custom:Organization"
+                        label="Organization (optional)"
                       />
-                      <TermsModal
-                          isOpen={termsModalOpen}
-                          onClose={handleTermsModalClose}
-                          onBottomReached={handleBottomReached}
+
+                      <TextField
+                        name="custom:Role"
+                        label="Role (optional)"
                       />
-                    </View>
                     </>
-                )
+                  );
+                },
               },
-              Footer() {
-                const {tokens } = useTheme();
-
-                return (
-                    <></>
-                )
-              },
-
-              FormFields() {
-                const { validationErrors } = useAuthenticator();
-                const { tokens } = useTheme();
-    
-                return (
-                  <>
-                    {/* Re-use default `Authenticator.SignUp.FormFields` */}
-                    <Authenticator.SignUp.FormFields />
-                    
-                    <View textAlign="center" padding={tokens.space.large}>
-                    <Text>Passwords must be at least 8 characters and contain at least one number, one uppercase letter, one lowercase letter, and one special character.</Text>
-                    </View>
-
-                    <TextField
-                      name="custom:Organization"
-                      label="Organization (optional)"
-                    />
-
-                    <TextField
-                      name="custom:Role"
-                      label="Role (optional)"
-                    />
-                  </>
-                );
-              },
-            },
           }}
           services={{
             async validateCustomSignUp(formData) {

@@ -163,12 +163,12 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
           const message = `Clicked Data Point:\nX: ${x}\nY: ${y}\nCurve Number: ${curveNumber} \nID: ${id}`;
           console.log(message);
           // Disable Modal for now. TODO: fix display of scan.
-          // openModal({
-          //   x,
-          //   y,
-          //   curveNumber,
-          //   id,
-          // });
+          openModal({
+            x,
+            y,
+            curveNumber,
+            id,
+          });
         }
       }
     };
@@ -242,8 +242,8 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
         contentLabel="NiiVue Modal"
         style={{
           content: {
-            width: '45%',
-            height: '65%',
+            width: '40%',
+            height: '100%',
             marginTop: '10%', 
             margintBottom: '10%',
             marginLeft: 'auto',
@@ -256,6 +256,10 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
         {selectedDataPoint && (
           <NiiVue subjectID={clickedDataPointId} roi={roi} closeModal={closeModal}> </NiiVue>
         )}
+        <div>
+          <label id="location"></label>
+          <p></p>
+        </div>
       </Modal>
     </div>
   );

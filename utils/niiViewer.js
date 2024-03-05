@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { Niivue, NVImage, NVIMAGE_TYPE } from "@niivue/niivue";
+import { Niivue } from "@niivue/niivue";
 import { Button, Select, MenuItem } from "@mui/material";
 import { getRelevantROIs, generateColormaps } from '/utils/roiColormaps';
 import ROIDict from '../public/content/Portal/Visualization/Dicts/MUSE_ROI_complete_list.json';
@@ -150,8 +150,8 @@ const NiiVue = ({ subjectID, roi, closeModal }) => {
       {isError ? (
         <p>Error: The original scan file (or more files) does not exist.</p>
       ) : (
-        <div>
-          <div style={{ display: "flex", flexDirection: "row", gap: "2%" }}>
+        <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ height: '5%', display: 'flex', flexDirection: 'row', gap: '2%' }} id="niivue_controls">
             <Button onClick={toggleOverlayVisibility}>Toggle Overlay</Button>
             <Select
               value={overlayColor}
@@ -164,10 +164,16 @@ const NiiVue = ({ subjectID, roi, closeModal }) => {
             </Select>
             <Button onClick={() => showHeader()}>Show Header</Button>
           </div>
-          <div style={{ marginTop: "1%" }}>
-            <canvas ref={canvas} height="1300%"  width="100%" />
+          <div style={{ height: '80%', width: '90%', alignItems: 'center', marginTop: '1%', marginBottom: '1%', marginLeft: '5%', marginRight: '5%',}} id="niivue">
+            <canvas ref={canvas}/>
           </div>
-          <footer id="intensity">&nbsp;</footer>
+          <div style={{ height: '15%', paddingLeft: '2%', paddingBottom: '2%'}} id="location">
+            <div>Cursor Location:</div>
+              <div>&nbsp;&nbsp;- In millimeters: ( -mm, -mm, -mm)</div>
+              <div>&nbsp;&nbsp;- In voxels: (-, -, -)</div>
+              <div>Values:</div>
+              <div>&nbsp;&nbsp;- Raw image: -</div>
+          </div>
         </div>
       )}
     </>

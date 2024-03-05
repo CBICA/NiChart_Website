@@ -180,75 +180,84 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
   }, [data.x, data.y, name, reference, roi]);
 
   return (
-    <div className={styles.visualizationContainer}>
-      <PlotlyChart data={chartData}
-        layout={chartLayout}
-        config={chartConfig}
-        onClick={eventHandlers?.click}
-      />
-      <div className={styles.controlsContainer}>
-        <div className={styles.chartControls}>
-          <div className={styles.chartControl}>
-            <Autocomplete
-              value={MUSEROICompleteList[roi]}
-              onChange={(event, newValue) => {
-                onROIChange(newValue ? newValue.ID : "");
-              }}
-              options={Object.values(MUSEROICompleteList)}
-              getOptionLabel={(option) => {
-                if (option.ID === "SPARE_score_AD") {
-                  return "SPARE AD score";
-                } else if (option.ID === "SPARE_score_BA") {
-                  return "SPARE BA score";
-                } else {
-                  return `${option.ID}: ${option.Full_Name}`;
-                }
-              }}
-              renderInput={(params) => (
-                <TextField 
-                  {...params} 
-                  label="Change ROI" 
-                  variant="standard" 
-                  style={{ minWidth: '250px' }} // Set a minimum width or adapt as needed
-                />
-              )}
-            />
+    <>
+      <div className={styles.visualizationContainer}>
+        <PlotlyChart data={chartData}
+          layout={chartLayout}
+          config={chartConfig}
+          onClick={eventHandlers?.click}
+        />
+        <div className={styles.controlsContainer}>
+          <div className={styles.chartControls}>
+            <div className={styles.chartControl}>
+              <Autocomplete
+                value={MUSEROICompleteList[roi]}
+                onChange={(event, newValue) => {
+                  onROIChange(newValue ? newValue.ID : "");
+                }}
+                options={Object.values(MUSEROICompleteList)}
+                getOptionLabel={(option) => {
+                  if (option.ID === "SPARE_score_AD") {
+                    return "SPARE AD score";
+                  } else if (option.ID === "SPARE_score_BA") {
+                    return "SPARE BA score";
+                  } else {
+                    return `${option.ID}: ${option.Full_Name}`;
+                  }
+                }}
+                renderInput={(params) => (
+                  <TextField 
+                    {...params} 
+                    label="Change ROI" 
+                    variant="standard" 
+                    style={{ minWidth: '250px' }} // Set a minimum width or adapt as needed
+                  />
+                )}
+              />
+            </div>
+            <div className={styles.chartControl}>
+              {/* Dropdown to select reference data */}
+              <FormControl variant="standard" style={{ minWidth: '250px' }}>
+                <InputLabel>Change Reference Data</InputLabel>
+                <Select value={referenceOption} onChange={(e) => onReferenceDataChange(e.target.value)}>
+                    <MenuItem value="CN">CN</MenuItem>
+                    <MenuItem value="CN - Female only">CN - Female only</MenuItem>
+                    <MenuItem value="CN - Male only">CN - Male only</MenuItem>
+                    <MenuItem value="AD">AD</MenuItem>
+                    <MenuItem value="AD - Female only">AD - Female only</MenuItem>
+                    <MenuItem value="AD - Male only">AD - Male only</MenuItem>
+                    <MenuItem value="MCI">MCI</MenuItem>
+                    <MenuItem value="MCI - Female only">MCI - Female only</MenuItem>
+                    <MenuItem value="MCI - Male only">MCI - Male only</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
           </div>
-          <div className={styles.chartControl}>
-            {/* Dropdown to select reference data */}
-            <FormControl variant="standard" style={{ minWidth: '250px' }}>
-              <InputLabel>Change Reference Data</InputLabel>
-              <Select value={referenceOption} onChange={(e) => onReferenceDataChange(e.target.value)}>
-                  <MenuItem value="CN">CN</MenuItem>
-                  <MenuItem value="CN - Female only">CN - Female only</MenuItem>
-                  <MenuItem value="CN - Male only">CN - Male only</MenuItem>
-                  <MenuItem value="AD">AD</MenuItem>
-                  <MenuItem value="AD - Female only">AD - Female only</MenuItem>
-                  <MenuItem value="AD - Male only">AD - Male only</MenuItem>
-                  <MenuItem value="MCI">MCI</MenuItem>
-                  <MenuItem value="MCI - Female only">MCI - Female only</MenuItem>
-                  <MenuItem value="MCI - Male only">MCI - Male only</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
+          {/* Button to destroy the plot */}
+          <Button  variant="contained" color="primary" onClick={onDelete}>Close Chart</Button>
         </div>
-        {/* Button to destroy the plot */}
-        <Button  variant="contained" color="primary" onClick={onDelete}>Close Chart</Button>
+        {/* Modal to show the NiiVue component */}
       </div>
-      {/* Modal to show the NiiVue component */}
       <Modal id='niivue_modal'
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="NiiVue Modal"
         style={{
           content: {
-            width: '40%',
-            height: '100%',
-            marginTop: '10%', 
-            margintBottom: '10%',
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -40%)', // Center the modal
+            width: '80vh', // Responsive width
+            height: '75vh', // Responsive height based on viewport height
+            overflow: 'hidden visible', // Adds scroll to the modal content if it exceeds the height
+            padding: '1%', // Optional: Adds some padding inside the modal
+            border: '2px solid #ccc', // Optional: Adds a border to the modal
+            borderRadius: '10px', // Optional: Rounds the corners of the modal
+            backgroundColor: '#fff', // Optional: Sets a background color for the modal content
           },
+          overlay: {
+            backgroundColor: 'rgba(0,0,0,0.6)' // Optional: Adds a semi-transparent overlay behind the modal
+          }
         }}
         ariaHideApp={false}
       >
@@ -256,12 +265,8 @@ const Chart = ({ name, data, reference, roi, referenceOption, onDelete, onROICha
         {selectedDataPoint && (
           <NiiVue subjectID={clickedDataPointId} roi={roi} closeModal={closeModal}> </NiiVue>
         )}
-        <div>
-          <label id="location"></label>
-          <p></p>
-        </div>
       </Modal>
-    </div>
+    </>
   );
 };
 

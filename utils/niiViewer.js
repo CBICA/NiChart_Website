@@ -8,7 +8,7 @@ import ROIDict from '../public/content/Portal/Visualization/Dicts/MUSE_ROI_compl
 const NiiVue = ({ subjectID, roi, closeModal }) => {
   const canvas = useRef(null);
   const [isError, setIsError] = useState(false);
-  const [overlayColor, setOverlayColor] = useState("custom_blue"); // State to manage overlay color
+  const [overlayColor, setOverlayColor] = useState("custom_blue");
   const originalScanURL = "/content/Portal/Visualization/Subject_Scans/IXI016-Guys-0697-T1.nii.gz";
   const overlayURL = "/content/Portal/Visualization/Subject_Scans/IXI016-Guys-0697-T1_DLMUSE.nii.gz";
   let nv;
@@ -48,12 +48,52 @@ const NiiVue = ({ subjectID, roi, closeModal }) => {
     }
   }
   
+  function initializePosition(imageOptions, volume) {
+    if (imageOptions.url == overlayURL)
+    {
+      const data = volume.img;
+      const dims = volume.dimsRAS
+
+      const voxelCount = dims[1] * dims[2] * dims[3];
+      let sumX = 0, sumY = 0, sumZ = 0, count = 0;
+      const relevantROIs = getRelevantROIs(roi); // a list
+
+      for (let i = 0; i < voxelCount; i++) {
+        if (relevantROIs.includes(data[i])) {
+          const x = i / (dims[2] * dims[3]);
+          const y = (i % (dims[1] * dims[2])) / dims[1];
+          const z = (i % (dims[2] * dims[3])) / dims[2] ; 
+
+          sumX += x;
+          sumY += y;
+          sumZ += z;
+          count++;
+        }
+      }
+
+      if (count > 0) {
+        const avg_x = Math.floor(sumX / count);
+        const avg_y = Math.floor(sumY / count);
+        const avg_z = Math.floor(sumZ / count);
+        const fr_x = avg_x/dims[1]
+        const fr_y = avg_y/dims[2]
+        const fr_z = avg_z/dims[3]
+
+        console.log("x: ", avg_x, 103, fr_x)
+        console.log("y: ", avg_y, 125, fr_y)
+        console.log("z: ", avg_z, 144, fr_z)
+
+
+        nv.scene.crosshairPos = [fr_x, fr_y, fr_z];
+      }
+    }
+  }
+
   // Function to load and process NIfTI files
   const loadNiftiFiles = async () => {
     try {
       const relevantROIs = getRelevantROIs(roi);
       let colormaps = generateColormaps(relevantROIs);
-      console.log(colormaps)
       const volumeList = [
         {
           url: originalScanURL,
@@ -70,6 +110,7 @@ const NiiVue = ({ subjectID, roi, closeModal }) => {
         crosshairColor: [1,1,1,1], // RGBA color array [0-1]
         show3Dcrosshair: true,
         onLocationChange: handleLocationChange,
+        onVolumeAddedFromUrl: initializePosition,
       }
 
       // Initialize Niivue with the volume list
@@ -164,7 +205,7 @@ const NiiVue = ({ subjectID, roi, closeModal }) => {
             </Select>
             <Button onClick={() => showHeader()}>Show Header</Button>
           </div>
-          <div style={{ height: '80%', width: '90%', alignItems: 'center', marginTop: '1%', marginBottom: '1%', marginLeft: '5%', marginRight: '5%',}} id="niivue">
+          <div style={{ height: '70%', width: '80%', alignItems: 'center', marginTop: '1%', marginBottom: '1%', marginLeft: '10%', marginRight: '10%',}} id="niivue">
             <canvas ref={canvas}/>
           </div>
           <div style={{ height: '15%', paddingLeft: '2%', paddingBottom: '2%'}} id="location">

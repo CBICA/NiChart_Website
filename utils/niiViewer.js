@@ -72,17 +72,9 @@ const NiiVue = ({ subjectID, roi, closeModal }) => {
       }
 
       if (count > 0) {
-        const avg_x = Math.floor(sumX / count);
-        const avg_y = Math.floor(sumY / count);
-        const avg_z = Math.floor(sumZ / count);
-        const fr_x = avg_x/dims[1]
-        const fr_y = avg_y/dims[2]
-        const fr_z = avg_z/dims[3]
-
-        console.log("x: ", avg_x, 103, fr_x)
-        console.log("y: ", avg_y, 125, fr_y)
-        console.log("z: ", avg_z, 144, fr_z)
-
+        const fr_x = Math.floor(sumX / count)/dims[1]; // Find average, and then normalize to [0,1] because crosshairPos wants it like that.
+        const fr_y = Math.floor(sumY / count)/dims[2];
+        const fr_z = Math.floor(sumZ / count)/dims[3]; 
 
         nv.scene.crosshairPos = [fr_x, fr_y, fr_z];
       }

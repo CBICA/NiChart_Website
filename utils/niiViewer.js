@@ -110,7 +110,7 @@ const NiiVue = ({ subjectID, roi, closeModal }) => {
         nv = new Niivue(config);
         nv.attachToCanvas(canvas.current);
         Object.keys(colormaps).forEach((key) => { nv.addColormap(key, colormaps[key]); });
-        nv.loadVolumes(volumeList);
+        await nv.loadVolumes(volumeList);
       }
 
       // Process and add the overlay
@@ -122,27 +122,32 @@ const NiiVue = ({ subjectID, roi, closeModal }) => {
   };
   
   // Toggle overlay visibility
-  const toggleOverlayVisibility = () => {
-    if (nv) {
-      const overlayVolume = nv.volumes[1];
-
-      if (overlayVolume) {
-        const overlayVolumeData = nv.volumes[1].img;
-        const uniqueValues = new Set();
-        for (let i = 0; i < overlayVolumeData.length; i++) {
-          uniqueValues.add(overlayVolumeData[i]);
+  const toggleOverlayVisibility = async () => {
+    try {
+      if (nv) {
+        const overlayVolume = nv.volumes[1];
+  
+        if (overlayVolume) {
+          const overlayVolumeData = nv.volumes[1].img;
+          const uniqueValues = new Set();
+          for (let i = 0; i < overlayVolumeData.length; i++) {
+            uniqueValues.add(overlayVolumeData[i]);
+          }
+          nv.removeVolumeByIndex(1);
+          nv.drawScene();
         }
-        nv.removeVolumeByIndex(1);
-        nv.drawScene();
-      }
-      else {
-        nv.addVolumeFromUrl({
-          url: overlayURL,
-          colormap: overlayColor,
-          opacity: 0.6,
-        })
-        nv.drawScene();
-      }
+        else {
+          await nv.addVolumeFromUrl({
+            url: overlayURL,
+            colormap: overlayColor,
+            opacity: 0.6,
+          })
+          nv.drawScene();
+        }
+      } 
+    } catch (error) {
+      console.error(error.message);
+      setIsError(true);
     }
   };
 

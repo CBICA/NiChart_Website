@@ -267,19 +267,12 @@ export const NiChartAuthenticator = props => {
                           <VerificationCodeModal/>
                         </View>
                         <View textAlign="left" padding={tokens.space.large}>
-                        <CheckboxField
-                            id="termsCheckbox"
-                            name="acknowledgement"
-                            label="I have fully read and agreed with the terms on the About page."
-                            // onChange={handleCheckboxChange}
-                            // checked={isCheckboxChecked}
-                        />
-                        {/* <TermsModal
+                        <TermsModal
                             open={termsModalOpen}
                             handleClose={handleTermsModalClose}
                             title="Terms and Conditions"
                             onBottomReached={handleBottomReached}
-                        /> */}
+                        />
 
                       </View>
                       </>
@@ -314,6 +307,15 @@ export const NiChartAuthenticator = props => {
                       <TextField
                         name="custom:Role"
                         label="Role (optional)"
+                      />
+                      <CheckboxField
+                        errorMessage={validationErrors.acknowledgement}
+                        hasError={!!validationErrors.acknowledgement}
+                        name="acknowledgement"
+                        value="yes"
+                        label="I agree with the Terms & Conditions"
+                        // onChange={handleCheckboxChange}
+                        // checked={isCheckboxChecked}
                       />
                     </>
                   );

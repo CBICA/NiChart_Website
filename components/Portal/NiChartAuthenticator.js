@@ -271,15 +271,15 @@ export const NiChartAuthenticator = props => {
                             id="termsCheckbox"
                             name="acknowledgement"
                             label="I have fully read and agreed with the terms on the About page."
-                            onChange={handleCheckboxChange}
-                            checked={isCheckboxChecked}
+                            // onChange={handleCheckboxChange}
+                            // checked={isCheckboxChecked}
                         />
-                        <TermsModal
+                        {/* <TermsModal
                             open={termsModalOpen}
                             handleClose={handleTermsModalClose}
                             title="Terms and Conditions"
                             onBottomReached={handleBottomReached}
-                        />
+                        /> */}
 
                       </View>
                       </>

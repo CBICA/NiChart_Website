@@ -149,7 +149,7 @@ const Components = () => {
           <img className={styles.brainImage} src="/images/Components/brain_harmonize.png"/>
           <h1 style={{ color: '#92da44' }}>NiChart Data Harmonization</h1>
         </div>
-        <p>To estimate and remove scanner-related batch effects in imaging variables we apply a statistical harmonization method, <a href="https://github.com/Zheng206/ComBatFam_Pipeline">ComBat</a>. The ComBat method is a Bayesian statistical technique aimed at removing <em>batch effects</em> in high-dimensional datasets.</p>
+        <p>To estimate and remove scanner-related batch effects in imaging variables we apply a statistical harmonization method, <a href="https://github.com/PennSIVE/ComBatFam_Pipeline/tree/main/ComBatFamily">ComBat</a>. The ComBat method is a Bayesian statistical technique aimed at removing <em>batch effects</em> in high-dimensional datasets.</p>
         <p>The method estimates both the mean (<em>location</em>) and the variance (<em>scale</em>) of the residuals across batches using <em>Empirical Bayes</em> estimation, after correcting for additional covariates, such as age, sex and ICV.</p>
 
         <br></br><br></br><hr/><br></br><br></br>
